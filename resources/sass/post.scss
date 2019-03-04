@@ -1,0 +1,18 @@
+.details-content {
+  strong, b {
+    font-weight: bold;
+  }
+
+  em, i {
+    font-style: italic;
+  }
+
+  * {
+    max-width: 700px !important;
+    line-height: 1.35em;
+  }
+  td {
+    border: 1px solid #c3bdbd;
+    padding: 5px 10px;
+  }
+}

@@ -1,0 +1,107 @@
+.popup-rg-lg {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  background: rgba(0, 0, 0, 0.8);
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+}
+
+.popup-rg-lg .popup-content {
+  background: #ffffff;
+  width: 572px;
+  min-height: 500px;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  margin-left: -286px;
+  margin-top: -340px;
+}
+
+.popup-rg-lg .popup-content .popup-menu {
+  overflow: hidden;
+}
+
+.popup-rg-lg .popup-content .popup-menu div {
+  width: 286px;
+  height: 72px;
+  cursor: pointer;
+}
+
+.popup-rg-lg .popup-content .popup-menu .btn-login {
+  background: url("../images/btn-login.jpg") no-repeat;
+}
+
+.popup-rg-lg .popup-content .popup-menu .btn-login.active, .popup-rg-lg .popup-content .popup-menu .btn-login:hover {
+  background: url("../images/btn-login-hover.jpg") no-repeat;
+}
+
+.popup-rg-lg .popup-content .popup-menu .btn-register {
+  background: url("../images/btn-register.jpg") no-repeat;
+}
+
+.popup-rg-lg .popup-content .popup-menu .btn-register:hover, .popup-rg-lg .popup-content .popup-menu .btn-register.active {
+  background: url("../images/btn-register-hover.jpg") no-repeat;
+}
+
+.popup-rg-lg .popup-content input[type=text], .popup-rg-lg .popup-content input[type=password] {
+  width: 330px;
+  height: 61px;
+  padding-left: 65px;
+  margin-bottom: 25px;
+  border-color: #d7d7d7;
+  outline: none;
+}
+
+.popup-rg-lg .popup-content p {
+  margin-bottom: 25px;
+  color: #25408e;
+  font-size: 16px;
+}
+
+.popup-rg-lg .popup-content p span {
+  color: red;
+}
+
+.popup-rg-lg .popup-content .username {
+  background: url("../images/icon-username.png") top 20px left 22px no-repeat;
+}
+
+.popup-rg-lg .popup-content .password {
+  background: url("../images/icon-password.png") top 20px left 22px no-repeat;
+}
+
+.popup-rg-lg .popup-content .phone {
+  background: url("../images/icon-phone.png") top 20px left 22px no-repeat;
+}
+
+.popup-rg-lg .popup-content .highlight {
+  color: #c12e03;
+}
+
+.popup-rg-lg .popup-content button[type=submit] {
+  width: 396px;
+  height: 66px;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+.popup-rg-lg .popup-content .btn-submit-login {
+  background: url("../images/btn-submit-login.png") no-repeat;
+}
+
+.popup-rg-lg .popup-content .btn-submit-register {
+  background: url("../images/btn-submit-register.png") no-repeat;
+}
+
+.popup-rg-lg .popup-content .popup-lg, .popup-rg-lg .popup-content .popup-rg {
+  display: none;
+  padding: 50px 80px;
+}
+
+.popup-rg-lg .popup-content .popup-lg.active, .popup-rg-lg .popup-content .popup-rg.active {
+  display: block;
+}
