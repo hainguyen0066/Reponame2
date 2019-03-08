@@ -3,7 +3,7 @@
         @foreach($slides as $slide)
             <div>
                 <a href="{{ $slide->link }}" title="{{ $slide->title }}">
-                    <img src="{{ Voyager::image($slide->image) }}" alt="{{ $slide->title }}"/>
+                    <img src="{{ 'https://vltn.t2g.dev/storage/'.($slide->image) }}" alt="{{ $slide->title }}"/>
                 </a>
             </div>
         @endforeach

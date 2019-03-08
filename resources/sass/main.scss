@@ -70,6 +70,7 @@ a {
 }
 
 .main_content {
+  .slick-slide {outline: none;}
   overflow: hidden;
   .slogan {
     height: calc(580px - 120px);
@@ -849,6 +850,7 @@ a {
         a.img {
           width: 120px;
           margin-left: 10px;
+          
         }
         a.content {
           width: 400px;
@@ -862,6 +864,12 @@ a {
         }
         a.time {
           width: 80px
+        }
+        img{
+          height: 80px;
+          width: 120px;
+          border: none;
+          object-fit: cover;
         }
       }
       .center {

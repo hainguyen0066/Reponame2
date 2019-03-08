@@ -19,12 +19,14 @@ $(document).ready(function(){
     })
 
     $('.slider-nav-thumbnails').slick({
-        slidesToShow: 5,
+        slidesToShow: 3,
         slidesToScroll: 1,
         asNavFor: '.my-slider',
         focusOnSelect: true,
-        arrows: false,
         autoplay:true,
+        nextArrow: '.next-arrow',
+		prevArrow: '.pre-arrow',
+
     });
     $('.register-btn , .popup-menu .btn-register').click(function(){
         $(".popup-rg-lg").removeClass("dnone");

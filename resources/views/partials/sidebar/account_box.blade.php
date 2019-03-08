@@ -5,7 +5,7 @@
 </div>
 @else
 <div class="info-user">
-    <div class="info-title"><p>Quản Lý Tài Khoản</p></div>
+    <div class="info-title"></div>
     <div class="info-content">
         <p>Tài khoản: <span>{{ str_limit($user->name, 20) }}</span></p>
         <p>Mật khẩu 2:
