@@ -611,10 +611,11 @@ a {
 }
 
 .footer .bottom-logo {
-  background: url("../images/logo-bottom.png") no-repeat;
+  background: url("../images/logo-bottom.png") center no-repeat;
   height: 70px;
   width: 140px;
   margin-left: 10px;
+  background-size: contain;
 }
 
 .footer .bottom-logo a {
@@ -840,10 +841,10 @@ a {
         margin-top: 15px;
         padding-bottom: 15px;
         border-bottom: #eeeeee 1px solid;
-        height: 80px;
+        min-height: 80px;
+        overflow: hidden;
         a {
-          display: block;
-          height: 80px;
+          display: block;          
           font-size: 14px;
           color: #838383;
         }
