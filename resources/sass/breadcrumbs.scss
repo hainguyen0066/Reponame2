@@ -1,5 +1,7 @@
 ul.breadcrumb {
   li.breadcrumb-item {
+    float: none;
+    display: inline-block;
     color: #fff;
     a {
       color: #fff;

@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers\Front;
 
-use App\User;
-use Hash;
+use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -20,17 +19,18 @@ class PasswordController extends BaseFrontController
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \App\Repository\UserRepository            $userRepository
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function changePassword(Request $request)
+    public function changePassword(Request $request, UserRepository $userRepository)
     {
         $validator = $this->validator($request->all());
         if (!$validator->passes()) {
             return $this->sendFailedResponse($request, $validator->getMessageBag()->toArray());
         }
         $user = \Auth::user();
-        $this->updatePassword($request, $user);
+        $userRepository->updatePassword($user, $request->get('password'));
 
         return back()->with('status', trans('Bạn đã đổi mật khẩu thành công'));
     }
@@ -61,11 +61,5 @@ class PasswordController extends BaseFrontController
             'old_password' => 'required|string|min:6',
             'password'     => 'required|string|min:6|confirmed',
         ]);
-    }
-
-    private function updatePassword(Request $request, User $user)
-    {
-        $user->password = Hash::make($request->get('password'));
-        $user->save();
     }
 }

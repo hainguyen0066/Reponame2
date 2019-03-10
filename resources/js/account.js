@@ -2,40 +2,65 @@ import $ from 'jquery';
 const MSG_TYPE_SUCCESS = 'success';
 const MSG_TYPE_ERROR = 'error';
 const activeClass = 'active';
-let loginUrl = './login';
-let registerUrl = './register';
+let urlLogin = './login';
+let urlRegister = './register';
+const menuLinkLoginSelector = '.popup-menu .btn-login';
+const menuLinkRegisterSelector = '.popup-menu .btn-register';
+const messageContainerSelector = '.popup-message';
+const popupContainerSelector = '.popup-rg-lg';
+const tabLoginSelector = '.popup-lg';
+const tabRegisterSelector = '.popup-rg';
 
 const Account = {
+    container: null,
+    menuLinkLogin: null,
+    menuLinkRegister: null,
+    messageContainer: null,
+    tabLogin: null,
+    tabRegister: null,
+    setContainer: (containerSelector) => {
+        Account.container = $(containerSelector);
+        Account.menuLinkLogin = Account.container.find(menuLinkLoginSelector);
+        Account.menuLinkRegister = Account.container.find(menuLinkRegisterSelector);
+        Account.messageContainer = Account.container.find(messageContainerSelector);
+        Account.tabLogin = Account.container.find(tabLoginSelector);
+        Account.tabRegister = Account.container.find(tabRegisterSelector);
+    },
     show: () => {
         Account.clearMessage();
-        $('.pp-dk-dn').fadeIn().addClass(activeClass);
+        Account.container.fadeIn().addClass(activeClass);
+
     },
     close: () =>  {
-        $('.pp-dk-dn').fadeOut().removeClass(activeClass);
+        Account.container.fadeOut().removeClass(activeClass);
     },
     showRegister: () => {
-        $('.ct-dk-dn, .mn-dk-dn .menu-btn').removeClass(activeClass);
-        $('.ct-dk-dn.ct-dk, .mn-dk-dn .menu-btn.btn-dk').addClass(activeClass);
+        Account.tabRegister.addClass(activeClass);
+        Account.tabLogin.removeClass(activeClass);
         Account.show();
+        Account.menuLinkLogin.removeClass(activeClass);
+        Account.menuLinkRegister.addClass(activeClass);
     },
     showLogin: () => {
-        $('.ct-dk-dn, .mn-dk-dn .menu-btn').removeClass(activeClass);
-        $('.ct-dk-dn.ct-dn, .mn-dk-dn .menu-btn.btn-dn').addClass(activeClass);
+        Account.tabLogin.addClass(activeClass);
+        Account.tabRegister.removeClass(activeClass);
         Account.show();
+        Account.menuLinkRegister.removeClass(activeClass);
+        Account.menuLinkLogin.addClass(activeClass);
     },
     showMessage: (msg, type) => {
-        let el = $('.pp-dk-dn .msg-dk-dn');
-        el.html("<span class='" + type + "'>" + msg + "</span>");
+        Account.messageContainer.html("<span class='" + type + "'>" + msg + "</span>");
     },
     clearMessage: () => {
-        $('.pp-dk-dn .msg-dk-dn').html('');
+        console.log(Account.messageContainer);
+        Account.messageContainer.html('');
     },
     login: () => {
-        let $tabLogin = $('.pp-dk-dn .ct-dk-dn.ct-dn');
-        let username = $tabLogin.find('.input-username').val();
-        let password = $tabLogin.find('.input-password').val();
+        Account.clearMessage();
+        let username = Account.tabLogin.find('input.username').val();
+        let password = Account.tabLogin.find('.input-password').val();
         $.ajax({
-            url: loginUrl,
+            url: urlLogin,
             method: 'POST',
             data: {
                 name: username,
@@ -61,19 +86,19 @@ const Account = {
         });
     },
     register: () => {
-        let $tabRegister = $('.pp-dk-dn .ct-dk-dn.ct-dk');
-        let username = $tabRegister.find('.input-username').val();
-        let password = $tabRegister.find('.input-password').val();
-        let passwordConfirm = $tabRegister.find('.input-password-confirm').val();
-        let email = $tabRegister.find('.input-email').val();
+        Account.clearMessage();
+        let username = Account.tabRegister.find('.input-username').val();
+        let password = Account.tabRegister.find('.input-password').val();
+        let passwordConfirm = Account.tabRegister.find('.input-password-confirm').val();
+        let phone = Account.tabRegister.find('.phone').val();
         $.ajax({
-            url: registerUrl,
+            url: urlRegister,
             method: 'POST',
             data: {
                 name: username,
                 password: password,
                 password_confirmation: passwordConfirm,
-                email: email,
+                phone: phone,
             },
             success: (rs) => {
                 Account.showMessage("Đăng ký tài khoản thành công", MSG_TYPE_SUCCESS);
@@ -97,13 +122,20 @@ const Account = {
 }
 
 $(document).ready(() => {
-    $('.pp-dk-dn .btn-close').click(() => {
-        Account.close();
+    const $popupContainer = $(popupContainerSelector);
+    Account.setContainer($popupContainer);
+    $popupContainer.find('.account-close, .popup-bg-mask').click(function(e) {
+        const closeClasses = ['account-close', 'popup-bg-mask'];
+        if (closeClasses.indexOf($(e.target)[0].className) != -1) {
+            Account.close();
+        }
     });
-    $('.mn-dk-dn .menu-btn.btn-dk, .ct-dk-dn .link-dk, .dk-nt .dk-nt-dk').click(() => {
+
+    $('.account-register').click(() => {
         Account.showRegister();
     });
-    $('.mn-dk-dn .menu-btn.btn-dn, .ct-dk-dn .link-dn').click(() => {
+
+    $('.account-login').click(() => {
         Account.showLogin();
     });
 
@@ -116,6 +148,7 @@ $(document).ready(() => {
         e.preventDefault();
         Account.login();
     });
+
 });
 
 export default Account;

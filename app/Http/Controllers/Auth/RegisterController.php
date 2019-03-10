@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Repository\UserRepository;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -49,9 +50,9 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name'     => 'required|string|max:255|unique:users',
-            'email'    => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
+            'name'     => 'required|regex:/^[a-z0-9]{5,50}$/i|unique:users',
+            'phone'    => 'nullable|digits_between:10,14',
+            'password' => 'required|string|between:6,32|confirmed',
         ]);
     }
 
@@ -63,11 +64,10 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name'     => $data['name'],
-            'email'    => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+        /** @var UserRepository $userRepository */
+        $userRepository = app(UserRepository::class);
+
+        return $userRepository->registerUser(array_only($data, ['name', 'password', 'phone']));
     }
 
     /**

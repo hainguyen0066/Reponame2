@@ -1,7 +1,7 @@
 @if(!Auth::user())
 <div class="register-login">
-    <div class="register-btn"></div>
-    <div class="login-btn"></div>
+    <div class="register-btn account-register"></div>
+    <div class="login-btn account-login"></div>
 </div>
 @else
 <div class="info-user">

@@ -133,6 +133,7 @@ return [
         ],
         'name'         => [
             'required' => 'Tên đăng nhập không được để trống',
+            'regex'    => 'Tên đăng nhập từ 5-50 ký tự và không được chứa ký tự đặc biệt',
             'unique'   => "Tên đăng nhập này đã được được sử dụng",
         ],
         'old_password' => [
@@ -142,7 +143,11 @@ return [
         'password'     => [
             'required'  => 'Mật khẩu không được để trống',
             'confirmed' => 'Mật khẩu xác nhận không khớp',
-            'min'       => 'Mật khẩu ít nhất 6 ký tự',
+            'between'   => 'Mật khẩu cho phép :min đến :max ký tự',
+        ],
+        'phone'        => [
+            'required'  => 'Số điện thoại không được để trống',
+            'digits_between' => 'Số điện thoại không đúng định dạng'
         ],
     ],
 

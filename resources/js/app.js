@@ -6,5 +6,6 @@
  */
 
 require('./bootstrap');
-require('./main');
 require('./slick.min');
+require('./main');
+require('./account.js');

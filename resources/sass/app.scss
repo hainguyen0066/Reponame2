@@ -1,4 +1,9 @@
 @charset "utf-8";
+@font-face {
+  font-family: 'PhilosopherBold';
+  src: url('../fonts/Philosopher-Bold.ttf');
+}
+@import url('https://fonts.googleapis.com/css?family=Roboto');
 @import "reset.css";
 @import "main.scss";
 @import "slick.css";
@@ -6,3 +11,4 @@
 @import "common.scss";
 @import "breadcrumbs.scss";
 @import "post.scss";
+@import "pagination.scss";

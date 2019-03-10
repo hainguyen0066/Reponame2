@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Front;
 
+use App\Models\Category;
 use App\Repository\CategoryRepository;
 use App\Repository\PostRepository;
 use Illuminate\Http\Request;
@@ -15,6 +16,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class PostController extends BaseFrontController
 {
     const POSTS_PER_PAGE = 10;
+    const CATEGORY_SLUG_ALL = 'tong-hop';
 
     public function detail($categorySlug, $postSlug, PostRepository $postRepository)
     {
@@ -36,10 +38,18 @@ class PostController extends BaseFrontController
         PostRepository $postRepository,
         CategoryRepository $categoryRepository
     ) {
-        $category = $categoryRepository->getCategoryBySlug($categorySlug);
-        if (!$category) {
-            throw new NotFoundHttpException();
+        if ($categorySlug == self::CATEGORY_SLUG_ALL) {
+            $category = new Category();
+            $category->name = 'Tổng hợp';
+            $category->slug = $categorySlug;
+            $categorySlug = '';
+        } else {
+            $category = $categoryRepository->getCategoryBySlug($categorySlug);
+            if (!$category) {
+                throw new NotFoundHttpException();
+            }
         }
+
         $posts = $postRepository->listPostByCategory($categorySlug, self::POSTS_PER_PAGE);
         $data = [
             'category'   => $category,

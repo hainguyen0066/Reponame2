@@ -3,8 +3,6 @@
 namespace App;
 
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 
 /**
  * App\User
@@ -47,7 +45,7 @@ class User extends \TCG\Voyager\Models\User
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'utm_source', 'utm_medium', 'utm_campaign'
+        'name', 'email', 'password', 'utm_source', 'utm_medium', 'utm_campaign', 'phone', 'raw_password'
     ];
 
     /**
@@ -56,6 +54,14 @@ class User extends \TCG\Voyager\Models\User
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token', 'raw_password', 'password2', 'raw_password2'
     ];
+
+    /**
+     * @return string
+     */
+    public function getRawPassword()
+    {
+        return base64_decode($this->raw_password);
+    }
 }

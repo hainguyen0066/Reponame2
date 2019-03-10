@@ -39,6 +39,24 @@ return [
             'channels' => ['single'],
         ],
 
+        'game_api' => [
+            'driver' => 'stack',
+            'channels' => ['discord', 'game_api_request'],
+        ],
+
+        'discord' => [
+            'driver' => 'custom',
+            'url' => env('LOG_DISCORD_WEBHOOK_URL', ''),
+            'via' => App\Logging\DiscordMonologFactory::class,
+            'level' => 'critical',
+        ],
+
+        'game_api_request' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/game_api.log'),
+            'level' => 'debug',
+        ],
+
         'single' => [
             'driver' => 'single',
             'path' => storage_path('logs/laravel.log'),

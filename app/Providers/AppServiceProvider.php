@@ -2,7 +2,10 @@
 
 namespace App\Providers;
 
-use App\Services\GameApiClient;
+use App\Observers\UserObserver;
+use App\Services\JXApiClient;
+use App\User;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -14,6 +17,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        User::observe(UserObserver::class);
+        Paginator::defaultView('vendor.pagination.default');
     }
 
     /**
@@ -23,12 +28,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(GameApiClient::class, function ($app) {
+        $this->app->singleton(JXApiClient::class, function ($app) {
             $baseUrl = env('GAME_API_BASE_URL', '');
-            $endpoint = env('GAME_API_ENDPOINT', '');
             $apiKey = env('GAME_API_KEY', '');
 
-            return new GameApiClient($baseUrl, $endpoint, $apiKey);
+            return new JXApiClient($baseUrl, $apiKey);
         });
     }
 }

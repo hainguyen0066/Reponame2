@@ -93,5 +93,10 @@ Route::group(['as' => 'front.'], function() {
         'uses' => 'PostController@detail',
         'as' => 'details.post'
     ]);
+
+    Route::get('/{uri}', [
+        'uses' => 'StaticPageController@detail',
+        'as' => 'static_pagdetaile'
+    ]);
 });
 
