@@ -1,11 +1,11 @@
 @if(!Auth::user())
 <div class="register-login">
-    <div class="register-btn"></div>
-    <div class="login-btn"></div>
+    <div class="register-btn account-register"></div>
+    <div class="login-btn account-login"></div>
 </div>
 @else
 <div class="info-user">
-    <div class="info-title"><p>Quản Lý Tài Khoản</p></div>
+    <div class="info-title"></div>
     <div class="info-content">
         <p>Tài khoản: <span>{{ str_limit($user->name, 20) }}</span></p>
         <p>Mật khẩu 2:

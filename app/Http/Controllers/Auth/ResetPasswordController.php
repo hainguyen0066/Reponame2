@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Repository\UserRepository;
+use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 
 class ResetPasswordController extends Controller
@@ -28,12 +30,33 @@ class ResetPasswordController extends Controller
     protected $redirectTo = '/home';
 
     /**
+     * @var \App\Repository\UserRepository
+     */
+    protected $userRepository;
+
+    /**
      * Create a new controller instance.
      *
-     * @return void
+     * @param \App\Repository\UserRepository $userRepository
      */
-    public function __construct()
+    public function __construct(UserRepository $userRepository)
     {
         $this->middleware('guest');
+        $this->userRepository = $userRepository;
+    }
+
+    /**
+     * Reset the given user's password.
+     *
+     * @param  \Illuminate\Contracts\Auth\CanResetPassword  $user
+     * @param  string  $password
+     * @return void
+     */
+    protected function resetPassword($user, $password)
+    {
+        $user->setRememberToken(Str::random(60));
+        $this->userRepository->updatePassword($user, $password);
+        event(new PasswordReset($user));
+        $this->guard()->login($user);
     }
 }

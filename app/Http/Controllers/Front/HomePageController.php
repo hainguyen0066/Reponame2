@@ -19,7 +19,7 @@ class HomePageController extends BaseFrontController
     {
         $postsLimit = self::HOMEPAGE_LIMIT_POSTS;
         $newsByCategory = [
-            'tong-hop'  => $postRepository->getHomePostsByCategory('tong-hop', $postsLimit),
+            'tong-hop'  => $postRepository->getHomePostsByCategory('', $postsLimit),
             'thong-bao' => $postRepository->getHomePostsByCategory('thong-bao', $postsLimit),
             'su-kien'   => $postRepository->getHomePostsByCategory('su-kien', $postsLimit),
         ];

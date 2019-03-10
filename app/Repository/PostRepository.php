@@ -33,14 +33,16 @@ class PostRepository extends AbstractEloquentRepository
      *
      * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model[]
      */
-    public function getHomePostsByCategory($categorySlug, $limit = self::DEFAULT_PER_PAGE)
+    public function getHomePostsByCategory($categorySlug = '', $limit = self::DEFAULT_PER_PAGE)
     {
         $query = $this->query();
         $query->published()
-            ->categorySlug($categorySlug)
             ->orderByPublishDate()
             ->limit($limit)
         ;
+        if ($categorySlug) {
+            $query->categorySlug($categorySlug);
+        }
 
         return $query->get();
     }
@@ -67,9 +69,11 @@ class PostRepository extends AbstractEloquentRepository
     {
         $query = $this->query();
         $query->published()
-            ->categorySlug($categorySlug)
             ->orderByPublishDate()
         ;
+        if ($categorySlug) {
+            $query->categorySlug($categorySlug);
+        }
 
         return $query->paginate($limit);
     }

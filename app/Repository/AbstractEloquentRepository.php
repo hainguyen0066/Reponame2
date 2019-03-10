@@ -32,7 +32,7 @@ abstract class AbstractEloquentRepository implements RepositoryInterface
     /**
      * @return Model|null
      */
-    private function makeModel()
+    protected function makeModel()
     {
         $model = app($this->model());
         if (!$model instanceof Model) {

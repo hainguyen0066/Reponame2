@@ -10,7 +10,7 @@
                      data-tab="{{ $categorySlug }}"
                      data-link="{{ route('front.category', [$categorySlug]) }}">{{ $categoryName }}</div>
             @endforeach
-            <a href="{{ route('front.search') }}" title="Xem thêm" class="news-more"></a>
+            <a href="{{ route('front.category', ['tong-hop']) }}" title="Xem thêm" class="news-more"></a>
         </div>
         @php
             $i = 0;

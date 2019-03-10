@@ -5,7 +5,7 @@
             <ul>
                 <li><a href="{{ route('front.home') }}" class="active">Trang Chủ</a></li>
                 <li><a href="{{ route('front.category', ['su-kien']) }}">Sự Kiện</a></li>
-                <li><a href="{{ route('front.category', ['su-kien']) }}">Hướng Dẫn</a></li>
+                <li><a href="{{ route('front.category', ['huong-dan']) }}">Hướng Dẫn</a></li>
                 <li><a href="{{ route('front.payment.index') }}">Nạp Thẻ</a></li>
                 <li><a href="{{ config('site.fb.page_url') }}" target="_blank">Fanpage</a></li>
                 <li><a href="{{ config('site.fb.group_url') }}" target="_blank">Group</a></li>

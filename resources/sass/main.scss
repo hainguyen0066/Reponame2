@@ -1,8 +1,6 @@
-@font-face {
-  font-family: 'PhilosopherBold';
-  src: url('../fonts/Philosopher-Bold.ttf');
+html {
+  font-size: 14px;
 }
-
 body {
   background: url('../images/bg-middle.jpg');
   font-family: PhilosopherBold, Arial, Tahoma, sans-serif;
@@ -70,6 +68,7 @@ a {
 }
 
 .main_content {
+  .slick-slide {outline: none;}
   overflow: hidden;
   .slogan {
     height: calc(580px - 120px);
@@ -220,10 +219,10 @@ a {
           height: 385px;
           .td-time {
             color: #ff191e;
-            width: 35px;
+            width: 60px;
           }
           .td-content {
-            width: 165px;
+            width: 140px;
             a {
               float: right;
               color: #2444be;
@@ -462,14 +461,12 @@ a {
             height: 190px;
             margin-top: 25px;
             ul {
-              display: table;
               margin: 0;
               padding: 0;
-              width: 100%;
-              height: 100%;
             }
             li {
-              display: table-row;
+              height: 2rem;
+              line-height: 2rem;
               a {
                 display: block;
                 width: 100%;
@@ -610,10 +607,11 @@ a {
 }
 
 .footer .bottom-logo {
-  background: url("../images/logo-bottom.png") no-repeat;
+  background: url("../images/logo-bottom.png") center no-repeat;
   height: 70px;
   width: 140px;
   margin-left: 10px;
+  background-size: contain;
 }
 
 .footer .bottom-logo a {
@@ -839,16 +837,17 @@ a {
         margin-top: 15px;
         padding-bottom: 15px;
         border-bottom: #eeeeee 1px solid;
-        height: 80px;
+        min-height: 80px;
+        overflow: hidden;
         a {
-          display: block;
-          height: 80px;
+          display: block;          
           font-size: 14px;
           color: #838383;
         }
         a.img {
           width: 120px;
           margin-left: 10px;
+          
         }
         a.content {
           width: 400px;
@@ -863,31 +862,16 @@ a {
         a.time {
           width: 80px
         }
+        img{
+          height: 80px;
+          width: 120px;
+          border: none;
+          object-fit: cover;
+        }
       }
       .center {
         text-align: center;
         margin-top: 30px;
-      }
-      .pagination {
-        display: inline-block;
-      }
-      .pagination a {
-        color: black;
-        float: left;
-        padding: 8px 16px;
-        text-decoration: none;
-        transition: background-color .3s;
-        border: 1px solid #ddd;
-        margin: 0 4px;
-        font-size: 16px;
-      }
-      .pagination a.active {
-        background-color: #4CAF50;
-        color: white;
-        border: 1px solid #4CAF50;
-      }
-      .pagination a:hover:not(.active) {
-        background-color: #ddd;
       }
     }
     .manage-charge {
@@ -1001,17 +985,10 @@ a {
       }
     }
   }
-  /* Font face*/
-  @font-face {
-    font-family: PhilosopherBold;
-    src: url('../fonts/Philosopher-Bold.ttf');
-  }
-
-  /* End Font face*/
 
   body {
     background: url('../images/bg-middle.jpg');
-    font-family: PhilosopherBold, Arial, Tahoma;
+    font-family: PhilosopherBold, sans-serif;
     font-size: 13px;
   }
 
@@ -1146,7 +1123,7 @@ a {
               font-size: 18px;
               font-weight: bold;
               line-height: 35px;
-              font-family: PhilosopherBold;
+              font-family: PhilosopherBold, sans-serif;
             }
           }
           .info-content {
@@ -1155,7 +1132,7 @@ a {
               font-size: 16px;
               color: #171b1e;
               line-height: 35px;
-              font-family: PhilosopherBold;
+              font-family: PhilosopherBold, sans-serif;
               span {
                 color: #c2433d
               }

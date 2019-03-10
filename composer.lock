@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2c677024f6eec76a0760cba836b0340a",
+    "content-hash": "d76bfc2b7551849bc3de18a85a380781",
     "packages": [
         {
             "name": "arrilot/laravel-widgets",
@@ -2217,6 +2217,43 @@
                 "storage"
             ],
             "time": "2018-09-14T15:30:29+00:00"
+        },
+        {
+            "name": "miraris/monolog-discord-handler",
+            "version": "0.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/miraris/monolog-discord-handler.git",
+                "reference": "783dc2b4a5d669bc7d69117c493ea50c884550e4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/miraris/monolog-discord-handler/zipball/783dc2b4a5d669bc7d69117c493ea50c884550e4",
+                "reference": "783dc2b4a5d669bc7d69117c493ea50c884550e4",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^6.3",
+                "monolog/monolog": "^1.23"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "DiscordHandler\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Miraris",
+                    "email": "miraris@autistici.org"
+                }
+            ],
+            "description": "A simple Monolog handler Discord webhooks",
+            "time": "2018-04-01T12:48:41+00:00"
         },
         {
             "name": "monolog/monolog",

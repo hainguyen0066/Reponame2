@@ -19,30 +19,13 @@ $(document).ready(function(){
     })
 
     $('.slider-nav-thumbnails').slick({
-        slidesToShow: 5,
+        slidesToShow: 3,
         slidesToScroll: 1,
         asNavFor: '.my-slider',
         focusOnSelect: true,
-        arrows: false,
         autoplay:true,
+        nextArrow: '.next-arrow',
+		prevArrow: '.pre-arrow',
+
     });
-    $('.register-btn , .popup-menu .btn-register').click(function(){
-        $(".popup-rg-lg").removeClass("dnone");
-        $(".popup-lg").removeClass("active");
-        $(".popup-rg").addClass("active");
-        $(".popup-menu .btn-login").removeClass("active");
-        $(".popup-menu .btn-register").addClass("active");
-    })
-    $('.login-btn, .popup-menu .btn-login').click(function(){
-        $(".popup-rg-lg").removeClass("dnone");
-        $(".popup-lg").addClass("active");
-        $(".popup-rg").removeClass("active");
-        $(".popup-menu .btn-register").removeClass("active");
-        $(".popup-menu .btn-login").addClass("active");
-    })
-    $('.popup-rg-lg').click(function(){
-        if (!$(event.target).closest(".popup-content").length) {
-            $(".popup-rg-lg").addClass("dnone");
-        }
-    })
 })
