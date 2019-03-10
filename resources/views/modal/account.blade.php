@@ -8,7 +8,7 @@
             <form action="">
                 <input type="text" placeholder="Tên đăng nhập" name="username" class="username">
                 <input type="password" placeholder="Mật khẩu" name="password" class="password">
-                <p>Quên mật khẩu? Sử dụng số điên thoại đăng ký gọi đến số <span>0999 999 999</span> để yêu cầu nhận mật khẩu mới.</p>
+                <p>Quên mật khẩu? Sử dụng số điên thoại đăng ký gọi đến số <span>0898 002 151</span> để yêu cầu nhận mật khẩu mới.</p>
                 <div class="highlight"></div>
                 <button type="submit" class="btn-submit-login"></button>
             </form>
