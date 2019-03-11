@@ -31,7 +31,11 @@ Route::group(['as' => 'front.'], function() {
 
 //     BEGIN CONTENT ROUTES
     Route::get('/download', [
-        'uses' => 'HomePageController@index',
+        'uses' => 'PostController@download',
+        'as' => 'page.download'
+    ]);
+    Route::get('/tai-game', [
+        'uses' => 'PostController@download',
         'as' => 'page.download'
     ]);
 

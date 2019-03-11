@@ -32,6 +32,20 @@ class PostController extends BaseFrontController
 
         return view('pages.post_detail', $data);
     }
+    public function download(PostRepository $postRepository)
+    {
+        $post = $postRepository->getPublishedPostBySlug('tai-game');
+        if (!$post) {
+            throw new NotFoundHttpException();
+        }
+        $otherPosts = $postRepository->getOtherPosts($post);
+        $data = [
+            'post'   => $post,
+            'others' => $otherPosts,
+        ];
+
+        return view('pages.post_detail', $data);
+    }
 
     public function list(
         $categorySlug,
