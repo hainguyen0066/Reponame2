@@ -5,7 +5,7 @@
         ?>
         <div class="item">
             <a href="{{ $url }}" class="img f-left">
-                <img src="{{ Voyager::image($post->getImage()) }}" alt="{{ $post->title }}" />
+                <img src="{{ Voyager::image($post->getImage()) }}" onerror="if (this.src != '/images/hot-img.png') this.src = '/images/hot-img.png';" alt="{{ $post->title }}" />
             </a>
             <a class="content f-left" href="{{ $url }}" title="{{ $post->title }}">
                 <div class="title">{{ str_limit($post->title, 100) }}</div>
