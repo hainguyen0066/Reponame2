@@ -272,10 +272,10 @@ body{
                     height: 385px;
                     .td-time{
                         color: #ff191e;
-                        width: 35px;
+                        width: 60px;
                     }
                     .td-content{   
-                        width:  165px;                    
+                        width:  145px;                    
                         a{
                             float: right;
                             color: #2444be;
@@ -807,7 +807,8 @@ body{
             }
         }
         li:last-child{
-            background:none
+            background:none;
+            font-size: 15px;
         }
     }
     .main-details-content{

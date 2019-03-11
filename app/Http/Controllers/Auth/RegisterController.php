@@ -51,7 +51,7 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name'     => 'required|regex:/^[a-z0-9]{5,50}$/i|unique:users',
-            'phone'    => 'nullable|digits_between:10,14',
+            'phone'    => 'required|digits_between:10,14',
             'password' => 'required|string|between:6,32|confirmed',
         ]);
     }
