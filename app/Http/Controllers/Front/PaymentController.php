@@ -17,13 +17,7 @@ class PaymentController extends BaseFrontController
 {
     public function index()
     {
-        $now = time();
-        $data = [
-            'amounts' => [10000, 20000, 50000, 100000, 200000, 300000, 500000],
-            'isInPromotion' => $now > strtotime("2019-01-03 00:00:00") && $now < strtotime("2019-01-09 23:59:59")
-        ];
-
-        return view('pages.charge', $data);
+       return redirect(route('front.static.nap_the_cao'));
     }
 
     public function submitCard(PaymentRepository $paymentRepository, ServerRepository $serverRepository)
