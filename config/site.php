@@ -7,17 +7,17 @@ return [
         'meta_description' => 'Ôn lại hồi ức võ lâm hoàng kim. Lộ trình phát triển rõ ràng, update tính năng liên tục và đều đặn',
     ],
     'fb'  => [
-        'app_id'   => '330885407505550',
-        'page_id'  => '259023564789788',
-        'page_url' => 'https://www.facebook.com/volamtrungnguyen2019',
-        'group_url' => 'https://www.facebook.com'
+        'app_id'   => '1041939975989453',
+        'page_id'  => '500304066823669',
+        'page_url' => 'https://www.facebook.com/volamtrungnguyen2019/',
+        'group_url' => 'https://www.facebook.com/groups/vltrungnguyen/?source_id=500304066823669'
     ],
     'ga'  => [
-        'id' => 'UA-131194659-1',
+        'id' => 'UA-131194659-2',
     ],
     // google tag manager
     'gtm' => [
-        'id'        => 'GTM-WL92DBB',
-        'config_id' => 'UA-131409000-1',
+        'id'        => '',
+        'config_id' => '',
     ],
 ];

@@ -8,4 +8,5 @@
 require('./bootstrap');
 require('./slick.min');
 require('./main');
+require('./payment');
 require('./account.js');

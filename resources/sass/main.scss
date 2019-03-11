@@ -919,6 +919,7 @@ a {
       }
       .list-btn-charge {
         overflow: hidden;
+        padding-bottom: 50px;
         ul {
           margin-left: 80px;
           margin-top: 20px;
@@ -943,9 +944,9 @@ a {
             align-items: center;
             justify-content: center;
           }
-        }
-        li:hover, li.active {
-          background: url('../images/btn-manage-account-hover.png') no-repeat;
+          &:hover, &.active {
+            background: url('../images/btn-manage-account-hover.png') no-repeat;
+          }
         }
       }
       .card-type {
@@ -954,9 +955,9 @@ a {
       .charge {
         margin-top: 30px;
         form {
-          margin-top: 100px;
+          margin-top: 40px;
           margin-left: 35px;
-          width: 435px;
+          width: 600px;
           min-height: 300px;
           .item {
             height: 45px;
@@ -965,17 +966,34 @@ a {
             .label {
               float: left;
               color: #151925;
-              font-size: 16px;
+              font-size: 1.2rem;
               font-family: PhilosopherBold;
               font-weight: bold;
               line-height: 55px;
+              margin-left: 50px;
             }
             .content {
               float: right;
+              margin-right: 50px;
+              &.payment-message {
+                line-height: 40px;
+                font-size: 1.1rem;
+                font-weight: bold;
+                text-align: center;
+                width: 400px;
+
+                &.success {
+                  color: green;
+                }
+                &.error {
+                  color: red;
+                }
+              }
             }
             input, select {
+              font-size: 1.1rem;
               height: 45px;
-              width: 300px;
+              width: 400px;
               border-radius: 5px;
               border: 1px solid black;
               outline: none;
