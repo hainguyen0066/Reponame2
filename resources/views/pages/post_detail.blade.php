@@ -8,11 +8,6 @@ $activeSlug = $post->getCategorySlug();
         <div class="header-details-content">
             <p class="c-white">{{ $post->title }}</p>
             {{ Breadcrumbs::render('post', $post) }}
-           {{-- <ul>
-                <li><a href="#">Trang Chủ</a></li>
-                <li><a href="#" class="c-white">Thông Báo</a></li>
-                <li><a href="" class="c-white">Trung tâm thông báo</a></li>
-            </ul>--}}
         </div>
         <div class="main-details-content">
             {!! $post->body !!}
@@ -31,5 +26,4 @@ $activeSlug = $post->getCategorySlug();
             @endif
         </div>
     </div>
-
 @endsection

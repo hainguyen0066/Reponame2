@@ -83,6 +83,18 @@ Route::group(['as' => 'front.'], function() {
         ]);
     });
 
+    $staticPages = [
+        'nap_the_cao' => '/nap-the/the-cao',
+        'vi_momo' => '/nap-the/vi-momo',
+        'chuyen_khoan' => '/nap-the/chuyen-khoan'
+    ];
+    foreach ($staticPages as $name => $uri) {
+        Route::get($uri, [
+            'uses' => 'StaticPageController@detail',
+            'as' => 'static.' . $name
+        ]);
+    }
+
 
     Route::get('/{categorySlug}', [
         'uses' => 'PostController@list',
@@ -92,11 +104,6 @@ Route::group(['as' => 'front.'], function() {
     Route::get('/{categorySlug}/{postSlug}', [
         'uses' => 'PostController@detail',
         'as' => 'details.post'
-    ]);
-
-    Route::get('/{uri}', [
-        'uses' => 'StaticPageController@detail',
-        'as' => 'static_pagdetaile'
     ]);
 });
 

@@ -20,9 +20,19 @@ class PageRepository extends AbstractEloquentRepository
         return Page::class;
     }
 
+    /**
+     * @param $uri
+     *
+     * @return Page|null
+     */
     public function getPageByUri($uri)
     {
         $query = $this->query();
-//        $query->where('')
+        $query->where([
+            'uri' => $uri,
+            'status' => true
+        ]);
+
+        return $query->first();
     }
 }

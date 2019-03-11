@@ -3,6 +3,7 @@
 Breadcrumbs::for('home', function ($trail) {
     $trail->push('Trang chủ', route('front.home'));
 });
+
 Breadcrumbs::for('afterHome', function ($trail, $title) {
     $trail->parent('home');
     $trail->push($title);
@@ -17,6 +18,12 @@ Breadcrumbs::for('charge', function ($trail) {
     $trail->parent('home');
     $trail->push('Nạp thẻ');
 });
+
+Breadcrumbs::for('charge-detail', function ($trail, $pageTitle) {
+    $trail->parent('charge');
+    $trail->push($pageTitle);
+});
+
 Breadcrumbs::for('changepass', function ($trail) {
     $trail->parent('home');
     $trail->push('Đổi mật khẩu');
@@ -31,4 +38,9 @@ Breadcrumbs::for('category', function ($trail, \App\Models\Category $category) {
 Breadcrumbs::for('post', function ($trail, \App\Models\Post $post) {
     $trail->parent('category', $post->category);
     $trail->push($post->title);
+});
+
+Breadcrumbs::for('static', function ($trail, \TCG\Voyager\Models\Page $page) {
+    $trail->parent('home');
+    $trail->push($page->title);
 });

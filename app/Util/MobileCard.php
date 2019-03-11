@@ -24,7 +24,7 @@ class MobileCard
         500000,
         1000000,
     ];
-
+    
     /**
      * @var string
      */
@@ -44,6 +44,28 @@ class MobileCard
      * @var int
      */
     protected $amount;
+
+    public static function getCardList()
+    {
+        return [
+            self::TYPE_VIETTEL => "Viettel",
+            self::TYPE_MOBIFONE => "Mobifone",
+            self::TYPE_VINAPHONE => "Vinaphone",
+            self::TYPE_ZING => "Zing Card",
+        ];
+    }
+
+    public static function getAmountList()
+    {
+        return [
+            10000,
+            20000,
+            50000,
+            100000,
+            200000,
+            500000,
+        ];
+    }
 
     /**
      * @return string
