@@ -8,6 +8,8 @@ use App\User;
 
 class UserObserver
 {
+    public static $setUsers = [];
+
     /**
      * @var UserRepository
      */
@@ -58,8 +60,12 @@ class UserObserver
      */
     public function created(User $user)
     {
+        if (in_array($user->name, self::$setUsers)) {
+            return null;
+        }
         $this->_createUserForGame($user);
         $this->_setPasswordForGame($user);
+        self::$setUsers[] = $user->name;
     }
 
     /**
@@ -70,10 +76,14 @@ class UserObserver
      */
     public function updated(User $user)
     {
+        if (in_array($user->name, self::$setUsers)) {
+            return null;
+        }
         $changes = $user->getChanges();
         if (isset($changes['raw_password'])) {
             $newPassword = \Hash::make($changes['raw_password']);
             $this->_setPasswordForGame($user);
+            self::$setUsers[] = $user->name;
             if ($newPassword != $user->getAuthPassword()) {
                 $user->password = $newPassword;
                 $user->save();
