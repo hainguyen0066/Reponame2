@@ -7,7 +7,7 @@
        <div class="ct-dmk">
             <h2>Đổi mật khẩu</h2>
             <div class="changepass-row">
-                <div class="frm-changepass">                    			  
+                <div class="frm-changepass">
                     <form action="{{ route('front.password.change.submit') }}" method="post" id="form_changepass" class="form-main">
                         @csrf
                         @if (session('status'))
@@ -51,7 +51,7 @@
                         </div>
                     </form>
                 </div>
-            </div>   
+            </div>
        </div>
     </div>
 @endsection
