@@ -2,7 +2,6 @@
 
 namespace App\Http\Middleware;
 
-use App\Repository\ServerRepository;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\ServiceUnavailableHttpException;
@@ -33,15 +32,11 @@ class T2GMiddleware
         ) {
             $user = \Auth::user();
             if (!$user || !$user->hasRole(['admin', 'editor'])) {
-                throw new ServiceUnavailableHttpException(null, "Vui lòng quay lại vào ngày 28-12 để tham gia Open Beta Kiếm Thế Web");
+                throw new ServiceUnavailableHttpException(null, "Server bảo trì!!! Vui lòng quay lại sau");
             }
         }
 
         \View::share('user', \Auth::user());
-        $serverRepository = app(ServerRepository::class);
-        $servers = $serverRepository->getAvailableServers();
-        \View::share('servers', $servers);
-        \View::share('serverPlayNow', $serverRepository->getServerPlayNow());
 
         return $next($request);
     }
