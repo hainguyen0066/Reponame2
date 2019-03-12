@@ -24,14 +24,15 @@ Route::group(['as' => 'front.'], function() {
         'as' => 'payment.submit_card'
     ]);
 
-    Route::get('/quan-ly-tai-khoan', [
-        'uses' => 'HomePageController@index',
-        'as' => 'account.index'
-    ]);
+    
 
 //     BEGIN CONTENT ROUTES
     Route::get('/download', [
-        'uses' => 'HomePageController@index',
+        'uses' => 'PostController@download',
+        'as' => 'page.download'
+    ]);
+    Route::get('/tai-game', [
+        'uses' => 'PostController@download',
         'as' => 'page.download'
     ]);
 
@@ -51,10 +52,28 @@ Route::group(['as' => 'front.'], function() {
     ]);
     ## --------------------- Secured Routes --------------------- ##
     Route::group(['middleware' => 'auth'], function() {
-        Route::get('/doi-mat-khau', [
-            'uses' => 'PasswordController@showChangePasswordForm',
-            'as' => 'password.change'
+        Route::get('/quan-ly-tai-khoan', [
+            'uses' => 'ManageAccount@accountInfo',
+            'as' => 'manage.account.info'
         ]);
+        Route::get('/thong-tin-tai-khoan', [
+            'uses' => 'ManageAccount@accountInfo',
+            'as' => 'manage.account.info'
+        ]);
+        
+        Route::get('/doi-mat-khau', [
+            'uses' => 'ManageAccount@changePass',
+            'as' => 'manage.account.pass'
+        ]);
+        Route::get('/doi-mat-khau-cap-2', [
+            'uses' => 'ManageAccount@changePass2',
+            'as' => 'manage.account.pass2'
+        ]);
+        Route::get('/lich-su-giao-dich', [
+            'uses' => 'ManageAccount@historyCharge',
+            'as' => 'manage.account.history'
+        ]);
+        
         Route::post('/doi-mat-khau', [
             'uses' => 'PasswordController@changePassword',
             'as' => 'password.change.submit'

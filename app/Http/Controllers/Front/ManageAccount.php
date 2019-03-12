@@ -6,19 +6,27 @@ use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Class PasswordController
+ * Class ManageAccount
  *
  * @package \App\Http\Controllers\Front
  */
-class PasswordController extends BaseFrontController
+class ManageAccount extends BaseFrontController
 {
-    public function showChangePasswordForm()
+    public function AccountInfo()
+    {
+        return view('pages.account_info');
+    }
+    public function changePass()
     {
         return view('pages.change_password');
     }
     public function changePass2()
     {
         return view('pages.change_password2');
+    }
+    public function historyCharge()
+    {
+        return view('pages.history_charge');
     }
 
     /**

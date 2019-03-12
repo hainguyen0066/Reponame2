@@ -722,13 +722,14 @@ a {
       }
       form {
         width: 300px;
-        margin-left: 60px;
+        margin-left: 200px;
         input {
           border-radius: 5px;
           width: 295px;
           height: 35px;
           margin-top: 10px;
           outline: none;
+          padding-left: 15px;
         }
         label {
           margin-top: 15px;

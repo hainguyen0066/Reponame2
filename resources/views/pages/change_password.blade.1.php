@@ -28,10 +28,11 @@
                 <div class="list-features">
                     <div class="title">Danh mục quản lý</div>
                     <ul>
-                        <li class=""><a href="{{  route('front.manage.account.info') }}">Thông tin tài khoản</a></li>
-                        <li class=""><a href="{{  route('front.manage.account.history') }}">Lịch sử giao dịch</a></li>
-                        <li class="active"><a href="{{  route('front.manage.account.pass') }}">Đổi mật khẩu cấp 1</a></li>
-                        <li class=""><a href="{{  route('front.manage.account.pass2') }}">Đổi mật khẩu cấp 2</a></li>
+                        <li class=""><a href="{{ route('front.password.change.pass') }}">Thông tin tài khoản</a></li>
+                        <li class=""><a href="{{ route('front.password.change.pass') }}">Cập nhật thông tin</a></li>
+                        <li class=""><a href="{{ route('front.password.change.pass') }}">Lịch sử giao dịch</a></li>
+                        <li class="active"><a href="{{ route('front.password.change.pass') }}">Đổi mật khẩu cấp 1</a></li>
+                        <li class=""><a href="{{ route('front.password.change.pass2') }}">Đổi mật khẩu cấp 2</a></li>
                     </ul>
                 </div>
             </div>
