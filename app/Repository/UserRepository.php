@@ -51,7 +51,7 @@ class UserRepository extends AbstractEloquentRepository
      */
     public function updatePassword(User $user, $password)
     {
-        $user->password = Hash::make($password);
+        $user->password = \Hash::make($password);
         $user->raw_password = base64_encode($password);
         $user->save();
     }
