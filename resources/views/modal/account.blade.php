@@ -23,7 +23,6 @@
                         <input type="password" placeholder="Mật khẩu" name="repassword" class="password input-password-confirm">
                         <input type="text" placeholder="Thông tin bảo mật quan trọng" name="phone" class="phone">
                         <div class="highlight"></div>
-                        <p class="highlight">Nếu để trống số điện thoại khi bạn đăng ký bạn có thể thêm sau trong phần quản lý tài khoản tại trang chủ.</p>
                         <button type="submit" class="btn-submit-register"></button>
                     </form>
                 </div>
