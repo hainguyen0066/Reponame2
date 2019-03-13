@@ -21,6 +21,7 @@ mix.copyDirectory('resources/images', 'public/images')
     .sass('resources/sass/app.scss', 'public/css/app.css')
     .sass('resources/sass/auth.scss', 'public/css/auth.css')
     .sass('resources/sass/popup-account.scss', 'public/css/account.css')
+    .sass('resources/sass/web_launcher.scss', 'public/css/web_launcher.css')
     .version();
 
 mix.js('resources/js/landing/index.js', 'public/js/landing.js') // tương tự JS
