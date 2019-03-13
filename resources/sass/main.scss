@@ -103,26 +103,76 @@ a {
           }
         }
       }
+      .charge{
+        width: 100%;
+        height: 60px;
+        margin-top: 10px;
+        background: url('../images/NapThe.png') no-repeat;
+        background-size: contain;
+        a{
+          display: block;
+          width: 100%;
+          height: 100%;
+          span{
+            position: absolute;
+            display: block;
+            margin-top: 10px;
+            margin-left: 40px;
+            width: 32px;
+            height: 32px;
+            background: url('../images/coin.png') no-repeat;
+            background-size: cover; animation: myAnimate 5s infinite linear;
+            -moz-animation: myAnimate 5s infinite linear;
+            -webkit-animation: myAnimate 5s infinite linear;
+            -o-animation: myAnimate 5s infinite linear;
+            -ms-animation: myAnimate 5s infinite linear;
+            transform-style: preserve-3d;
+            -moz-transform-style: preserve-3d;
+            -webkit-transform-style: preserve-3d;
+            -o-transform-style: preserve-3d;
+            -ms-transform-style: preserve-3d;
+            
+          }
+          @-webkit-keyframes myAnimate {
+            from {
+                transform: rotateY(0);
+              -moz-transform: rotateY(0);
+                -webkit-transform: rotateY(0);
+                -o-transform: rotateY(0);
+                -ms-transform: rotateY(0);
+            }
+            to   {
+                transform: rotateY(360deg);
+                -moz-transform: rotateY(360deg);
+                -webkit-transform: rotateY(360deg);
+                -o-transform: rotateY(360deg);
+                -ms-transform: rotateY(360deg);
+            }
+        }
+        }
+      }
       .register-login {
         width: 100%;
         .register-btn {
           cursor: pointer;
           width: 100%;
-          height: 78px;
+          height: 60px;
           margin-top: 10px;
-          background: url('../images/register-btn.png') no-repeat;
+          background: url('../images/DangKy.png') no-repeat;
+          background-size: contain;
         }
-        .register-btn:hover {
+        .register-btn_:hover {
           background: url('../images/register-btn-hover.png') no-repeat;
         }
         .login-btn {
           cursor: pointer;
           width: 100%;
-          height: 78px;
+          height: 60px;
           margin-top: 10px;
-          background: url('../images/login-btn.png') no-repeat;
+          background: url('../images/DangNhap.png') no-repeat;
+          background-size: contain;
         }
-        .login-btn:hover {
+        .login-btn_:hover {
           background: url('../images/login-btn-hover.png') no-repeat;
         }
       }
@@ -1136,7 +1186,7 @@ a {
               background: url('../images/lantern.png') no-repeat;
             }
           }
-        }
+        }        
         .register-login {
           width: 100%;
           .register-btn {

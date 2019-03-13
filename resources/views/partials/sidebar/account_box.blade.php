@@ -1,3 +1,8 @@
+<div class="charge">
+    <a href="{{ route('front.static.nap_the_cao') }}">
+        <span></span>
+    </a>
+</div>
 @if(!Auth::user())
 <div class="register-login">
     <div class="register-btn account-register"></div>
