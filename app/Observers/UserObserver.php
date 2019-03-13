@@ -64,7 +64,6 @@ class UserObserver
             return null;
         }
         $this->_createUserForGame($user);
-        $this->_setPasswordForGame($user);
         self::$setUsers[] = $user->name;
     }
 
