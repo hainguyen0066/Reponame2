@@ -23,7 +23,10 @@ Route::group(['as' => 'front.'], function() {
         'uses' => 'PaymentController@submitCard',
         'as' => 'payment.submit_card'
     ]);
-
+    Route::get('/web-launcher',[        
+        'uses' => 'WebLauncherController@index',
+        'as'   => 'web_laucher'
+    ]);
     
 
 //     BEGIN CONTENT ROUTES
