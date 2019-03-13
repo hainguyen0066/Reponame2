@@ -24,7 +24,7 @@
                     @foreach($newsByCategory as $categorySlug => $news)
                         @foreach($news as $item)
                         <li>
-                            <a href="{{ route('front.details.post', [$categorySlug, $item->slug]) }} target="_blank" ">
+                            <a href="{{ route('front.details.post', [$categorySlug, $item->slug]) }}" target="_blank">
                                 {{ str_limit($item->title, 30) }} <span class="time">{{ $item->displayPublishedDate()}}</span>
                             </a>
                         </li>
