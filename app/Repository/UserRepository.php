@@ -39,7 +39,8 @@ class UserRepository extends AbstractEloquentRepository
     public function registerUser(array $data)
     {
         $data['name'] = strtolower($data['name'] ?? '');
-        $user = $this->create(array_only($data, ['name', 'phone', 'email']));
+        $user = $this->makeModel();
+        $user->fill(array_only($data, ['name', 'phone', 'email']));
         $this->updatePassword($user, $data['password'] ?? '');
 
         return $user;
