@@ -5,8 +5,8 @@
         <div class="header-details-content">
             <p class="c-white">Trung tâm thông báo</p>
             <ul>
-                <li><a href="#">Trang Chủ</a></li>
-                <li><a href="#" class="c-white">Quản lý tài khoản</a></li>
+                <li><a href="{{ route('front.home')}}">Trang Chủ</a></li>
+                <li><a href="{{  route('front.manage.account.info') }}" class="c-white">Quản lý tài khoản</a></li>
                 <li><a href="" class="c-white">Đổi mật khẩu cấp 2</a></li>
             </ul>
         </div>
@@ -32,7 +32,7 @@
                         <li class=""><a href="{{  route('front.manage.account.history') }}">Lịch sử giao dịch</a></li>
                         <li class=""><a href="{{  route('front.manage.account.pass') }}">Đổi mật khẩu cấp 1</a></li>
                         <li class="active"><a href="{{  route('front.manage.account.pass2') }}">Đổi mật khẩu cấp 2</a></li>
-                        
+                        <li class=""><a href="{{ route('front.static.chuyen_khoan') }}" style="line-height: 30px;">Nạp thẻ</a></li>
                     </ul>
                 </div>
             </div>

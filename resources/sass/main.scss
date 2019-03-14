@@ -386,7 +386,7 @@ a {
               font-size: 16px;
             }
             div:hover, div.active, .slick-current {
-              color: #ffffff;
+              color: #ff9000;
             }
           }
         }
@@ -523,14 +523,17 @@ a {
             }
             li {
               display: table-row;
+              background: url('../images/icon-list-new.png') left top no-repeat;
               a {
                 display: block;
-                width: 100%;
+                width: calc(100% - 25px);
                 height: 100%;
                 color: black;
                 font-family: 'Roboto', sans-serif;
                 font-size: 14px;
                 font-weight: normal;
+                padding-left: 25px;
+                line-height: 20px;
                 span {
                   float: right;
                 }
@@ -634,14 +637,17 @@ a {
           }
           li {
             display: table-row;
+            background: url('../images/icon-list-new.png') left top no-repeat;
             a {
               display: block;
-              width: 100%;
+              width: calc(100% - 25px);
               height: 100%;
               color: black;
               font-family: 'Roboto', sans-serif;
               font-size: 14px;
               font-weight: normal;
+              padding-left: 25px;
+              line-height: 20px;
               span {
                 float: right;
               }
@@ -1665,6 +1671,7 @@ a {
             }
             li {
               display: table-row;
+              background: url('../images/icon-list-new.png') left top no-repeat;
               a {
                 display: block;
                 width: 100%;

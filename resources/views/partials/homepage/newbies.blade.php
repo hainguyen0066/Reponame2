@@ -29,7 +29,7 @@
             </a>
         </div>
         @if(count($guides))
-            <div class="list-news">
+            <div class="list-news">                
                 <ul>
                     @foreach($guides as $item)
                         <li>
