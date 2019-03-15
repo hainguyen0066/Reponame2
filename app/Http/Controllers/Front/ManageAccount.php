@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class ManageAccount extends BaseFrontController
 {
+    
     public function AccountInfo()
     {
         return view('pages.account_info');

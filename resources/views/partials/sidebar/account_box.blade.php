@@ -21,7 +21,7 @@
             @endif
         </p>
         <p>Địa chỉ IP: <span>{{ request()->getClientIp() }}</span></p>
-        <p>Điện thoại: <span>{{ $user->phone ? str_pad($user->phone, 7, '*') : '' }}</span></p>
+        <p>Điện thoại: <span>{{ $user->phone ? substr_replace($user->phone, '*******',0, 7) : 'Chưa cập nhật' }}</span></p>
     </div>
     <div class="two-btn">
         <div class="btn-manage"><a href="{{ route('front.manage.account.info') }}"></a></div>
