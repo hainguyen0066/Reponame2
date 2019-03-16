@@ -14,5 +14,6 @@ $links = [
             <a href="{{  route($route) }}">{{ $title }}</a>
         </li>
         @endforeach
+            <li class=""><a href="{{ route('front.static.chuyen_khoan') }}" style="line-height: 30px;">Nạp thẻ</a></li>
     </ul>
 </div>

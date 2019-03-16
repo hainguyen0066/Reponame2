@@ -5,7 +5,7 @@
 @section('content')
 <div class="columns-right">
     <div class="details-content">
-        v
+        @include('partials.manage_account.breadcrumbs')
         <div class="main-details-content">                                
             <div class="manage-account">
                 <div class="features">
