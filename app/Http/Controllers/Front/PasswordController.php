@@ -34,6 +34,11 @@ class PasswordController extends BaseFrontController
             return $this->sendFailedResponse($request, $validator->getMessageBag()->toArray());
         }
         $user = \Auth::user();
+        if (!$user->validatePassword($request->get('old_password'))) {
+            return $this->sendFailedResponse($request, [
+                'old_password' => ['Mật khẩu cũ không đúng']
+            ]);
+        }
         $userRepository->updatePassword($user, $request->get('password'));
 
         return back()->with('status', trans('Bạn đã đổi mật khẩu thành công'));
@@ -66,4 +71,5 @@ class PasswordController extends BaseFrontController
             'password'     => 'required|string|min:6|confirmed',
         ]);
     }
+
 }

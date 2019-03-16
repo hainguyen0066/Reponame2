@@ -44,3 +44,9 @@ Breadcrumbs::for('static', function ($trail, \TCG\Voyager\Models\Page $page) {
     $trail->parent('home');
     $trail->push($page->title);
 });
+
+Breadcrumbs::for('manageAccount', function ($trail, $title) {
+    $trail->parent('home');
+    $trail->push("Quản lý tài khoản", route('front.manage.account.info'));
+    $trail->push($title);
+});

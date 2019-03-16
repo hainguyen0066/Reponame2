@@ -1,39 +1,53 @@
 @extends('layouts.front')
+@php
+    $pageTitle = "Đổi mật khẩu cấp 1";
+@endphp
 @section('content')
 <div class="columns-right">
     <div class="details-content">
-        <div class="header-details-content">
-            <p class="c-white">Trung tâm thông báo</p>
-            <ul>
-                <li><a href="#">Trang Chủ</a></li>
-                <li><a href="#" class="c-white">Quản lý tài khoản</a></li>
-                <li><a href="" class="c-white">Đổi mật khẩu cấp 1</a></li>
-            </ul>
-        </div>
+        @include('partials.manage_account.breadcrumbs')
         <div class="main-details-content">                                
             <div class="manage-account">
                 <div class="features">
                     <div class="title">Đổi mật khẩu cấp 1</div>
-                    <form action="">
-                        <label for="old-password">Mật khẩu cấp 1 cũ</label>
-                        <input type="password" name="old-password" id="old-password">
+                    <form method="POST" action="{{ route('front.password.change.submit') }}">
+                        @csrf
+                        <label for="old_password">Mật khẩu cấp 1 cũ</label>
+                        <input type="password" name="old_password" id="old_password">
+                        @if ($errors->has('old_password'))
+                        <div class="invalid-feedback">
+                            <span role="alert">
+                                <strong>{{ $errors->first('old_password') }}</strong>
+                            </span>
+                        </div>
+                        @endif
                         <label for="password">Mật khẩu cấp 1 mới</label>
                         <input type="password" name="password" id="password">
-                        <label for="re-password">Mật khẩu cấp 1 mới</label>
-                        <input type="password" name="re-password" id="re-password">
-                        <div class="c-red"></div>
+                        @if ($errors->has('password'))
+                        <div class="invalid-feedback">
+                            <span role="alert">
+                                <strong>{{ $errors->first('password') }}</strong>
+                            </span>
+                        </div>
+                        @endif
+                        <label for="password_confirmation">Nhập lại mật khẩu cấp 1 mới</label>
+                        <input type="password" name="password_confirmation" id="password_confirmation">
+                        @if ($errors->has('password_confirmation'))
+                        <div class="invalid-feedback">
+                            <span role="alert">
+                                <strong>{{ $errors->first('password_confirmation') }}</strong>
+                            </span>
+                        </div>
+                        @endif
+                        @if (session('status'))
+                            <div class="alert alert-success" role="alert">
+                                {{ session('status') }}
+                            </div>
+                        @endif
                         <button type="submit" value="">Cập nhật</button>
                     </form>
                 </div>
-                <div class="list-features">
-                    <div class="title">Danh mục quản lý</div>
-                    <ul>
-                        <li class=""><a href="{{  route('front.manage.account.info') }}">Thông tin tài khoản</a></li>
-                        <li class=""><a href="{{  route('front.manage.account.history') }}">Lịch sử giao dịch</a></li>
-                        <li class="active"><a href="{{  route('front.manage.account.pass') }}">Đổi mật khẩu cấp 1</a></li>
-                        <li class=""><a href="{{  route('front.manage.account.pass2') }}">Đổi mật khẩu cấp 2</a></li>
-                    </ul>
-                </div>
+                @include('partials.manage_account.links_list')
             </div>
         </div>
     </div>

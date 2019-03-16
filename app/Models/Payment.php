@@ -30,16 +30,16 @@ class Payment extends BaseEloquentModel
     {
         $extended = $isAdmin ? "" : ". Vui lòng liên hệ BQT để được hỗ trợ.";
         if ($this->status) {
-            $msg = "<span class='label label-success'>Thành công!</span>";
+            $msg = "<span class='c-green'>Thành công!</span>";
         } else {
             if (!$this->finished) {
-                $msg = "<span  class='label label-info'>Đang xử lý</span>";
+                $msg = "<span  class='label-info'>Đang xử lý</span>";
             } else {
-                $msg = "<span  class='label label-danger'>Không thành công</span>";
+                $msg = "<span  class='c-red'>Không thành công</span>";
                 if ($this->card_type != MobileCard::TYPE_ZING) {
                     if($this->gateway_status == 2) {
                         $text = $this->gateway_response ? $this->gateway_response : "Có lỗi xảy ra";
-                        $msg = "<span style='color:red'>{$text}{$extended}</span>";
+                        $msg = "<span class='c-red'>{$text}{$extended}</span>";
                     }
                     if($this->gateway_status == 1 && $this->gold_added) {
                         if ($isAdmin) {
@@ -47,7 +47,7 @@ class Payment extends BaseEloquentModel
                         } else {
                             $text = "Có lỗi xảy ra" . $extended;
                         }
-                        $msg = "<span  class='label label-warning'>{$text}</span>";
+                        $msg = "<span  class='c-orange'>{$text}</span>";
                     }
                 }
             }

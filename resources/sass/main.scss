@@ -801,10 +801,22 @@ a {
           outline: none;
           margin-left: 70px;
         }
+        .invalid-feedback {
+          color: red;
+          margin-top: 5px;
+        }
+        .alert-success {
+          margin-top: 10px;
+          color: green;
+          font-size: 1rem;
+          font-weight: bold;
+        }
       }
       .features {
         ul {
-          margin-left: 40px;
+          border: 1px solid #cecece;
+          margin:  30px 0;
+          padding: 30px 50px;
           li {
             font-size: 18px;
             margin-top: 15px;
@@ -813,8 +825,6 @@ a {
               float: right;
             }
           }
-          margin-top: 30px;
-          padding-bottom: 50px;
         }
         table {
           width: 100%;
@@ -889,6 +899,10 @@ a {
         }
       }
     }
+    .center {
+      text-align: center;
+      margin-top: 30px;
+    }
     .list-content {
       .item {
         margin-top: 15px;
@@ -925,10 +939,6 @@ a {
           border: none;
           object-fit: cover;
         }
-      }
-      .center {
-        text-align: center;
-        margin-top: 30px;
       }
       .pagination {
         display: inline-block;
@@ -1081,14 +1091,6 @@ a {
       }
     }
   }
-  /* Font face*/
-  @font-face {
-    font-family: PhilosopherBold;
-    src: url('../fonts/Philosopher-Bold.ttf');
-  }
-
-  /* End Font face*/
-
   body {
     background: url('../images/bg-middle.jpg');
     font-family: PhilosopherBold, Arial, Tahoma;

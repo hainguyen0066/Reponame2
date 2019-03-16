@@ -20,7 +20,7 @@
                     <form method="POST" id="registerForm" action="/register">
                         <input type="text" placeholder="Tên đăng nhập" name="username" class="username input-username">
                         <input type="password" placeholder="Mật khẩu" name="password" class="password input-password">
-                        <input type="password" placeholder="Mật khẩu" name="repassword" class="password input-password-confirm">
+                        <input type="password" placeholder="Mật khẩu" name="password_confirmation" class="password input-password-confirm">
                         <input type="text" placeholder="Thông tin bảo mật quan trọng" name="phone" class="phone">
                         <div class="highlight"></div>
                         <button type="submit" class="btn-submit-register"></button>

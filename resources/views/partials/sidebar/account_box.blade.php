@@ -13,15 +13,9 @@
     <div class="info-title"></div>
     <div class="info-content">
         <p>Tài khoản: <span>{{ str_limit($user->name, 20) }}</span></p>
-        <p>Mật khẩu 2:
-            @if(empty($user->pass2))
-                <span>Chưa cập nhật</span>
-            @else
-                <span style="color: green">Đã cập nhật</span>
-            @endif
-        </p>
+        <p>Mật khẩu 2: {!! $user->displayPass2() !!}</p>
         <p>Địa chỉ IP: <span>{{ request()->getClientIp() }}</span></p>
-        <p>Điện thoại: <span>{{ $user->phone ? str_pad($user->phone, 7, '*') : '' }}</span></p>
+        <p>Điện thoại: {!! $user->displayPhone() !!}</p>
     </div>
     <div class="two-btn">
         <div class="btn-manage"><a href="{{ route('front.manage.account.info') }}"></a></div>

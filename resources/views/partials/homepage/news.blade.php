@@ -31,7 +31,7 @@
                         <a class="h-news-tt" title="Xem thêm"
                            href="{{ route('front.details.post', [$categorySlug, $firstItem->slug] ) }}">
                             <div class="hot-img f-left">
-                                <img src="{{ Voyager::image($firstItem->getImage()) }}"  onerror="if (this.src != '/images/hot-img.png') this.src = '/images/hot-img.png';"
+                                <img src="{{ Voyager::image($firstItem->getImage()) }}"  onerror="if (this.src != '/images/logo.png') this.src = '/images/logo.png';"
                                      alt="{{ $firstItem->title }}">
                             </div>
                             <div class="hot-des f-left">

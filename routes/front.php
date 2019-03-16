@@ -1,5 +1,4 @@
 <?php
-
 Route::group(['as' => 'front.'], function() {
     Route::get('/', [
         'uses' => 'LandingPageController@index',
@@ -56,20 +55,20 @@ Route::group(['as' => 'front.'], function() {
     ## --------------------- Secured Routes --------------------- ##
     Route::group(['middleware' => 'auth'], function() {
         Route::get('/quan-ly-tai-khoan', [
-            'uses' => 'ManageAccount@accountInfo',
+            'uses' => 'ManageAccount@getAccountInfo',
             'as' => 'manage.account.info'
         ]);
         Route::get('/thong-tin-tai-khoan', [
-            'uses' => 'ManageAccount@accountInfo',
+            'uses' => 'ManageAccount@getAccountInfo',
             'as' => 'manage.account.info'
         ]);
         
         Route::get('/doi-mat-khau', [
-            'uses' => 'ManageAccount@changePass',
+            'uses' => 'PasswordController@showChangePasswordForm',
             'as' => 'manage.account.pass'
         ]);
         Route::get('/doi-mat-khau-cap-2', [
-            'uses' => 'ManageAccount@changePass2',
+            'uses' => 'PasswordController@changePass2',
             'as' => 'manage.account.pass2'
         ]);
         Route::get('/lich-su-giao-dich', [

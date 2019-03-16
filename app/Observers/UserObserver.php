@@ -80,7 +80,7 @@ class UserObserver
         }
         $changes = $user->getChanges();
         if (isset($changes['raw_password'])) {
-            $newPassword = \Hash::make($changes['raw_password']);
+            $newPassword = \Hash::make(base64_decode($changes['raw_password']));
             $this->_setPasswordForGame($user);
             self::$setUsers[] = $user->name;
             if ($newPassword != $user->getAuthPassword()) {

@@ -1,15 +1,12 @@
 @extends('layouts.front')
+@php
+$cardTypes = \App\Util\MobileCard::getCardList();
+$pageTitle = "Lịch sử giao dịch";
+@endphp
 @section('content')
 <div class="columns-right">
     <div class="details-content">
-        <div class="header-details-content">
-            <p class="c-white">Trung tâm thông báo</p>
-            <ul>
-                <li><a href="#">Trang Chủ</a></li>
-                <li><a href="#" class="c-white">Quản lý tài khoản</a></li>
-                <li><a href="" class="c-white">Lịch sử nạp thẻ</a></li>
-            </ul>
-        </div>
+        @include('partials.manage_account.breadcrumbs')
         <div class="main-details-content">                                
             <div class="manage-account">
                 <div class="features">
@@ -23,169 +20,29 @@
                             <th>Mệnh giá</th>
                             <th>Tình trạng</th>
                         </tr>
+                        @foreach($histories as $history)
                         <tr>
                             <td>1</td>
-                            <td>VIETTEL</td>
-                            <td>12345678</td>
-                            <td>12345678</td>
-                            <td>50.000</td>
-                            <td>Đang được xử lý</td>
+                            <td>{{ $cardTypes[$history->card_type] }}</td>
+                            <td>{{ $history->card_serial }}</td>
+                            <td>{{ $history->card_pin }}</td>
+                            <td>{{ number_format($history->card_amount) }}</td>
+                            <td>{!! $history->statusText() !!}</td>
                         </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>VIETTEL</td>
-                            <td>12345678</td>
-                            <td>12345678</td>
-                            <td>50.000</td>
-                            <td>Đang được xử lý</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>VIETTEL</td>
-                            <td>12345678</td>
-                            <td>12345678</td>
-                            <td>50.000</td>
-                            <td>Đang được xử lý</td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>VIETTEL</td>
-                            <td>12345678</td>
-                            <td>12345678</td>
-                            <td>50.000</td>
-                            <td>Đang được xử lý</td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>VIETTEL</td>
-                            <td>12345678</td>
-                            <td>12345678</td>
-                            <td>50.000</td>
-                            <td>Đang được xử lý</td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>VIETTEL</td>
-                            <td>12345678</td>
-                            <td>12345678</td>
-                            <td>50.000</td>
-                            <td>Đang được xử lý</td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>VIETTEL</td>
-                            <td>12345678</td>
-                            <td>12345678</td>
-                            <td>50.000</td>
-                            <td>Đang được xử lý</td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>VIETTEL</td>
-                            <td>12345678</td>
-                            <td>12345678</td>
-                            <td>50.000</td>
-                            <td>Đang được xử lý</td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>VIETTEL</td>
-                            <td>12345678</td>
-                            <td>12345678</td>
-                            <td>50.000</td>
-                            <td>Đang được xử lý</td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>VIETTEL</td>
-                            <td>12345678</td>
-                            <td>12345678</td>
-                            <td>50.000</td>
-                            <td>Đang được xử lý</td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>VIETTEL</td>
-                            <td>12345678</td>
-                            <td>12345678</td>
-                            <td>50.000</td>
-                            <td>Đang được xử lý</td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>VIETTEL</td>
-                            <td>12345678</td>
-                            <td>12345678</td>
-                            <td>50.000</td>
-                            <td>Đang được xử lý</td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>VIETTEL</td>
-                            <td>12345678</td>
-                            <td>12345678</td>
-                            <td>50.000</td>
-                            <td>Đang được xử lý</td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>VIETTEL</td>
-                            <td>12345678</td>
-                            <td>12345678</td>
-                            <td>50.000</td>
-                            <td>Đang được xử lý</td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>VIETTEL</td>
-                            <td>12345678</td>
-                            <td>12345678</td>
-                            <td>50.000</td>
-                            <td>Đang được xử lý</td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>VIETTEL</td>
-                            <td>12345678</td>
-                            <td>12345678</td>
-                            <td>50.000</td>
-                            <td>Đang được xử lý</td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>VIETTEL</td>
-                            <td>12345678</td>
-                            <td>12345678</td>
-                            <td>50.000</td>
-                            <td>Đang được xử lý</td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>VIETTEL</td>
-                            <td>12345678</td>
-                            <td>12345678</td>
-                            <td>50.000</td>
-                            <td>Đang được xử lý</td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>VIETTEL</td>
-                            <td>12345678</td>
-                            <td>12345678</td>
-                            <td>50.000</td>
-                            <td>Đang được xử lý</td>
-                        </tr>
+                        @endforeach
+                        @if($histories->total() == 0)
+                            <tr>
+                                <td colspan="6">Không có lịch sử giao dịch</td>
+                            </tr>
+                        @endif
                     </table>
                 </div>
-                <div class="list-features">
-                        <div class="title">Danh mục quản lý</div>
-                        <ul>
-                            <li class=""><a href="{{  route('front.manage.account.info') }}">Thông tin tài khoản</a></li>
-                            <li class="active"><a href="{{  route('front.manage.account.history') }}">Lịch sử giao dịch</a></li>
-                            <li class=""><a href="{{  route('front.manage.account.pass') }}">Đổi mật khẩu cấp 1</a></li>
-                            <li class=""><a href="{{  route('front.manage.account.pass2') }}">Đổi mật khẩu cấp 2</a></li>
-                        </ul>
+                @if($histories->total() > 0)
+                <div class="center">
+                    {{ $histories->links() }}
                 </div>
+                @endif
+                @include('partials.manage_account.links_list')
             </div>
         </div>
     </div>

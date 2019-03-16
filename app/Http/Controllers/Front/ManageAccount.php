@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Front;
 
+use App\Repository\PaymentRepository;
 use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -12,21 +13,18 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class ManageAccount extends BaseFrontController
 {
-    public function AccountInfo()
+    const LIMIT_PAYMENT_HISTORY = 30;
+
+    public function getAccountInfo()
     {
         return view('pages.account_info');
     }
-    public function changePass()
+
+    public function historyCharge(PaymentRepository $paymentRepository)
     {
-        return view('pages.change_password');
-    }
-    public function changePass2()
-    {
-        return view('pages.change_password2');
-    }
-    public function historyCharge()
-    {
-        return view('pages.history_charge');
+        $histories = $paymentRepository->getUserPaymentHistory(\Auth::user(), self::LIMIT_PAYMENT_HISTORY);
+
+        return view('pages.history_charge', ['histories' => $histories]);
     }
 
     /**

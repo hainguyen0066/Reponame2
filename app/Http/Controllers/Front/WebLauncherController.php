@@ -14,6 +14,7 @@ class WebLauncherController extends BaseFrontController
 {
     const WEBLAUNCHER_LIMIT_POSTS = 6;
     const WEBLAUNCHER_LIMIT_SLIDERS = 1;
+
     public function index(PostRepository $postRepository, SliderRepository $sliderRepository)
     {
         $postsLimit = self::WEBLAUNCHER_LIMIT_POSTS;

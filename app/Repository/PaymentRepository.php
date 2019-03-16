@@ -130,4 +130,19 @@ class PaymentRepository extends AbstractEloquentRepository
         $record->status     = $status;
         $record->save();
     }
+
+    public function makeUserPaymentHistoryQuery(User $user)
+    {
+        $query = $this->query();
+        $query->whereUserId($user->id);
+
+        return $query;
+    }
+
+    public function getUserPaymentHistory(User $user, $limit = 10)
+    {
+        $query = $this->makeUserPaymentHistoryQuery($user);
+
+        return $query->paginate($limit);
+    }
 }
