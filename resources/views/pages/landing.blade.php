@@ -1,6 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
+    @component('meta')
+    @slot('title')
+        @section('title'){{ $title ?? config('site.seo.title') }}@show
+    @endslot
+    @slot('meta_description')
+        {{ $meta_description ?? config('site.seo.meta_description') }}
+    @endslot
+    @slot('meta_keyword')
+        {{ $meta_keyword ?? config('site.seo.meta_keyword') }}
+    @endslot
+    @endcomponent
     <link rel="stylesheet" href="{{ mix('css/landing.css') }}">
     <link rel="stylesheet" href="{{ mix('css/account.css') }}">
 </head>
@@ -17,9 +28,15 @@
                     </ul>
                 </div>
                 <div class="three-button">
-                    <div class="register-btn account-register"></div>
-                    <div class="download"> <a href="{{ route('front.page.download')}}"></a></div>
-                    <div class="login-btn account-login"></div>
+                    @if(!Auth::user())
+                        <div class="register-btn account-register"></div>
+                        <div class="download"> <a href="{{ route('front.page.download')}}"></a></div>
+                        <div class="login-btn account-login"></div>
+                    @else
+                        <div class="charge"><a href="{{ route('front.static.nap_the_cao') }}"></a></div>
+                        <div class="download"><a href="{{ route('front.page.download')}}"></a></div>
+                        <div class="logout"><a href="{{ route('logout')}}"></a></div>
+                    @endif
                 </div>
             </div>
         </div>
