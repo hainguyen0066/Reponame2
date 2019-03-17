@@ -1,7 +1,7 @@
 <div class="manage-charge">
     <div class="charge">
         <div class="title">Nạp thẻ</div>
-        <form action="">
+        <form id="formUseCard" method="post" action="">
             <div class="item">
                 <div class="label"><label for="card_type">Loại thẻ:</label></div>
                 <div class="content">
@@ -20,32 +20,20 @@
                 </div>
             </div>
             <div class="item">
-                <div class="label"><label for="card_pin">Mã pin:</label></div>
+                <div class="label"><label for="card_pin">Mã thẻ:</label></div>
                 <div class="content">
                     <input type="text" name="card_pin" id="card_pin">
                 </div>
             </div>
             <div class="item">
-                <div class="label"><label for="menh-gia">Loại thẻ:</label></div>
+                <div class="label"><label for="card_amount">Mệnh giá:</label></div>
                 <div class="content">
-                    <select name="menh-gia" id="menh-gia">
+                    <select name="card_amount" id="card_amount">
                     <option value="">-- Chọn mệnh giá --</option>
                         @foreach(\App\Util\MobileCard::getAmountList() as $val)
                             <option value="{{ $val }}">{{ number_format($val) }} VNĐ</option>
                         @endforeach
                     </select>
-                </div>
-            </div>
-            {{--<div class="item">--}}
-                {{--<div class="label"><label>Mã kiểm tra</label></div>--}}
-                {{--<div class="content">--}}
-                    {{--aaaaaaaaaaaaaa--}}
-                {{--</div>--}}
-            {{--</div>--}}
-            <div class="item">
-                <div class="label"><label for="ma-kiem-tra">Mã pin:</label></div>
-                <div class="content">
-                    <input type="text" name="ma-kiem-tra" id="ma-kiem-tra">
                 </div>
             </div>
             <div class="item">

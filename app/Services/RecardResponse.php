@@ -57,7 +57,7 @@ class RecardResponse
             if (isset($result->code)) {
                 $this->errors = $result->code;
             } else {
-                $this->errors = ["Unknown error"];
+                $this->errors = $result;
             }
         }
         if ($this->statusCode == 200 && !empty($result->success) && !empty($result->transaction_code)) {

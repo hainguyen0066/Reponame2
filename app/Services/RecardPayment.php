@@ -74,6 +74,7 @@ class RecardPayment
     {
         $type = $this->getCardType($card);
         $data = $this->merchantId . $type . $card->getSerial() . $card->getCode() . $card->getAmount();
+
         return hash_hmac('sha256', $data, $this->secretKey);
     }
 

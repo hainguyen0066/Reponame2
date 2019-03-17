@@ -1,5 +1,9 @@
-const urlUseCard = '/payment';
-const  btnUseCard = $('#btnUseCard');
+import Account from './account';
+
+const urlUseCard = '/nap-the';
+const btnUseCard = $('#btnUseCard');
+const message = $('.payment-message');
+
 $(document).ready(function () {
     btnUseCard.click(function (e) {
         e.preventDefault();
@@ -7,15 +11,28 @@ $(document).ready(function () {
     })
 })
 
+function clearMessage() {
+    message.text('');
+}
 function showSuccess(msg) {
-    $('.payment-message').removeClass('error').addClass('success').html(msg);
+    message.removeClass('error').addClass('success');
+    message.text(msg);
 }
 
 function showError(error) {
-    $('.payment-message').removeClass('success').addClass('error').html(error);
+    message.removeClass('success').addClass('error');
+    message.text(error);
 }
 
 function submitCard() {
+    clearMessage();
+    if (!window.user_id) {
+        showError("Vui lòng đăng nhập trước khi nạp thẻ!");
+        setTimeout(function () {
+            Account.showLogin();
+        }, 1500);
+        return;
+    }
     var card_type = $('#card_type').val();
     var card_amount = $('#card_amount').val();
     var card_serial = $('#card_serial').val();
@@ -47,16 +64,23 @@ function submitCard() {
         dataType: "json",
         type: 'POST',
         url: urlUseCard,
-        data: $('#form_charge').serialize(),
+        data: $('#formUseCard').serialize(),
         cache: false,
         success: function (data) {
+            if (data.relogin) {
+                setTimeout(function() {
+                    Account.showLogin();
+                }, 1500);
+            }
             // reCaptcha();
-            if (data.state == 1) {
+            if (data.msg) {
                 showSuccess(data.msg);
+            } else {
+                showError(data.error);
             }
-            else {
-                showError(data.msg);
-            }
+            btnUseCard.removeAttr("disabled");
+        },
+        error: function () {
             btnUseCard.removeAttr("disabled");
         }
     });

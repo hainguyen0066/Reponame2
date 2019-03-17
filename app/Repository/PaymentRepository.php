@@ -3,7 +3,6 @@
 namespace App\Repository;
 
 use App\Models\Payment;
-use App\Models\Server;
 use App\Services\RecardResponse;
 use App\User;
 use App\Util\MobileCard;
@@ -36,51 +35,52 @@ class PaymentRepository extends AbstractEloquentRepository
             ->where('card_serial', 'LIKE', $card->getSerial())
             ->where('card_type', $card->getType())
         ;
-        if ($card->getType() != MobileCard::TYPE_ZING) {
-            $query->where('status', 1);
-        }
 
         return $query->count();
     }
 
     /**
-     * @param \App\User            $user
-     * @param \App\Util\MobileCard $card
-     * @param \App\Models\Server   $server
+     * @param \App\Models\Payment  $payment
      * @param                      $transactionCode
-     * @param                      $gameCoin
      *
-     * @return int
+     * @return \App\Models\Payment
      */
-    public function createRecardPayment(User $user, MobileCard $card, Server $server, $transactionCode, $gameCoin)
+    public function updateRecardPayment(Payment $payment, $transactionCode)
     {
-        $record = new Payment();
-        $params = $this->createPayment($user, $card, $server, $gameCoin);
-        $params['transaction_id'] = $transactionCode;
-        $params['pay_from'] = 'ReCard';
-        $params['pay_method'] = 'ReCard';
-        foreach ($params as $param => $value) {
-            $record->{$param} = $value;
-        }
-        $record->save();
+        $payment->transaction_id = $transactionCode;
+        $payment->pay_from = "ReCard";
+        $payment->pay_method = "ReCard";
+        $payment->save();
 
-        return $record->id;
+        return $payment;
+    }
+
+    /**
+     * @param \App\Models\Payment $payment
+     *
+     * @return \App\Models\Payment
+     */
+    public function updateZingCardPayment(Payment $payment)
+    {
+        $payment->pay_from = "ZingCard";
+        $payment->pay_method = "ZingCard";
+        $payment->save();
+
+        return $payment;
     }
 
     /**
      * @param \App\User            $user
      * @param \App\Util\MobileCard $card
-     * @param \App\Models\Server   $server
      * @param                      $gameCoin
      *
-     * @return array
+     * @return \App\Models\Payment
      */
-    private function createPayment(User $user, MobileCard $card, Server $server, $gameCoin)
+    public function createPayment(User $user, MobileCard $card, $gameCoin)
     {
-        $log = [
+        $payment = new Payment();
+        $data = [
             'username'     => $user->name,
-            'payment_type' => Payment::PAYMENT_TYPE_MOBILECARD,
-            'server_id'    => $server->game_server_id,
             'card_type'    => $card->getType(),
             'card_serial'  => $card->getSerial(),
             'card_pin'     => $card->getCode(),
@@ -91,8 +91,12 @@ class PaymentRepository extends AbstractEloquentRepository
             'utm_source'   => $user->utm_source,
             'utm_campaign' => $user->utm_campaign,
         ];
+        foreach ($data as $attribute => $value) {
+            $payment->{$attribute} = $value;
+        }
+        $payment->save();
 
-        return $log;
+        return $payment;
     }
 
     /**
