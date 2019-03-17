@@ -36,10 +36,10 @@
         </div>
         <div class="section-05">
             <div class="container">
-                <div class="volamtranhba"><a href="#"></a></div>
-                <div class="quanhunghoitu"><a href="#"></a></div>
-                <div class="anhhungthiep"><a href="#"></a></div>
-                <div class="denhatbanghoi"><a href="#"></a></div>
+                <div class="volamtranhba"><a href="{{ route('front.details.post', ['tong-hop','su-kien-ba-chu-vo-lam'])}}"></a></div>
+                <div class="quanhunghoitu"><a href="{{ route('front.details.post', ['tong-hop','chuoi-su-kien-close-beta-20-03'])}}"></a></div>
+                <div class="anhhungthiep"><a href="{{ route('front.details.post', ['tong-hop','huoi-su-kien-close-beta-20-03'])}}"></a></div>
+                <div class="denhatbanghoi"><a href="{{ route('front.details.post', ['tong-hop','de-nhat-bang-hoi'])}}"></a></div>
             </div>
         </div>
         <div class="footer">
