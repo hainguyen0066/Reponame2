@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @package \App\Http\Controllers\Front
  */
-class ManageAccount extends BaseFrontController
+class ManageAccountController extends BaseFrontController
 {
     const LIMIT_PAYMENT_HISTORY = 30;
 

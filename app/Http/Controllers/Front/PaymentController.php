@@ -3,8 +3,7 @@
 namespace App\Http\Controllers\Front;
 
 use App\Repository\PaymentRepository;
-use App\Repository\ServerRepository;
-use App\Services\GameApiClient;
+use App\Services\JXApiClient;
 use App\Services\RecardPayment;
 use App\Util\MobileCard;
 
@@ -20,15 +19,11 @@ class PaymentController extends BaseFrontController
        return redirect(route('front.static.nap_the_cao'));
     }
 
-    public function submitCard(PaymentRepository $paymentRepository, ServerRepository $serverRepository)
+    public function submitCard(PaymentRepository $paymentRepository)
     {
         $user = \Auth::user();
         if (!$user) {
             return response()->json(["error" => 'Vui lòng đăng nhập lại để tiếp tục thao tác']);
-        }
-        $server = $serverRepository->find(request('server_id'));
-        if (!$server || !$server->status) {
-            return response()->json(["error" => 'Vui lòng chọn máy chủ']);
         }
         $type   = trim(request('card_type'));
         $amount = trim(request('card_amount'));
@@ -48,16 +43,16 @@ class PaymentController extends BaseFrontController
         }
         $recard = new RecardPayment(
             env('RECARD_MERCHANT_ID'),
-            env('RECARD_SERECT_KEY')
+            env('RECARD_SECRET_KEY')
         );
         $gameCoin = intval($amount) / 100;
         if ($card->getType() == MobileCard::TYPE_ZING){
-            $paymentRepository->addLogZingCard($user, $card, $server, $gameCoin);
-//            $this->discord->send("`{$user->username}` vừa submit 1 thẻ Zing `" . $amount / 1000 . "k`");
+            $paymentRepository->addLogZingCard($user, $card, $gameCoin);
+            $this->discord->send("`{$user->username}` vừa submit 1 thẻ Zing `" . $amount / 1000 . "k`");
         } else {
             $result = $recard->useCard($card);
             if ($result->isSuccess() && $transactionCode = $result->getTransactionCode()) {
-                $paymentRepository->addLogRecard($user, $card, $server, $transactionCode, $gameCoin);
+                $paymentRepository->createRecardPayment($user, $card, $transactionCode, $gameCoin);
             } else {
                 return response()->json(["error" => implode('<br/>', $result->getErrors())]);
             }
@@ -95,7 +90,7 @@ class PaymentController extends BaseFrontController
             }
         }
         if (!$checkCardFormat) {
-            return "Thẻ định dạnh không đúng. Bạn vui lòng kiểm tra lại.";
+            return "Thẻ định dạng không đúng. Bạn vui lòng kiểm tra lại.";
         }
         if($paymentRepository->isCardExisted($card)){
             return  "Thẻ đã có trong hệ thống!!!";
@@ -104,7 +99,7 @@ class PaymentController extends BaseFrontController
         return false;
     }
 
-    public function recardCallback(PaymentRepository $paymentRepository, GameApiClient $gameApiClient)
+    public function recardCallback(PaymentRepository $paymentRepository, JXApiClient $gameApiClient)
     {
         $response = [
             'status' => false
@@ -119,7 +114,7 @@ class PaymentController extends BaseFrontController
         if (isset($posts['secret_key'])) {
             unset($posts['secret_key']);
         }
-        if (!$transactionCode || $secretKey != env('RECARD_SERECT_KEY')) {
+        if (!$transactionCode || $secretKey != env('RECARD_SECRET_KEY')) {
             return response()->json($response);
         }
         $record = $paymentRepository->getByTransactionCode($transactionCode);
@@ -134,8 +129,8 @@ class PaymentController extends BaseFrontController
         if (!$recardStatus) {
             return response()->json($response);
         }
-        $gamecoin = $record->gamecoin + $record->gamecoin_promotion;
-        $result = $gameApiClient->addGold($record->id, $record->username, $record->server_id, $amount, $gamecoin);
+        $gamecoin = $record->gamecoin;
+        $result = $gameApiClient->addGold($record->username, $gamecoin);
         $paymentRepository->updateRecordAddedGold($record, $result);
         $response = [
             'status' => true,

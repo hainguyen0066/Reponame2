@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use GuzzleHttp\Client;
-use phpDocumentor\Reflection\Types\Self_;
 
 /**
  * Class JXApiClient
@@ -56,7 +55,7 @@ class JXApiClient
      */
     public function getLastResponse()
     {
-        return count(self::$responseStack) ? array_pull(self::$responseStack) : null;
+        return count(self::$responseStack) ? array_pop(self::$responseStack) : null;
     }
 
     /**
@@ -73,6 +72,7 @@ class JXApiClient
             'query' => $params
         ]);
         $body = $response->getBody()->getContents();
+        $this->addResponseStack($body);
         $responseCode = preg_replace('/[\x00-\x1F\x80-\xFF]/', '', $body);
         if(substr($responseCode, 0, 2) != '1:') {
             return false;
@@ -95,6 +95,7 @@ class JXApiClient
             'query' => $params
         ]);
         $body = $response->getBody()->getContents();
+        $this->addResponseStack($body);
         $responseCode = preg_replace('/[\x00-\x1F\x80-\xFF]/', '', $body);
         if(substr($responseCode, 0, 2) != '1:') {
             return false;
@@ -117,6 +118,7 @@ class JXApiClient
             'query' => $params
         ]);
         $body = $response->getBody()->getContents();
+        $this->addResponseStack($body);
         $responseCode = preg_replace('/[\x00-\x1F\x80-\xFF]/', '', $body);
         if(substr($responseCode, 0, 2) != '1:') {
             return false;
@@ -128,17 +130,22 @@ class JXApiClient
     /**
      * @param     $username
      * @param int $gold
+     * @param int $lockedGold
      *
      * @return bool
      */
-    public function addGold($username, $gold)
+    public function addGold($username, $gold, $lockedGold = 0)
     {
         $signed = md5($this->apiKey . $username);
         $params = ['tk' => $username, 'knb' => $gold, 'sign' => $signed];
+        if ($lockedGold > 0) {
+            $params['soxu'] = $lockedGold;
+        }
         $response = $this->client->get(self::ENDPOINT_ADD_GOLD, [
             'query' => $params
         ]);
         $body = $response->getBody()->getContents();
+        $this->addResponseStack($body);
         $responseCode = preg_replace('/[\x00-\x1F\x80-\xFF]/', '', $body);
         if(substr($responseCode, 0, 2) != '1:') {
             return false;
@@ -155,6 +162,7 @@ class JXApiClient
     {
         $response = $this->client->get(self::ENDPOINT_CCU);
         $body = $response->getBody()->getContents();
+        $this->addResponseStack($body);
 
         return explode('-', $body);
     }

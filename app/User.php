@@ -85,4 +85,22 @@ class User extends \TCG\Voyager\Models\User
     {
         return $password== $this->getRawPassword();
     }
+
+    /**
+     * @return string
+     */
+    public function getRawPassword2()
+    {
+        return base64_decode($this->password2);
+    }
+
+    /**
+     * @param $password2
+     *
+     * @return bool
+     */
+    public function validatePassword2($password2)
+    {
+        return $password2 == $this->getRawPassword2();
+    }
 }

@@ -56,4 +56,14 @@ class UserRepository extends AbstractEloquentRepository
         $user->raw_password = base64_encode($password);
         $user->save();
     }
+
+    /**
+     * @param \App\User $user
+     * @param           $password2
+     */
+    public function updatePassword2(User $user, $password2)
+    {
+        $user->password2 = base64_encode($password2);
+        $user->save();
+    }
 }

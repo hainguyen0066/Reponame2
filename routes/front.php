@@ -10,8 +10,8 @@ Route::group(['as' => 'front.'], function() {
         'as' => 'home'
     ]);
 
-    Route::get('/lich-su-nap-the', [
-        'uses' => 'HomePageController@index',
+    Route::get('/lich-su-giao-dich', [
+        'uses' => 'ManageAccountController@historyCharge',
         'as' => 'payment.history'
     ]);
     Route::get('/nap-the', [
@@ -55,11 +55,11 @@ Route::group(['as' => 'front.'], function() {
     ## --------------------- Secured Routes --------------------- ##
     Route::group(['middleware' => 'auth'], function() {
         Route::get('/quan-ly-tai-khoan', [
-            'uses' => 'ManageAccount@getAccountInfo',
+            'uses' => 'ManageAccountController@getAccountInfo',
             'as' => 'manage.account.info'
         ]);
         Route::get('/thong-tin-tai-khoan', [
-            'uses' => 'ManageAccount@getAccountInfo',
+            'uses' => 'ManageAccountController@getAccountInfo',
             'as' => 'manage.account.info'
         ]);
         
@@ -68,11 +68,16 @@ Route::group(['as' => 'front.'], function() {
             'as' => 'manage.account.pass'
         ]);
         Route::get('/doi-mat-khau-cap-2', [
-            'uses' => 'PasswordController@changePass2',
+            'uses' => 'PasswordController@showChangePassword2Form',
             'as' => 'manage.account.pass2'
         ]);
+        Route::post('/doi-mat-khau-cap-2', [
+            'uses' => 'PasswordController@changePassword2',
+            'as' => 'password2.change.submit'
+        ]);
+
         Route::get('/lich-su-giao-dich', [
-            'uses' => 'ManageAccount@historyCharge',
+            'uses' => 'ManageAccountController@historyCharge',
             'as' => 'manage.account.history'
         ]);
         

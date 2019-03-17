@@ -55,7 +55,7 @@
                 <div class="label"><label for=""></label></div>
                 <div class="content">
                     <button id="btnUseCard" type="submit">Nạp thẻ</button>
-                    <a href="{{ route('front.payment.history') }}">Lịch sử giao dịch</a>
+                    <a href="{{ route('front.manage.account.history') }}">Lịch sử giao dịch</a>
                 </div>
             </div>
         </form>

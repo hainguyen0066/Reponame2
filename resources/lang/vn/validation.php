@@ -127,27 +127,38 @@ return [
     */
 
     'custom' => [
-        'email'        => [
+        'email'         => [
             'required' => 'Địa chỉ email không được để trống',
             'unique'   => "Địa chỉ email này đã được được sử dụng",
         ],
-        'name'         => [
+        'name'          => [
             'required' => 'Tên đăng nhập không được để trống',
             'regex'    => 'Tên đăng nhập từ 5-50 ký tự và không được chứa ký tự đặc biệt',
             'unique'   => "Tên đăng nhập này đã được được sử dụng",
         ],
-        'old_password' => [
-            'required' => 'Mật khẩu cũ không được để trống',
-            'min'      => 'Mật khẩu cũ ít nhất 6 ký tự',
+        'old_password'  => [
+            'required'         => 'Mật khẩu cũ không được để trống',
+            'required_without' => 'Mật khẩu cũ không được để trống',
+            'min'              => 'Mật khẩu cũ ít nhất 6 ký tự',
         ],
-        'password'     => [
+        'password'      => [
             'required'  => 'Mật khẩu không được để trống',
             'confirmed' => 'Mật khẩu xác nhận không khớp',
             'between'   => 'Mật khẩu cho phép :min đến :max ký tự',
         ],
-        'phone'        => [
-            'required'  => 'Số điện thoại không được để trống',
-            'digits_between' => 'Số điện thoại không đúng định dạng'
+        'old_password2' => [
+            'required'         => 'Mật khẩu cấp 2 cũ không được để trống',
+            'required_without' => 'Mật khẩu cấp 2 cũ không được để trống',
+            'min'              => 'Mật khẩu cấp 2 cũ ít nhất 6 ký tự',
+        ],
+        'password2'     => [
+            'required'  => 'Mật khẩu cấp 2 không được để trống',
+            'confirmed' => 'Xác nhận mật khẩu cấp 2 không khớp',
+            'between'   => 'Mật khẩu cấp 2 cho phép :min đến :max ký tự',
+        ],
+        'phone'         => [
+            'required'       => 'Số điện thoại không được để trống',
+            'digits_between' => 'Số điện thoại không đúng định dạng',
         ],
     ],
 

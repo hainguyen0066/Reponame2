@@ -274,8 +274,7 @@ a {
             width: 60px;
           }
           .td-content {
-            width: 140
-            px;
+            width: 140px;
             a {
               float: right;
               color: #2444be;
@@ -753,7 +752,7 @@ a {
       padding: 60px 0px;
       li {
         width: 700px;
-        background: url(/images/icon-list-new.png?0ff50f1…) left top no-repeat;
+        background: url('../images/icon-list-new.png') left center no-repeat;
         padding-left: 30px;
         a {
           display: block;
@@ -780,7 +779,7 @@ a {
         font-weight: bold;
       }
       form {
-        width: 300px;
+        width: 320px;
         margin-left: 200px;
         input {
           border-radius: 5px;

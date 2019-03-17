@@ -7,4 +7,5 @@
     @if(Route::currentRouteName() != 'front.home')
         @include('partials.sidebar.supports')
     @endif
+    @include('partials.fb_fanpage')
 </div>

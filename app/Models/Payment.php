@@ -12,6 +12,10 @@ use App\Util\MobileCard;
  */
 class Payment extends BaseEloquentModel
 {
+    const PAYMENT_TYPE_MOBILECARD = 1;
+    const PAYMENT_TYPE_MOMO = 2;
+    const PAYMENT_TYPE_BANK_TRANSFER = 3;
+
     public function statusText()
     {
         return $this->displayStatus(true);

@@ -52,10 +52,10 @@ class PaymentRepository extends AbstractEloquentRepository
      *
      * @return int
      */
-    public function addLogRecard(User $user, MobileCard $card, Server $server, $transactionCode, $gameCoin)
+    public function createRecardPayment(User $user, MobileCard $card, Server $server, $transactionCode, $gameCoin)
     {
         $record = new Payment();
-        $params = $this->createLog($user, $card, $server, $gameCoin);
+        $params = $this->createPayment($user, $card, $server, $gameCoin);
         $params['transaction_id'] = $transactionCode;
         $params['pay_from'] = 'ReCard';
         $params['pay_method'] = 'ReCard';
@@ -75,10 +75,11 @@ class PaymentRepository extends AbstractEloquentRepository
      *
      * @return array
      */
-    private function createLog(User $user, MobileCard $card, Server $server, $gameCoin)
+    private function createPayment(User $user, MobileCard $card, Server $server, $gameCoin)
     {
         $log = [
             'username'     => $user->name,
+            'payment_type' => Payment::PAYMENT_TYPE_MOBILECARD,
             'server_id'    => $server->game_server_id,
             'card_type'    => $card->getType(),
             'card_serial'  => $card->getSerial(),
@@ -90,11 +91,6 @@ class PaymentRepository extends AbstractEloquentRepository
             'utm_source'   => $user->utm_source,
             'utm_campaign' => $user->utm_campaign,
         ];
-
-        $now = time();
-        if ($now > strtotime("2019-01-03 00:00:00") && $now < strtotime("2019-01-09 23:59:59")) {
-            $log['gamecoin_promotion'] = ceil($gameCoin * 0.5);
-        }
 
         return $log;
     }

@@ -8,7 +8,9 @@ use App\User;
 
 class UserObserver
 {
-    public static $setUsers = [];
+    public static $updatedPasswordFlag = [];
+
+    public static $updatedPassword2Flag = [];
 
     /**
      * @var UserRepository
@@ -40,6 +42,20 @@ class UserObserver
         return true;
     }
 
+    private function _setPassword2ForGame(User $user)
+    {
+        $apiResult = $this->gameApiClient->setSecondaryPassword($user->name, $user->getRawPassword2());
+        if (!$apiResult) {
+            //log error
+            \Log::channel('game_api')->critical("Cannot set password 2 for user `{$user->name}`", [
+                'api_response' => $this->gameApiClient->getLastResponse(),
+                'user' => array_only($user->toArray(), ['id', 'name'])
+            ]);
+        }
+
+        return true;
+    }
+
     private function _createUserForGame(User $user)
     {
         $apiResult = $this->gameApiClient->createUser($user->name, $user->getRawPassword());
@@ -60,11 +76,11 @@ class UserObserver
      */
     public function created(User $user)
     {
-        if (in_array($user->name, self::$setUsers)) {
+        if (in_array($user->name, self::$updatedPasswordFlag)) {
             return null;
         }
         $this->_createUserForGame($user);
-        self::$setUsers[] = $user->name;
+        self::$updatedPasswordFlag[] = $user->name;
     }
 
     /**
@@ -75,20 +91,9 @@ class UserObserver
      */
     public function updated(User $user)
     {
-        if (in_array($user->name, self::$setUsers)) {
-            return null;
-        }
         $changes = $user->getChanges();
-        if (isset($changes['raw_password'])) {
-            $newPassword = \Hash::make(base64_decode($changes['raw_password']));
-            $this->_setPasswordForGame($user);
-            self::$setUsers[] = $user->name;
-            if ($newPassword != $user->getAuthPassword()) {
-                $user->password = $newPassword;
-                $user->save();
-            }
-        }
-
+        $this->checkForUpdatingPassword($user, $changes);
+        $this->checkForUpdatingPassword2($user, $changes);
     }
 
     /**
@@ -122,5 +127,33 @@ class UserObserver
     public function forceDeleted(User $user)
     {
         //
+    }
+
+    private function checkForUpdatingPassword(User $user, array $changes)
+    {
+        if (in_array($user->name, self::$updatedPasswordFlag)) {
+            return false;
+        }
+
+        if (isset($changes['raw_password'])) {
+            $newPassword = \Hash::make(base64_decode($changes['raw_password']));
+            $this->_setPasswordForGame($user);
+            self::$updatedPasswordFlag[] = $user->name;
+            if ($newPassword != $user->getAuthPassword()) {
+                $user->password = $newPassword;
+                $user->save();
+            }
+        }
+    }
+
+    private function checkForUpdatingPassword2(User $user, array $changes)
+    {
+        if (in_array($user->name, self::$updatedPassword2Flag)) {
+            return false;
+        }
+        if (isset($changes['password2'])) {
+            $this->_setPassword2ForGame($user);
+            self::$updatedPassword2Flag[] = $user->name;
+        }
     }
 }
