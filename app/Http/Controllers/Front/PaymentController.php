@@ -169,6 +169,6 @@ class PaymentController extends BaseFrontController
      */
     private function calculateGameCoin(int $amount)
     {
-        return $amount / 100;
+        return $amount / 1000;
     }
 }
