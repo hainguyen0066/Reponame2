@@ -58,11 +58,10 @@ class MobileCard
     public static function getAmountList()
     {
         return [
-            10000,
-            20000,
             50000,
             100000,
             200000,
+            300000,
             500000,
         ];
     }

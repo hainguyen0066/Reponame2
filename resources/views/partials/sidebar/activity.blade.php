@@ -29,5 +29,5 @@
             <td class="td-content"><a href="{{ route('front.details.post', ['huong-dan','chien-tr-ong-tong-kim'])}}">Chiến trường tống kim</a></td>
         </tr>
     </table>
-    <div class="act-daily-view-more"><a href="{{ route('front.category', ['su-kien']) }}">Xem thêm >></a></div>
+    <div class="act-daily-view-more"><a href="{{ route('front.category', ['huong-dan']) }}">Xem thêm >></a></div>
 </div>
