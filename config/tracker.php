@@ -3,7 +3,7 @@
 return [
     'fb' => [
         'chat_popup' => [
-            'enabled' => false,
+            'enabled' => true,
             'logged_in_greeting' => 'Chào mừng bạn đến Võ Lâm Trùng Phùng, bạn cần mình hỗ trợ gì ạ?',
             'logged_out_greeting' => 'Chào mừng bạn đến Võ Lâm Trùng Phùng, bạn cần mình hỗ trợ gì ạ?',
             'theme_color' => '#0084ff',
