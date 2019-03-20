@@ -4,7 +4,7 @@ return [
     'seo' => [
         'title'            => 'Võ Lâm Trung Nguyên',
         'meta_keyword'     => 'vo lam trung nguyen, vltk hay, game pk hay, volam1, ctc, vo lam ctc, vo lam cong thanh chien, vo lam 1',
-        'meta_description' => 'Ôn lại hồi ức võ lâm hoàng kim. Lộ trình phát triển rõ ràng, update tính năng liên tục và đều đặn',
+        'meta_description' => 'Ôn lại hồi ức thời hoàng kim của võ lâm. Lộ trình phát triển rõ ràng, update tính năng liên tục và đều đặn.',
     ],
     'fb'  => [
         'app_id'   => '1041939975989453',
