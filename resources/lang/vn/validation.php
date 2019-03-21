@@ -155,6 +155,7 @@ return [
             'required'  => 'Mật khẩu cấp 2 không được để trống',
             'confirmed' => 'Xác nhận mật khẩu cấp 2 không khớp',
             'between'   => 'Mật khẩu cấp 2 cho phép :min đến :max ký tự',
+            'min'       => 'Mật khẩu cấp 2 phải từ :min ký tự',
         ],
         'phone'         => [
             'required'       => 'Số điện thoại không được để trống',

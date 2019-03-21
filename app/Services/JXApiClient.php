@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use GuzzleHttp\Client;
+use Mockery\Mock;
 
 /**
  * Class JXApiClient
@@ -35,9 +36,14 @@ class JXApiClient
 
     public function __construct($baseUrl, $apiKey)
     {
-        $this->client = new Client([
-            'base_uri' => $baseUrl
-        ]);
+        if (env('GAME_API_MOCK', false)) {
+            $this->client = new MockedJXApiClient();
+        } else {
+            $this->client = new Client([
+                'base_uri' => $baseUrl
+            ]);
+        }
+
         $this->baseUrl = rtrim($baseUrl, '/');
         $this->apiKey = $apiKey;
     }
@@ -129,17 +135,20 @@ class JXApiClient
 
     /**
      * @param     $username
-     * @param int $gold
-     * @param int $lockedGold
+     * @param int $knb
+     * @param int $xu
      *
      * @return bool
      */
-    public function addGold($username, $gold, $lockedGold = 0)
+    public function addGold($username, $knb = 0, $xu = 0)
     {
         $signed = md5($this->apiKey . $username);
-        $params = ['tk' => $username, 'knb' => $gold, 'sign' => $signed];
-        if ($lockedGold > 0) {
-            $params['soxu'] = $lockedGold;
+        $params = ['tk' => $username, 'sign' => $signed];
+        if ($xu > 0) {
+            $params['soxu'] = $xu;
+        }
+        if ($knb > 0) {
+            $params['knb'] = $knb;
         }
         $response = $this->client->get(self::ENDPOINT_ADD_GOLD, [
             'query' => $params

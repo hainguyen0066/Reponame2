@@ -76,21 +76,34 @@ class PaymentRepository extends AbstractEloquentRepository
      *
      * @return \App\Models\Payment
      */
-    public function createPayment(User $user, MobileCard $card, $gameCoin)
+    public function createCardPayment(User $user, MobileCard $card, $gameCoin)
+    {
+        $data = [
+            'card_type'   => $card->getType(),
+            'card_serial' => $card->getSerial(),
+            'card_pin'    => $card->getCode(),
+            'card_amount' => $card->getAmount(),
+        ];
+        $payment = $this->createPayment($user, Payment::PAYMENT_TYPE_CARD, $card->getAmount(), $gameCoin, $data);
+
+        return $payment;
+    }
+
+    public function createPayment(User $user, $type, $amount, $gamecoin, $extraData)
     {
         $payment = new Payment();
         $data = [
             'username'     => $user->name,
-            'card_type'    => $card->getType(),
-            'card_serial'  => $card->getSerial(),
-            'card_pin'     => $card->getCode(),
-            'card_amount'  => $card->getAmount(),
-            'gamecoin'     => $gameCoin,
+            'payment_type' => $type,
+            'amount'       => $amount,
+            'gamecoin'     => $gamecoin,
             'ip'           => request()->getClientIp(),
             'utm_medium'   => $user->utm_medium,
             'utm_source'   => $user->utm_source,
             'utm_campaign' => $user->utm_campaign,
+            'creator_id'   => \Auth::user()->id,
         ];
+        $data = array_merge($data, $extraData);
         foreach ($data as $attribute => $value) {
             $payment->{$attribute} = $value;
         }
@@ -128,6 +141,7 @@ class PaymentRepository extends AbstractEloquentRepository
     {
         $record->gold_added = $status;
         $record->status     = $status;
+        $record->finished   = true;
         $record->save();
     }
 
@@ -144,5 +158,24 @@ class PaymentRepository extends AbstractEloquentRepository
         $query = $this->makeUserPaymentHistoryQuery($user);
 
         return $query->paginate($limit);
+    }
+
+    /**
+     * @param $moneyAmount
+     * @param $paymentType
+     *
+     * @return array
+     */
+    public function exchangeGamecoin($moneyAmount, $paymentType)
+    {
+        $knb = $xu = 0;
+        $gameCoinAmount = ceil($moneyAmount / env('GOLD_EXCHANGE_RATE', 1000));
+        if ($paymentType == Payment::PAYMENT_TYPE_BANK_TRANSFER || $paymentType == Payment::PAYMENT_TYPE_MOMO) {
+            $xu = $gameCoinAmount + ceil($gameCoinAmount * env('GOLD_EXCHANGE_BONUS', 20) / 100);
+        } else {
+            $knb = $gameCoinAmount;
+        }
+
+        return [$knb, $xu];
     }
 }

@@ -46,8 +46,8 @@ class PaymentController extends BaseFrontController
             env('RECARD_MERCHANT_ID'),
             env('RECARD_SECRET_KEY')
         );
-        $gameCoin = $this->calculateGameCoin($card->getAmount());
-        $payment = $paymentRepository->createPayment($user, $card, $gameCoin);
+        list($knb, $soxu) = $paymentRepository->exchangeGamecoin($card->getAmount());
+        $payment = $paymentRepository->createCardPayment($user, $card, $knb);
         if ($card->getType() == MobileCard::TYPE_ZING){
             $paymentRepository->updateZingCardPayment($payment);
             $this->discord->send("`{$user->username}` vừa submit 1 thẻ Zing `" . $card->getAmount() / 1000 . "k`");
@@ -160,15 +160,5 @@ class PaymentController extends BaseFrontController
         ;
 
         return $card;
-    }
-
-    /**
-     * @param int $amount
-     *
-     * @return float|int
-     */
-    private function calculateGameCoin(int $amount)
-    {
-        return $amount / 1000;
     }
 }

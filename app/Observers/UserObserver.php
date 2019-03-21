@@ -5,6 +5,7 @@ namespace App\Observers;
 use App\Repository\UserRepository;
 use App\Services\JXApiClient;
 use App\User;
+use App\Util\GameApiLog;
 
 class UserObserver
 {
@@ -33,7 +34,7 @@ class UserObserver
         $apiResult = $this->gameApiClient->setPassword($user->name, $user->getRawPassword());
         if (!$apiResult) {
             //log error
-            \Log::channel('game_api')->critical("Cannot set password for user `{$user->name}`", [
+            GameApiLog::notify("Cannot set password for user `{$user->name}`", [
                 'api_response' => $this->gameApiClient->getLastResponse(),
                 'user' => array_only($user->toArray(), ['id', 'name'])
             ]);
@@ -47,7 +48,7 @@ class UserObserver
         $apiResult = $this->gameApiClient->setSecondaryPassword($user->name, $user->getRawPassword2());
         if (!$apiResult) {
             //log error
-            \Log::channel('game_api')->critical("Cannot set password 2 for user `{$user->name}`", [
+            GameApiLog::notify("Cannot set password 2 for user `{$user->name}`", [
                 'api_response' => $this->gameApiClient->getLastResponse(),
                 'user' => array_only($user->toArray(), ['id', 'name'])
             ]);
@@ -60,7 +61,7 @@ class UserObserver
     {
         $apiResult = $this->gameApiClient->createUser($user->name, $user->getRawPassword());
         if (!$apiResult) {
-            \Log::channel('game_api')->critical("Cannot create account for user `{$user->name}`", [
+            GameApiLog::notify("Cannot create account for user `{$user->name}`", [
                 'api_response' => $this->gameApiClient->getLastResponse(),
                 'user' => array_only($user->toArray(), ['id', 'name'])
             ]);

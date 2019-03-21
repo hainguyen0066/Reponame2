@@ -2,6 +2,8 @@
 
 namespace App\Util;
 
+use App\Models\Payment;
+
 /**
  * Class CommonHelper
  *
@@ -65,5 +67,16 @@ class CommonHelper
         ];
 
         return "https://www.facebook.com/dialog/share?" . http_build_query($params);
+    }
+
+    public static function getIconForPaymentType($paymentType)
+    {
+        $icons = [
+            Payment::PAYMENT_TYPE_CARD => 'voyager-credit-card',
+            Payment::PAYMENT_TYPE_MOMO => 'voyager-wallet',
+            Payment::PAYMENT_TYPE_BANK_TRANSFER => 'voyager-receipt',
+        ];
+
+        return $icons[$paymentType] ?? 'voyager-exclamation';
     }
 }

@@ -66,4 +66,15 @@ class UserRepository extends AbstractEloquentRepository
         $user->password2 = base64_encode($password2);
         $user->save();
     }
+
+    public function getAutoCompleteUsers($term)
+    {
+        $query = $this->query();
+        $query->select(['id', 'name as text'])
+            ->whereRaw("name LIKE '{$term}%'")
+            ->limit(10)
+        ;
+
+        return $query->get()->toArray();
+    }
 }
