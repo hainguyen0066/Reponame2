@@ -55,7 +55,7 @@
             <div class="container">
                 <div class="volamtranhba"><a href="{{ route('front.details.post', ['tong-hop','su-kien-ba-chu-vo-lam'])}}"></a></div>
                 <div class="quanhunghoitu"><a href="{{ route('front.details.post', ['tong-hop','chuoi-su-kien-close-beta-20-03'])}}"></a></div>
-                <div class="anhhungthiep"><a href="{{ route('front.details.post', ['tong-hop','chuoi-su-kien-close-beta-20-03'])}}"></a></div>
+                <div class="anhhungthiep"><a href="https://www.facebook.com/volamtrungnguyen2019/videos/283765432499493" target="_blank"></a></div>
                 <div class="denhatbanghoi"><a href="{{ route('front.details.post', ['tong-hop','de-nhat-bang-hoi'])}}"></a></div>
             </div>
         </div>
