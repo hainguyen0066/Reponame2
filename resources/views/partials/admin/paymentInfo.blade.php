@@ -5,9 +5,9 @@
     @endif
 </h4>
 @if($item->payment_type == \App\Models\Payment::PAYMENT_TYPE_CARD)
-    <p>Mã thẻ: {{ $this->card_pin }}</p>
-    <p>Serial: {{ $this->card_serial }}</p>
-    <p>Loại thẻ: {{ $this->card_type }}</p>
+    <p>Mã thẻ: {{ $item->card_pin }}</p>
+    <p>Serial: {{ $item->card_serial }}</p>
+    <p>Loại thẻ: {{ $item->card_type }}</p>
 @endif
 @if($item->note)
     <p><i class="voyager-info-circled"></i> {{ $item->note }}</p>
