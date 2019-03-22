@@ -164,7 +164,6 @@ return [
         ],
 
         'widgets' => [
-
         ],
 
     ],
@@ -211,7 +210,7 @@ return [
     ],
 
     'additional_js' => [
-        //'js/custom.js',
+        'js/admin/app.js',
     ],
 
     'googlemaps' => [

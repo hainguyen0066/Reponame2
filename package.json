@@ -21,6 +21,7 @@
     },
     "dependencies": {
         "alertifyjs": "^1.11.2",
+        "chart.js": "^2.8.0",
         "highcharts": "^7.0.1",
         "jquery": "^3.3.1"
     }
