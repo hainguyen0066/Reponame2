@@ -24,7 +24,7 @@ class PaymentController extends BaseFrontController
     public function __construct()
     {
         parent::__construct();
-        $this->discord = new DiscordWebHookClient(env('DISCORD_ADD_GOLD_WEBHOOK_URL'));
+        $this->discord = new DiscordWebHookClient(env('DISCORD_ZING_WEBHOOK_URL'));
     }
 
     public function index()
@@ -51,7 +51,7 @@ class PaymentController extends BaseFrontController
         $payment = $paymentRepository->createCardPayment($user, $card, $knb);
         if ($card->getType() == MobileCard::TYPE_ZING){
             $paymentRepository->updateZingCardPayment($payment);
-            $this->discord->send("`{$user->username}` vừa submit 1 thẻ Zing `" . $card->getAmount() / 1000 . "k`");
+            $this->discord->send("`{$user->name}` vừa submit 1 thẻ Zing `" . $card->getAmount() / 1000 . "k`");
         } else {
             $result = $recard->useCard($card);
             if ($result->isSuccess() && $transactionCode = $result->getTransactionCode()) {
