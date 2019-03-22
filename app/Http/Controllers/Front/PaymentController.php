@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Front;
 
+use App\Models\Payment;
 use App\Repository\PaymentRepository;
 use App\Services\DiscordWebHookClient;
 use App\Services\JXApiClient;
@@ -46,7 +47,7 @@ class PaymentController extends BaseFrontController
             env('RECARD_MERCHANT_ID'),
             env('RECARD_SECRET_KEY')
         );
-        list($knb, $soxu) = $paymentRepository->exchangeGamecoin($card->getAmount());
+        list($knb, $soxu) = $paymentRepository->exchangeGamecoin($card->getAmount(), Payment::PAYMENT_TYPE_CARD);
         $payment = $paymentRepository->createCardPayment($user, $card, $knb);
         if ($card->getType() == MobileCard::TYPE_ZING){
             $paymentRepository->updateZingCardPayment($payment);
