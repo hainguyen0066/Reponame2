@@ -178,4 +178,21 @@ class PaymentRepository extends AbstractEloquentRepository
 
         return [$knb, $xu];
     }
+
+    /**
+     * @param \App\Models\Payment $payment
+     * @param bool                $status
+     * @param bool                $goldAdded
+     *
+     * @return \App\Models\Payment
+     */
+    public function setDone(Payment $payment, $status = true, $goldAdded = true)
+    {
+        $payment->finished = true;
+        $payment->status = $status;
+        $payment->gold_added = $goldAdded;
+        $payment->save();
+
+        return $payment;
+    }
 }

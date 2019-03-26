@@ -19,6 +19,7 @@ class AppServiceProvider extends ServiceProvider
     {
         User::observe(UserObserver::class);
         Paginator::defaultView('vendor.pagination.default');
+        \Voyager::addAction(\App\Action\AcceptPaymentAction::class);
     }
 
     /**

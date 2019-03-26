@@ -17,6 +17,14 @@ class Payment extends BaseEloquentModel
     const PAYMENT_TYPE_MOMO = 3;
     const PAYMENT_TYPE_BANK_TRANSFER = 4;
 
+    const PAYMENT_STATUS_SUCCESS = 1;
+    const PAYMENT_STATUS_PROCESSING = 2;
+    const PAYMENT_STATUS_MANUAL_ADD_GOLD_ERROR = 3;
+    const PAYMENT_STATUS_GATEWAY_RESPONSE_ERROR = 4;
+    const PAYMENT_STATUS_GATEWAY_ADD_GOLD_ERROR = 5;
+    const PAYMENT_STATUS_NOT_SUCCESS = 6;
+
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -41,39 +49,9 @@ class Payment extends BaseEloquentModel
 
     public function displayStatus($isAdmin = false)
     {
-        $extended = $isAdmin ? "" : ". Vui lòng liên hệ BQT để được hỗ trợ.";
-        $extendedClass = $isAdmin ? "h5" : "";
-        if ($this->status) {
-            $msg = "<span class='{$extendedClass} label label-success c-green'>Thành công!</span>";
-        } else {
-            if (!$this->finished) {
-                if ($this->payment_type != Payment::PAYMENT_TYPE_CARD) {
-                    if (!$this->gold_added) {
-                        $msg = "<span  class='{$extendedClass} label label-primary'>Lỗi API nạp tiền</span>";
-                    }
-                } else {
-                    $msg = "<span  class='{$extendedClass} label label-primary'>Đang xử lý</span>";
-                }
-            } else {
-                $msg = "<span  class='{$extendedClass} label label-danger c-red'>Không thành công</span>";
-                if ($this->card_type != MobileCard::TYPE_ZING) {
-                    if($this->gateway_status == 2) {
-                        $text = $this->gateway_response ? $this->gateway_response : "Có lỗi xảy ra";
-                        $msg = "<span class='{$extendedClass} label label-danger c-red'>{$text}{$extended}</span>";
-                    }
-                    if($this->gateway_status == 1 && $this->gold_added) {
-                        if ($isAdmin) {
-                            $text = "Gateway phản hồi OK, nhưng chưa add được vàng cho user";
-                        } else {
-                            $text = "Có lỗi xảy ra" . $extended;
-                        }
-                        $msg = "<span class='{$extendedClass} label label-warning c-orange'>{$text}</span>";
-                    }
-                }
-            }
-        }
+        $status = self::getPaymentStatus($this);
 
-        return $msg;
+        return view('partials.payments.status', ['status' => $status, 'isAdmin' => $isAdmin]);
     }
 
     public static function getPaymentTypes()
@@ -85,9 +63,59 @@ class Payment extends BaseEloquentModel
         ];
     }
 
+    /**
+     * @param \App\Models\Payment $payment
+     *
+     * @return int
+     */
+    public static function getPaymentStatus(Payment $payment)
+    {
+        if ($payment->status) {
+            return self::PAYMENT_STATUS_SUCCESS; // thành công
+        } else {
+            if (!$payment->finished) {
+                if ($payment->payment_type != Payment::PAYMENT_TYPE_CARD) {
+                    if (!$payment->gold_added) {
+                        // lỗi API nạp tiền
+                        return self::PAYMENT_STATUS_MANUAL_ADD_GOLD_ERROR;
+                    }
+                } else {
+                    return self::PAYMENT_STATUS_PROCESSING; // đang xử lý
+                }
+            } else {
+                if ($payment->card_type != MobileCard::TYPE_ZING) {
+                    if($payment->gateway_status == 2) {
+                        return self::PAYMENT_STATUS_GATEWAY_RESPONSE_ERROR; // Recard trả về lỗi
+                    }
+                    if($payment->gateway_status == 1 && $payment->gold_added) {
+                        return self::PAYMENT_STATUS_GATEWAY_ADD_GOLD_ERROR; // Recard trả về OK nhưng không add được vàng cho user
+                    }
+                }
+                return self::PAYMENT_STATUS_NOT_SUCCESS; // không thành công - unknown error
+            }
+        }
+    }
+
     public function displayPaymentType()
     {
         $types = self::getPaymentTypes();
         return isset($types[$this->payment_type]) ? $types[$this->payment_type] : "Unknown";
+    }
+
+    /**
+     * @param \App\Models\Payment $payment
+     *
+     * @return bool
+     */
+    public static function isAcceptable(Payment $payment)
+    {
+        $status = self::getPaymentStatus($payment);
+
+        return $payment->payment_type
+            && (
+                $status == self::PAYMENT_STATUS_PROCESSING
+                || $status == self::PAYMENT_STATUS_MANUAL_ADD_GOLD_ERROR
+                || $status == self::PAYMENT_STATUS_GATEWAY_ADD_GOLD_ERROR
+            );
     }
 }

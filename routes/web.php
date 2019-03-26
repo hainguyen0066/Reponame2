@@ -15,8 +15,13 @@ Route::group(['prefix' => config('voyager.user.redirect')], function () {
     // Your overwrites here
     Route::group(['as' => 'voyager.', 'middleware' => 'admin.user'], function () {
         Route::get('/', ['uses' => 'Admin\DashboardController@index', 'as' => 'dashboard']);
-        Route::get('/payments/{user}/history', ['uses' => 'Admin\PaymentBreadController@history', 'as' => 'payment.history']);
-
+        Route::get('/payments/{user}/history', ['uses' => 'Admin\PaymentBreadController@history', 'as' => 'payments.history']);
+        Route::get(
+            '/payments/{payment}/accept', [
+                'uses' => 'Admin\PaymentBreadController@accept',
+                'as' => 'payments.accept',
+            ]
+        );
     });
 });
 

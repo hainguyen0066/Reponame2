@@ -12,9 +12,9 @@ $activeSlug = $post->getCategorySlug();
         <div class="main-details-content">
             {!! $post->body !!}
             <div class="ps">
-                <img src="{{ asset('images/ps-icon.png') }}" alt="" height="20">
+                <img src="{{ asset('images/ps-icon.png') }}" alt="" height="20" width="20">
                 &nbsp; Võ Lâm Trung Nguyên &nbsp;
-                <img src="{{ asset('images/ps-icon.png') }}" alt="" height="20"><br>
+                <img src="{{ asset('images/ps-icon.png') }}" alt="" height="20" width="20"><br/>
                 Kính Bút!
             </div>
             @if(count($others))

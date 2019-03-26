@@ -1,4 +1,5 @@
 <h4>
+    <span class="label label-dark">#{{ $item->id }}</span>
     <span class="label label-danger"><i class="{{ \App\Util\CommonHelper::getIconForPaymentType($item->payment_type) }}"></i> {{ $item->displayPaymentType() }}</span>
     @if($item->amount > 0)
     <span class="label label-success"><i class="voyager-dollar"></i> {{ number_format($item->amount / 1000) }}K</span>

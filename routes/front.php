@@ -1,4 +1,5 @@
 <?php
+
 Route::group(['as' => 'front.'], function() {
     Route::get('/', [
         'uses' => 'LandingPageController@index',
@@ -84,23 +85,6 @@ Route::group(['as' => 'front.'], function() {
         Route::post('/doi-mat-khau', [
             'uses' => 'PasswordController@changePassword',
             'as' => 'password.change.submit'
-        ]);
-        Route::get('/choi-game/{server}/{serverName}', [
-            'uses' => 'ServerController@play',
-            'as' => 'server.play'
-        ]);
-        Route::get('/choi-game-test/{server}/{serverName}', [
-            'uses' => 'ServerController@playTest',
-            'as' => 'server.play_test'
-        ]);
-
-        Route::get('/choi-ngay', [
-            'uses' => 'ServerController@playNow',
-            'as' => 'play_now'
-        ]);
-        Route::get('/ccu', [
-            'uses' => 'ServerController@getCCU',
-            'as' => 'server.ccu'
         ]);
 
         Route::post('/nhan-qua', [

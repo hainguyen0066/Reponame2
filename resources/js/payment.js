@@ -8,6 +8,8 @@ $(document).ready(function () {
     btnUseCard.click(function (e) {
         e.preventDefault();
         submitCard();
+
+        return false;
     })
 })
 
