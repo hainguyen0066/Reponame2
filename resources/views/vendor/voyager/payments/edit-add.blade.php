@@ -82,9 +82,9 @@
 
                         <div class="panel-footer">
                             @if(!empty($dataTypeContent->id) && $dataTypeContent->isDone())
-                                <button type="submit" class="btn btn-primary save">Add</button>
-                            @else
                                 <a href="{{ route('voyager.payments.index') }}" class="btn btn-info back">Back</a>
+                            @else
+                                <button type="submit" class="btn btn-primary save">Save</button>
                             @endif
                         </div>
                     </form>
