@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exceptions\PaymentApiException;
 use App\Models\Payment;
 use App\Repository\PaymentRepository;
 use App\Services\DiscordWebHookClient;
@@ -26,7 +27,7 @@ class PaymentBreadController extends VoyagerBaseController
 
     public function create(Request $request)
     {
-        $this->addDataToAddEditView();
+        $this->addDataToAddEditView(true);
 
         return parent::create($request);
     }
@@ -60,16 +61,19 @@ class PaymentBreadController extends VoyagerBaseController
         return redirect()
             ->route("voyager." . self::VOYAGER_SLUG . ".index")
             ->with([
-                'message'    => "[#{$payment->id}] " . __('voyager::generic.successfully_updated')." {$dataType->display_name_singular}",
+                'message'    => "[#{$payment->id}] Cập nhật thành công",
                 'alert-type' => 'success',
             ]);
     }
 
-    private function addDataToAddEditView()
+    private function addDataToAddEditView($isAdding = false)
     {
-        \Voyager::onLoadingView('voyager::payments.edit-add', function ($view, &$params) {
+        \Voyager::onLoadingView('voyager::payments.edit-add', function ($view, &$params) use ($isAdding) {
             $types = Payment::getPaymentTypes();
-            unset($types[Payment::PAYMENT_TYPE_CARD]);
+            if ($isAdding) {
+                unset($types[Payment::PAYMENT_TYPE_CARD]);
+            }
+
             $params['paymentTypes'] = $types;
         });
     }
@@ -93,9 +97,20 @@ class PaymentBreadController extends VoyagerBaseController
         }
 
         if (!$request->has('_validate')) {
-            $data = $this->insertUpdateData($request, $slug, $dataType->addRows, new $dataType->model_name());
-            if (!$data) {
-                return response()->json(['errors' => ['note' => 'Lỗi API nạp tiền']]);
+            try {
+                $data = $this->insertUpdateData($request, $slug, $dataType->addRows, new $dataType->model_name());
+            } catch (PaymentApiException $e) {
+                $payment = $e->getPaymentItem();
+                GameApiLog::notify("Add vàng thất bại cho user `{$payment->username}` " . $e->getMessage(), [
+                    'creator' => \Auth::user()->name,
+                    'info' => array_only($payment->toArray(), ['id', 'amount', 'note']),
+                ]);
+                $error = 'Lỗi API nạp tiền';
+                if ($request->ajax()) {
+                    return response()->json(['errors' => ['note' => $error]]);
+                } else {
+                    return $this->returnToListWithError($error, $payment->id);
+                }
             }
 
             event(new BreadDataAdded($dataType, $data));
@@ -108,7 +123,7 @@ class PaymentBreadController extends VoyagerBaseController
                 ->route("voyager.{$dataType->slug}.index")
                 ->with(
                     [
-                        'message'    => __(
+                        'message'    => "[#{$data->id}] " . __(
                                 'voyager::generic.successfully_added_new'
                             ) . " {$dataType->display_name_singular}",
                         'alert-type' => 'success',
@@ -117,42 +132,71 @@ class PaymentBreadController extends VoyagerBaseController
         }
     }
 
+    public function update(Request $request, $id)
+    {
+        $slug = $this->getSlug($request);
+
+        $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
+
+        // Compatibility with Model binding.
+        $id = $id instanceof Model ? $id->{$id->getKeyName()} : $id;
+
+        $data = call_user_func([$dataType->model_name, 'findOrFail'], $id);
+
+        // Check permission
+        $this->authorize('edit', $data);
+
+        // Validate fields with ajax
+        $val = $this->validateBread($request->all(), $dataType->editRows, $dataType->name, $id);
+
+        if ($val->fails()) {
+            return response()->json(['errors' => $val->messages()]);
+        }
+
+        if (!$request->ajax()) {
+            try {
+                $this->insertUpdateData($request, $slug, $dataType->editRows, $data);
+            } catch (PaymentApiException $e) {
+                $payment = $e->getPaymentItem();
+                GameApiLog::notify("Add vàng thất bại cho user `{$payment->username}` " . $e->getMessage(), [
+                    'creator' => \Auth::user()->name,
+                    'info' => array_only($payment->toArray(), ['id', 'amount', 'note']),
+                ]);
+                return $this->returnToListWithError($request, $payment->id);
+            }
+
+
+            event(new BreadDataUpdated($dataType, $data));
+
+            return redirect()
+                ->route("voyager.{$dataType->slug}.index")
+                ->with([
+                    'message'    => "[#{$data->id}] Cập nhật thành công",
+                    'alert-type' => 'success',
+                ]);
+        }
+    }
+
     /**
      * @param Request $request
-     * @param $slug
-     * @param $rows
-     * @param $data
+     * @param         $slug
+     * @param         $rows
+     * @param         $data
      *
      * @return \App\Models\Payment
+     * @throws \App\Http\Controllers\Admin\PaymentApiException
      */
     public function insertUpdateData($request, $slug, $rows, $data)
     {
-        /** @var PaymentRepository $paymentRepository */
-        $paymentRepository = app(PaymentRepository::class);
-        $user = User::findOrFail($request->get('user_id'));
-        $extraData = [];
-        $paymentType = $request->get('payment_type');
-        $amount = $request->get('amount');
-        list($knb, $soxu) = $paymentRepository->exchangeGameCoin($amount, $paymentType);
-        if ($note = $request->get('note')) {
-            $extraData['note'] = $note;
-        }
-
-        $payment = $paymentRepository->createPayment($user, $paymentType, $amount, $soxu, $extraData);
-        /** @var JXApiClient $jxApi */
-        $jxApi = app(JXApiClient::class);
-        if ($addGoldStatus = $jxApi->addGold($user->name, $knb, $soxu)) {
-            $paymentRepository->updateRecordAddedGold($payment, $addGoldStatus);
-            $this->sendPaymentNotification($payment);
+        if (empty($data->id)) {
+            // create new
+            return $this->addNewPayment($request);
         } else {
-            GameApiLog::notify("Add vàng thất bại cho user `{$payment->username}` " . $jxApi->getLastResponse(), [
-                'creator' => \Auth::user()->name,
-                'info' => array_only($payment->toArray(), ['id', 'amount', 'note']),
-            ]);
-            return false;
-        }
+            $data->fill(array_only($request->all(), ['note', 'amount']));
+            $data->save();
 
-        return $payment;
+            return $data;
+        }
     }
 
     public function history(User $user, Request $request)
@@ -197,5 +241,33 @@ class PaymentBreadController extends VoyagerBaseController
                 'message'    => "[#{$id}] {$error}",
                 'alert-type' => 'error',
             ]);
+    }
+
+    private function addNewPayment(Request $request)
+    {
+        /** @var PaymentRepository $paymentRepository */
+        $paymentRepository = app(PaymentRepository::class);
+        $user = User::findOrFail($request->get('user_id'));
+        $extraData = [];
+        $paymentType = $request->get('payment_type');
+        $amount = $request->get('amount');
+        list($knb, $soxu) = $paymentRepository->exchangeGameCoin($amount, $paymentType);
+        if ($note = $request->get('note')) {
+            $extraData['note'] = $note;
+        }
+
+        $payment = $paymentRepository->createPayment($user, $paymentType, $amount, $soxu, $extraData);
+        /** @var JXApiClient $jxApi */
+        $jxApi = app(JXApiClient::class);
+        if ($addGoldStatus = $jxApi->addGold($user->name, $knb, $soxu)) {
+            $paymentRepository->updateRecordAddedGold($payment, $addGoldStatus);
+            $this->sendPaymentNotification($payment);
+        } else {
+            $exception = new PaymentApiException($jxApi->getLastResponse());
+            $exception->setPaymentItem($payment);
+            throw $exception;
+        }
+
+        return $payment;
     }
 }

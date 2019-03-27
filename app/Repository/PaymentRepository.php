@@ -93,6 +93,7 @@ class PaymentRepository extends AbstractEloquentRepository
     {
         $payment = new Payment();
         $data = [
+            'user_id'      => $user->id,
             'username'     => $user->name,
             'payment_type' => $type,
             'amount'       => $amount,

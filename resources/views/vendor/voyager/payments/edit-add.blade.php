@@ -4,13 +4,16 @@
     <div class="page-content edit-add container-fluid">
         <div class="row">
             <div class="col-md-12">
-
                 <div class="panel panel-bordered">
                     <!-- form start -->
                     <form role="form"
                           class="form-edit-add"
                           action="@if(!is_null($dataTypeContent->getKey())){{ route('voyager.'.$dataType->slug.'.update', $dataTypeContent->getKey()) }}@else{{ route('voyager.'.$dataType->slug.'.store') }}@endif"
                           method="POST" enctype="multipart/form-data">
+                        <!-- PUT Method if we are editing -->
+                        @if(isset($dataTypeContent->id))
+                            {{ method_field("PUT") }}
+                        @endif
                         {{ csrf_field() }}
 
                         <div class="panel-body">
@@ -23,32 +26,51 @@
                                 </ul>
                             </div>
                             @endif
+                            @if(!empty($dataTypeContent->id))
+                            <div class="form-group col-md-12">
+                                {!! $dataTypeContent->displayStatus(true) !!}
+                                @if($dataTypeContent->isDone())
+                                <span class="help-block">Không thể sửa đổi thông tin record Payment này</span>
+                                @endif
+                            </div>
+                            @endif
                             <div class="form-group col-md-12">
                                 <label for="selectUser">Tài khoản</label>
+                                @if(empty($dataTypeContent->user_id))
                                 <select required class="form-control select2-users" name="user_id" id="selectUser">
                                     <option value="">Chọn User</option>
                                 </select>
+                                @else
+                                    <input class="form-control" type="text" readonly="readonly" value="{{ $dataTypeContent->username }}">
+                                @endif
                             </div>
                             <div class="form-group col-md-12">
                                 <label for="payment_type">Loại giao dịch</label>
-                                <select required class="form-control select2" name="payment_type" id="payment_type">
-                                    <option value="">Chọn loại giao dịch</option>
-                                    @foreach($paymentTypes as $type => $text)
-                                    <option {{ old('payment_type') == $type ? 'selected' : '' }} value="{{ $type }}">{{ $text }}</option>
-                                    @endforeach
-                                </select>
+                                @if(!empty($dataTypeContent->id))
+                                    <input type="text" class="form-control" value="{{ $paymentTypes[$dataTypeContent->payment_type] ?? '' }}" readonly>
+                                @else
+                                    <select required class="form-control select2" name="payment_type" id="payment_type">
+                                        <option value="">Chọn loại giao dịch</option>
+                                        @foreach($paymentTypes as $type => $text)
+                                            <option {{ old('payment_type') == $type ? 'selected="selected"' : '' }} value="{{ $type }}">{{ $text }}</option>
+                                        @endforeach
+                                    </select>
+                                @endif
                             </div>
                             <div class="form-group col-md-12">
                                 <label for="amount">Số tiền</label>
                                 <input required type="text" class="form-control" name="amount"
                                        placeholder="" id="moneyAmount"
-                                       value="{{ old('amount') }}"/>
+                                       @if(!empty($dataTypeContent->id) && $dataTypeContent->isDone())
+                                               readonly="readonly"
+                                       @endif
+                                       value="{{ $dataTypeContent->amount ?? old('amount') }}"/>
                             </div>
                             <div class="form-group col-md-12">
                                 <label for="note">Ghi chú</label>
                                 <input type="text" class="form-control" name="note"
                                        placeholder="" id="note"
-                                       value="{{ old('note') }}"/>
+                                       value="{{ $dataTypeContent->note ??  old('note') }}"/>
                             </div>
                             <div class="clearfix"></div>
                             <div class="col-md-12">
@@ -59,7 +81,11 @@
                         </div><!-- panel-body -->
 
                         <div class="panel-footer">
-                            <button type="submit" class="btn btn-primary save">Add</button>
+                            @if(!empty($dataTypeContent->id) && $dataTypeContent->isDone())
+                                <button type="submit" class="btn btn-primary save">Add</button>
+                            @else
+                                <a href="{{ route('voyager.payments.index') }}" class="btn btn-info back">Back</a>
+                            @endif
                         </div>
                     </form>
                 </div>
@@ -92,11 +118,13 @@
             $('#moneyAmount').change(addGoldReview);
             $('#moneyAmount').keyup(addGoldReview);
             $('#selectUser').change(addGoldReview);
+            @if(!$dataTypeContent->user_id)
             $('#selectUser').select2({
                 ajax: {
                     url: '{{ route('autocomplete.users') }}',
                 }
             });
+            @endif
         })
     </script>
 @endpush

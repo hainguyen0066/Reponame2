@@ -24,6 +24,7 @@ class Payment extends BaseEloquentModel
     const PAYMENT_STATUS_GATEWAY_ADD_GOLD_ERROR = 5;
     const PAYMENT_STATUS_NOT_SUCCESS = 6;
 
+    public $fillable = ['amount', 'note'];
 
     public function user()
     {
@@ -70,7 +71,7 @@ class Payment extends BaseEloquentModel
      */
     public static function getPaymentStatus(Payment $payment)
     {
-        if ($payment->status) {
+        if ($payment->status && $payment->finished) {
             return self::PAYMENT_STATUS_SUCCESS; // thành công
         } else {
             if (!$payment->finished) {
@@ -117,5 +118,10 @@ class Payment extends BaseEloquentModel
                 || $status == self::PAYMENT_STATUS_MANUAL_ADD_GOLD_ERROR
                 || $status == self::PAYMENT_STATUS_GATEWAY_ADD_GOLD_ERROR
             );
+    }
+
+    public function isDone()
+    {
+        return self::getPaymentStatus($this) == self::PAYMENT_STATUS_SUCCESS;
     }
 }
