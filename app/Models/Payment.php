@@ -97,10 +97,16 @@ class Payment extends BaseEloquentModel
         }
     }
 
-    public function displayPaymentType()
+    /**
+     * @param $paymentType
+     *
+     * @return mixed|string
+     */
+    public static function displayPaymentType($paymentType)
     {
         $types = self::getPaymentTypes();
-        return isset($types[$this->payment_type]) ? $types[$this->payment_type] : "Unknown";
+
+        return $types[$paymentType] ?? "Unknown";
     }
 
     /**

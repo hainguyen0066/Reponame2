@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use TCG\Voyager\Events\BreadDataAdded;
+use TCG\Voyager\Events\BreadDataUpdated;
 use TCG\Voyager\Http\Controllers\VoyagerBaseController;
 use Voyager;
 
@@ -39,6 +40,21 @@ class PaymentBreadController extends VoyagerBaseController
         return parent::edit($request, $id);
     }
 
+    public function report(Request $request, PaymentRepository $paymentRepository)
+    {
+        $fromDate = $request->get('fromDate', date('Y-m-d', strtotime("-2 weeks")));
+        $toDate = $request->get('toDate', date('Y-m-d', strtotime('today')));
+        $revenue = $paymentRepository->getRevenueChartData($fromDate, $toDate);
+
+        return view('voyager::payments.report', [
+            'fromDate' => $fromDate,
+            'toDate'   => $toDate,
+            'revenue'  => $revenue,
+            'todayRevenue' => $paymentRepository->getRevenueByPeriod(date('Y-m-d'), date('Y-m-d', strtotime("+1 day"))),
+            'thisMonthRevenue' => $paymentRepository->getRevenueByPeriod(date('Y-m-01')),
+        ]);
+    }
+
     public function accept(Payment $payment, JXApiClient $JXApiClient, PaymentRepository $paymentRepository)
     {
         $this->authorize('edit', $payment);
@@ -46,7 +62,6 @@ class PaymentBreadController extends VoyagerBaseController
             $error = "Record đã ghi nhận thành công, hành động không được phép.";
             return $this->returnToListWithError($error, $payment->id);
         }
-        $dataType = Voyager::model('DataType')->where('slug', '=', self::VOYAGER_SLUG)->first();
 
         list($knb, $xu) = $paymentRepository->exchangeGamecoin($payment->amount, $payment->payment_type);
         $addedGoldStatus = $JXApiClient->addGold($payment->username, $knb, $xu);
@@ -55,7 +70,7 @@ class PaymentBreadController extends VoyagerBaseController
             $error = "Lỗi API nạp vàng, chưa add được vàng cho user";
             return $this->returnToListWithError($error, $payment->id);
         }
-
+        $payment->game_coin = $knb + $xu;
         $paymentRepository->setDone($payment);
 
         return redirect()
@@ -164,8 +179,6 @@ class PaymentBreadController extends VoyagerBaseController
                 ]);
                 return $this->returnToListWithError($request, $payment->id);
             }
-
-
             event(new BreadDataUpdated($dataType, $data));
 
             return redirect()
@@ -184,7 +197,7 @@ class PaymentBreadController extends VoyagerBaseController
      * @param         $data
      *
      * @return \App\Models\Payment
-     * @throws \App\Http\Controllers\Admin\PaymentApiException
+     * @throws \App\Exceptions\PaymentApiException
      */
     public function insertUpdateData($request, $slug, $rows, $data)
     {
@@ -192,7 +205,14 @@ class PaymentBreadController extends VoyagerBaseController
             // create new
             return $this->addNewPayment($request);
         } else {
-            $data->fill(array_only($request->all(), ['note', 'amount']));
+            $input = array_only($request->all(), ['note', 'amount']);
+            $data->fill($input);
+            if (isset($input['amount'])) {
+                /** @var PaymentRepository $paymentRepository */
+                $paymentRepository = app(PaymentRepository::class);
+                list($knb, $xu) = $paymentRepository->exchangeGamecoin($input['amount'], $data->payment_type);
+                $data->gamecoin = $knb + $xu;
+            }
             $data->save();
 
             return $data;
@@ -254,6 +274,7 @@ class PaymentBreadController extends VoyagerBaseController
         list($knb, $soxu) = $paymentRepository->exchangeGameCoin($amount, $paymentType);
         if ($note = $request->get('note')) {
             $extraData['note'] = $note;
+            $extraData['pay_from'] = Payment::displayPaymentType($paymentType);
         }
 
         $payment = $paymentRepository->createPayment($user, $paymentType, $amount, $soxu, $extraData);

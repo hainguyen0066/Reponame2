@@ -79,4 +79,18 @@ class CommonHelper
 
         return $icons[$paymentType] ?? 'voyager-exclamation';
     }
+
+    /**
+     * @param $date1 Y-m-d
+     * @param $date2 Y-m-d
+     *
+     * @return float
+     */
+    public static function subDate($date1, $date2) {
+        $first_date = strtotime($date1);
+        $second_date = strtotime($date2);
+        $dateDiff = abs($first_date - $second_date);
+
+        return floor($dateDiff / (60 * 60 * 24));
+    }
 }

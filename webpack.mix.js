@@ -29,7 +29,8 @@ mix.js('resources/js/landing/index.js', 'public/js/landing.js') // tương tự 
     .sass('resources/sass/landing.scss', 'public/css/landing.css')
     .version();
 
-mix.js('resources/js/admin/index.js', 'public/js/admin/app.js') // tương tự JS
+mix.js('resources/js/admin/index.js', 'public/js/admin/app.js')
+    .sass('resources/sass/admin/app.scss', 'public/css/admin/app.css')
     .version();
 
 // mix.js('vendor/tcg/voyager/resources/assets/js/app.js', 'public/voyager/js')

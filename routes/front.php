@@ -1,5 +1,4 @@
 <?php
-
 Route::group(['as' => 'front.'], function() {
     Route::get('/', [
         'uses' => 'LandingPageController@index',

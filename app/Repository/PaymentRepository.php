@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Models\Payment;
 use App\Services\RecardResponse;
 use App\User;
+use App\Util\CommonHelper;
 use App\Util\MobileCard;
 
 /**
@@ -195,5 +196,67 @@ class PaymentRepository extends AbstractEloquentRepository
         $payment->save();
 
         return $payment;
+    }
+
+    function getRevenueChartData($fromDate, $toDate){
+        $count = CommonHelper::subDate($fromDate, $toDate);
+        $results = \DB::table('payments')->selectRaw("DATE_FORMAT(`created_at`, '%d-%m') AS `date`, `pay_from`, SUM(`card_amount`)/1000 as `total`")
+            ->whereRaw("`created_at` BETWEEN '{$fromDate} 00:00:00' AND '{$toDate} 23:59:59' AND `status` = 1")
+            ->groupBy('pay_from', 'date')
+            ->orderBy('date', 'ASC')
+            ->get()
+        ;
+        //order data
+        $data = $payfroms = [];
+        for($i = 0; $i <= $count; $i ++){
+            $startOfDay = mktime(0, 0, 0, date('n', strtotime($fromDate)), date('d', strtotime($fromDate)) + $i);
+            $day = date('d-m', $startOfDay);
+            foreach ($results as $key => $value) {
+                if (!in_array($value->pay_from, $payfroms)) {
+                    $payfroms[] = $value->pay_from;
+                }
+                if ($value->date == $day) {
+                    $data[$day][$value->pay_from] = $value->total;
+                }
+            }
+        }
+        $series = $seriesData = [];
+        $total = 0;
+        foreach ($data as $key => $val) {
+            $series[] = "'$key'";
+            foreach ($payfroms as $name) {
+                $payByDay = isset($val[$name]) ? $val[$name] : 0;
+                $seriesData[$name][] = $payByDay;
+                $total += $payByDay;
+            }
+        }
+
+        return [
+            'series'     => implode(',', $series),
+            'seriesData' => $seriesData,
+            'total'      => $total,
+        ];
+    }
+
+    /**
+     * @param      $fromDate
+     * @param null $toDate
+     *
+     * @return mixed
+     */
+    public function getRevenueByPeriod($fromDate = null, $toDate = null)
+    {
+        $query = $this->query();
+        if ($fromDate) {
+            $query->where('created_at', '>', $fromDate);
+        }
+        if ($toDate) {
+            $query->where('created_at', '<', $toDate);
+        }
+        $total = $query->where('status', 1)
+            ->sum('amount')
+        ;
+
+        return $total;
     }
 }

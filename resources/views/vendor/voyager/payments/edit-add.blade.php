@@ -29,6 +29,9 @@
                             @if(!empty($dataTypeContent->id))
                             <div class="form-group col-md-12">
                                 {!! $dataTypeContent->displayStatus(true) !!}
+                                @if($dataTypeContent->gateway_response)
+                                    <span class="help-block text-danger">{{ $dataTypeContent->gateway_response }}</span>
+                                @endif
                                 @if($dataTypeContent->isDone())
                                 <span class="help-block">Không thể sửa đổi thông tin record Payment này</span>
                                 @endif

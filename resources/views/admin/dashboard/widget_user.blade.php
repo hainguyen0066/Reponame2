@@ -66,23 +66,3 @@ extract($registeredChart);
     </div>
 </div>
 
-@push('extra-js')
-    <script type="text/javascript">
-        $(function () {
-            $('#datepickerFrom').datetimepicker({
-                format: "YYYY/MM/DD"
-            });
-            $('#datepickerTo').datetimepicker({
-                format: "YYYY/MM/DD",
-                useCurrent: false //Important! See issue #1075
-            });
-            $("#datepickerFrom").on("dp.change", function (e) {
-                $('#datepickerTo').data("DateTimePicker").minDate(e.date);
-            });
-            $("#datepickerTo").on("dp.change", function (e) {
-                $('#datepickerFrom').data("DateTimePicker").maxDate(e.date);
-            });
-        });
-    </script>
-@endpush
-
