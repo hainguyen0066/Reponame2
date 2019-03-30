@@ -8,10 +8,10 @@
                 <div class="col-md-12">
                     <div>
                         - Doanh thu trong ngày
-                        <strong style="font-size: 16px;">{{ number_format($todayRevenue * 1000) }}</strong>
+                        <strong style="font-size: 16px;">{{ number_format($todayRevenue) }}</strong>
                     </div>
                     <div>
-                        - Doanh thu trong tháng: <strong style="font-size: 16px;">{{ number_format($thisMonthRevenue * 1000) }}</strong>
+                        - Doanh thu trong tháng: <strong style="font-size: 16px;">{{ number_format($thisMonthRevenue) }}</strong>
                     </div>
                 </div>
             </div>

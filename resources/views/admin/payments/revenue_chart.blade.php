@@ -65,7 +65,7 @@ extract($revenue)
                     name: '<?=$name?>',
                     data: [<?=implode(',', $data)?>]
                 }
-                <?= $k < (count($data) - 1) ? ',' : '' ?>
+                <?= $k++ < (count($seriesData) - 1) ? ',' : '' ?>
                 <?php endforeach; ?>
             ]
         });
