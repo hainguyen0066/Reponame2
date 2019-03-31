@@ -70,7 +70,7 @@ class PaymentBreadController extends VoyagerBaseController
             $error = "Lỗi API nạp vàng, chưa add được vàng cho user";
             return $this->returnToListWithError($error, $payment->id);
         }
-        $payment->game_coin = $knb + $xu;
+        $payment->gamecoin = $knb + $xu;
         $paymentRepository->setDone($payment);
 
         return redirect()
