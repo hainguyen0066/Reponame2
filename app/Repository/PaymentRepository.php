@@ -248,10 +248,10 @@ class PaymentRepository extends AbstractEloquentRepository
     {
         $query = $this->query();
         if ($fromDate) {
-            $query->where('created_at', '>', $fromDate);
+            $query->where('created_at', '>=', $fromDate);
         }
         if ($toDate) {
-            $query->where('created_at', '<', $toDate);
+            $query->where('created_at', '<=', $toDate);
         }
         $total = $query->where('status', 1)
             ->sum('amount')
