@@ -36,14 +36,14 @@ class Payment extends BaseEloquentModel
         return $this->belongsTo(User::class, 'creator_id');
     }
 
-    public function statusText()
+    public function statusText($isAdmin = true)
     {
-        return $this->displayStatus(true);
+        return $this->displayStatus($isAdmin);
     }
 
     public function info()
     {
-        return view('partials.admin.paymentInfo', [
+        return view('partials.admin.payment_info', [
             'item'    => $this
         ]);
     }

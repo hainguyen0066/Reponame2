@@ -138,14 +138,14 @@ $user = \Auth::user();
                                         <tr>
                                             <td>{{ $history->id }}</td>
                                             <td>{!! $history->info() !!}</td>
-                                            <td>{{ number_format($history->card_amount) }}</td>
+                                            <td>{{ number_format($history->amount) }}</td>
                                             <td>{{ number_format($history->gamecoin) }}</td>
-                                            <td>{!! $history->statusText(true) !!}</td>
+                                            <td>{!! $history->displayStatus(true) !!}</td>
                                         </tr>
                                     @endforeach
                                     @if($histories->total() == 0)
                                         <tr>
-                                            <td colspan="6">Không có lịch sử giao dịch</td>
+                                            <td colspan="5">Không có lịch sử giao dịch</td>
                                         </tr>
                                     @endif
                                 </table>

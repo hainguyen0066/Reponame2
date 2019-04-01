@@ -13,26 +13,33 @@ $pageTitle = "Lịch sử giao dịch";
                     <div class="title">Lịch sử giao dịch</div>
                     <table>
                         <tr>
-                            <th>STT</th>
-                            <th>Loại thẻ</th>
-                            <th>Seri</th>
-                            <th>Mã thẻ</th>
-                            <th>Mệnh giá</th>
+                            <th>ID</th>
+                            <th>Thông tin</th>
+                            <th>Số tiền</th>
+                            <th>Số Xu</th>
                             <th>Tình trạng</th>
                         </tr>
                         @foreach($histories as $history)
-                        <tr>
-                            <td>1</td>
-                            <td>{{ $cardTypes[$history->card_type] }}</td>
-                            <td>{{ $history->card_serial }}</td>
-                            <td>{{ $history->card_pin }}</td>
-                            <td>{{ number_format($history->card_amount) }}</td>
-                            <td>{!! $history->statusText() !!}</td>
-                        </tr>
+                            <tr>
+                                <td align="center">{{ $history->id }}</td>
+                                <td>
+                                    <h4>
+                                        {{ \App\Models\Payment::displayPaymentType($history->payment_type) }}
+                                    </h4>
+                                    @if($history->payment_type == \App\Models\Payment::PAYMENT_TYPE_CARD)
+                                        <p>Mã thẻ: {{ $history->card_pin }}</p>
+                                        <p>Serial: {{ $history->card_serial }}</p>
+                                        <p>Loại thẻ: {{ $history->card_type }}</p>
+                                    @endif
+                                </td>
+                                <td align="right">{{ number_format($history->amount) }} VNĐ</td>
+                                <td align="right">{{ number_format($history->gamecoin) }}</td>
+                                <td align="center">{!! $history->displayStatus(false) !!}</td>
+                            </tr>
                         @endforeach
                         @if($histories->total() == 0)
                             <tr>
-                                <td colspan="6">Không có lịch sử giao dịch</td>
+                                <td colspan="5">Không có lịch sử giao dịch</td>
                             </tr>
                         @endif
                     </table>
