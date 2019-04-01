@@ -20,16 +20,9 @@ extract($registeredChart);
                     <label for="reportRange" class="col-sm-3 control-label">
                         Chọn thời gian thống kê
                     </label>
-                    <div class="col-sm-2">
+                    <div class="col-sm-4">
                         <div class="form-group">
-                            <input class="form-control" type="text" id="datepickerFrom" name="fromDate"
-                                   value="{{ $fromDate }}" placeholder="Từ ngày"/>
-                        </div>
-                    </div>
-                    <div class="col-sm-2">
-                        <div class="form-group">
-                            <input class="form-control" type="text" id="datepickerTo" name="toDate"
-                                   value="{{ $toDate }}" placeholder="Đến ngày"/>
+                            @include('admin.partials.input_daterange')
                         </div>
                     </div>
                     <div class="col-sm-3">

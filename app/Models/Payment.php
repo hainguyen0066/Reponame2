@@ -126,6 +126,16 @@ class Payment extends BaseEloquentModel
             );
     }
 
+    /**
+     * @param \App\Models\Payment $payment
+     *
+     * @return bool
+     */
+    public static function isRejectable(Payment $payment)
+    {
+        return self::isAcceptable($payment);
+    }
+
     public function isDone()
     {
         return self::getPaymentStatus($this) == self::PAYMENT_STATUS_SUCCESS;

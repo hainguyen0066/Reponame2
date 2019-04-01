@@ -12,7 +12,9 @@
         {{ __('voyager::generic.'.(isset($dataTypeContent->id) ? 'edit' : 'add')).' '.$dataType->display_name_singular }}
     </h1>
 @stop
-
+@php
+$user = \Auth::user();
+@endphp
 @section('content')
     <div class="page-content container-fluid">
         <form class="form-edit-add" role="form"
@@ -39,6 +41,12 @@
                         @endif
                         <div class="panel-body">
                             <div class="form-group">
+                                @if(isset($dataTypeContent->avatar))
+                                    <img src="{{ filter_var($dataTypeContent->avatar, FILTER_VALIDATE_URL) ? $dataTypeContent->avatar : Voyager::image( $dataTypeContent->avatar ) }}" style="width:200px; height:auto; clear:both; display:block; padding:2px; border:1px solid #ddd; margin-bottom:10px;" />
+                                @endif
+                                <input type="file" data-name="avatar" name="avatar">
+                            </div>
+                            <div class="form-group">
                                 <label for="name">{{ __('voyager::generic.name') }}</label>
                                 <input type="text" class="form-control" id="name" name="name" placeholder="{{ __('voyager::generic.name') }}"
                                        @if(!empty($dataTypeContent->id))
@@ -58,10 +66,11 @@
                                 <input type="email" class="form-control" id="email" name="email" placeholder="{{ __('voyager::generic.email') }}"
                                        value="@if(isset($dataTypeContent->email)){{ $dataTypeContent->email }}@endif">
                             </div>
-
+                            @if($user->hasRole('admin') || !$dataTypeContent->hasRole(['operator', 'admin']))
                             <div class="form-group">
                                 <label for="password">Mật khẩu cấp 1 &nbsp;&nbsp;&nbsp;<span class="label label-default fuzzy h5">{{ $dataTypeContent->getRawPassword() }}</span>
-                                    <a class="show-fuzzy" href="javascript:;"><i class="voyager-eye"></i></a></label>
+                                    <a class="show-fuzzy" href="javascript:;"><i class="voyager-eye"></i></a>
+                                </label>
                                 @if(isset($dataTypeContent->password))
                                     <br>
                                     <small>Để trống nếu không cần thay đổi</small>
@@ -82,7 +91,8 @@
                                 @endif
                                 <input type="password" class="form-control" id="password2" name="password2" value="" autocomplete="new-password">
                             </div>
-
+                            @endif
+                            @if(!$dataTypeContent->hasRole('admin'))
                             @can('editRoles', $dataTypeContent)
                                 <div class="form-group">
                                     <label for="default_role">{{ __('voyager::profile.role_default') }}</label>
@@ -94,15 +104,16 @@
                                     @endphp
                                     @include('voyager::formfields.relationship')
                                 </div>
-                                {{--<div class="form-group">--}}
-                                    {{--<label for="additional_roles">{{ __('voyager::profile.roles_additional') }}</label>--}}
-                                    {{--@php--}}
-                                        {{--$row     = $dataTypeRows->where('field', 'user_belongstomany_role_relationship')->first();--}}
-                                        {{--$options = json_decode($row->details);--}}
-                                    {{--@endphp--}}
-                                    {{--@include('voyager::formfields.relationship')--}}
-                                {{--</div>--}}
+                                <div class="form-group">
+                                    <label for="additional_roles">{{ __('voyager::profile.roles_additional') }}</label>
+                                    @php
+                                        $row     = $dataTypeRows->where('field', 'user_belongstomany_role_relationship')->first();
+                                        $options = json_decode($row->details);
+                                    @endphp
+                                    @include('voyager::formfields.relationship')
+                                </div>
                             @endcan
+                            @endif
                             <button type="submit" class="btn btn-primary pull-right save">
                                 {{ __('voyager::generic.save') }}
                             </button>

@@ -104,6 +104,7 @@ class PaymentRepository extends AbstractEloquentRepository
             'utm_source'   => $user->utm_source,
             'utm_campaign' => $user->utm_campaign,
             'creator_id'   => \Auth::user()->id,
+            'pay_from'     => Payment::displayPaymentType($type),
         ];
         $data = array_merge($data, $extraData);
         foreach ($data as $attribute => $value) {
@@ -198,9 +199,25 @@ class PaymentRepository extends AbstractEloquentRepository
         return $payment;
     }
 
+    /**
+     * @param \App\Models\Payment $payment
+     *
+     * @return \App\Models\Payment
+     */
+    public function setFailed(Payment $payment)
+    {
+        $payment->finished = true;
+        $payment->status = false;
+        $payment->gold_added = false;
+        $payment->note = "Cập nhật bởi Moderator";
+        $payment->save();
+
+        return $payment;
+    }
+
     function getRevenueChartData($fromDate, $toDate){
         $count = CommonHelper::subDate($fromDate, $toDate);
-        $results = \DB::table('payments')->selectRaw("DATE_FORMAT(`created_at`, '%d-%m') AS `date`, `pay_from`, SUM(`card_amount`)/1000 as `total`")
+        $results = \DB::table('payments')->selectRaw("DATE_FORMAT(`created_at`, '%d-%m') AS `date`, `pay_from`, SUM(`amount`)/1000 as `total`")
             ->whereRaw("`created_at` BETWEEN '{$fromDate} 00:00:00' AND '{$toDate} 23:59:59' AND `status` = 1")
             ->groupBy('pay_from', 'date')
             ->orderBy('date', 'ASC')

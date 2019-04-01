@@ -10,22 +10,22 @@ use TCG\Voyager\Actions\AbstractAction;
  *
  * @package \App\Action
  */
-class AcceptPaymentAction extends AbstractAction
+class RejectPaymentAction extends AbstractAction
 {
 
     public function getTitle()
     {
-        return "OK";
+        return "Reject";
     }
 
     public function getIcon()
     {
-        return "voyager-check";
+        return "voyager-x";
     }
 
     public function getPaymentsRoute()
     {
-        return route('voyager.payments.accept', [$this->data->id]);
+        return route('voyager.payments.reject', [$this->data->id]);
     }
 
     public function getDefaultRoute()
@@ -41,13 +41,13 @@ class AcceptPaymentAction extends AbstractAction
             return false;
         }
 
-        return Payment::isAcceptable($payment);
+        return Payment::isRejectable($payment);
     }
 
     public function getAttributes()
     {
         return [
-            'class' => 'btn btn-success btn-sm pull-right'
+            'class' => 'btn btn-danger btn-sm pull-right'
         ];
     }
 }

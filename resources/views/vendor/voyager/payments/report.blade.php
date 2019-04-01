@@ -24,12 +24,7 @@
                             </label>
                             <div class="col-sm-4">
                                 <div class="form-group">
-                                    <input class="form-control" type="text" id="dateRange" placeholder="Từ ngày"
-                                           value="{{ date("d-m-Y", strtotime($fromDate)) . " --- " . date("d-m-Y", strtotime($toDate)) }}"
-                                           data-from="{{ $fromDate }}" data-to="{{ $toDate }}"
-                                    />
-                                    <input type="hidden" name="fromDate" id="fromDate" value="{{ $fromDate }}"/>
-                                    <input type="hidden" name="toDate" id="toDate" value="{{ $toDate }}"/>
+                                    @include('admin.partials.input_daterange')
                                 </div>
                             </div>
                             <div class="col-sm-3">

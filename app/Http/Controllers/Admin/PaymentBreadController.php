@@ -81,6 +81,23 @@ class PaymentBreadController extends VoyagerBaseController
             ]);
     }
 
+    public function reject(Payment $payment, PaymentRepository $paymentRepository)
+    {
+        $this->authorize('edit', $payment);
+        if (!Payment::isRejectable($payment)) {
+            $error = "Hành động không được phép.";
+            return $this->returnToListWithError($error, $payment->id);
+        }
+        $paymentRepository->setFailed($payment);
+
+        return redirect()
+            ->route("voyager." . self::VOYAGER_SLUG . ".index")
+            ->with([
+                'message'    => "[#{$payment->id}] Cập nhật thành công",
+                'alert-type' => 'success',
+            ]);
+    }
+
     private function addDataToAddEditView($isAdding = false)
     {
         \Voyager::onLoadingView('voyager::payments.edit-add', function ($view, &$params) use ($isAdding) {

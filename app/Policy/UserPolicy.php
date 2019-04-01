@@ -13,7 +13,23 @@ class UserPolicy extends \TCG\Voyager\Policies\UserPolicy
 {
     public function read(User $user, $model)
     {
-        return $this->checkPermission($user, $model, 'read');
+        return false;
+    }
+
+    /**
+     * Determine if the given model can be edited by the user.
+     *
+     * @param \TCG\Voyager\Contracts\User $user
+     * @param  $model
+     *
+     * @return bool
+     */
+    public function edit(User $user, $model)
+    {
+        // Does this record belong to the current user?
+        $current = $user->id === $model->id;
+
+        return $current || (!$model->hasRole('admin') && $this->checkPermission($user, $model, 'edit'));
     }
 
     /**
@@ -26,6 +42,6 @@ class UserPolicy extends \TCG\Voyager\Policies\UserPolicy
      */
     public function editRoles(User $user, $model)
     {
-        return $user->hasPermission('edit_roles');
+        return !$model->hasRole('admin') && $user->hasPermission('edit_roles');
     }
 }

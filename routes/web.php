@@ -21,6 +21,10 @@ Route::group(['prefix' => config('voyager.user.redirect')], function () {
                 'uses' => 'Admin\PaymentBreadController@accept',
                 'as' => 'accept',
             ]);
+            Route::get('/{payment}/reject', [
+                'uses' => 'Admin\PaymentBreadController@reject',
+                'as' => 'reject',
+            ]);
             Route::get('/report', [
                 'uses' => 'Admin\PaymentBreadController@report',
                 'as' => 'report',
