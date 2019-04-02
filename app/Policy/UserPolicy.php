@@ -29,7 +29,13 @@ class UserPolicy extends \TCG\Voyager\Policies\UserPolicy
         // Does this record belong to the current user?
         $current = $user->id === $model->id;
 
-        return $current || (!$model->hasRole('admin') && $this->checkPermission($user, $model, 'edit'));
+        return $current
+            || (
+                (   $user->hasRole('admin') && !$model->hasRole('admin'))
+                    || ($user->hasRole('operator') && !$model->hasRole('operator') && !$model->hasRole('admin')
+                )
+                && $this->checkPermission($user, $model, 'edit')
+            );
     }
 
     /**
@@ -42,6 +48,14 @@ class UserPolicy extends \TCG\Voyager\Policies\UserPolicy
      */
     public function editRoles(User $user, $model)
     {
-        return !$model->hasRole('admin') && $user->hasPermission('edit_roles');
+        // Does this record belong to the current user?
+        $current = $user->id === $model->id;
+
+        return ($current && $user->hasRole('admin'))
+            || (
+                $user->hasRole('admin') && !$model->hasRole('admin')
+                && $this->checkPermission($user, $model, 'edit_roles')
+            );
     }
+
 }

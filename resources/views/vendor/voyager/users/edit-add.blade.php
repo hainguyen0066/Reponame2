@@ -66,7 +66,7 @@ $user = \Auth::user();
                                 <input type="email" class="form-control" id="email" name="email" placeholder="{{ __('voyager::generic.email') }}"
                                        value="@if(isset($dataTypeContent->email)){{ $dataTypeContent->email }}@endif">
                             </div>
-                            @if($user->hasRole('admin') || !$dataTypeContent->hasRole(['operator', 'admin']))
+                            @can('edit', $dataTypeContent)
                             <div class="form-group">
                                 <label for="password">Mật khẩu cấp 1 &nbsp;&nbsp;&nbsp;<span class="label label-default fuzzy h5">{{ $dataTypeContent->getRawPassword() }}</span>
                                     <a class="show-fuzzy" href="javascript:;"><i class="voyager-eye"></i></a>
@@ -91,8 +91,7 @@ $user = \Auth::user();
                                 @endif
                                 <input type="password" class="form-control" id="password2" name="password2" value="" autocomplete="new-password">
                             </div>
-                            @endif
-                            @if(!$dataTypeContent->hasRole('admin'))
+                            @endcan
                             @can('editRoles', $dataTypeContent)
                                 <div class="form-group">
                                     <label for="default_role">{{ __('voyager::profile.role_default') }}</label>
@@ -113,7 +112,6 @@ $user = \Auth::user();
                                     @include('voyager::formfields.relationship')
                                 </div>
                             @endcan
-                            @endif
                             <button type="submit" class="btn btn-primary pull-right save">
                                 {{ __('voyager::generic.save') }}
                             </button>
