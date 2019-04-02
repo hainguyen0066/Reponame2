@@ -48,7 +48,7 @@ return [
             'driver' => 'custom',
             'url' => env('LOG_DISCORD_WEBHOOK_URL', ''),
             'via' => App\Logging\DiscordMonologFactory::class,
-            'level' => 'critical',
+            'level' => 'error',
         ],
 
         'game_api_request' => [
