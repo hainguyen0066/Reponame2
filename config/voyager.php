@@ -164,7 +164,6 @@ return [
         ],
 
         'widgets' => [
-
         ],
 
     ],
@@ -207,11 +206,11 @@ return [
 
     // Here you can specify additional assets you would like to be included in the master.blade
     'additional_css' => [
-        //'css/custom.css',
+        'css/admin/app.css',
     ],
 
     'additional_js' => [
-        //'js/custom.js',
+        'js/admin/app.js',
     ],
 
     'googlemaps' => [

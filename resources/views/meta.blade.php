@@ -4,7 +4,7 @@
 <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon" />
 <meta property="fb:app_id" content="{{ config('site.fb.app_id') }}" />
 <meta property="og:description" content="{{ $meta_description ?? config('site.seo.meta_description') }}"/>
-<meta property="og:image" content="{{ $shareImage ?? asset('images/share.png') }}"/>
+<meta property="og:image" content="{{ $shareImage ?? asset('images/share.1.2.png') }}"/>
 <meta property="og:url" content="{{ url()->current() }}"/>
 <meta property="og:site_name" content="{{ $title ?? config('site.seo.title') }}"/>
 <meta property="og:locale" content="vi_VN"/>

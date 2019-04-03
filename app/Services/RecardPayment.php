@@ -36,11 +36,15 @@ class RecardPayment
     {
         $this->merchantId = $merchantId;
         $this->secretKey = $secretKey;
-        $this->client = new \GuzzleHttp\Client([
-            'base_uri'    => self::BASE_URL,
-            'timeout'     => 60,
-            'http_errors' => false,
-        ]);
+        if (env('RECARD_API_MOCK', false)) {
+            $this->client = new MockedRecardApiClient();
+        } else {
+            $this->client = new \GuzzleHttp\Client([
+                'base_uri'    => self::BASE_URL,
+                'timeout'     => 60,
+                'http_errors' => false,
+            ]);
+        }
     }
 
     /**
@@ -74,6 +78,7 @@ class RecardPayment
     {
         $type = $this->getCardType($card);
         $data = $this->merchantId . $type . $card->getSerial() . $card->getCode() . $card->getAmount();
+
         return hash_hmac('sha256', $data, $this->secretKey);
     }
 

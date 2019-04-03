@@ -1,57 +1,55 @@
 @extends('layouts.front')
+@php
+    $pageTitle = "Đổi mật khẩu cấp 1";
+@endphp
 @section('content')
-    <div class="content-detail">
-        <div class="ctdt-header">
-            {{ Breadcrumbs::render('afterHome', 'Đổi mật khẩu') }}
-        </div>
-       <div class="ct-dmk">
-            <h2>Đổi mật khẩu</h2>
-            <div class="changepass-row">
-                <div class="frm-changepass">                    			  
-                    <form action="{{ route('front.password.change.submit') }}" method="post" id="form_changepass" class="form-main">
+<div class="columns-right">
+    <div class="details-content">
+        @include('partials.manage_account.breadcrumbs')
+        <div class="main-details-content">                                
+            <div class="manage-account">
+                <div class="features">
+                    <div class="title">Đổi mật khẩu cấp 1</div>
+                    <form method="POST" action="{{ route('front.password.change.submit') }}">
                         @csrf
+                        <label for="old_password">Mật khẩu cấp 1 cũ</label>
+                        <input type="password" name="old_password" id="old_password">
+                        @if ($errors->has('old_password'))
+                        <div class="invalid-feedback">
+                            <span role="alert">
+                                <strong>{{ $errors->first('old_password') }}</strong>
+                            </span>
+                        </div>
+                        @endif
+                        <label for="password">Mật khẩu cấp 1 mới</label>
+                        <input type="password" name="password" id="password">
+                        @if ($errors->has('password'))
+                        <div class="invalid-feedback">
+                            <span role="alert">
+                                <strong>{{ $errors->first('password') }}</strong>
+                            </span>
+                        </div>
+                        @endif
+                        <label for="password_confirmation">Nhập lại mật khẩu cấp 1 mới</label>
+                        <input type="password" name="password_confirmation" id="password_confirmation">
+                        @if ($errors->has('password_confirmation'))
+                        <div class="invalid-feedback">
+                            <span role="alert">
+                                <strong>{{ $errors->first('password_confirmation') }}</strong>
+                            </span>
+                        </div>
+                        @endif
                         @if (session('status'))
                             <div class="alert alert-success" role="alert">
                                 {{ session('status') }}
                             </div>
                         @endif
-                        <div class="form-row">
-                            <label for="old_pass">MẬT KHẨU CŨ: </label>
-                            <div class="form-input-group">
-                                <input required="required" class="frm-input" name="old_password"
-                                       id="old_pass" type="password"/>
-                                @if ($errors->has('old_password'))
-                                    <p class="invalid-feedback" role="alert">
-                                        {{ $errors->first('old_password') }}
-                                    </p>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <label class="frm-label">MẬT KHẨU MỚI :</label>
-                            <div class="form-input-group">
-                                <input required="required" class="frm-input" id="new_pass" name="password" type="password"/>
-                                @if ($errors->has('password'))
-                                    <p class="invalid-feedback" role="alert">
-                                        {{ $errors->first('password') }}
-                                    </p>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <label class="frm-label">XÁC NHẬN MẬT KHẨU MỚI:</label>
-                            <div class="form-input-group">
-                                <input required="required" class="frm-input" id="re_new_pass"
-                                   name="password_confirmation" type="password"/>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <label class="frm-label">&nbsp;</label>
-                            <button type="submit" class="bt-change">Đổi mật khẩu</button>
-                        </div>
+                        <button type="submit" value="">Cập nhật</button>
                     </form>
                 </div>
-            </div>   
-       </div>
+                @include('partials.manage_account.links_list')
+            </div>
+        </div>
     </div>
+</div>
 @endsection

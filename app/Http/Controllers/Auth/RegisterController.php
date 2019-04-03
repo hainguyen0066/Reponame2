@@ -3,9 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Repository\UserRepository;
-use App\User;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -51,7 +49,7 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name'     => 'required|regex:/^[a-z0-9]{5,50}$/i|unique:users',
-            'phone'    => 'nullable|digits_between:10,14',
+            'phone'    => 'required|digits_between:10,14',
             'password' => 'required|string|between:6,32|confirmed',
         ]);
     }

@@ -11,7 +11,7 @@
                     <form method="POST" id="loginForm" action="/login">
                         <input type="text" placeholder="Tên đăng nhập" name="username" class="username input-username">
                         <input type="password" placeholder="Mật khẩu" name="password" class="input-password">
-                        <p>Quên mật khẩu? Sử dụng số điên thoại đăng ký gọi đến số <span>0898 002 151</span> để yêu cầu nhận mật khẩu mới.</p>
+                        <p>Nếu bạn quên mật khẩu, sử dụng số điên thoại đăng ký gọi đến số <span>0898 002 151</span> để yêu cầu nhận mật khẩu mới.</p>
                         <div class="highlight"></div>
                         <button type="submit" class="btn-submit-login"></button>
                     </form>
@@ -20,10 +20,9 @@
                     <form method="POST" id="registerForm" action="/register">
                         <input type="text" placeholder="Tên đăng nhập" name="username" class="username input-username">
                         <input type="password" placeholder="Mật khẩu" name="password" class="password input-password">
-                        <input type="password" placeholder="Mật khẩu" name="repassword" class="password input-password-confirm">
-                        <input type="text" placeholder="Thông tin bảo mật quan trọng" name="phone" class="phone">
+                        <input type="password" placeholder="Xác nhận mật khẩu" name="password_confirmation" class="password input-password-confirm">
+                        <input type="text" placeholder="Số điện thoại đăng ký" name="phone" class="phone">
                         <div class="highlight"></div>
-                        <p class="highlight">Nếu để trống số điện thoại khi bạn đăng ký bạn có thể thêm sau trong phần quản lý tài khoản tại trang chủ.</p>
                         <button type="submit" class="btn-submit-register"></button>
                     </form>
                 </div>

@@ -6,19 +6,19 @@
     <div class="column-first">
         <div class="menu-news">
             @foreach($categories as $categorySlug => $categoryName)
-                <div class="tab-link {{ $categorySlug }} {{ $i++ == 0 ? 'active' : '' }}"
+                <div class="tab-link {{ $categorySlug }} {{ $i++ == 2 ? 'active' : '' }}"
                      data-tab="{{ $categorySlug }}"
                      data-link="{{ route('front.category', [$categorySlug]) }}">{{ $categoryName }}</div>
             @endforeach
-            <a href="{{ route('front.category', ['tong-hop']) }}" title="Xem thêm" class="news-more"></a>
+            <a href="{{ route('front.category', ['su-kien']) }}" title="Xem thêm" class="news-more"></a>
         </div>
         @php
             $i = 0;
         @endphp
         @foreach($newsByCategory as $categorySlug => $news)
-            <div class="tab-content {{ $categorySlug }}-content {{ $i == 0 ? 'active' : '' }}">
+            <div class="tab-content {{ $categorySlug }}-content {{ $i == 2 ? 'active' : '' }}">
             @php
-                $active = $i == 0 ? 'active' : '';
+                $active = $i == 2 ? 'active' : '';
                 $i++;
             @endphp
             @if(count($news))
@@ -31,7 +31,7 @@
                         <a class="h-news-tt" title="Xem thêm"
                            href="{{ route('front.details.post', [$categorySlug, $firstItem->slug] ) }}">
                             <div class="hot-img f-left">
-                                <img src="{{ Voyager::image($firstItem->getImage()) }}"
+                                <img src="{{ Voyager::image($firstItem->getImage()) }}"  onerror="if (this.src != '/images/logo.png') this.src = '/images/logo.png';"
                                      alt="{{ $firstItem->title }}">
                             </div>
                             <div class="hot-des f-left">

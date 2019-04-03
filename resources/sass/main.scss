@@ -1,6 +1,8 @@
-html {
-  font-size: 14px;
+@font-face {
+  font-family: 'PhilosopherBold';
+  src: url('../fonts/Philosopher-Bold.ttf');
 }
+
 body {
   background: url('../images/bg-middle.jpg');
   font-family: PhilosopherBold, Arial, Tahoma, sans-serif;
@@ -101,26 +103,76 @@ a {
           }
         }
       }
+      .charge{
+        width: 100%;
+        height: 60px;
+        margin-top: 10px;
+        background: url('../images/NapThe.png') no-repeat;
+        background-size: contain;
+        a{
+          display: block;
+          width: 100%;
+          height: 100%;
+          span{
+            position: absolute;
+            display: block;
+            margin-top: 10px;
+            margin-left: 40px;
+            width: 32px;
+            height: 32px;
+            background: url('../images/coin.png') no-repeat;
+            background-size: cover; animation: myAnimate 5s infinite linear;
+            -moz-animation: myAnimate 5s infinite linear;
+            -webkit-animation: myAnimate 5s infinite linear;
+            -o-animation: myAnimate 5s infinite linear;
+            -ms-animation: myAnimate 5s infinite linear;
+            transform-style: preserve-3d;
+            -moz-transform-style: preserve-3d;
+            -webkit-transform-style: preserve-3d;
+            -o-transform-style: preserve-3d;
+            -ms-transform-style: preserve-3d;
+            
+          }
+          @-webkit-keyframes myAnimate {
+            from {
+                transform: rotateY(0);
+              -moz-transform: rotateY(0);
+                -webkit-transform: rotateY(0);
+                -o-transform: rotateY(0);
+                -ms-transform: rotateY(0);
+            }
+            to   {
+                transform: rotateY(360deg);
+                -moz-transform: rotateY(360deg);
+                -webkit-transform: rotateY(360deg);
+                -o-transform: rotateY(360deg);
+                -ms-transform: rotateY(360deg);
+            }
+        }
+        }
+      }
       .register-login {
         width: 100%;
         .register-btn {
           cursor: pointer;
           width: 100%;
-          height: 78px;
+          height: 60px;
           margin-top: 10px;
-          background: url('../images/register-btn.png') no-repeat;
+          background: url('../images/DangKy.png') no-repeat;
+          background-size: contain;
         }
-        .register-btn:hover {
+        .register-btn_:hover {
           background: url('../images/register-btn-hover.png') no-repeat;
         }
         .login-btn {
           cursor: pointer;
           width: 100%;
-          height: 78px;
+          height: 60px;
           margin-top: 10px;
-          background: url('../images/login-btn.png') no-repeat;
+          background: url('../images/DangNhap.png') no-repeat;
+          background-size: contain;
         }
-        .login-btn:hover {
+        .login-btn_:hover {
           background: url('../images/login-btn-hover.png') no-repeat;
         }
       }
@@ -264,7 +316,7 @@ a {
       .hot-line {
         background: url('../images/bg-hot-line.jpg') no-repeat;
         width: 100%;
-        height: 150px;
+        height: 100px;
         margin-top: 10px;
         padding: 50px 0px 0px 50px;
         p {
@@ -290,8 +342,10 @@ a {
           height: 270px;
           a {
             display: block;
-            height: 270px;
-            width: 760px;
+            img {
+              height: 270px;
+              width: 760px;
+            }
           }
           overflow: hidden;
         }
@@ -331,7 +385,7 @@ a {
               font-size: 16px;
             }
             div:hover, div.active, .slick-current {
-              color: #ffffff;
+              color: #ff9000;
             }
           }
         }
@@ -430,7 +484,6 @@ a {
             .hot-img {
               width: 120px;
               height: 100%;
-              background: url('../images/hot-img.png');
               background-size: 100% 100%;
               img {
                 width: 100%;
@@ -461,20 +514,25 @@ a {
             height: 190px;
             margin-top: 25px;
             ul {
+              display: table;
               margin: 0;
               padding: 0;
+              width: 100%;
+              height: 100%;
             }
             li {
-              height: 2rem;
-              line-height: 2rem;
+              display: table-row;
+              background: url('../images/icon-list-new.png') left top no-repeat;
               a {
                 display: block;
-                width: 100%;
+                width: calc(100% - 25px);
                 height: 100%;
                 color: black;
                 font-family: 'Roboto', sans-serif;
                 font-size: 14px;
                 font-weight: normal;
+                padding-left: 25px;
+                line-height: 20px;
                 span {
                   float: right;
                 }
@@ -493,7 +551,7 @@ a {
         }
       }
       .newbies {
-        background-color: #ffffff;
+        background-color: white;
         height: 355px;
         margin-top: 10px;
         padding: 10px;
@@ -540,7 +598,6 @@ a {
           .hot-img {
             width: 120px;
             height: 100%;
-            background: url('../images/hot-img.png');
             background-size: 100% 100%;
             img {
               width: 100%;
@@ -579,14 +636,17 @@ a {
           }
           li {
             display: table-row;
+            background: url('../images/icon-list-new.png') left top no-repeat;
             a {
               display: block;
-              width: 100%;
+              width: calc(100% - 25px);
               height: 100%;
               color: black;
               font-family: 'Roboto', sans-serif;
               font-size: 14px;
               font-weight: normal;
+              padding-left: 25px;
+              line-height: 20px;
               span {
                 float: right;
               }
@@ -671,7 +731,8 @@ a {
       }
     }
     li:last-child {
-      background: none
+      background: none;      
+      font-size: 15px;
     }
   }
   .main-details-content {
@@ -690,9 +751,11 @@ a {
       padding: 60px 0px;
       li {
         width: 700px;
+        background: url('../images/icon-list-new.png') left center no-repeat;
+        padding-left: 30px;
         a {
           display: block;
-          width: 100%;
+          width: calc(100% - 30px);
           span {
             float: right;
           }
@@ -715,14 +778,15 @@ a {
         font-weight: bold;
       }
       form {
-        width: 300px;
-        margin-left: 60px;
+        width: 320px;
+        margin-left: 200px;
         input {
           border-radius: 5px;
           width: 295px;
           height: 35px;
           margin-top: 10px;
           outline: none;
+          padding-left: 15px;
         }
         label {
           margin-top: 15px;
@@ -744,10 +808,22 @@ a {
           outline: none;
           margin-left: 70px;
         }
+        .invalid-feedback {
+          color: red;
+          margin-top: 5px;
+        }
+        .alert-success {
+          margin-top: 10px;
+          color: green;
+          font-size: 1rem;
+          font-weight: bold;
+        }
       }
       .features {
         ul {
-          margin-left: 40px;
+          border: 1px solid #cecece;
+          margin:  30px 0;
+          padding: 30px 50px;
           li {
             font-size: 18px;
             margin-top: 15px;
@@ -756,8 +832,6 @@ a {
               float: right;
             }
           }
-          margin-top: 30px;
-          padding-bottom: 50px;
         }
         table {
           width: 100%;
@@ -832,6 +906,10 @@ a {
         }
       }
     }
+    .center {
+      text-align: center;
+      margin-top: 30px;
+    }
     .list-content {
       .item {
         margin-top: 15px;
@@ -840,14 +918,14 @@ a {
         min-height: 80px;
         overflow: hidden;
         a {
-          display: block;          
+          display: block;
           font-size: 14px;
           color: #838383;
         }
         a.img {
           width: 120px;
           margin-left: 10px;
-          
+
         }
         a.content {
           width: 400px;
@@ -869,9 +947,26 @@ a {
           object-fit: cover;
         }
       }
-      .center {
-        text-align: center;
-        margin-top: 30px;
+      .pagination {
+        display: inline-block;
+      }
+      .pagination a {
+        color: black;
+        float: left;
+        padding: 8px 16px;
+        text-decoration: none;
+        transition: background-color .3s;
+        border: 1px solid #ddd;
+        margin: 0 4px;
+        font-size: 16px;
+      }
+      .pagination a.active {
+        background-color: #4CAF50;
+        color: white;
+        border: 1px solid #4CAF50;
+      }
+      .pagination a:hover:not(.active) {
+        background-color: #ddd;
       }
     }
     .manage-charge {
@@ -892,6 +987,7 @@ a {
       }
       .list-btn-charge {
         overflow: hidden;
+        padding-bottom: 50px;
         ul {
           margin-left: 80px;
           margin-top: 20px;
@@ -916,9 +1012,9 @@ a {
             align-items: center;
             justify-content: center;
           }
-        }
-        li:hover, li.active {
-          background: url('../images/btn-manage-account-hover.png') no-repeat;
+          &:hover, &.active {
+            background: url('../images/btn-manage-account-hover.png') no-repeat;
+          }
         }
       }
       .card-type {
@@ -927,9 +1023,9 @@ a {
       .charge {
         margin-top: 30px;
         form {
-          margin-top: 100px;
+          margin-top: 40px;
           margin-left: 35px;
-          width: 435px;
+          width: 600px;
           min-height: 300px;
           .item {
             height: 45px;
@@ -938,17 +1034,34 @@ a {
             .label {
               float: left;
               color: #151925;
-              font-size: 16px;
+              font-size: 1.2rem;
               font-family: PhilosopherBold;
               font-weight: bold;
               line-height: 55px;
+              margin-left: 50px;
             }
             .content {
               float: right;
+              margin-right: 50px;
+              &.payment-message {
+                line-height: 40px;
+                font-size: 1.1rem;
+                font-weight: bold;
+                text-align: center;
+                width: 400px;
+
+                &.success {
+                  color: green;
+                }
+                &.error {
+                  color: red;
+                }
+              }
             }
             input, select {
+              font-size: 1.1rem;
               height: 45px;
-              width: 300px;
+              width: 400px;
               border-radius: 5px;
               border: 1px solid black;
               outline: none;
@@ -985,10 +1098,9 @@ a {
       }
     }
   }
-
   body {
     background: url('../images/bg-middle.jpg');
-    font-family: PhilosopherBold, sans-serif;
+    font-family: PhilosopherBold, Arial, Tahoma;
     font-size: 13px;
   }
 
@@ -1083,7 +1195,7 @@ a {
               background: url('../images/lantern.png') no-repeat;
             }
           }
-        }
+        }        
         .register-login {
           width: 100%;
           .register-btn {
@@ -1123,7 +1235,7 @@ a {
               font-size: 18px;
               font-weight: bold;
               line-height: 35px;
-              font-family: PhilosopherBold, sans-serif;
+              font-family: PhilosopherBold;
             }
           }
           .info-content {
@@ -1132,7 +1244,7 @@ a {
               font-size: 16px;
               color: #171b1e;
               line-height: 35px;
-              font-family: PhilosopherBold, sans-serif;
+              font-family: PhilosopherBold;
               span {
                 color: #c2433d
               }
@@ -1413,7 +1525,6 @@ a {
               .hot-img {
                 width: 120px;
                 height: 100%;
-                background: url('../images/hot-img.png');
                 background-size: 100% 100%;
                 img {
                   width: 100%;
@@ -1525,7 +1636,6 @@ a {
             .hot-img {
               width: 120px;
               height: 100%;
-              background: url('../images/hot-img.png');
               background-size: 100% 100%;
               img {
                 width: 100%;
@@ -1564,6 +1674,7 @@ a {
             }
             li {
               display: table-row;
+              background: url('../images/icon-list-new.png') left top no-repeat;
               a {
                 display: block;
                 width: 100%;
@@ -1586,402 +1697,4 @@ a {
     }
   }
 
-  .footer {
-    height: 80px;
-    padding-top: 180px;
-  }
-
-  .footer .bottom-logo {
-    background: url("../images/logo-bottom.png") no-repeat;
-    height: 70px;
-    width: 140px;
-    margin-left: 10px;
-  }
-
-  .footer .bottom-logo a {
-    display: block;
-    width: 100%;
-    height: 100%;
-  }
-
-  .footer .footer-contents {
-    width: 800px;
-  }
-
-  .footer .footer-contents p {
-    color: #75919f;
-    font-size: 16px;
-    line-height: 25px;
-  }
-
-  .footer .footer-contents a {
-    color: #ffffff;
-  }
-
-  .footer .footer-contents span {
-    color: #ffffff;
-  }
-
-  .footer .footer-contents span.blue {
-    color: #1759df;
-  }
-
-  /*details content*/
-  .details-content {
-    width: 100%;
-    .header-details-content {
-      width: 760px;
-      height: 96px;
-      background: url('../images/bg-details-content.jpg') no-repeat;
-      p {
-        margin-left: 20px;
-        font-size: 24px;
-        line-height: 55px;
-      }
-      ul {
-        margin-left: 20px;
-      }
-      li {
-        float: left;
-        padding-right: 30px;
-        background: url('../images/bg-li-arrow.jpg') right no-repeat;
-        a {
-          font-size: 15px;
-        }
-      }
-      li:first-child {
-        a {
-          color: #64719a;
-        }
-      }
-      li:last-child {
-        background: none
-      }
-    }
-    .main-details-content {
-      margin-top: 10px;
-      width: 700px;
-      background: #ffffff;
-      min-height: 1400px;
-      padding: 50px 30px;
-      font-family: 'Roboto', sans-serif !important;
-      p {
-        line-height: 25px;
-      }
-      .view-more {
-        margin-top: 30px;
-        background: url('../images/bg-view-more.jpg') top no-repeat;
-        padding: 60px 0px;
-        li {
-          width: 700px;
-          a {
-            display: block;
-            width: 100%;
-            span {
-              float: right;
-            }
-            color: #171b1e;
-            font-size: 16px;
-            line-height: 50px;
-          }
-          a:hover {
-            font-size: 17px;
-          }
-        }
-      }
-      .manage-account {
-        .title {
-          background: url('../images/icon-arrow.png') left no-repeat;
-          padding-left: 40px;
-          color: #151925;
-          font-size: 20px;
-          font-family: PhilosopherBold;
-          font-weight: bold;
-        }
-        form {
-          width: 300px;
-          margin-left: 60px;
-          input {
-            border-radius: 5px;
-            width: 295px;
-            height: 35px;
-            margin-top: 10px;
-            outline: none;
-          }
-          label {
-            margin-top: 15px;
-            display: inline-block;
-            font-size: 14px;
-          }
-          button {
-            width: 158px;
-            height: 42px;
-            background: url('../images/btn-manage-account-hover.png') no-repeat;
-            border: none;
-            margin-top: 15px;
-            text-align: center;
-            color: #fff7e7;
-            font-size: 16px;
-            font-family: PhilosopherBold;
-            font-weight: bold;
-            cursor: pointer;
-            outline: none;
-            margin-left: 70px;
-          }
-        }
-        .features {
-          ul {
-            margin-left: 40px;
-            li {
-              font-size: 18px;
-              margin-top: 15px;
-              width: 400px;
-              span {
-                float: right;
-              }
-            }
-            margin-top: 30px;
-            padding-bottom: 50px;
-          }
-          table {
-            width: 100%;
-            margin-top: 30px;
-          }
-          table, th, td {
-            border: 1px solid gray;
-            border-collapse: collapse;
-          }
-          th, td {
-            padding: 7px 15px;
-          }
-          th {
-            background-color: #008040;
-            color: white;
-          }
-          tr:nth-child(even) {
-            background-color: #F0F0F0;
-          }
-          tr:hover {
-            background-color: #ddd;
-          }
-        }
-
-        .list-features {
-          margin: 20px;
-          ul {
-            margin-left: 60px
-          }
-          li {
-            width: 158px;
-            height: 42px;
-            background: url('../images/btn-manage-account.png') no-repeat;
-            padding-left: 30px;
-            float: left;
-            margin-top: 15px;
-            a {
-              display: block;
-              width: 98px;
-              height: 100%;
-              color: #fff7e7;
-              font-size: 16px;
-              line-height: 16px;
-              margin-top: 5px;
-              text-align: center;
-              font-family: PhilosopherBold, Arial;
-              font-weight: bold;
-            }
-          }
-          li:hover, li.active {
-            background: url('../images/btn-manage-account-hover.png') no-repeat;
-          }
-        }
-      }
-      .menu {
-        margin-top: -30px;
-        border-bottom: #404040 solid 2px;
-        height: 30px;
-        li {
-          float: left;
-          padding-left: 5px;
-          padding-right: 25px;
-          a {
-            font-size: 20px;
-            font-family: PhilosopherBold;
-            color: #39425e;
-            line-height: 25px;
-            font-weight: bold;
-          }
-          a:hover, a.active {
-            color: #c73002
-          }
-        }
-      }
-      .list-content {
-        .item {
-          margin-top: 15px;
-          padding-bottom: 15px;
-          border-bottom: #eeeeee 1px solid;
-          height: 80px;
-          a {
-            display: block;
-            height: 80px;
-            font-size: 14px;
-            color: #838383;
-          }
-          a.img {
-            width: 120px;
-            margin-left: 10px;
-          }
-          a.content {
-            width: 400px;
-            margin-left: 10px;
-            .title {
-              color: #151925;
-              padding-bottom: 15px;
-              font-weight: bold;
-              font-size: 18px;
-            }
-          }
-          a.time {
-            width: 80px
-          }
-        }
-        .center {
-          text-align: center;
-          margin-top: 30px;
-        }
-        .pagination {
-          display: inline-block;
-        }
-        .pagination a {
-          color: black;
-          float: left;
-          padding: 8px 16px;
-          text-decoration: none;
-          transition: background-color .3s;
-          border: 1px solid #ddd;
-          margin: 0 4px;
-          font-size: 16px;
-        }
-        .pagination a.active {
-          background-color: #4CAF50;
-          color: white;
-          border: 1px solid #4CAF50;
-        }
-        .pagination a:hover:not(.active) {
-          background-color: #ddd;
-        }
-      }
-      .manage-charge {
-        .title {
-          background: url('../images/icon-arrow.png') left no-repeat;
-          padding-left: 40px;
-          color: #151925;
-          font-size: 20px;
-          font-family: PhilosopherBold;
-          font-weight: bold;
-        }
-        .head-title {
-          color: #c33203;
-          font-size: 30px;
-          font-family: PhilosopherBold;
-          font-weight: bold;
-          text-align: center;
-        }
-        .list-btn-charge {
-          overflow: hidden;
-          ul {
-            margin-left: 80px;
-            margin-top: 20px;
-          }
-          li {
-            width: 158px;
-            height: 42px;
-            background: url('../images/btn-manage-account.png') no-repeat;
-            padding-left: 30px;
-            float: left;
-            margin-top: 15px;
-            a {
-              display: block;
-              width: 100px;
-              height: 100%;
-              color: #fff7e7;
-              font-size: 16px;
-              text-align: center;
-              font-family: PhilosopherBold;
-              font-weight: bold;
-              display: flex;
-              align-items: center;
-              justify-content: center;
-            }
-          }
-          li:hover, li.active {
-            background: url('../images/btn-manage-account-hover.png') no-repeat;
-          }
-        }
-        .card-type {
-          margin-top: 30px;
-        }
-        .charge {
-          margin-top: 30px;
-          form {
-            margin-top: 100px;
-            margin-left: 35px;
-            width: 435px;
-            min-height: 300px;
-            .item {
-              height: 45px;
-              width: 100%;
-              margin-top: 15px;
-              .label {
-                float: left;
-                color: #151925;
-                font-size: 16px;
-                font-family: PhilosopherBold;
-                font-weight: bold;
-                line-height: 55px;
-              }
-              .content {
-                float: right;
-              }
-              input, select {
-                height: 45px;
-                width: 300px;
-                border-radius: 5px;
-                border: 1px solid black;
-                outline: none;
-                padding: 0px;
-                text-align: center;
-              }
-              select {
-                text-align-last: center;
-              }
-              button[type=submit] {
-                width: 158px;
-                height: 42px;
-                background: url('../images/btn-manage-account-hover.png') no-repeat;
-                border: none;
-                margin-top: 15px;
-                text-align: center;
-                color: #fff7e7;
-                font-size: 16px;
-                font-family: PhilosopherBold;
-                font-weight: bold;
-                cursor: pointer;
-                outline: none;
-                margin-right: 20px;
-              }
-              button:hover {
-                background: url('../images/btn-manage-account.png') no-repeat;
-              }
-              a {
-                text-decoration: underline;
-                font-size: 16px;
-              }
-            }
-          }
-        }
-      }
-    }
-  }
 }

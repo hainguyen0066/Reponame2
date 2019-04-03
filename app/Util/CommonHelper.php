@@ -2,6 +2,8 @@
 
 namespace App\Util;
 
+use App\Models\Payment;
+
 /**
  * Class CommonHelper
  *
@@ -65,5 +67,30 @@ class CommonHelper
         ];
 
         return "https://www.facebook.com/dialog/share?" . http_build_query($params);
+    }
+
+    public static function getIconForPaymentType($paymentType)
+    {
+        $icons = [
+            Payment::PAYMENT_TYPE_CARD => 'voyager-credit-card',
+            Payment::PAYMENT_TYPE_MOMO => 'voyager-wallet',
+            Payment::PAYMENT_TYPE_BANK_TRANSFER => 'voyager-receipt',
+        ];
+
+        return $icons[$paymentType] ?? 'voyager-exclamation';
+    }
+
+    /**
+     * @param $date1 Y-m-d
+     * @param $date2 Y-m-d
+     *
+     * @return float
+     */
+    public static function subDate($date1, $date2) {
+        $first_date = strtotime($date1);
+        $second_date = strtotime($date2);
+        $dateDiff = abs($first_date - $second_date);
+
+        return floor($dateDiff / (60 * 60 * 24));
     }
 }

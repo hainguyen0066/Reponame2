@@ -18,7 +18,7 @@
             <a class="h-news-tt" title="Xem thêm"
                href="{{ route('front.details.post', [$guideSlug, $firstItem->slug] ) }}">
                 <div class="hot-img f-left">
-                    <img src="{{ Voyager::image($firstItem->getImage()) }}"
+                    <img src="{{ Voyager::image($firstItem->getImage()) }}" onerror="if (this.src != '/images/hot-img.png') this.src = '/images/logo.png';"
                          alt="{{ $firstItem->title }}">
                 </div>
                 <div class="hot-des f-left">
@@ -29,7 +29,7 @@
             </a>
         </div>
         @if(count($guides))
-            <div class="list-news">
+            <div class="list-news">                
                 <ul>
                     @foreach($guides as $item)
                         <li>

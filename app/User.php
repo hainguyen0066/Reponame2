@@ -45,7 +45,7 @@ class User extends \TCG\Voyager\Models\User
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'utm_source', 'utm_medium', 'utm_campaign', 'phone', 'raw_password'
+        'name', 'email', 'password', 'utm_source', 'utm_medium', 'utm_campaign', 'phone', 'raw_password', 'role_id'
     ];
 
     /**
@@ -63,5 +63,44 @@ class User extends \TCG\Voyager\Models\User
     public function getRawPassword()
     {
         return base64_decode($this->raw_password);
+    }
+
+    public function displayPhone()
+    {
+        $phone = $this->phone ? str_pad(substr($this->phone, -4), 10, '*', STR_PAD_LEFT) : '';
+        return $phone ? "<span class='text-success'>{$phone}</span>" : "<span class=\"c-red\">Chưa cập nhật</span>";
+    }
+
+    public function displayPass2()
+    {
+        return $this->password2 ? "<span class='text-success'>Đã cập nhật</span>" : "<span class=\"c-red\">Chưa cập nhật</span>";
+    }
+
+    /**
+     * @param $password
+     *
+     * @return bool
+     */
+    public function validatePassword($password)
+    {
+        return $password== $this->getRawPassword();
+    }
+
+    /**
+     * @return string
+     */
+    public function getRawPassword2()
+    {
+        return base64_decode($this->password2);
+    }
+
+    /**
+     * @param $password2
+     *
+     * @return bool
+     */
+    public function validatePassword2($password2)
+    {
+        return $password2 == $this->getRawPassword2();
     }
 }

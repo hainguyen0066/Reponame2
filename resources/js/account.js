@@ -2,14 +2,16 @@ import $ from 'jquery';
 const MSG_TYPE_SUCCESS = 'success';
 const MSG_TYPE_ERROR = 'error';
 const activeClass = 'active';
-let urlLogin = './login';
-let urlRegister = './register';
+let urlLogin = '/login';
+let urlRegister = '/register';
 const menuLinkLoginSelector = '.popup-menu .btn-login';
 const menuLinkRegisterSelector = '.popup-menu .btn-register';
 const messageContainerSelector = '.popup-message';
 const popupContainerSelector = '.popup-rg-lg';
 const tabLoginSelector = '.popup-lg';
 const tabRegisterSelector = '.popup-rg';
+
+let FLAG_IS_SUBMITTING_DATA = false;
 
 const Account = {
     container: null,
@@ -86,7 +88,11 @@ const Account = {
         });
     },
     register: () => {
+        if (FLAG_IS_SUBMITTING_DATA) {
+            return;
+        }
         Account.clearMessage();
+        FLAG_IS_SUBMITTING_DATA = true;
         let username = Account.tabRegister.find('.input-username').val();
         let password = Account.tabRegister.find('.input-password').val();
         let passwordConfirm = Account.tabRegister.find('.input-password-confirm').val();
@@ -104,7 +110,8 @@ const Account = {
                 Account.showMessage("Đăng ký tài khoản thành công", MSG_TYPE_SUCCESS);
                 setTimeout(() => {
                     window.location.reload();
-                }, 2000)
+                }, 2000);
+                FLAG_IS_SUBMITTING_DATA = false;
             },
             error: (rs) => {
                 let msg = 'Có lỗi xảy ra, vui lòng thử lại sau';
@@ -115,6 +122,7 @@ const Account = {
                     }
                 }
                 Account.showMessage(msg, MSG_TYPE_ERROR);
+                FLAG_IS_SUBMITTING_DATA = false;
             },
             dataType: 'json'
         });

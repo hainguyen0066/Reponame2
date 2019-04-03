@@ -1,5 +1,4 @@
 <?php
-
 Route::group(['as' => 'front.'], function() {
     Route::get('/', [
         'uses' => 'LandingPageController@index',
@@ -11,8 +10,8 @@ Route::group(['as' => 'front.'], function() {
         'as' => 'home'
     ]);
 
-    Route::get('/lich-su-nap-the', [
-        'uses' => 'HomePageController@index',
+    Route::get('/lich-su-giao-dich', [
+        'uses' => 'ManageAccountController@historyCharge',
         'as' => 'payment.history'
     ]);
     Route::get('/nap-the', [
@@ -23,15 +22,19 @@ Route::group(['as' => 'front.'], function() {
         'uses' => 'PaymentController@submitCard',
         'as' => 'payment.submit_card'
     ]);
-
-    Route::get('/quan-ly-tai-khoan', [
-        'uses' => 'HomePageController@index',
-        'as' => 'account.index'
+    Route::get('/web-launcher',[        
+        'uses' => 'WebLauncherController@index',
+        'as'   => 'web_laucher'
     ]);
+    
 
 //     BEGIN CONTENT ROUTES
     Route::get('/download', [
-        'uses' => 'HomePageController@index',
+        'uses' => 'PostController@download',
+        'as' => 'page.download'
+    ]);
+    Route::get('/tai-game', [
+        'uses' => 'PostController@download',
         'as' => 'page.download'
     ]);
 
@@ -51,30 +54,36 @@ Route::group(['as' => 'front.'], function() {
     ]);
     ## --------------------- Secured Routes --------------------- ##
     Route::group(['middleware' => 'auth'], function() {
+        Route::get('/quan-ly-tai-khoan', [
+            'uses' => 'ManageAccountController@getAccountInfo',
+            'as' => 'manage.account.info'
+        ]);
+        Route::get('/thong-tin-tai-khoan', [
+            'uses' => 'ManageAccountController@getAccountInfo',
+            'as' => 'manage.account.info'
+        ]);
+        
         Route::get('/doi-mat-khau', [
             'uses' => 'PasswordController@showChangePasswordForm',
-            'as' => 'password.change'
+            'as' => 'manage.account.pass'
         ]);
+        Route::get('/doi-mat-khau-cap-2', [
+            'uses' => 'PasswordController@showChangePassword2Form',
+            'as' => 'manage.account.pass2'
+        ]);
+        Route::post('/doi-mat-khau-cap-2', [
+            'uses' => 'PasswordController@changePassword2',
+            'as' => 'password2.change.submit'
+        ]);
+
+        Route::get('/lich-su-giao-dich', [
+            'uses' => 'ManageAccountController@historyCharge',
+            'as' => 'manage.account.history'
+        ]);
+        
         Route::post('/doi-mat-khau', [
             'uses' => 'PasswordController@changePassword',
             'as' => 'password.change.submit'
-        ]);
-        Route::get('/choi-game/{server}/{serverName}', [
-            'uses' => 'ServerController@play',
-            'as' => 'server.play'
-        ]);
-        Route::get('/choi-game-test/{server}/{serverName}', [
-            'uses' => 'ServerController@playTest',
-            'as' => 'server.play_test'
-        ]);
-
-        Route::get('/choi-ngay', [
-            'uses' => 'ServerController@playNow',
-            'as' => 'play_now'
-        ]);
-        Route::get('/ccu', [
-            'uses' => 'ServerController@getCCU',
-            'as' => 'server.ccu'
         ]);
 
         Route::post('/nhan-qua', [
@@ -82,6 +91,18 @@ Route::group(['as' => 'front.'], function() {
             'as'   => 'get_welcome_code',
         ]);
     });
+
+    $staticPages = [
+        'nap_the_cao' => '/nap-the/the-cao',
+        'vi_momo' => '/nap-the/vi-momo',
+        'chuyen_khoan' => '/nap-the/chuyen-khoan'
+    ];
+    foreach ($staticPages as $name => $uri) {
+        Route::get($uri, [
+            'uses' => 'StaticPageController@detail',
+            'as' => 'static.' . $name
+        ]);
+    }
 
 
     Route::get('/{categorySlug}', [
@@ -92,11 +113,6 @@ Route::group(['as' => 'front.'], function() {
     Route::get('/{categorySlug}/{postSlug}', [
         'uses' => 'PostController@detail',
         'as' => 'details.post'
-    ]);
-
-    Route::get('/{uri}', [
-        'uses' => 'StaticPageController@detail',
-        'as' => 'static_pagdetaile'
     ]);
 });
 

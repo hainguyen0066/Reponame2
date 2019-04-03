@@ -36,7 +36,7 @@ return [
     'channels' => [
         'stack' => [
             'driver' => 'stack',
-            'channels' => ['single'],
+            'channels' => ['single', 'discord'],
         ],
 
         'game_api' => [
@@ -48,12 +48,18 @@ return [
             'driver' => 'custom',
             'url' => env('LOG_DISCORD_WEBHOOK_URL', ''),
             'via' => App\Logging\DiscordMonologFactory::class,
-            'level' => 'critical',
+            'level' => 'error',
         ],
 
         'game_api_request' => [
             'driver' => 'single',
             'path' => storage_path('logs/game_api.log'),
+            'level' => 'debug',
+        ],
+
+        'recard_mock' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/recard_mock.log'),
             'level' => 'debug',
         ],
 

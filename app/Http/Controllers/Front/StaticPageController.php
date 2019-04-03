@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Front;
 
 use App\Repository\PageRepository;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Class StaticPageController
@@ -11,8 +12,14 @@ use App\Repository\PageRepository;
  */
 class StaticPageController extends BaseFrontController
 {
-    public function detail($uri = '', PageRepository $pageRepository)
+    public function detail(PageRepository $pageRepository)
     {
+        $uri = trim(request()->route()->uri());
+        $page = $pageRepository->getPageByUri($uri);
+        if (!$page) {
+            throw new NotFoundHttpException();
+        }
 
+        return view('pages.static_page', ['page' => $page]);
     }
 }
