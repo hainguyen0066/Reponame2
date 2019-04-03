@@ -52,17 +52,13 @@ class RecardResponse
     {
         $this->statusCode = $response->getStatusCode();
         $this->body = $response->getBody()->getContents();
-        $result = json_decode($this->body);
+        $result = json_decode($this->body, 1);
         if ($this->statusCode != 200) {
-            if (isset($result->code)) {
-                $this->errors = [$result->code];
-            } else {
-                $this->errors = [$result];
-            }
+            $this->errors = $result;
         }
-        if ($this->statusCode == 200 && !empty($result->success) && !empty($result->transaction_code)) {
+        if ($this->statusCode == 200 && !empty($result['success']) && !empty($result['transaction_code'])) {
             $this->success = true;
-            $this->transactionCode = $result->transaction_code;
+            $this->transactionCode = $result['transaction_code'];
         }
     }
 
