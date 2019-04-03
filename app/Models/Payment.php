@@ -82,7 +82,7 @@ class Payment extends BaseEloquentModel
                         return self::PAYMENT_STATUS_MANUAL_ADD_GOLD_ERROR;
                     }
                 } else {
-                    if (!$payment->transaction_id) {
+                    if ($payment->card_type != MobileCard::TYPE_ZING &&  empty($payment->transaction_id)) {
                         return self::PAYMENT_STATUS_RECARD_NOT_ACCEPT;
                     }
                     return self::PAYMENT_STATUS_PROCESSING; // đang xử lý
