@@ -1,3 +1,4 @@
+@if($user)
 <div class="manage-charge">
     <div class="charge">
         <div class="title">Nạp thẻ</div>
@@ -49,3 +50,10 @@
         </form>
     </div>
 </div>
+@else
+    <div class="manage-charge">
+        <div class="charge">
+            <div class="title">Vui lòng <a href="javascript:;" class="account-login">đăng nhập</a> để nạp thẻ</div>
+        </div>
+    </div>
+@endif

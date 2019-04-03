@@ -123,9 +123,7 @@ class PaymentRepository extends AbstractEloquentRepository
     public function getByTransactionCode($transactionCode)
     {
         $query = $this->query();
-        $query->where('transaction_id', $transactionCode)
-            ->where('finished','!=', 1)
-        ;
+        $query->where('transaction_id', $transactionCode);
 
         return $query->first();
     }

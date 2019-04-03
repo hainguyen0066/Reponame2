@@ -27,8 +27,12 @@
             }
             break;
         case \App\Models\Payment::PAYMENT_STATUS_NOT_SUCCESS:
-            $classes = "{$defaultClasses} label-danger c-green";
+            $classes = "{$defaultClasses} label-danger c-red";
             $text = "Không thành công";
+            break;
+        case \App\Models\Payment::PAYMENT_STATUS_RECARD_NOT_ACCEPT:
+            $classes = "{$defaultClasses} label-danger c-red";
+            $text = $isAdmin ? "Recard không chấp nhận thẻ" : "Thẻ không hợp lệ";
             break;
     }
 @endphp

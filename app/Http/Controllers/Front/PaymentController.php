@@ -124,16 +124,21 @@ class PaymentController extends BaseFrontController
             $record['message'] = "Transaction not found";
             return response()->json($response, 404);
         }
+        if (!empty($record->status)) {
+            $record['message'] = "Transaction was processed successfully before";
+            return response()->json($response);
+        }
         // add gold
-        /** @var \Servers_model $this->servers_model */
         $recardStatus = $status == 1 ? true : false;
         $paymentRepository->updateRecardTransaction($record, $status, $reason, $amount);
         if (!$recardStatus) {
             return response()->json($response);
         }
-        $gamecoin = $record->gamecoin;
-        $result = $gameApiClient->addGold($record->username, $gamecoin);
-        $paymentRepository->updateRecordAddedGold($record, $result);
+        if (!empty($record->status) && empty($record->gold_added)) {
+            $gamecoin = $record->gamecoin;
+            $result = $gameApiClient->addGold($record->username, $gamecoin);
+            $paymentRepository->updateRecordAddedGold($record, $result);
+        }
         $response = [
             'status' => true,
             'message' => 'Processed'

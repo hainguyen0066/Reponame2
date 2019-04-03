@@ -59,6 +59,11 @@
                                         @endforeach
                                     </select>
                                 @endif
+                                @if($dataTypeContent->payment_type == \App\Models\Payment::PAYMENT_TYPE_CARD)
+                                    <p>
+                                        @include('partials.admin.card_info', ['item' => $dataTypeContent])
+                                    </p>
+                                @endif
                             </div>
                             <div class="form-group col-md-12">
                                 <label for="amount">Số tiền</label>

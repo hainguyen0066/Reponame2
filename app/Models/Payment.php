@@ -23,6 +23,7 @@ class Payment extends BaseEloquentModel
     const PAYMENT_STATUS_GATEWAY_RESPONSE_ERROR = 4;
     const PAYMENT_STATUS_GATEWAY_ADD_GOLD_ERROR = 5;
     const PAYMENT_STATUS_NOT_SUCCESS = 6;
+    const PAYMENT_STATUS_RECARD_NOT_ACCEPT = 7;
 
     public $fillable = ['amount', 'note'];
 
@@ -81,10 +82,14 @@ class Payment extends BaseEloquentModel
                         return self::PAYMENT_STATUS_MANUAL_ADD_GOLD_ERROR;
                     }
                 } else {
+                    if (!$payment->transaction_id) {
+                        return self::PAYMENT_STATUS_RECARD_NOT_ACCEPT;
+                    }
                     return self::PAYMENT_STATUS_PROCESSING; // đang xử lý
                 }
             } else {
                 if ($payment->card_type != MobileCard::TYPE_ZING) {
+
                     if($payment->gateway_status == 2) {
                         return self::PAYMENT_STATUS_GATEWAY_RESPONSE_ERROR; // Recard trả về lỗi
                     }
@@ -92,9 +97,11 @@ class Payment extends BaseEloquentModel
                         return self::PAYMENT_STATUS_GATEWAY_ADD_GOLD_ERROR; // Recard trả về OK nhưng không add được vàng cho user
                     }
                 }
-                return self::PAYMENT_STATUS_NOT_SUCCESS; // không thành công - unknown error
+
             }
         }
+
+        return self::PAYMENT_STATUS_NOT_SUCCESS;
     }
 
     /**
