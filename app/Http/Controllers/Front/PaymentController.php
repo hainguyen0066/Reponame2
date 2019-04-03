@@ -134,7 +134,7 @@ class PaymentController extends BaseFrontController
         if (!$recardStatus) {
             return response()->json($response);
         }
-        if (!empty($record->status) && empty($record->gold_added)) {
+        if ($recardStatus && empty($record->gold_added)) {
             $gamecoin = $record->gamecoin;
             $result = $gameApiClient->addGold($record->username, $gamecoin);
             $paymentRepository->updateRecordAddedGold($record, $result);
