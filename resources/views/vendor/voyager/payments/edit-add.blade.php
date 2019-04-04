@@ -32,9 +32,6 @@
                                 @if($dataTypeContent->gateway_response)
                                     <span class="help-block text-danger">{{ $dataTypeContent->gateway_response }}</span>
                                 @endif
-                                @if($dataTypeContent->isDone())
-                                <span class="help-block">Không thể sửa đổi thông tin record Payment này</span>
-                                @endif
                             </div>
                             @endif
                             <div class="form-group col-md-12">
@@ -49,13 +46,15 @@
                             </div>
                             <div class="form-group col-md-12">
                                 <label for="payment_type">Loại giao dịch</label>
-                                @if(!empty($dataTypeContent->id))
+                                @if(!empty($dataTypeContent->id) && $dataTypeContent->payment_type == \App\Models\Payment::PAYMENT_TYPE_CARD)
                                     <input type="text" class="form-control" value="{{ $paymentTypes[$dataTypeContent->payment_type] ?? '' }}" readonly>
                                 @else
                                     <select required class="form-control select2" name="payment_type" id="payment_type">
+                                        @if(empty($dataTypeContent->id))
                                         <option value="">Chọn loại giao dịch</option>
+                                        @endif
                                         @foreach($paymentTypes as $type => $text)
-                                            <option {{ old('payment_type') == $type ? 'selected="selected"' : '' }} value="{{ $type }}">{{ $text }}</option>
+                                            <option {{ old('payment_type', $dataTypeContent->payment_type) == $type ? 'selected="selected"' : '' }} value="{{ $type }}">{{ $text }}</option>
                                         @endforeach
                                     </select>
                                 @endif
@@ -89,11 +88,8 @@
                         </div><!-- panel-body -->
 
                         <div class="panel-footer">
-                            @if(!empty($dataTypeContent->id) && $dataTypeContent->isDone())
-                                <a href="{{ route('voyager.payments.index') }}" class="btn btn-info back">Back</a>
-                            @else
-                                <button type="submit" class="btn btn-primary save">Save</button>
-                            @endif
+                            <a href="{{ route('voyager.payments.index') }}" class="btn btn-default back">Back</a>
+                            <button type="submit" class="btn btn-primary save">Save</button>
                         </div>
                     </form>
                 </div>

@@ -25,7 +25,7 @@ class Payment extends BaseEloquentModel
     const PAYMENT_STATUS_NOT_SUCCESS = 6;
     const PAYMENT_STATUS_RECARD_NOT_ACCEPT = 7;
 
-    public $fillable = ['amount', 'note'];
+    public $fillable = ['amount', 'note', 'payment_type'];
 
     public function user()
     {

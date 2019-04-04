@@ -222,7 +222,8 @@ class PaymentBreadController extends VoyagerBaseController
             // create new
             return $this->addNewPayment($request);
         } else {
-            $input = array_only($request->all(), ['note', 'amount']);
+            $fields = !empty($data->status) ?  ['note', 'payment_type'] : ['note', 'amount', 'payment_type'];
+            $input = array_only($request->all(), $fields);
             $data->fill($input);
             if (isset($input['amount'])) {
                 /** @var PaymentRepository $paymentRepository */
