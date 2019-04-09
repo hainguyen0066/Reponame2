@@ -50,7 +50,6 @@ class PaymentController extends BaseFrontController
         list($knb, $soxu) = $paymentRepository->exchangeGamecoin($card->getAmount(), Payment::PAYMENT_TYPE_CARD);
         $payment = $paymentRepository->createCardPayment($user, $card, $knb);
         if ($card->getType() == MobileCard::TYPE_ZING){
-            $paymentRepository->updateZingCardPayment($payment);
             $this->discord->send("`{$user->name}` vừa submit 1 thẻ Zing `" . $card->getAmount() / 1000 . "k`");
         } else {
             $result = $recard->useCard($card);

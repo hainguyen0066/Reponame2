@@ -64,6 +64,22 @@
                                     </p>
                                 @endif
                             </div>
+
+                            <div class="form-group col-md-12
+                                    @if($dataTypeContent->payment_type != \App\Models\Payment::PAYMENT_TYPE_BANK_TRANSFER)
+                                    hidden
+                                    @endif
+                                    " id="bankWrapper">
+                                <label for="payment_type">Ngân hàng</label>
+                                <select required class="form-control select2" name="pay_from" id="pay_from">
+                                    @php
+                                        $banks = ['Đông Á', 'Vietcombank']
+                                    @endphp
+                                    @foreach($banks as $bank)
+                                        <option {{ old('pay_from', $dataTypeContent->pay_from) == $bank || empty($dataTypeContent->pay_from) ? 'selected="selected"' : '' }} value="{{ $bank }}">{{ $bank }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                             <div class="form-group col-md-12">
                                 <label for="amount">Số tiền</label>
                                 <input required type="text" class="form-control" name="amount"
@@ -118,9 +134,19 @@
             $('#addGoldReview').removeClass('hidden').html(reviewText);
         }
 
+        function toggleBankSelection() {
+            let type = $(this).val();
+            if (type == PAYMENT_TYPE_BANK_TRANSFER) {
+                $('#bankWrapper').removeClass('hidden');
+            } else {
+                $('#bankWrapper').addClass('hidden');
+            }
+        }
+
         $(document).ready(function () {
             $('#moneyAmount').change(addGoldReview);
             $('#moneyAmount').keyup(addGoldReview);
+            $('#payment_type').change(toggleBankSelection);
             $('#selectUser').change(addGoldReview);
             @if(!$dataTypeContent->user_id)
             $('#selectUser').select2({

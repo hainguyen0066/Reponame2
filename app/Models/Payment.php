@@ -25,7 +25,7 @@ class Payment extends BaseEloquentModel
     const PAYMENT_STATUS_NOT_SUCCESS = 6;
     const PAYMENT_STATUS_RECARD_NOT_ACCEPT = 7;
 
-    public $fillable = ['amount', 'note', 'payment_type'];
+    public $fillable = ['amount', 'note', 'payment_type', 'pay_from'];
 
     public function user()
     {
@@ -146,5 +146,18 @@ class Payment extends BaseEloquentModel
     public function isDone()
     {
         return self::getPaymentStatus($this) == self::PAYMENT_STATUS_SUCCESS;
+    }
+
+    /**
+     * @param $value
+     */
+    public function setPaymentTypeAttribute($value)
+    {
+        $this->attributes['payment_type'] = $value;
+        if (self::PAYMENT_TYPE_CARD == $value) {
+            $this->attributes['pay_method'] = $this->attributes['card_type'] == MobileCard::TYPE_ZING ? "ZingCard" : "Recard";
+        } else {
+            $this->attributes['pay_method'] = self::displayPaymentType($value);
+        }
     }
 }

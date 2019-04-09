@@ -223,6 +223,9 @@ class PaymentBreadController extends VoyagerBaseController
             return $this->addNewPayment($request);
         } else {
             $fields = !empty($data->status) ?  ['note', 'payment_type'] : ['note', 'amount', 'payment_type'];
+            if ($data->payment_type == Payment::PAYMENT_TYPE_BANK_TRANSFER) {
+                $fields[] = 'pay_from';
+            }
             $input = array_only($request->all(), $fields);
             $data->fill($input);
             if (isset($input['amount'])) {
@@ -290,9 +293,12 @@ class PaymentBreadController extends VoyagerBaseController
         $paymentType = $request->get('payment_type');
         $amount = $request->get('amount');
         list($knb, $soxu) = $paymentRepository->exchangeGameCoin($amount, $paymentType);
+        $extraData['pay_method'] = Payment::displayPaymentType($paymentType);
+        if ($paymentType == Payment::PAYMENT_TYPE_BANK_TRANSFER) {
+            $extraData['pay_from'] = $request->get('pay_from');
+        }
         if ($note = $request->get('note')) {
             $extraData['note'] = $note;
-            $extraData['pay_from'] = Payment::displayPaymentType($paymentType);
         }
 
         $payment = $paymentRepository->createPayment($user, $paymentType, $amount, $soxu, $extraData);
