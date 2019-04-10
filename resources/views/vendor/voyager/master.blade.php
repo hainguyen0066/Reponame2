@@ -115,7 +115,14 @@
     var alerter = toastr[alertType];
 
     if (alerter) {
-        alerter(alertMessage);
+        if (alertType == 'error') {
+            alerter(alertMessage, null, {
+                timeOut: 0,
+                extendedTimeOut: 0
+            });
+        } else {
+            alerter(alertMessage);
+        }
     } else {
         toastr.error("toastr alert-type " + alertType + " is unknown");
     }
