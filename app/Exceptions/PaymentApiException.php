@@ -11,6 +11,7 @@ use App\Models\Payment;
  */
 class PaymentApiException extends \Exception
 {
+    const GAME_PAYMENT_API_ERROR_CODE = 1;
     /**
      * @var
      */
