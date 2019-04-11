@@ -264,7 +264,11 @@ class PaymentBreadController extends VoyagerBaseController
     {
         $paymentTypes = Payment::getPaymentTypes();
         $now = date('Y-m-d H:i:s');
-        $text = "[". $paymentTypes[$payment->payment_type] ."] `{$payment->creator->name}` add vào tài khoản `{$payment->username}` `{$payment->gamecoin} Xu` vào lúc {$now}.";
+        $text = "[". $paymentTypes[$payment->payment_type] ."]";
+        if ($payment->payment_type == Payment::PAYMENT_TYPE_BANK_TRANSFER) {
+            $text .= "[{$payment->pay_from}]";
+        }
+        $text .= " `{$payment->creator->name}` add vào tài khoản `{$payment->username}` `{$payment->gamecoin} Xu` vào lúc {$now}.";
         if ($payment->note) {
             $text .= " Ghi chú: {$payment->note}";
         }
