@@ -336,7 +336,7 @@ class PaymentBreadController extends VoyagerBaseController
     {
         $key = "ADD_GOLD_LOCKED_{$payment->user_id}_{$payment->amount}";
         $message = sprintf("User %s vừa được add %s Xu bởi %s vào lúc %s. Vui lòng thử lại sau 5 phút", $payment->username, $payment->gamecoin, $payment->creator->name, $payment->created_at->format('H:i'));
-        \Cache::set($key, $message, 300);
+        \Cache::set($key, $message, 5);
     }
 
     private function isPaymentAdded($userId, $amount)
