@@ -106,7 +106,7 @@ class PaymentController extends BaseFrontController
             'status' => false
         ];
         $transactionCode = request('transaction_code');
-        $status = request('status');
+        $status = intval(request('status'));
         $reason = request('reason');
         $amount = request('amount');
 //        $comment = request('comment');
@@ -128,7 +128,7 @@ class PaymentController extends BaseFrontController
             return response()->json($response);
         }
         // add gold
-        $recardStatus = $status == 1 ? true : false;
+        $recardStatus = $status === 1 ? true : false;
         $paymentRepository->updateRecardTransaction($record, $status, $reason, $amount);
         if (!$recardStatus) {
             return response()->json($response);

@@ -90,10 +90,10 @@ class Payment extends BaseEloquentModel
             } else {
                 if ($payment->card_type != MobileCard::TYPE_ZING) {
 
-                    if($payment->gateway_status == 2) {
+                    if($payment->gateway_status === 2) {
                         return self::PAYMENT_STATUS_GATEWAY_RESPONSE_ERROR; // Recard trả về lỗi
                     }
-                    if($payment->gateway_status == 1 && !$payment->gold_added) {
+                    if($payment->gateway_status === 1 && !$payment->gold_added) {
                         return self::PAYMENT_STATUS_GATEWAY_ADD_GOLD_ERROR; // Recard trả về OK nhưng không add được vàng cho user
                     }
                 }
