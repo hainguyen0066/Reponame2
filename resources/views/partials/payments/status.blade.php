@@ -16,7 +16,7 @@
             break;
         case \App\Models\Payment::PAYMENT_STATUS_GATEWAY_RESPONSE_ERROR:
             $classes = "{$defaultClasses} label-danger c-red";
-            $text = $payment->gateway_response ? $payment->gateway_response : "Có lỗi xảy ra";
+            $text = !empty($item->gateway_response) ? $item->gateway_response : "Có lỗi xảy ra";
             break;
         case \App\Models\Payment::PAYMENT_STATUS_GATEWAY_ADD_GOLD_ERROR:
             $classes = "{$defaultClasses} label-danger c-red";

@@ -53,7 +53,7 @@ class Payment extends BaseEloquentModel
     {
         $status = self::getPaymentStatus($this);
 
-        return view('partials.payments.status', ['status' => $status, 'isAdmin' => $isAdmin]);
+        return view('partials.payments.status', ['status' => $status, 'isAdmin' => $isAdmin, 'item' => $this]);
     }
 
     public static function getPaymentTypes()
