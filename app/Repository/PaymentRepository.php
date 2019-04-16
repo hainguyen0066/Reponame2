@@ -115,7 +115,7 @@ class PaymentRepository extends AbstractEloquentRepository
     public function updateRecardTransaction(Payment $record, $status, $reason, $amount)
     {
         $reasonPhrase = $status == 2 ? RecardResponse::getReasonPhrase($reason) : '';
-        $record->gateway_status = boolval($status);
+        $record->gateway_status = $status;
         $record->gateway_response = $reasonPhrase;
         $record->gateway_amount = $amount;
         $record->finished = true;
