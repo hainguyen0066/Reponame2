@@ -67,12 +67,13 @@ class UserRepository extends AbstractEloquentRepository
         $user->save();
     }
 
-    public function getAutoCompleteUsers($term)
+    public function getAutoCompleteUsers($term, $limit = 10)
     {
         $query = $this->query();
         $query->select(['id', 'name as text'])
             ->whereRaw("name LIKE '{$term}%'")
-            ->limit(10)
+            ->orderBy('name', 'ASC')
+            ->limit($limit)
         ;
 
         return $query->get()->toArray();
