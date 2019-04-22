@@ -142,12 +142,19 @@
                 $('#bankWrapper').addClass('hidden');
             }
         }
-
+        let savingTimeout = null;
         $(document).ready(function () {
             $('#moneyAmount').change(addGoldReview);
             $('#moneyAmount').keyup(addGoldReview);
             $('#payment_type').change(toggleBankSelection);
             $('#selectUser').change(addGoldReview);
+            $('form.form-edit-add').submit(function (e) {
+                let saveBtn = $(this).find('.save');
+                saveBtn.prop('disabled', 'disabled');
+                savingTimeout = setTimeout(function () {
+                    saveBtn.removeProp('disabled');
+                }, 3000);
+            });
             @if(!$dataTypeContent->user_id)
             $('#selectUser').select2({
                 ajax: {
