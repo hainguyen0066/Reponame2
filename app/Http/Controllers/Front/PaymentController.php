@@ -38,6 +38,12 @@ class PaymentController extends BaseFrontController
         if (!$user) {
             return response()->json(["error" => 'Vui lòng đăng nhập lại để tiếp tục thao tác', 'relogin' => true]);
         }
+        $now = time();
+        $startMaintenance = (\DateTime::createFromFormat('Y-m-d H:i', date('Y-m-d 16:25')))->getTimestamp();
+        $endMaintenance = (\DateTime::createFromFormat('Y-m-d H:i', date('Y-m-d 16:55')))->getTimestamp();
+        if ($now > $startMaintenance && $now < $endMaintenance) {
+            return response()->json(["error" => 'Server đang trong thời gian bảo trì định kỳ, vui lòng thử lại sau 17:00H.']);
+        }
         $card = $this->createCardInstance();
         $error = $this->validateCard($card, $paymentRepository);
         if ($error) {
