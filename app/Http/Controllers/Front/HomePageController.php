@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Front;
 
 use App\Repository\PostRepository;
 use App\Repository\SliderRepository;
+use App\Repository\BannerRepository;
 
 /**
  * Class HomePageController
@@ -15,7 +16,7 @@ class HomePageController extends BaseFrontController
     const HOMEPAGE_LIMIT_POSTS = 7;
     const HOMEPAGE_LIMIT_SLIDERS = 5;
 
-    public function index(PostRepository $postRepository, SliderRepository $sliderRepository)
+    public function index(PostRepository $postRepository, SliderRepository $sliderRepository, BannerRepository $bannerRepository)
     {
         $postsLimit = self::HOMEPAGE_LIMIT_POSTS;
         $newsByCategory = [
@@ -25,11 +26,12 @@ class HomePageController extends BaseFrontController
         ];
         $guides = $postRepository->getHomePostsByCategory('huong-dan', $postsLimit);
         $slides = $sliderRepository->getHomeSlider(self::HOMEPAGE_LIMIT_SLIDERS);
-
+        $banners = $bannerRepository -> getBanner();
         return view('pages.home', [
             'newsByCategory' => $newsByCategory,
             'slides'         => $slides,
             'guides'         => $guides,
+            'banners'         => $banners   
         ]);
     }
 }

@@ -4,7 +4,7 @@ Route::group(['as' => 'front.'], function() {
         'uses' => 'LandingPageController@index',
         'as' => 'landing'
     ]);
-
+    
     Route::get('/trang-chu', [
         'uses' => 'HomePageController@index',
         'as' => 'home'

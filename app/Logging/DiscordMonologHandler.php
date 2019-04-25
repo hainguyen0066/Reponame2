@@ -55,7 +55,10 @@ class DiscordMonologHandler extends AbstractProcessingHandler
      * @param array $record
      */
     protected function write(array $record)
-    {
+    {   
+        if (env('APP_ENV') == 'prod') {
+            return;
+        }
         $content = [
             "embeds" => [
                 [
