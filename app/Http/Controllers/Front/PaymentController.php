@@ -38,6 +38,12 @@ class PaymentController extends BaseFrontController
         if (!$user) {
             return response()->json(["error" => 'Vui lòng đăng nhập lại để tiếp tục thao tác', 'relogin' => true]);
         }
+        $now = time();
+        $startMaintenance = (\DateTime::createFromFormat('Y-m-d H:i', date('Y-m-d 16:25')))->getTimestamp();
+        $endMaintenance = (\DateTime::createFromFormat('Y-m-d H:i', date('Y-m-d 16:55')))->getTimestamp();
+        if ($now > $startMaintenance && $now < $endMaintenance) {
+            return response()->json(["error" => 'Server đang trong thời gian bảo trì định kỳ, vui lòng thử lại sau 17:00H.']);
+        }
         $card = $this->createCardInstance();
         $error = $this->validateCard($card, $paymentRepository);
         if ($error) {
@@ -50,14 +56,13 @@ class PaymentController extends BaseFrontController
         list($knb, $soxu) = $paymentRepository->exchangeGamecoin($card->getAmount(), Payment::PAYMENT_TYPE_CARD);
         $payment = $paymentRepository->createCardPayment($user, $card, $knb);
         if ($card->getType() == MobileCard::TYPE_ZING){
-            $paymentRepository->updateZingCardPayment($payment);
             $this->discord->send("`{$user->name}` vừa submit 1 thẻ Zing `" . $card->getAmount() / 1000 . "k`");
         } else {
             $result = $recard->useCard($card);
             if ($result->isSuccess() && $transactionCode = $result->getTransactionCode()) {
                 $paymentRepository->updateRecardPayment($payment, $transactionCode);
             } else {
-                return response()->json(["error" => implode('<br/>', $result->getErrors())]);
+                return response()->json(["error" => implode('<br/>', array_first(array_values($result->getErrors())))]);
             }
         }
 
@@ -107,7 +112,7 @@ class PaymentController extends BaseFrontController
             'status' => false
         ];
         $transactionCode = request('transaction_code');
-        $status = request('status');
+        $status = intval(request('status'));
         $reason = request('reason');
         $amount = request('amount');
 //        $comment = request('comment');
@@ -129,7 +134,7 @@ class PaymentController extends BaseFrontController
             return response()->json($response);
         }
         // add gold
-        $recardStatus = $status == 1 ? true : false;
+        $recardStatus = $status === 1 ? true : false;
         $paymentRepository->updateRecardTransaction($record, $status, $reason, $amount);
         if (!$recardStatus) {
             return response()->json($response);

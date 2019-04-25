@@ -67,12 +67,13 @@ class UserRepository extends AbstractEloquentRepository
         $user->save();
     }
 
-    public function getAutoCompleteUsers($term)
+    public function getAutoCompleteUsers($term, $limit = 10)
     {
         $query = $this->query();
         $query->select(['id', 'name as text'])
             ->whereRaw("name LIKE '{$term}%'")
-            ->limit(10)
+            ->orderBy('name', 'ASC')
+            ->limit($limit)
         ;
 
         return $query->get()->toArray();
@@ -82,7 +83,7 @@ class UserRepository extends AbstractEloquentRepository
     {
         $fromDate = strtotime($fromDate);
         $toDate = strtotime($toDate);
-        $data = \DB::table('users')->selectRaw("DATE_FORMAT(created_at, '%e-%m') as `date`, CONCAT(utm_campaign, '.', utm_medium, '.', utm_source) as `cid`, DATE_FORMAT(created_at, '%m-%e') as ordered_date, COUNT(id) as `total`")
+        $data = \DB::table('users')->selectRaw("DATE_FORMAT(created_at, '%d-%m') as `date`, CONCAT(utm_campaign, '.', utm_medium, '.', utm_source) as `cid`, DATE_FORMAT(created_at, '%m-%d') as ordered_date, COUNT(id) as `total`")
             ->whereRaw("UNIX_TIMESTAMP(CONVERT_TZ(created_at, '+07:00', '+00:00')) BETWEEN {$fromDate} AND $toDate")
             ->groupBy('date', 'ordered_date', 'cid')
             ->orderByRaw("ordered_date ASC, total DESC")

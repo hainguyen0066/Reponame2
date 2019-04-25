@@ -49,22 +49,6 @@ class PaymentRepository extends AbstractEloquentRepository
     public function updateRecardPayment(Payment $payment, $transactionCode)
     {
         $payment->transaction_id = $transactionCode;
-        $payment->pay_from = "ReCard";
-        $payment->pay_method = "ReCard";
-        $payment->save();
-
-        return $payment;
-    }
-
-    /**
-     * @param \App\Models\Payment $payment
-     *
-     * @return \App\Models\Payment
-     */
-    public function updateZingCardPayment(Payment $payment)
-    {
-        $payment->pay_from = "ZingCard";
-        $payment->pay_method = "ZingCard";
         $payment->save();
 
         return $payment;
@@ -96,7 +80,6 @@ class PaymentRepository extends AbstractEloquentRepository
         $data = [
             'user_id'      => $user->id,
             'username'     => $user->name,
-            'payment_type' => $type,
             'amount'       => $amount,
             'gamecoin'     => $gamecoin,
             'ip'           => request()->getClientIp(),
@@ -104,12 +87,13 @@ class PaymentRepository extends AbstractEloquentRepository
             'utm_source'   => $user->utm_source,
             'utm_campaign' => $user->utm_campaign,
             'creator_id'   => \Auth::user()->id,
-            'pay_from'     => Payment::displayPaymentType($type),
         ];
         $data = array_merge($data, $extraData);
         foreach ($data as $attribute => $value) {
             $payment->{$attribute} = $value;
         }
+        // set payment_type at last because we are using a Mutator that depend on others attributes
+        $payment->payment_type = $type;
         $payment->save();
 
         return $payment;
@@ -131,7 +115,7 @@ class PaymentRepository extends AbstractEloquentRepository
     public function updateRecardTransaction(Payment $record, $status, $reason, $amount)
     {
         $reasonPhrase = $status == 2 ? RecardResponse::getReasonPhrase($reason) : '';
-        $record->gateway_status = boolval($status);
+        $record->gateway_status = $status;
         $record->gateway_response = $reasonPhrase;
         $record->gateway_amount = $amount;
         $record->finished = true;
@@ -215,9 +199,9 @@ class PaymentRepository extends AbstractEloquentRepository
 
     function getRevenueChartData($fromDate, $toDate){
         $count = CommonHelper::subDate($fromDate, $toDate);
-        $results = \DB::table('payments')->selectRaw("DATE_FORMAT(`created_at`, '%d-%m') AS `date`, `pay_from`, SUM(`amount`)/1000 as `total`")
+        $results = \DB::table('payments')->selectRaw("DATE_FORMAT(`created_at`, '%d-%m') AS `date`, `pay_method`, SUM(`amount`)/1000 as `total`")
             ->whereRaw("`created_at` BETWEEN '{$fromDate} 00:00:00' AND '{$toDate} 23:59:59' AND `status` = 1")
-            ->groupBy('pay_from', 'date')
+            ->groupBy('pay_method', 'date')
             ->orderBy('date', 'ASC')
             ->get()
         ;
@@ -227,11 +211,11 @@ class PaymentRepository extends AbstractEloquentRepository
             $startOfDay = mktime(0, 0, 0, date('n', strtotime($fromDate)), date('d', strtotime($fromDate)) + $i);
             $day = date('d-m', $startOfDay);
             foreach ($results as $key => $value) {
-                if (!in_array($value->pay_from, $payfroms)) {
-                    $payfroms[] = $value->pay_from;
+                if (!in_array($value->pay_method, $payfroms)) {
+                    $payfroms[] = $value->pay_method;
                 }
                 if ($value->date == $day) {
-                    $data[$day][$value->pay_from] = $value->total;
+                    $data[$day][$value->pay_method] = $value->total;
                 }
             }
         }

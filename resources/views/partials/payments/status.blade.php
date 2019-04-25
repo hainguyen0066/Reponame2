@@ -16,15 +16,14 @@
             break;
         case \App\Models\Payment::PAYMENT_STATUS_GATEWAY_RESPONSE_ERROR:
             $classes = "{$defaultClasses} label-danger c-red";
-            $text = $payment->gateway_response ? $payment->gateway_response : "Có lỗi xảy ra";
+            $text = !empty($item->gateway_response) ? $item->gateway_response : "Có lỗi xảy ra";
             break;
         case \App\Models\Payment::PAYMENT_STATUS_GATEWAY_ADD_GOLD_ERROR:
             $classes = "{$defaultClasses} label-danger c-red";
             if ($isAdmin) {
-                $text = "Gateway phản hồi OK, nhưng chưa add được vàng cho user";
-            } else {
-                $text = "Có lỗi xảy ra" . $extended;
+                $extraText = "Recard phản hồi OK! nhưng lỗi API nạp tiền. <br/>Có thể duyệt lại thẻ.";
             }
+            $text = "Có lỗi xảy ra" . $extended;
             break;
         case \App\Models\Payment::PAYMENT_STATUS_NOT_SUCCESS:
             $classes = "{$defaultClasses} label-danger c-red";
@@ -36,4 +35,7 @@
             break;
     }
 @endphp
-<span class="{{ $classes }}">{{ $text }}</span>
+<p><span class="{{ $classes }}">{{ $text }}</span></p>
+@if($isAdmin && !empty($extraText))
+<p>{!! $extraText !!}</p>
+@endif

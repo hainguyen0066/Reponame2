@@ -45,6 +45,9 @@ class DiscordWebHookClient
      */
     public function send($message)
     {
+        if(env('APP_ENV') != 'prod') {
+            return;
+        }
         $content = [
             'content' => $message,
         ];

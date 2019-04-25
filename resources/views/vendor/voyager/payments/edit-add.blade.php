@@ -32,9 +32,6 @@
                                 @if($dataTypeContent->gateway_response)
                                     <span class="help-block text-danger">{{ $dataTypeContent->gateway_response }}</span>
                                 @endif
-                                @if($dataTypeContent->isDone())
-                                <span class="help-block">Không thể sửa đổi thông tin record Payment này</span>
-                                @endif
                             </div>
                             @endif
                             <div class="form-group col-md-12">
@@ -49,13 +46,15 @@
                             </div>
                             <div class="form-group col-md-12">
                                 <label for="payment_type">Loại giao dịch</label>
-                                @if(!empty($dataTypeContent->id))
+                                @if(!empty($dataTypeContent->id) && $dataTypeContent->payment_type == \App\Models\Payment::PAYMENT_TYPE_CARD)
                                     <input type="text" class="form-control" value="{{ $paymentTypes[$dataTypeContent->payment_type] ?? '' }}" readonly>
                                 @else
                                     <select required class="form-control select2" name="payment_type" id="payment_type">
+                                        @if(empty($dataTypeContent->id))
                                         <option value="">Chọn loại giao dịch</option>
+                                        @endif
                                         @foreach($paymentTypes as $type => $text)
-                                            <option {{ old('payment_type') == $type ? 'selected="selected"' : '' }} value="{{ $type }}">{{ $text }}</option>
+                                            <option {{ old('payment_type', $dataTypeContent->payment_type) == $type ? 'selected="selected"' : '' }} value="{{ $type }}">{{ $text }}</option>
                                         @endforeach
                                     </select>
                                 @endif
@@ -64,6 +63,22 @@
                                         @include('partials.admin.card_info', ['item' => $dataTypeContent])
                                     </p>
                                 @endif
+                            </div>
+
+                            <div class="form-group col-md-12
+                                    @if($dataTypeContent->payment_type != \App\Models\Payment::PAYMENT_TYPE_BANK_TRANSFER)
+                                    hidden
+                                    @endif
+                                    " id="bankWrapper">
+                                <label for="payment_type">Ngân hàng</label>
+                                <select required class="form-control select2" name="pay_from" id="pay_from">
+                                    @php
+                                        $banks = ['Đông Á', 'Vietcombank']
+                                    @endphp
+                                    @foreach($banks as $bank)
+                                        <option {{ old('pay_from', $dataTypeContent->pay_from) == $bank || empty($dataTypeContent->pay_from) ? 'selected="selected"' : '' }} value="{{ $bank }}">{{ $bank }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="form-group col-md-12">
                                 <label for="amount">Số tiền</label>
@@ -89,11 +104,8 @@
                         </div><!-- panel-body -->
 
                         <div class="panel-footer">
-                            @if(!empty($dataTypeContent->id) && $dataTypeContent->isDone())
-                                <a href="{{ route('voyager.payments.index') }}" class="btn btn-info back">Back</a>
-                            @else
-                                <button type="submit" class="btn btn-primary save">Save</button>
-                            @endif
+                            <a href="{{ route('voyager.payments.index') }}" class="btn btn-default back">Back</a>
+                            <button type="submit" class="btn btn-primary save">Save</button>
                         </div>
                     </form>
                 </div>
@@ -122,10 +134,27 @@
             $('#addGoldReview').removeClass('hidden').html(reviewText);
         }
 
+        function toggleBankSelection() {
+            let type = $(this).val();
+            if (type == PAYMENT_TYPE_BANK_TRANSFER) {
+                $('#bankWrapper').removeClass('hidden');
+            } else {
+                $('#bankWrapper').addClass('hidden');
+            }
+        }
+        let savingTimeout = null;
         $(document).ready(function () {
             $('#moneyAmount').change(addGoldReview);
             $('#moneyAmount').keyup(addGoldReview);
+            $('#payment_type').change(toggleBankSelection);
             $('#selectUser').change(addGoldReview);
+            $('form.form-edit-add').submit(function (e) {
+                let saveBtn = $(this).find('.save');
+                saveBtn.prop('disabled', 'disabled');
+                savingTimeout = setTimeout(function () {
+                    saveBtn.removeProp('disabled');
+                }, 3000);
+            });
             @if(!$dataTypeContent->user_id)
             $('#selectUser').select2({
                 ajax: {

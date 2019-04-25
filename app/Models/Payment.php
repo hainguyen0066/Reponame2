@@ -25,7 +25,7 @@ class Payment extends BaseEloquentModel
     const PAYMENT_STATUS_NOT_SUCCESS = 6;
     const PAYMENT_STATUS_RECARD_NOT_ACCEPT = 7;
 
-    public $fillable = ['amount', 'note'];
+    public $fillable = ['amount', 'note', 'payment_type', 'pay_from'];
 
     public function user()
     {
@@ -53,7 +53,7 @@ class Payment extends BaseEloquentModel
     {
         $status = self::getPaymentStatus($this);
 
-        return view('partials.payments.status', ['status' => $status, 'isAdmin' => $isAdmin]);
+        return view('partials.payments.status', ['status' => $status, 'isAdmin' => $isAdmin, 'item' => $this]);
     }
 
     public static function getPaymentTypes()
@@ -82,7 +82,7 @@ class Payment extends BaseEloquentModel
                         return self::PAYMENT_STATUS_MANUAL_ADD_GOLD_ERROR;
                     }
                 } else {
-                    if (!$payment->transaction_id) {
+                    if ($payment->card_type != MobileCard::TYPE_ZING &&  empty($payment->transaction_id)) {
                         return self::PAYMENT_STATUS_RECARD_NOT_ACCEPT;
                     }
                     return self::PAYMENT_STATUS_PROCESSING; // đang xử lý
@@ -90,10 +90,10 @@ class Payment extends BaseEloquentModel
             } else {
                 if ($payment->card_type != MobileCard::TYPE_ZING) {
 
-                    if($payment->gateway_status == 2) {
+                    if($payment->gateway_status === 2) {
                         return self::PAYMENT_STATUS_GATEWAY_RESPONSE_ERROR; // Recard trả về lỗi
                     }
-                    if($payment->gateway_status == 1 && $payment->gold_added) {
+                    if($payment->gateway_status === 1 && !$payment->gold_added) {
                         return self::PAYMENT_STATUS_GATEWAY_ADD_GOLD_ERROR; // Recard trả về OK nhưng không add được vàng cho user
                     }
                 }
@@ -146,5 +146,18 @@ class Payment extends BaseEloquentModel
     public function isDone()
     {
         return self::getPaymentStatus($this) == self::PAYMENT_STATUS_SUCCESS;
+    }
+
+    /**
+     * @param $value
+     */
+    public function setPaymentTypeAttribute($value)
+    {
+        $this->attributes['payment_type'] = $value;
+        if (self::PAYMENT_TYPE_CARD == $value) {
+            $this->attributes['pay_method'] = $this->attributes['card_type'] == MobileCard::TYPE_ZING ? "ZingCard" : "Recard";
+        } else {
+            $this->attributes['pay_method'] = self::displayPaymentType($value);
+        }
     }
 }

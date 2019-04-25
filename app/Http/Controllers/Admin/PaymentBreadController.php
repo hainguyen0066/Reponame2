@@ -133,15 +133,19 @@ class PaymentBreadController extends VoyagerBaseController
                 $data = $this->insertUpdateData($request, $slug, $dataType->addRows, new $dataType->model_name());
             } catch (PaymentApiException $e) {
                 $payment = $e->getPaymentItem();
-                GameApiLog::notify("Add vàng thất bại cho user `{$payment->username}` " . $e->getMessage(), [
-                    'creator' => \Auth::user()->name,
-                    'info' => array_only($payment->toArray(), ['id', 'amount', 'note']),
-                ]);
-                $error = 'Lỗi API nạp tiền';
+                $error = $e->getMessage();
+                if ($e->getCode() > 0) {
+                    $error = "Lỗi API nạp tiền";
+                    GameApiLog::notify("Add vàng thất bại cho user `{$payment->username}` " . $e->getMessage(), [
+                        'creator' => \Auth::user()->name,
+                        'info' => array_only($payment->toArray(), ['id', 'amount', 'note']),
+                    ]);
+                }
+
                 if ($request->ajax()) {
                     return response()->json(['errors' => ['note' => $error]]);
                 } else {
-                    return $this->returnToListWithError($error, $payment->id);
+                    return $this->returnToListWithError($error, $payment->id ?? null);
                 }
             }
 
@@ -219,10 +223,20 @@ class PaymentBreadController extends VoyagerBaseController
     public function insertUpdateData($request, $slug, $rows, $data)
     {
         if (empty($data->id)) {
+            if ($error = $this->isPaymentAdded($request->get('user_id'), $request->get('amount'))) {
+                throw new PaymentApiException($error);
+            }
             // create new
-            return $this->addNewPayment($request);
+            $payment = $this->addNewPayment($request);
+            $this->preventPaymentDuplicated($payment);
+
+            return $payment;
         } else {
-            $input = array_only($request->all(), ['note', 'amount']);
+            $fields = !empty($data->status) ?  ['note', 'payment_type'] : ['note', 'amount', 'payment_type'];
+            if ($data->payment_type == Payment::PAYMENT_TYPE_BANK_TRANSFER) {
+                $fields[] = 'pay_from';
+            }
+            $input = array_only($request->all(), $fields);
             $data->fill($input);
             if (isset($input['amount'])) {
                 /** @var PaymentRepository $paymentRepository */
@@ -250,7 +264,11 @@ class PaymentBreadController extends VoyagerBaseController
     {
         $paymentTypes = Payment::getPaymentTypes();
         $now = date('Y-m-d H:i:s');
-        $text = "[". $paymentTypes[$payment->payment_type] ."] `{$payment->creator->name}` add vào tài khoản `{$payment->username}` `{$payment->gamecoin} Xu` vào lúc {$now}.";
+        $text = "[". $paymentTypes[$payment->payment_type] ."]";
+        if ($payment->payment_type == Payment::PAYMENT_TYPE_BANK_TRANSFER) {
+            $text .= "[{$payment->pay_from}]";
+        }
+        $text .= " `{$payment->creator->name}` add vào tài khoản `{$payment->username}` `{$payment->gamecoin} Xu` vào lúc {$now}.";
         if ($payment->note) {
             $text .= " Ghi chú: {$payment->note}";
         }
@@ -270,12 +288,14 @@ class PaymentBreadController extends VoyagerBaseController
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    private function returnToListWithError(string $error, $id)
+    private function returnToListWithError(string $error, $id = null)
     {
+        $message = $id ? "[#{$id}] {$error}" : "$error";
+
         return redirect()
             ->route("voyager." . self::VOYAGER_SLUG . ".index")
             ->with([
-                'message'    => "[#{$id}] {$error}",
+                'message'    => $message,
                 'alert-type' => 'error',
             ]);
     }
@@ -289,9 +309,12 @@ class PaymentBreadController extends VoyagerBaseController
         $paymentType = $request->get('payment_type');
         $amount = $request->get('amount');
         list($knb, $soxu) = $paymentRepository->exchangeGameCoin($amount, $paymentType);
+        $extraData['pay_method'] = Payment::displayPaymentType($paymentType);
+        if ($paymentType == Payment::PAYMENT_TYPE_BANK_TRANSFER) {
+            $extraData['pay_from'] = $request->get('pay_from');
+        }
         if ($note = $request->get('note')) {
             $extraData['note'] = $note;
-            $extraData['pay_from'] = Payment::displayPaymentType($paymentType);
         }
 
         $payment = $paymentRepository->createPayment($user, $paymentType, $amount, $soxu, $extraData);
@@ -301,11 +324,25 @@ class PaymentBreadController extends VoyagerBaseController
             $paymentRepository->updateRecordAddedGold($payment, $addGoldStatus);
             $this->sendPaymentNotification($payment);
         } else {
-            $exception = new PaymentApiException($jxApi->getLastResponse());
+            $exception = new PaymentApiException($jxApi->getLastResponse(), PaymentApiException::GAME_PAYMENT_API_ERROR_CODE);
             $exception->setPaymentItem($payment);
             throw $exception;
         }
 
         return $payment;
+    }
+
+    private function preventPaymentDuplicated(Payment $payment)
+    {
+        $key = "ADD_GOLD_LOCKED_{$payment->user_id}_{$payment->amount}";
+        $message = sprintf("User %s vừa được add %s Xu bởi %s vào lúc %s. Vui lòng thử lại sau 5 phút", $payment->username, $payment->gamecoin, $payment->creator->name, $payment->created_at->format('H:i'));
+        \Cache::set($key, $message, 5);
+    }
+
+    private function isPaymentAdded($userId, $amount)
+    {
+        $key = "ADD_GOLD_LOCKED_{$userId}_{$amount}";
+
+        return \Cache::get($key);
     }
 }
