@@ -34,6 +34,7 @@
 @if(!Auth::user())
     @include('modal.account')
 @endif
+@yield('banner')
 @section('js')
     @include('partials.scripts')
 @show

@@ -28,4 +28,7 @@ $(document).ready(function(){
 		prevArrow: '.pre-arrow',
 
     });
+    $(".popup-banner").click(function(){        
+        $(".popup-banner").css("display", "none");
+    })
 })

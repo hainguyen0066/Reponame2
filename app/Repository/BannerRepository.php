@@ -3,14 +3,13 @@
 namespace App\Repository;
 
 use App\Models\Banner;
-use Prettus\Repository\Eloquent\BaseRepository;
 
 /**
  * Class BannerRepository
  *
  * @package \App\Repository
  */
-class BannerRepository extends BaseRepository
+class BannerRepository extends AbstractEloquentRepository
 {
 
     /**
@@ -18,8 +17,21 @@ class BannerRepository extends BaseRepository
      *
      * @return string
      */
-    public function model()
+    public function model():string
     {
         return Banner::class;
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|object|null
+     */
+    public function getActiveBanner()
+    {
+        $query = $this->query();
+        $query->active()
+            ->orderBy('id', 'desc')
+        ;
+
+        return $query->first();
     }
 }

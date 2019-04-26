@@ -6,3 +6,10 @@
     @include('partials.homepage.news')
     @include('partials.homepage.newbies')
 @endsection
+
+@if(!empty($banner))
+    @section('banner')
+        @include('modal.banner')
+    @endsection
+@endif
+
