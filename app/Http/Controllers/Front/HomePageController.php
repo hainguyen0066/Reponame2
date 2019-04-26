@@ -26,12 +26,13 @@ class HomePageController extends BaseFrontController
         ];
         $guides = $postRepository->getHomePostsByCategory('huong-dan', $postsLimit);
         $slides = $sliderRepository->getHomeSlider(self::HOMEPAGE_LIMIT_SLIDERS);
-        $banners = $bannerRepository -> getBanner();
+        $banners = $bannerRepository ->getActiveBanner();
+
         return view('pages.home', [
             'newsByCategory' => $newsByCategory,
             'slides'         => $slides,
             'guides'         => $guides,
-            'banners'         => $banners   
+            'banner'         => $banners
         ]);
     }
 }

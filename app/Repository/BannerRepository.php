@@ -21,14 +21,17 @@ class BannerRepository extends AbstractEloquentRepository
     {
         return Banner::class;
     }
-    
-    public function getBanner($limit = 1)
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|object|null
+     */
+    public function getActiveBanner()
     {
         $query = $this->query();
         $query->active()
             ->orderBy('id', 'desc')
-            ->limit($limit)
         ;
-        return $query->get();
+
+        return $query->first();
     }
 }
