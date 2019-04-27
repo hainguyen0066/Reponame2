@@ -17,3 +17,4 @@ yarn-error.log
 .phpunit.result.cache
 design
 .DS_Store
+.phpstorm.meta.php
