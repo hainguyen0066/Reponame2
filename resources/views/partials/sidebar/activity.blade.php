@@ -29,10 +29,6 @@
             <td class="td-content"><a href="{{ route('front.details.post', ['huong-dan','chien-tr-ong-tong-kim'])}}">Chiến trường tống kim</a></td>
         </tr>        
         <tr>
-            <td class="td-time">16:00</td>
-            <td class="td-content"><a href="{{ route('front.details.post', ['huong-dan','phong-l-ng-do'])}}">Phong Lăng Độ</a></td>
-        </tr>
-        <tr>
             <td class="td-time">18:00</td>
             <td class="td-content"><a href="{{ route('front.details.post', ['huong-dan','phong-l-ng-do'])}}">Phong Lăng Độ</a></td>
         </tr>
@@ -55,6 +51,10 @@
         <tr>
             <td class="td-time">21:00</td>
             <td class="td-content"><a href="{{ route('front.details.post', ['huong-dan','chien-tr-ong-tong-kim'])}}">Chiến trường tống kim</a></td>
+        </tr>
+        <tr>
+            <td class="td-time">22:00</td>
+            <td class="td-content"><a href="{{ route('front.details.post', ['huong-dan','phong-l-ng-do'])}}">Phong Lăng Độ</a></td>
         </tr>
         <tr>
             <td class="td-time">22:30</td>
