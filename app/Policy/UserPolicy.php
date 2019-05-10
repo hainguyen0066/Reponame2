@@ -51,11 +51,13 @@ class UserPolicy extends \TCG\Voyager\Policies\UserPolicy
         // Does this record belong to the current user?
         $current = $user->id === $model->id;
 
-        return ($current && $user->hasRole('admin'))
-            || (
-                $user->hasRole('admin') && !$model->hasRole('admin')
-                && $this->checkPermission($user, $model, 'edit_roles')
-            );
+        return (
+            $user->hasRole('admin')
+            && (
+                $current || !$model->hasRole('admin')
+                // admin cannot change role of other admin
+            )
+        );
     }
 
 }
