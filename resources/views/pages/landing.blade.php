@@ -12,6 +12,7 @@
         {{ $meta_keyword ?? config('site.seo.meta_keyword') }}
     @endslot
     @endcomponent
+    @include('partials.tracker.google_tag_manager_partner')
     <link rel="stylesheet" href="{{ mix('css/landing.css') }}">
     <link rel="stylesheet" href="{{ mix('css/account.css') }}">
 </head>
