@@ -13,6 +13,7 @@
         @endslot
     @endcomponent
     @include('partials.styles')
+    @include('partials.tracker.google_tag_manager_partner.blade.php')
 </head>
 <body>
 @include('partials.trackers')
