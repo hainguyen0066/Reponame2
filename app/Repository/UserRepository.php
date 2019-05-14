@@ -83,7 +83,7 @@ class UserRepository extends AbstractEloquentRepository
     {
         $fromDate = strtotime($fromDate);
         $toDate = strtotime($toDate) + (24*3600) - 1;
-        $data = \DB::table('users')->selectRaw("DATE_FORMAT(created_at, '%d-%m') as `date`, CONCAT(utm_campaign, '.', utm_medium, '.', utm_source) as `cid`, DATE_FORMAT(created_at, '%m-%d') as ordered_date, COUNT(id) as `total`")
+        $data = \DB::table('users')->selectRaw("DATE_FORMAT(created_at, '%d-%m') as `date`, CONCAT(COALESCE(utm_campaign, ''), '|', COALESCE(utm_medium, ''), '|', COALESCE(utm_source, '')) as `cid`, DATE_FORMAT(created_at, '%m-%d') as ordered_date, COUNT(id) as `total`")
             ->whereRaw("UNIX_TIMESTAMP(CONVERT_TZ(created_at, '+07:00', '+00:00')) BETWEEN {$fromDate} AND $toDate")
             ->groupBy('date', 'ordered_date', 'cid')
             ->orderByRaw("ordered_date ASC, total DESC")
@@ -92,7 +92,7 @@ class UserRepository extends AbstractEloquentRepository
         $reportByDate = [];
         $campaigns = [];
         foreach ($data as $item) {
-            @list($campaign, $medium, $source) = explode('.', $item->cid);
+            @list($campaign, $medium, $source) = explode('|', $item->cid);
             if (!$campaign) $campaign = 'not-set';
             if (!$medium) $medium = 'not-set';
             if (!$source) $source = 'not-set';
@@ -102,8 +102,8 @@ class UserRepository extends AbstractEloquentRepository
                     'details' => []
                 ];
             }
-            $group = $source . "." . $medium;
-            $reportByDate[$item->date]['details']["{$campaign}.$group"] = $item->total;
+            $group = $source . "|" . $medium;
+            $reportByDate[$item->date]['details']["{$campaign}|$group"] = $item->total;
             $reportByDate[$item->date]['total'] += $item->total;
             if (!isset($campaigns[$campaign]) || !in_array($group, $campaigns[$campaign])) {
                 $campaigns[$campaign][] = $group;

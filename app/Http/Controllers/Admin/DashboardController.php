@@ -44,7 +44,7 @@ class DashboardController extends Controller
             $direct = 0;
             $mkt = 0;
             foreach ($reportDatum['details'] as $cid => $total) {
-                if ($cid == 'not-set.not-set.not-set') {
+                if ($cid == 'not-set|not-set|not-set') {
                     $direct += $total;
                 } else {
                     $mkt += $total;
