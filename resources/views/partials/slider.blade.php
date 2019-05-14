@@ -2,7 +2,7 @@
     <div class="my-slider">
         @foreach($slides as $slide)
             <div>
-                <a href="{{ $slide->link }}" title="{{ $slide->title }}">
+                <a href="{{ $slide->displayLink() }}" title="{{ $slide->title }}">
                     <img src="{{ Voyager::image($slide->image) }}" alt="{{ $slide->title }}"/>
                 </a>
             </div>

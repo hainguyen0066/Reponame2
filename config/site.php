@@ -20,4 +20,7 @@ return [
         'id'        => '',
         'config_id' => '',
     ],
+    'domains' => [
+        'vltrungnguyen.com', 'vltrungnguyen.net'
+    ]
 ];
