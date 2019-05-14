@@ -21,6 +21,6 @@ return [
         'config_id' => '',
     ],
     'domains' => [
-        'vltrungnguyen.com', 'vltrungnguyen.net'
+        'vltrungnguyen.com', 'www.vltrungnguyen.com', 'vltrungnguyen.net', 'www.vltrungnguyen.net'
     ]
 ];
