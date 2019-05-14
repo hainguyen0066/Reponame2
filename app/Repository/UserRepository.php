@@ -82,7 +82,7 @@ class UserRepository extends AbstractEloquentRepository
     public function getUserRegisteredReport($fromDate, $toDate)
     {
         $fromDate = strtotime($fromDate);
-        $toDate = strtotime($toDate);
+        $toDate = strtotime($toDate) + (24*3600) - 1;
         $data = \DB::table('users')->selectRaw("DATE_FORMAT(created_at, '%d-%m') as `date`, CONCAT(utm_campaign, '.', utm_medium, '.', utm_source) as `cid`, DATE_FORMAT(created_at, '%m-%d') as ordered_date, COUNT(id) as `total`")
             ->whereRaw("UNIX_TIMESTAMP(CONVERT_TZ(created_at, '+07:00', '+00:00')) BETWEEN {$fromDate} AND $toDate")
             ->groupBy('date', 'ordered_date', 'cid')

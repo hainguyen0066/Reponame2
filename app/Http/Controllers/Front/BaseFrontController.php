@@ -46,7 +46,7 @@ class BaseFrontController extends Controller
         }
         if (!$tracked && !empty($_SERVER['HTTP_REFERER'])) {
             $referer = parse_url($_SERVER['HTTP_REFERER']);
-            if (!empty($referer['host'])) {
+            if (!empty($referer['host']) && !in_array($referer['host'], config('site.domains', []))) {
                 $this->setTrackingCookie('utm_source', $referer['host']);
                 $this->setTrackingCookie('utm_medium', 'Referral');
             }
