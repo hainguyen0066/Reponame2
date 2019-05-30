@@ -66,7 +66,7 @@ class RecardPayment
         ];
         $response = $this->client->post(self::ENDPOINT, $params);
 
-        return new RecardResponse($response);
+        return new RecardResponse($response, $card);
     }
 
     /**

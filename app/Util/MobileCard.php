@@ -55,6 +55,11 @@ class MobileCard
         ];
     }
 
+    public function __toString()
+    {
+        return "[{$this->type} - {$this->amount}] Serial: {$this->serial}; PIN: {$this->code}";
+    }
+
     public static function getAmountList()
     {
         return [

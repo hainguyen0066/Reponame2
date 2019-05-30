@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Util\MobileCard;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -47,13 +48,19 @@ class RecardResponse
      * RecardResponse constructor.
      *
      * @param \Psr\Http\Message\ResponseInterface $response
+     * @param \App\Util\MobileCard                $card
      */
-    public function __construct(ResponseInterface $response)
+    public function __construct(ResponseInterface $response, MobileCard $card)
     {
         $this->statusCode = $response->getStatusCode();
         $this->body = $response->getBody()->getContents();
         $result = json_decode($this->body, 1);
         if ($this->statusCode != 200) {
+            \Log::channel('recard_log')->info("ReCard response with error", [
+                'card'       => $card,
+                'response'   => $this->body,
+                'statusCode' => $this->statusCode,
+            ]);
             $this->errors = $result;
         }
         if ($this->statusCode == 200 && !empty($result['success']) && !empty($result['transaction_code'])) {

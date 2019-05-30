@@ -56,6 +56,11 @@ return [
             'path' => storage_path('logs/game_api.log'),
             'level' => 'debug',
         ],
+        'recard_log' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/recard.log'),
+            'level' => 'debug',
+        ],
 
         'recard_mock' => [
             'driver' => 'single',
