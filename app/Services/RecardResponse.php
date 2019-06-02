@@ -61,6 +61,9 @@ class RecardResponse
                 'response'   => $this->body,
                 'statusCode' => $this->statusCode,
             ]);
+            if (isset($result['statusCode'])) {
+                unset($result['statusCode']);
+            }
             $this->errors = $result;
         }
         if ($this->statusCode == 200 && !empty($result['success']) && !empty($result['transaction_code'])) {
