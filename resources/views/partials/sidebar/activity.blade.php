@@ -29,6 +29,10 @@
             <td class="td-content"><a href="{{ route('front.details.post', ['su-kien','boss-dai-hoang-kim'])}}">Boss Đại Hoàng Kim</a></td>
         </tr>
         <tr>
+            <td class="td-time">20:00</td>
+            <td class="td-content"><a href="{{ route('front.details.post', ['huong-dan','boss-tieu-hoang-kim'])}}">Boss tiểu hoàng kim</a></td>
+        </tr>
+        <tr>
             <td class="td-time">21:00</td>
             <td class="td-content"><a href="{{ route('front.details.post', ['huong-dan','chien-tr-ong-tong-kim'])}}">Chiến trường tống kim</a></td>
         </tr>
