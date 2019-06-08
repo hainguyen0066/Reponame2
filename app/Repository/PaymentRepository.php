@@ -206,13 +206,13 @@ class PaymentRepository extends AbstractEloquentRepository
             ->get()
         ;
         //order data
-        $data = $payfroms = [];
+        $data = $payMethods = [];
         for($i = 0; $i <= $count; $i ++){
             $startOfDay = mktime(0, 0, 0, date('n', strtotime($fromDate)), date('d', strtotime($fromDate)) + $i);
             $day = date('d-m', $startOfDay);
             foreach ($results as $key => $value) {
-                if (!in_array($value->pay_method, $payfroms)) {
-                    $payfroms[] = $value->pay_method;
+                if (!in_array($value->pay_method, $payMethods)) {
+                    $payMethods[] = $value->pay_method;
                 }
                 if ($value->date == $day) {
                     $data[$day][$value->pay_method] = $value->total;
@@ -220,20 +220,22 @@ class PaymentRepository extends AbstractEloquentRepository
             }
         }
         $series = $seriesData = [];
-        $total = 0;
+        $total = $totalRevenue = 0;
         foreach ($data as $key => $val) {
             $series[] = "'$key'";
-            foreach ($payfroms as $name) {
-                $payByDay = isset($val[$name]) ? $val[$name] : 0;
-                $seriesData[$name][] = $payByDay;
+            foreach ($payMethods as $payMethod) {
+                $payByDay = isset($val[$payMethod]) ? $val[$payMethod] : 0;
+                $seriesData[$payMethod][] = $payByDay;
                 $total += $payByDay;
+                $totalRevenue += $this->calculateRevenue($payMethod, $payByDay);
             }
         }
 
         return [
-            'series'     => implode(',', $series),
-            'seriesData' => $seriesData,
-            'total'      => $total,
+            'series'       => implode(',', $series),
+            'seriesData'   => $seriesData,
+            'total'        => $total,
+            'totalRevenue' => $totalRevenue,
         ];
     }
 
@@ -241,7 +243,7 @@ class PaymentRepository extends AbstractEloquentRepository
      * @param      $fromDate
      * @param null $toDate
      *
-     * @return mixed
+     * @return array []
      */
     public function getRevenueByPeriod($fromDate = null, $toDate = null)
     {
@@ -252,10 +254,41 @@ class PaymentRepository extends AbstractEloquentRepository
         if ($toDate) {
             $query->where('created_at', '<=', $toDate);
         }
-        $total = $query->where('status', 1)
-            ->sum('amount')
+        $results = $query->selectRaw("SUM(amount) as total, pay_method")
+            ->where('status', 1)
+            ->groupBy('pay_method')
+            ->get()
         ;
+        $revenue = [
+            'total'   => 0,
+            'revenue' => 0,
+        ];
+        foreach ($results as $result) {
+            $revenue['total'] += $result->total;
+            $revenue['revenue'] += $this->calculateRevenue($result->pay_method, $result->total);
+        }
 
-        return $total;
+        return $revenue;
+    }
+
+    /**
+     * @param     $name
+     * @param int $money
+     *
+     * @return float|int
+     */
+    private function calculateRevenue($name, int $money)
+    {
+        switch ($name) {
+            case Payment::PAY_METHOD_RECARD:
+                return $money * ( 100 - config('REVENUE_RATE_CARD', 32)) / 100;
+            case Payment::PAY_METHOD_ZING_CARD:
+                return $money * ( 100 - config('REVENUE_RATE_CARD', 30)) / 100;
+            case Payment::PAYMENT_TYPE_BANK_TRANSFER:
+            case Payment::PAYMENT_TYPE_MOMO:
+                return $money;
+        }
+
+        return $money;
     }
 }

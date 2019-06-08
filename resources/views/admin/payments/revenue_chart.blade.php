@@ -13,7 +13,14 @@ extract($revenue)
             <span class="label label-info">{{ $name }}: {{  number_format(array_sum($data)) }}K</span>
         @endforeach
     </div>
-
+</div>
+<div class="row">
+    <div class="col-xs-2">
+        Tổng lợi nhuận:
+    </div>
+    <div class="col-xs-2">
+        {{ number_format($totalRevenue * 1000) }} VNĐ
+    </div>
 </div>
 <div id="revenueChart" style="width: 98%;height: 450px;padding: 1% 0"></div>
 @push('extra-js')

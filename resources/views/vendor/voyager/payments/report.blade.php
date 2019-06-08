@@ -5,14 +5,31 @@
         @include('voyager::alerts')
         <div class="panel widget">
             <div class="row">
-                <div class="col-md-12">
-                    <div>
-                        - Doanh thu trong ngày
-                        <strong style="font-size: 16px;">{{ number_format($todayRevenue) }}</strong>
-                    </div>
-                    <div>
-                        - Doanh thu trong tháng: <strong style="font-size: 16px;">{{ number_format($thisMonthRevenue) }}</strong>
-                    </div>
+                <div class="col-xs-12 col-sm-6 col-md-4 text-center">
+                    <span class="h4">Thống kê nhanh</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <table class="table table-bordered">
+                        <thead>
+                        <th width="100"></th>
+                        <th>Doanh thu</th>
+                        <th>Lợi nhuận</th>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>Hôm nay</td>
+                            <td>{{ number_format($todayRevenue['total']) }}</td>
+                            <td><span class="h5 label label-success">{{ number_format($todayRevenue['revenue']) }}</span></td>
+                        </tr>
+                        <tr>
+                            <td>Tháng này</td>
+                            <td>{{ number_format($thisMonthRevenue['total']) }}</td>
+                            <td><span class="h5 label label-success">{{ number_format($thisMonthRevenue['revenue']) }}</span></td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
             <div class="row report-registered">

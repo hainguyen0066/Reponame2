@@ -118,9 +118,9 @@ class PaymentBreadController extends VoyagerBaseController
         // Check permission
         $this->authorize('add', app($dataType->model_name));
         $rules = [
-            'user_id' => 'required|exists:users,id',
+            'user_id'      => 'required|exists:users,id',
             'payment_type' => ['required', Rule::in(array_keys(Payment::getPaymentTypes()))],
-            'amount' => 'integer|gte:10000'
+            'amount'       => 'integer|gte:10000',
         ];
         $validator = Validator::make($request->all(), $rules);
 
