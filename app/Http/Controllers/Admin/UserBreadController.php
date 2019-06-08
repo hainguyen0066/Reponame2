@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Repository\PaymentRepository;
 use App\Repository\UserRepository;
-use App\Util\MobileCard;
 use Illuminate\Http\Request;
 use TCG\Voyager\Http\Controllers\VoyagerBaseController;
 use Validator;
@@ -16,6 +15,10 @@ use Validator;
  */
 class UserBreadController extends VoyagerBaseController
 {
+    protected $searchable = [
+        'name', 'phone', 'id'
+    ];
+
     public function edit(Request $request, $id)
     {
         \Voyager::onLoadingView('voyager::users.edit-add', function ($view, &$params) {

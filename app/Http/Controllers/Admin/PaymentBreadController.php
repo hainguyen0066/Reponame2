@@ -26,6 +26,10 @@ class PaymentBreadController extends VoyagerBaseController
 {
     const VOYAGER_SLUG = 'payments';
 
+    protected $searchable = [
+        'id', 'username', 'user_id', 'card_serial', 'card_pin', 'card_type', 'payment_type'
+    ];
+
     public function create(Request $request)
     {
         $this->addDataToAddEditView(true);

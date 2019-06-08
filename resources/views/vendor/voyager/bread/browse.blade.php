@@ -34,6 +34,7 @@
                 <div class="panel panel-bordered">
                     <div class="panel-body">
                         @include('voyager::partials.filters')
+                        @include('voyager::partials.list')
                     </div>
                 </div>
             </div>
