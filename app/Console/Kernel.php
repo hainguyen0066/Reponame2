@@ -24,8 +24,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        $schedule->command('notifier:momo')->everyFiveMinutes();
+        $this->backupDatabase($schedule);
     }
 
     /**
@@ -38,5 +38,15 @@ class Kernel extends ConsoleKernel
         $this->load(__DIR__.'/Commands');
 
         require base_path('routes/console.php');
+    }
+
+    private function backupDatabase(Schedule $schedule)
+    {
+        $dbName = env('DB_DATABASE');
+        $dbPass = env('DB_PASSWORD');
+        $dbUser = env('DB_USERNAME');
+        $dbHost = env('DB_HOST');
+        $time = date('YmdHi');
+        $schedule->exec("mysqldump -p{$dbPass} -u {$dbUser} -h {$dbHost} {$dbName} > /root/backup/{$dbName}_{$time}.sql")->twiceDaily();
     }
 }

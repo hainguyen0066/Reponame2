@@ -1,10 +1,10 @@
 <?php
 Route::group(['as' => 'front.'], function() {
-    Route::get('/', [
+    Route::any('/', [
         'uses' => 'LandingPageController@index',
         'as' => 'landing'
     ]);
-    
+
     Route::get('/trang-chu', [
         'uses' => 'HomePageController@index',
         'as' => 'home'
@@ -22,11 +22,11 @@ Route::group(['as' => 'front.'], function() {
         'uses' => 'PaymentController@submitCard',
         'as' => 'payment.submit_card'
     ]);
-    Route::get('/web-launcher',[        
+    Route::get('/web-launcher',[
         'uses' => 'WebLauncherController@index',
         'as'   => 'web_laucher'
     ]);
-    
+
 
 //     BEGIN CONTENT ROUTES
     Route::get('/download', [
@@ -62,7 +62,7 @@ Route::group(['as' => 'front.'], function() {
             'uses' => 'ManageAccountController@getAccountInfo',
             'as' => 'manage.account.info'
         ]);
-        
+
         Route::get('/doi-mat-khau', [
             'uses' => 'PasswordController@showChangePasswordForm',
             'as' => 'manage.account.pass'
@@ -80,7 +80,7 @@ Route::group(['as' => 'front.'], function() {
             'uses' => 'ManageAccountController@historyCharge',
             'as' => 'manage.account.history'
         ]);
-        
+
         Route::post('/doi-mat-khau', [
             'uses' => 'PasswordController@changePassword',
             'as' => 'password.change.submit'

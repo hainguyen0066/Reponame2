@@ -172,4 +172,39 @@ class PaymentController extends BaseFrontController
 
         return $card;
     }
+
+    public function alertTransaction()
+    {
+        $sender = request('sender');
+        $message = request('message');
+        $createdAt = request('createdAt');
+        \Log::info("Banking Alert received: Sender {$sender}, message: {$message}");
+        if (!$message) {
+            exit();
+        }
+        $stkDongA = env('BANKING_ACCOUNT_DONGA');
+        $stkVCB = env('BANKING_ACCOUNT_VIETCOMBANK');
+        $alert = "";
+        if ($stkDongA && strpos($message, "TK {$stkDongA}") !== false) {
+            //DongA Bank thong bao: TK 0110666501 da thay doi: +200,000 VND. Nop tien mat(NGUYEN VAN LOI NOP TM-LONG NHAN 11). So du hien tai la:...
+            $beginOfAmount = strpos($message, 'da thay doi: +') + 14;
+            $endOfAmount = strpos(substr($message, $beginOfAmount), 'VND');
+            $amount = trim(substr($message, $beginOfAmount, $endOfAmount));
+            $note = trim(substr($message, $beginOfAmount + $endOfAmount + 4));
+            $note = trim(substr($note, 0, strpos($note, "So du hien tai")));
+            $alert = "[Đông Á Bank] Nhận được số tiền `{$amount}` vào lúc `{$createdAt}`. Nội dung: `{$note}`";
+
+        } elseif ($stkVCB && strpos($message, "TK {$stkVCB}") !== false) {
+            //SD TK 0071001400512 +200,000VND luc 19-06-2019 20:50:40. SD 83,157,241VND. Ref IBVCB.1906190052065001.dangthanhhai
+            $beginOfAmount = strpos($message, "TK {$stkVCB} +") + 18;
+            $endOfAmount = strpos(substr($message, $beginOfAmount), 'VND');
+            $amount = trim(substr($message, $beginOfAmount, $endOfAmount));
+            $note = trim(substr($message, strpos($message, '. Ref') + 6));
+            $alert = "[Vietcombank] Nhận được số tiền `{$amount}` vào lúc `{$createdAt}`. Nội dung: `{$note}`";
+        }
+
+        if ($alert) {
+            $this->discord->send($alert);
+        }
+    }
 }

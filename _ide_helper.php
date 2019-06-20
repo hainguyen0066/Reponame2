@@ -3,7 +3,7 @@
 
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.7.3 on 2019-06-08 15:59:01.
+ * Generated for Laravel 5.7.3 on 2019-06-20 15:31:17.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -14483,6 +14483,54 @@ namespace Intervention\Image\Facades {
  
 }
 
+namespace Webklex\IMAP\Facades { 
+
+    /**
+     * Class Client
+     *
+     * @package Webklex\IMAP\Facades
+     */ 
+    class Client {
+        
+        /**
+         * Resolve a account instance.
+         *
+         * @param string $name
+         * @return \Client 
+         * @static 
+         */ 
+        public static function account($name = null)
+        {
+            return \Webklex\IMAP\ClientManager::account($name);
+        }
+        
+        /**
+         * Get the name of the default account.
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function getDefaultAccount()
+        {
+            return \Webklex\IMAP\ClientManager::getDefaultAccount();
+        }
+        
+        /**
+         * Set the name of the default account.
+         *
+         * @param string $name
+         * @return void 
+         * @static 
+         */ 
+        public static function setDefaultAccount($name)
+        {
+            \Webklex\IMAP\ClientManager::setDefaultAccount($name);
+        }
+         
+    }
+ 
+}
+
 namespace TCG\Voyager\Facades { 
 
     /**
@@ -17174,6 +17222,8 @@ namespace  {
     class Breadcrumbs extends \DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs {}
 
     class Image extends \Intervention\Image\Facades\Image {}
+
+    class Client extends \Webklex\IMAP\Facades\Client {}
 
     class Voyager extends \TCG\Voyager\Facades\Voyager {}
  

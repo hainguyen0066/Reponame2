@@ -51,6 +51,11 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapWebRoutes()
     {
+        Route::any('/payment/transaction-alert', [
+            'uses' => '\App\Http\Controllers\Front\PaymentController@alertTransaction',
+            'as' => 'front.payment.transaction_alert'
+        ]);
+
         Route::middleware('web')
              ->namespace($this->namespace)
              ->group(base_path('routes/web.php'));
