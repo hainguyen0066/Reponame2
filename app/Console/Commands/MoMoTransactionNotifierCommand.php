@@ -108,15 +108,17 @@ class MoMoTransactionNotifierCommand extends Command
     private function parseAlertMessage($emailBody, $linkReview)
     {
         $crawler = new Crawler($emailBody);
+        $senderPhoneNode = $crawler->filterXPath("(//*[contains(text(),'Số điện thoại người gửi')])/../..//td[last()]/span");
+        if (!$senderPhoneNode->text()) {
+            return;
+        }
         $amountNode = $crawler->filterXPath("//*[contains(text(),'0đ')]");
-        $crawler = new Crawler($emailBody);
         $senderNode = $crawler->filterXPath("(//*[contains(text(),'Người gửi')])/../..//td[last()]/span");
-        $crawler = new Crawler($emailBody);
         $noteNode = $crawler->filterXPath("(//*[contains(text(),'Tin nhắn')])/../..//td[last()]/span");
-        $crawler = new Crawler($emailBody);
         $timeNode = $crawler->filterXPath("(//*[contains(text(),'Thời gian')])/../..//td[last()]/span");
+
         $alert = sprintf(
-            "[MoMo] Nhận được số tiền `%s` từ người dùng MoMo `%s` vào lúc %s.",
+            "[MoMo] Nhận được số tiền `%s` từ `%s` vào lúc %s.",
             $amountNode->text(),
             $senderNode->text(),
             $timeNode->text()
