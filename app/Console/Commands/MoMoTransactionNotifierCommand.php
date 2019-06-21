@@ -97,7 +97,9 @@ class MoMoTransactionNotifierCommand extends Command
     private function alertDiscord(Message $email)
     {
         $message = $this->parseAlertMessage($email->getHTMLBody(), $this->getReviewUrl($email));
-        $this->discord->send($message);
+        if ($message) {
+            $this->discord->send($message);
+        }
     }
 
     private function markAsRead(Message $email)
