@@ -27,7 +27,7 @@ class PaymentBreadController extends VoyagerBaseController
     const VOYAGER_SLUG = 'payments';
 
     protected $searchable = [
-        'id', 'username', 'user_id', 'card_serial', 'card_pin', 'card_type', 'payment_type'
+        'id', 'username', 'user_id', 'card_serial', 'card_pin', 'card_type', 'payment_type', 'created_at'
     ];
 
     public function create(Request $request)

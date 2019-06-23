@@ -16,7 +16,7 @@ use Validator;
 class UserBreadController extends VoyagerBaseController
 {
     protected $searchable = [
-        'name', 'phone', 'id'
+        'name', 'phone', 'id', 'created_at'
     ];
 
     public function edit(Request $request, $id)
