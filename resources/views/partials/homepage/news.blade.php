@@ -6,7 +6,7 @@
     <div class="column-first">
         <div class="menu-news">
             @foreach($categories as $categorySlug => $categoryName)
-                <div class="tab-link {{ $categorySlug }} {{ $i++ == 2 ? 'active' : '' }}"
+                <div class="tab-link {{ $categorySlug }} {{ $i++ == 0 ? 'active' : '' }}"
                      data-tab="{{ $categorySlug }}"
                      data-link="{{ route('front.category', [$categorySlug]) }}">{{ $categoryName }}</div>
             @endforeach
@@ -16,11 +16,11 @@
             $i = 0;
         @endphp
         @foreach($newsByCategory as $categorySlug => $news)
-            <div class="tab-content {{ $categorySlug }}-content {{ $i == 2 ? 'active' : '' }}">
             @php
-                $active = $i == 2 ? 'active' : '';
+                $active = $i == 0 ? 'active' : '';
                 $i++;
             @endphp
+            <div class="tab-content {{ $categorySlug }}-content {{ $active }}">
             @if(count($news))
                 @php
                     /** @var \Illuminate\Support\Collection $news */
