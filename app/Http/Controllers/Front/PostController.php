@@ -20,7 +20,7 @@ class PostController extends BaseFrontController
 
     public function detail($categorySlug, $postSlug, PostRepository $postRepository)
     {
-        $post = $postRepository->getPublishedPostBySlug($postSlug);
+        $post = $postRepository->getPostBySlug($postSlug);
         if (!$post) {
             throw new NotFoundHttpException();
         }
@@ -39,7 +39,7 @@ class PostController extends BaseFrontController
 
     public function download(PostRepository $postRepository)
     {
-        $post = $postRepository->getPublishedPostBySlug('tai-game');
+        $post = $postRepository->getPostBySlug('tai-game');
         if (!$post) {
             throw new NotFoundHttpException();
         }
