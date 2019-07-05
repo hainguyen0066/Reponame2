@@ -69,6 +69,10 @@ class RouteServiceProvider extends ServiceProvider
             'as' => 'front.payment.recard_callback'
         ]);
 
+        Route::any('/payment/card-callback', [
+            'uses' => '\App\Http\Controllers\Front\PaymentController@cardPaymentCallback',
+            'as' => 'front.payment.card_payment_callback'
+        ]);
     }
 
     /**

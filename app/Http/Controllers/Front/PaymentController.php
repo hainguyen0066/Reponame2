@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers\Front;
 
+use App\Contract\CardPaymentInterface;
 use App\Models\Payment;
 use App\Repository\PaymentRepository;
 use App\Services\DiscordWebHookClient;
 use App\Services\JXApiClient;
+use App\Services\NapTheNhanhPayment;
 use App\Services\RecardPayment;
 use App\Util\MobileCard;
+use Illuminate\Http\Request;
 
 /**
  * Class PaymentController
@@ -49,18 +52,15 @@ class PaymentController extends BaseFrontController
         if ($error) {
             return response()->json(['error' => $error]);
         }
-        $recard = new RecardPayment(
-            env('RECARD_MERCHANT_ID'),
-            env('RECARD_SECRET_KEY')
-        );
+        $cardPayment = $this->getCardPaymentService();
         list($knb, $soxu) = $paymentRepository->exchangeGamecoin($card->getAmount(), Payment::PAYMENT_TYPE_CARD);
         $payment = $paymentRepository->createCardPayment($user, $card, $knb);
         if ($card->getType() == MobileCard::TYPE_ZING){
             $this->discord->send("`{$user->name}` vừa submit 1 thẻ Zing `" . $card->getAmount() / 1000 . "k`");
         } else {
-            $result = $recard->useCard($card);
+            $result = $cardPayment->useCard($card, $payment->getKey());
             if ($result->isSuccess() && $transactionCode = $result->getTransactionCode()) {
-                $paymentRepository->updateRecardPayment($payment, $transactionCode);
+                $paymentRepository->updateCardPayment($payment, $transactionCode);
             } else {
                 return response()->json(["error" => implode('<br/>', array_first(array_values($result->getErrors())))]);
             }
@@ -117,10 +117,6 @@ class PaymentController extends BaseFrontController
         $amount = request('amount');
 //        $comment = request('comment');
         $secretKey = request('secret_key');
-        $posts = request();
-        if (isset($posts['secret_key'])) {
-            unset($posts['secret_key']);
-        }
         if (!$transactionCode || $secretKey != env('RECARD_SECRET_KEY')) {
             return response()->json($response);
         }
@@ -140,6 +136,46 @@ class PaymentController extends BaseFrontController
             return response()->json($response);
         }
         if ($recardStatus && empty($record->gold_added)) {
+            $gamecoin = $record->gamecoin;
+            $result = $gameApiClient->addGold($record->username, $gamecoin);
+            $paymentRepository->updateRecordAddedGold($record, $result);
+        }
+        $response = [
+            'status' => true,
+            'message' => 'Processed'
+        ];
+
+        return response()->json($response);
+    }
+
+    public function cardPaymentCallback(PaymentRepository $paymentRepository, JXApiClient $gameApiClient, Request $request)
+    {
+        $response = [
+            'status' => false
+        ];
+        $cardPayment = $this->getCardPaymentService();
+        $transactionCode = $cardPayment->getTransactionCodeFromCallback($request);
+        if (!$transactionCode) {
+            return response()->json($response);
+        }
+        /** @var Payment $record */
+        $record = $paymentRepository->getByTransactionCode($transactionCode);
+        if (!$record) {
+            $record['message'] = "Transaction not found";
+            return response()->json($response, 404);
+        }
+        if (!empty($record->status)) {
+            $record['message'] = "Transaction was processed successfully before";
+            return response()->json($response);
+        }
+        list($status, $amount, $reason) = $cardPayment->parseCallbackRequest($request);
+        // add gold
+        $cardStatus = $status === 1 ? true : false;
+        $paymentRepository->updateCardPaymentTransaction($record, $status, $cardPayment->getReasonPhrase($reason), $amount);
+        if (!$cardStatus) {
+            return response()->json($response);
+        }
+        if ($cardStatus && empty($record->gold_added)) {
             $gamecoin = $record->gamecoin;
             $result = $gameApiClient->addGold($record->username, $gamecoin);
             $paymentRepository->updateRecordAddedGold($record, $result);
@@ -175,10 +211,8 @@ class PaymentController extends BaseFrontController
 
     public function alertTransaction()
     {
-        $sender = request('sender');
         $message = request('message');
         $createdAt = request('createdAt');
-        \Log::info("Banking Alert received: Sender {$sender}, message: {$message}");
         if (!$message) {
             exit();
         }
@@ -214,5 +248,25 @@ class PaymentController extends BaseFrontController
         if ($alert) {
             $this->discord->send($alert);
         }
+    }
+
+    /**
+     * @return \App\Contract\CardPaymentInterface
+     */
+    private function getCardPaymentService()
+    {
+        if (env('CARD_PAYMENT_PARTNER') == CardPaymentInterface::PARTNER_NAPTHENHANH) {
+            $service = new NapTheNhanhPayment(
+                env('NAPTHENHANH_PARTNER_ID'),
+                env('NAPTHENHANH_PARTNER_KEY')
+            );
+        } else {
+            $service = new RecardPayment(
+                env('RECARD_MERCHANT_ID'),
+                env('RECARD_SECRET_KEY')
+            );
+        }
+
+        return $service;
     }
 }

@@ -56,15 +56,15 @@ return [
             'path' => storage_path('logs/game_api.log'),
             'level' => 'debug',
         ],
-        'recard_log' => [
+        'card_payment' => [
             'driver' => 'single',
-            'path' => storage_path('logs/recard.log'),
+            'path' => storage_path('logs/card_payment.log'),
             'level' => 'debug',
         ],
 
-        'recard_mock' => [
+        'card_payment_mocked' => [
             'driver' => 'single',
-            'path' => storage_path('logs/recard_mock.log'),
+            'path' => storage_path('logs/card_payment_mocked.log'),
             'level' => 'debug',
         ],
 

@@ -6,44 +6,37 @@ use App\Contract\CardPaymentInterface;
 use App\Util\MobileCard;
 
 /**
- * Class RecardPayment
+ * Class NapTheNhanhPayment
  *
  * @package \App\Services
  */
-class RecardPayment implements CardPaymentInterface
+class NapTheNhanhPayment implements CardPaymentInterface
 {
-    const ENDPOINT = "/api/card";
-    const BASE_URL = "https://recard.vn";
-    const CARD_TYPE_VIETTEL = 1;
-    const CARD_TYPE_MOBIFONE = 2;
-    const CARD_TYPE_VINAPHONE = 3;
-
-    public static $callbackReason = [
-        1 => "Thẻ không tồn tại",
-        2 => "Thẻ đã được sử dụng",
-        3 => "Thẻ không sử dụng được",
-        4 => "Thẻ sai mệnh giá",
-    ];
+    const ENDPOINT = "/api/charging-wcb";
+    const BASE_URL = "http://sys.napthenhanh.com";
+    const CARD_TYPE_VIETTEL = 'VIETTEL';
+    const CARD_TYPE_MOBIFONE = 'MOBIFONE';
+    const CARD_TYPE_VINAPHONE = 'VINAPHONE';
 
     /**
      * @var string
      */
-    private $merchantId;
+    private $partnerId;
 
     /**
      * @var string
      */
-    private $secretKey;
+    private $partnerKey;
 
     /**
      * @var \GuzzleHttp\Client
      */
     private $client;
 
-    public function __construct($merchantId, $secretKey)
+    public function __construct($partnerId, $partnerKey)
     {
-        $this->merchantId = $merchantId;
-        $this->secretKey = $secretKey;
+        $this->partnerId = $partnerId;
+        $this->partnerKey = $partnerKey;
         if (env('CARD_PAYMENT_API_MOCK', false)) {
             $this->client = new CardPaymentApiClientMocked();
         } else {
@@ -60,32 +53,34 @@ class RecardPayment implements CardPaymentInterface
      */
     public function useCard(MobileCard $card, $paymentId = '')
     {
-        $signature = $this->sign($card);
+        $signature = $this->sign($card, $paymentId);
         $params['form_params'] = [
-            'merchant_id' => $this->merchantId,
-            'secret_key'  => $this->secretKey,
-            'type'        => $this->getCardType($card),
-            'serial'      => $card->getSerial(),
-            'code'        => $card->getCode(),
-            'amount'      => $card->getAmount(),
-            'signature'   => $signature,
+            'partner_id' => $this->partnerId,
+            'type'       => $this->getCardType($card),
+            'serial'     => $card->getSerial(),
+            'pin'        => $card->getCode(),
+            'amount'     => $card->getAmount(),
+            'sign'       => $signature,
+            'tranid'     => $paymentId,
         ];
+        dump($params['form_params']);
         $response = $this->client->post(self::ENDPOINT, $params);
 
-        return new RecardResponse($response, $card);
+        return new NapTheNhanhResponse($response, $card);
     }
 
     /**
-     * @param $card
+     * @param \App\Util\MobileCard $card
+     * @param                      $paymentId
      *
      * @return string
      */
-    private function sign(MobileCard $card)
+    private function sign(MobileCard $card, $paymentId)
     {
         $type = $this->getCardType($card);
-        $data = $this->merchantId . $type . $card->getSerial() . $card->getCode() . $card->getAmount();
+        $signature = $this->partnerId . $this->partnerKey . $type . $card->getCode() . $card->getSerial() . $card->getAmount() . $paymentId;
 
-        return hash_hmac('sha256', $data, $this->secretKey);
+        return md5($signature);
     }
 
     /**
@@ -109,13 +104,13 @@ class RecardPayment implements CardPaymentInterface
     }
 
     /**
-     * @param $reason
+     * @param $reasonCode
      *
-     * @return mixed|string
+     * @return string
      */
-    public function getReasonPhrase($reason)
+    public function getReasonPhrase($reasonCode)
     {
-        return isset(self::$callbackReason[$reason]) ? self::$callbackReason[$reason] : "Lỗi không xác định `{$reason}`";
+        return isset(self::$callbackReason[$reasonCode]) ? self::$callbackReason[$reasonCode] : "Lỗi không xác định `{$reasonCode}`";
     }
 
     /**
@@ -125,12 +120,7 @@ class RecardPayment implements CardPaymentInterface
      */
     public function getTransactionCodeFromCallback(\Illuminate\Http\Request $request)
     {
-        $secretKey = $request->get('secret_key');
-        if ($secretKey != $this->secretKey) {
-            return '';
-        }
-
-        return $request->get('transaction_code');
+        return $request->get('tranid');
     }
 
     /**
@@ -141,7 +131,7 @@ class RecardPayment implements CardPaymentInterface
     public function parseCallbackRequest(\Illuminate\Http\Request $request)
     {
         $status = intval($request->get('status'));
-        $reason = $request->get('reason');
+        $reason = $request->get('message');
         $amount = intval($request->get('amount'));
 
         return [$status, $amount, $reason];

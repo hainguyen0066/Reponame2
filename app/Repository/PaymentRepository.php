@@ -46,7 +46,7 @@ class PaymentRepository extends AbstractEloquentRepository
      *
      * @return \App\Models\Payment
      */
-    public function updateRecardPayment(Payment $payment, $transactionCode)
+    public function updateCardPayment(Payment $payment, $transactionCode)
     {
         $payment->transaction_id = $transactionCode;
         $payment->save();
@@ -112,11 +112,10 @@ class PaymentRepository extends AbstractEloquentRepository
         return $query->first();
     }
 
-    public function updateRecardTransaction(Payment $record, $status, $reason, $amount)
+    public function updateCardPaymentTransaction(Payment $record, $status, $reason, $amount)
     {
-        $reasonPhrase = $status == 2 ? RecardResponse::getReasonPhrase($reason) : '';
         $record->gateway_status = $status;
-        $record->gateway_response = $reasonPhrase;
+        $record->gateway_response = $reason;
         $record->gateway_amount = $amount;
         $record->finished = true;
         $record->save();
@@ -281,9 +280,11 @@ class PaymentRepository extends AbstractEloquentRepository
     {
         switch ($name) {
             case Payment::PAY_METHOD_RECARD:
-                return $money * ( 100 - config('REVENUE_RATE_CARD', 32)) / 100;
+                return $money * ( 100 - env('REVENUE_RATE_CARD_RECARD', 32)) / 100;
+            case Payment::PAY_METHOD_NAPTHENHANH:
+                return $money * ( 100 - env('REVENUE_RATE_CARD_NAPTHENHANH', 28)) / 100;
             case Payment::PAY_METHOD_ZING_CARD:
-                return $money * ( 100 - config('REVENUE_RATE_CARD', 30)) / 100;
+                return $money * ( 100 - env('REVENUE_RATE_CARD_ZING', 30)) / 100;
             case Payment::PAYMENT_TYPE_BANK_TRANSFER:
             case Payment::PAYMENT_TYPE_MOMO:
                 return $money;

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 
+use App\Contract\CardPaymentInterface;
 use App\User;
 use App\Util\MobileCard;
 
@@ -26,6 +27,7 @@ class Payment extends BaseEloquentModel
     const PAYMENT_STATUS_RECARD_NOT_ACCEPT      = 7;
     const PAY_METHOD_ZING_CARD                  = "ZingCard";
     const PAY_METHOD_RECARD                     = "Recard";
+    const PAY_METHOD_NAPTHENHANH                = "NapTheNhanh";
     const PAY_METHOD_BANK_TRANSFER              = "Chuyển khoản";
     const PAY_METHOD_MOMO                       = "MoMo";
 
@@ -159,7 +161,11 @@ class Payment extends BaseEloquentModel
     {
         $this->attributes['payment_type'] = $value;
         if (self::PAYMENT_TYPE_CARD == $value) {
-            $this->attributes['pay_method'] = $this->attributes['card_type'] == MobileCard::TYPE_ZING ? self::PAY_METHOD_ZING_CARD : self::PAY_METHOD_RECARD;
+            if ($this->attributes['card_type'] == MobileCard::TYPE_ZING) {
+                $this->attributes['pay_method'] = self::PAY_METHOD_ZING_CARD;
+            } else {
+                $this->attributes['pay_method'] = env('CARD_PAYMENT_PARTNER') == CardPaymentInterface::PARTNER_NAPTHENHANH ? self::PAY_METHOD_NAPTHENHANH : self::PAY_METHOD_RECARD;
+            }
         } elseif(self::PAYMENT_TYPE_MOMO == $value) {
             $this->attributes['pay_method'] = self::PAY_METHOD_MOMO;
         } elseif(self::PAYMENT_TYPE_BANK_TRANSFER == $value) {

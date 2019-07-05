@@ -2,18 +2,25 @@
 
 namespace App\Services;
 
+use App\Contract\CardPaymentInterface;
 use GuzzleHttp\Psr7\Response;
 use Psr\Http\Message\ResponseInterface;
 
 /**
- * Class MockedRecardApiClient
+ * Class CardPaymentApiClientMocked
  *
  * @package \App\Services
  */
-class MockedRecardApiClient
+class CardPaymentApiClientMocked
 {
     protected static $mockedResponse;
 
+    protected $logger;
+
+    public function __construct()
+    {
+        $this->logger = \Log::channel('card_payment_mocked');
+    }
     /**
      * @param \GuzzleHttp\Psr7\Response $response
      */
@@ -24,7 +31,7 @@ class MockedRecardApiClient
 
     public function get($uri, array $options = [])
     {
-        \Log::channel('recard_mock')->info("GET Request to Recard API", [
+        $this->logger->info("GET Request to Card Payment API", [
             'uri'     => $uri,
             'options' => $options,
         ]);
@@ -34,7 +41,7 @@ class MockedRecardApiClient
 
     public function post($uri, array $options = [])
     {
-        \Log::channel('recard_mock')->info("POST Request to Recard API", [
+        $this->logger->info("POST Request to Card Payment API", [
             'uri'     => $uri,
             'options' => $options,
         ]);
@@ -50,7 +57,18 @@ class MockedRecardApiClient
         if (self::$mockedResponse instanceof ResponseInterface) {
             $response = self::$mockedResponse;
         } else {
-            $response = new Response(200, [], json_encode(['transaction_code' => time(), 'success' => true]));
+            if (env('CARD_PAYMENT_PARTNER') == CardPaymentInterface::PARTNER_NAPTHENHANH) {
+                $response = new Response(
+                    200,
+                    [],
+                    json_encode(
+                        ['tranid' => time(), 'status' => NapTheNhanhResponse::RESPONSE_STATUS_SUCCESS, 'message' => 'Thẻ đã được nạp thành công và đang chờ xử lý ']
+                    )
+                );
+            } else {
+                $response = new Response(200, [], json_encode(['tranid' => time(), 'success' => true]));
+            }
+
         }
 
         return $response;
