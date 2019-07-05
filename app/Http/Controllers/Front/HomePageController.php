@@ -28,6 +28,8 @@ class HomePageController extends BaseFrontController
         $slides = $sliderRepository->getHomeSlider(self::HOMEPAGE_LIMIT_SLIDERS);
         $banners = $bannerRepository ->getActiveBanner();
 
+        $this->setMetaTitle('Trang chủ');
+
         return view('pages.home', [
             'newsByCategory' => $newsByCategory,
             'slides'         => $slides,

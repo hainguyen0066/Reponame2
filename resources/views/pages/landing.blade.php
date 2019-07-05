@@ -2,17 +2,19 @@
 <html>
 <head>
     @component('meta')
-    @slot('title')
+        @slot('title')
         @section('title'){{ $title ?? config('site.seo.title') }}@show
-    @endslot
-    @slot('meta_description')
-        {{ $meta_description ?? config('site.seo.meta_description') }}
-    @endslot
-    @slot('meta_keyword')
-        {{ $meta_keyword ?? config('site.seo.meta_keyword') }}
-    @endslot
+        @endslot
+        @slot('meta_description')
+            {{ $meta_description ?? config('site.seo.meta_description') }}
+        @endslot
+        @slot('meta_keywords')
+            {{ $meta_keywords ?? config('site.seo.meta_keyword') }}
+        @endslot
+        @slot('meta_image')
+            {{ $meta_image ?? asset(config('site.seo.meta_image')) }}
+        @endslot
     @endcomponent
-    @include('partials.tracker.google_tag_manager_partner')
     <link rel="stylesheet" href="{{ mix('css/landing.css') }}">
     <link rel="stylesheet" href="{{ mix('css/account.css') }}">
 </head>

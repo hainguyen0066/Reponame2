@@ -17,12 +17,15 @@ class ManageAccountController extends BaseFrontController
 
     public function getAccountInfo()
     {
+        $this->setMetaTitle("Thông tin tài khoản");
+
         return view('pages.account_info');
     }
 
     public function historyCharge(PaymentRepository $paymentRepository)
     {
         $histories = $paymentRepository->getUserPaymentHistory(\Auth::user(), self::LIMIT_PAYMENT_HISTORY);
+        $this->setMetaTitle("Lịch sử giao dịch");
 
         return view('pages.history_charge', ['histories' => $histories]);
     }

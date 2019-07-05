@@ -3,7 +3,7 @@
 
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.7.3 on 2019-06-20 15:31:17.
+ * Generated for Laravel 5.7.3 on 2019-07-05 16:31:40.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -13553,6 +13553,98 @@ namespace Illuminate\Support\Facades {
  
 }
 
+namespace Webklex\IMAP\Facades { 
+
+    /**
+     * Class Client
+     *
+     * @package Webklex\IMAP\Facades
+     */ 
+    class Client {
+        
+        /**
+         * Resolve a account instance.
+         *
+         * @param string $name
+         * @return \Client 
+         * @static 
+         */ 
+        public static function account($name = null)
+        {
+            return \Webklex\IMAP\ClientManager::account($name);
+        }
+        
+        /**
+         * Get the name of the default account.
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function getDefaultAccount()
+        {
+            return \Webklex\IMAP\ClientManager::getDefaultAccount();
+        }
+        
+        /**
+         * Set the name of the default account.
+         *
+         * @param string $name
+         * @return void 
+         * @static 
+         */ 
+        public static function setDefaultAccount($name)
+        {
+            \Webklex\IMAP\ClientManager::setDefaultAccount($name);
+        }
+         
+    }
+
+    /**
+     * Class Client
+     *
+     * @package Webklex\IMAP\Facades
+     */ 
+    class Client {
+        
+        /**
+         * Resolve a account instance.
+         *
+         * @param string $name
+         * @return \Client 
+         * @static 
+         */ 
+        public static function account($name = null)
+        {
+            return \Webklex\IMAP\ClientManager::account($name);
+        }
+        
+        /**
+         * Get the name of the default account.
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function getDefaultAccount()
+        {
+            return \Webklex\IMAP\ClientManager::getDefaultAccount();
+        }
+        
+        /**
+         * Set the name of the default account.
+         *
+         * @param string $name
+         * @return void 
+         * @static 
+         */ 
+        public static function setDefaultAccount($name)
+        {
+            \Webklex\IMAP\ClientManager::setDefaultAccount($name);
+        }
+         
+    }
+ 
+}
+
 namespace Arrilot\Widgets { 
 
     /**
@@ -14483,54 +14575,6 @@ namespace Intervention\Image\Facades {
  
 }
 
-namespace Webklex\IMAP\Facades { 
-
-    /**
-     * Class Client
-     *
-     * @package Webklex\IMAP\Facades
-     */ 
-    class Client {
-        
-        /**
-         * Resolve a account instance.
-         *
-         * @param string $name
-         * @return \Client 
-         * @static 
-         */ 
-        public static function account($name = null)
-        {
-            return \Webklex\IMAP\ClientManager::account($name);
-        }
-        
-        /**
-         * Get the name of the default account.
-         *
-         * @return string 
-         * @static 
-         */ 
-        public static function getDefaultAccount()
-        {
-            return \Webklex\IMAP\ClientManager::getDefaultAccount();
-        }
-        
-        /**
-         * Set the name of the default account.
-         *
-         * @param string $name
-         * @return void 
-         * @static 
-         */ 
-        public static function setDefaultAccount($name)
-        {
-            \Webklex\IMAP\ClientManager::setDefaultAccount($name);
-        }
-         
-    }
- 
-}
-
 namespace TCG\Voyager\Facades { 
 
     /**
@@ -14834,6 +14878,16 @@ namespace TCG\Voyager\Facades {
         public static function getLocales()
         {
             return \TCG\Voyager\Voyager::getLocales();
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function displayField($dataType, $row, $data)
+        {
+            return \TCG\Voyager\Voyager::displayField($dataType, $row, $data);
         }
          
     }
@@ -17212,6 +17266,8 @@ namespace  {
     class Validator extends \Illuminate\Support\Facades\Validator {}
 
     class View extends \Illuminate\Support\Facades\View {}
+
+    class ImapClient extends \Webklex\IMAP\Facades\Client {}
 
     class Widget extends \Arrilot\Widgets\Facade {}
 

@@ -30,8 +30,13 @@ class PostController extends BaseFrontController
             'others' => $otherPosts,
         ];
 
+        $this->setMetaTitle($post->title)
+            ->setMetaDescription($post->excerpt)
+            ->setMetaImage($post->getImage());
+
         return view('pages.post_detail', $data);
     }
+
     public function download(PostRepository $postRepository)
     {
         $post = $postRepository->getPublishedPostBySlug('tai-game');
@@ -43,6 +48,9 @@ class PostController extends BaseFrontController
             'post'   => $post,
             'others' => $otherPosts,
         ];
+        $this->setMetaTitle($post->title)
+            ->setMetaDescription($post->excerpt)
+            ->setMetaImage($post->getImage());
 
         return view('pages.post_detail', $data);
     }
@@ -70,6 +78,7 @@ class PostController extends BaseFrontController
             'posts'      => $posts,
             'activeSlug' => $category->slug,
         ];
+        $this->setMetaTitle($category->name);
 
         return view('pages.category', $data);
     }

@@ -16,6 +16,7 @@ class Payment extends BaseEloquentModel
     const PAYMENT_TYPE_CARD = 1;
     const PAYMENT_TYPE_MOMO = 3;
     const PAYMENT_TYPE_BANK_TRANSFER = 4;
+    const PAYMENT_TYPE_ADVANCE_DEBT = 5;
 
     const PAYMENT_STATUS_SUCCESS                = 1;
     const PAYMENT_STATUS_PROCESSING             = 2;
@@ -28,6 +29,7 @@ class Payment extends BaseEloquentModel
     const PAY_METHOD_RECARD                     = "Recard";
     const PAY_METHOD_BANK_TRANSFER              = "Chuyển khoản";
     const PAY_METHOD_MOMO                       = "MoMo";
+    const PAY_METHOD_ADVANCE_DEBT               = "Tạm ứng";
 
     public $fillable = ['amount', 'note', 'payment_type', 'pay_from'];
 
@@ -164,6 +166,8 @@ class Payment extends BaseEloquentModel
             $this->attributes['pay_method'] = self::PAY_METHOD_MOMO;
         } elseif(self::PAYMENT_TYPE_BANK_TRANSFER == $value) {
             $this->attributes['pay_method'] = self::PAY_METHOD_BANK_TRANSFER;
+        } elseif(self::PAYMENT_TYPE_ADVANCE_DEBT == $value) {
+            $this->attributes['pay_method'] = self::PAY_METHOD_ADVANCE_DEBT;
         }
     }
 }

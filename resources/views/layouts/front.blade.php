@@ -3,17 +3,19 @@
 <head>
     @component('meta')
         @slot('title')
-            @section('title'){{ $title ?? config('site.seo.title') }}@show
+        @section('title'){{ $title ?? config('site.seo.title') }}@show
         @endslot
         @slot('meta_description')
             {{ $meta_description ?? config('site.seo.meta_description') }}
         @endslot
-        @slot('meta_keyword')
-            {{ $meta_keyword ?? config('site.seo.meta_keyword') }}
+        @slot('meta_keywords')
+            {{ $meta_keywords ?? config('site.seo.meta_keyword') }}
+        @endslot
+        @slot('meta_image')
+            {{ $meta_image ?? asset(config('site.seo.meta_image')) }}
         @endslot
     @endcomponent
     @include('partials.styles')
-    @include('partials.tracker.google_tag_manager_partner')
 </head>
 <body>
 @include('partials.trackers')

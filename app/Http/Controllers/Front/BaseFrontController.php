@@ -59,4 +59,42 @@ class BaseFrontController extends Controller
         $cookie = Cookie::make($name, $value, $expire);
         Cookie::queue($cookie);
     }
+
+    /**
+     * @param $title
+     *
+     * @return \App\Http\Controllers\Front\BaseFrontController
+     */
+    protected function setMetaTitle($title)
+    {
+        view()->share('title', $title . " - " . config('site.seo.title'));
+        return $this;
+    }
+
+    /**
+     * @param $description
+     *
+     * @return \App\Http\Controllers\Front\BaseFrontController
+     */
+    protected function setMetaDescription($description)
+    {
+        view()->share('meta_description', str_limit($description, 255) ?? config('site.seo.meta_description'));
+
+        return $this;
+    }
+
+    /**
+     * @param $image
+     *
+     * @return $this
+     */
+    protected function setMetaImage($image)
+    {
+        if (strpos(trim($image), 'http') !== 0) {
+            $image = url($image);
+        }
+        view()->share('meta_image', $image ?? asset(config('site.seo.meta_image')));
+
+        return $this;
+    }
 }

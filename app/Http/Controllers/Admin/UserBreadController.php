@@ -16,7 +16,7 @@ use Validator;
 class UserBreadController extends VoyagerBaseController
 {
     protected $searchable = [
-        'name', 'phone', 'id', 'created_at'
+        'name', 'phone', 'note', 'id', 'email'
     ];
 
     public function edit(Request $request, $id)
@@ -52,7 +52,7 @@ class UserBreadController extends VoyagerBaseController
         $userRepository = app(UserRepository::class);
         /** @var \App\User $user */
         $user = $data;
-        $user->fill(array_only($request->all(), ['name', 'phone', 'email', 'role_id']));
+        $user->fill(array_only($request->all(), ['name', 'phone', 'email', 'role_id', 'note']));
         if ($password = $request->get('password')) {
             $userRepository->updatePassword($user, $password);
         }
@@ -64,5 +64,10 @@ class UserBreadController extends VoyagerBaseController
         }
 
         return $user;
+    }
+
+    protected function alterBreadBrowseEloquentQuery(\Illuminate\Database\Eloquent\Builder $query, Request $request)
+    {
+        $query->with(['payments', 'roles']);
     }
 }

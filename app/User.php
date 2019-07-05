@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Payment;
 use Illuminate\Notifications\Notifiable;
 
 /**
@@ -58,6 +59,30 @@ class User extends \TCG\Voyager\Models\User
     ];
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
+    }
+
+    /**
+     * @return int|mixed
+     */
+    public function getTotalPaid()
+    {
+        if ($this->payments->count() > 0) {
+            $paidArray = $this->payments->map(function ($item) {
+                return $item->status ? $item->amount : 0;
+            });
+
+            return $paidArray->sum();
+        }
+
+        return 0;
+    }
+
+    /**
      * @return string
      */
     public function getRawPassword()
@@ -102,5 +127,13 @@ class User extends \TCG\Voyager\Models\User
     public function validatePassword2($password2)
     {
         return $password2 == $this->getRawPassword2();
+    }
+
+    /**
+     * @return bool
+     */
+    public function isNormalUser()
+    {
+        return empty($this->role_id);
     }
 }
