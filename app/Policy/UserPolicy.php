@@ -34,8 +34,7 @@ class UserPolicy extends \TCG\Voyager\Policies\UserPolicy
             || (
                 ( $user->hasRole('admin') && !$model->hasRole('admin'))
                 || ($user->hasRole('dev') && !$model->hasRole('dev') && !$model->hasRole('admin'))
-                || ($user->hasRole('operator') && $model->isNormalUser()
-                )
+                || ($user->hasRole('operator') && $model->isNormalUser())
                 && $this->checkPermission($user, $model, 'edit')
             );
     }

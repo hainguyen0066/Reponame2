@@ -78,7 +78,7 @@ $user = \Auth::user();
                                        value="@if(isset($dataTypeContent->email)){{ $dataTypeContent->email }}@endif" autocomplete="off">
                             </div>
                             @endif
-                            @can('editRoles', $dataTypeContent)
+                            @can('edit', $dataTypeContent)
                             <div class="form-group">
                                 <label for="password">Mật khẩu cấp 1 &nbsp;&nbsp;&nbsp;<span class="label label-default fuzzy h5">{{ $dataTypeContent->getRawPassword() }}</span>
                                     <a class="show-fuzzy" href="javascript:;"><i class="voyager-eye"></i></a>
