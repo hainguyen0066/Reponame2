@@ -146,7 +146,7 @@ $rowClass = 'col-xs-12 col-md-4';
             if (type == PAYMENT_TYPE_MOMO || type == PAYMENT_TYPE_BANK_TRANSFER) {
                 gold += gold * {{ env('GOLD_EXCHANGE_BONUS', 10) / 100 }};
             }
-            if (!username || !gold || !type) {
+            if (!username || !gold) {
                 $('.review-container').addClass('hidden');
                 return;
             }
@@ -163,6 +163,7 @@ $rowClass = 'col-xs-12 col-md-4';
             } else {
                 $('#bankWrapper').addClass('hidden');
             }
+            addGoldReview();
         }
 
         let savingTimeout = null;
