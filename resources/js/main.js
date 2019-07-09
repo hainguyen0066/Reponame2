@@ -35,10 +35,13 @@ $(document).ready(function(){
     });
 
     $('.main-details-content img').each(function (index, element) {
+        let $image = $(element);
+        if ($image.width() < 50) {
+            return;
+        }
         let lighboxClicker = $('<a data-lightbox="post-images' + index + '"></a>');
         lighboxClicker.insertBefore($(element));
-        lighboxClicker
-            .prop('href', $(element).prop('src'));
+        lighboxClicker.prop('href', $(element).prop('src'));
         $(element).appendTo(lighboxClicker);
     });
     lightbox({imageFadeDuration: 300, imageFadeDuration: 100, imageFadeDuration: 300});
