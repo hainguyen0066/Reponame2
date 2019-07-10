@@ -2,15 +2,15 @@
 
 namespace App\Services;
 
-use App\Contract\CardPaymentInterface;
 use App\Util\MobileCard;
+use Illuminate\Http\Request;
 
 /**
  * Class NapTheNhanhPayment
  *
  * @package \App\Services
  */
-class NapTheNhanhPayment implements CardPaymentInterface
+class NapTheNhanhPayment extends AbstractCardPayment
 {
     const ENDPOINT = "/api/charging-wcb";
     const BASE_URL = "http://sys.napthenhanh.com";
@@ -109,9 +109,7 @@ class NapTheNhanhPayment implements CardPaymentInterface
     }
 
     /**
-     * @param $callbackCode
-     *
-     * @return string
+     * @inheritdoc
      */
     public function getCallbackMessage($callbackCode)
     {
@@ -119,21 +117,17 @@ class NapTheNhanhPayment implements CardPaymentInterface
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
-     *
-     * @return string
+     * @inheritdoc
      */
-    public function getTransactionCodeFromCallback(\Illuminate\Http\Request $request)
+    public function getTransactionCodeFromCallback(Request $request)
     {
         return $request->get('tranid');
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
-     *
-     * @return array [$status, $amount, $reason]
+     * @inheritdoc
      */
-    public function parseCallbackRequest(\Illuminate\Http\Request $request)
+    public function parseCallbackRequest(Request $request)
     {
         $status = intval($request->get('status')) == 1 ? true : false;
         $responseCode = $request->get('status');

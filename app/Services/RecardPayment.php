@@ -2,15 +2,15 @@
 
 namespace App\Services;
 
-use App\Contract\CardPaymentInterface;
 use App\Util\MobileCard;
+use Illuminate\Http\Request;
 
 /**
  * Class RecardPayment
  *
  * @package \App\Services
  */
-class RecardPayment implements CardPaymentInterface
+class RecardPayment extends AbstractCardPayment
 {
     const ENDPOINT = "/api/card";
     const BASE_URL = "https://recard.vn";
@@ -125,7 +125,7 @@ class RecardPayment implements CardPaymentInterface
     /**
      * @inheritdoc
      */
-    public function getTransactionCodeFromCallback(\Illuminate\Http\Request $request)
+    public function getTransactionCodeFromCallback(Request $request)
     {
         $secretKey = $request->get('secret_key');
         if ($secretKey != $this->secretKey) {
@@ -138,7 +138,7 @@ class RecardPayment implements CardPaymentInterface
     /**
      * @inheritdoc
      */
-    public function parseCallbackRequest(\Illuminate\Http\Request $request)
+    public function parseCallbackRequest(Request $request)
     {
         $status = intval($request->get('status'));
         $reason = $request->get('reason');
@@ -146,4 +146,5 @@ class RecardPayment implements CardPaymentInterface
 
         return [$status, $amount, $reason];
     }
+
 }

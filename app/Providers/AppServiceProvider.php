@@ -53,6 +53,7 @@ class AppServiceProvider extends ServiceProvider
                     env('RECARD_SECRET_KEY')
                 );
             }
+            $service->setLogger(\Log::channel('card_payment'));
 
             return $service;
        });

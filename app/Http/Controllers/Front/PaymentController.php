@@ -113,36 +113,36 @@ class PaymentController extends BaseFrontController
         ];
         /** @var CardPaymentInterface $cardPayment */
         $cardPayment = app(CardPaymentInterface::class);
+        $cardPayment->logCallbackRequest($request);
         $transactionCode = $cardPayment->getTransactionCodeFromCallback($request);
         if (!$transactionCode) {
+            $response['message'] = "No transaction code found";
+            $cardPayment->logCallbackProcessed($response['message']);
             return response()->json($response);
         }
         /** @var Payment $record */
         $record = $paymentRepository->getByTransactionCode($transactionCode);
         if (!$record) {
             $response['message'] = "Transaction not found";
+            $cardPayment->logCallbackProcessed($response['message']);
             return response()->json($response, 404);
         }
         if (!empty($record->status)) {
             $response['message'] = "Transaction was processed successfully before";
+            $cardPayment->logCallbackProcessed($response['message']);
             return response()->json($response);
         }
         list($status, $amount, $callbackCode) = $cardPayment->parseCallbackRequest($request);
         // add gold
-        $cardStatus = $status === 1 ? true : false;
         $paymentRepository->updateCardPaymentTransaction($record, $status, $cardPayment->getCallbackMessage($callbackCode), $amount);
-        if (!$cardStatus) {
-            return response()->json($response);
-        }
-        if ($cardStatus && empty($record->gold_added)) {
+        if ($status && empty($record->gold_added)) {
             $gamecoin = $record->gamecoin;
             $result = $gameApiClient->addGold($record->username, $gamecoin);
             $paymentRepository->updateRecordAddedGold($record, $result);
+            $response['status'] = true;
         }
-        $response = [
-            'status' => true,
-            'message' => 'Processed'
-        ];
+        $response['message'] = 'Processed';
+        $cardPayment->logCallbackProcessed($response['message']);
 
         return response()->json($response);
     }

@@ -115,7 +115,9 @@ class PaymentRepository extends AbstractEloquentRepository
     public function updateCardPaymentTransaction(Payment $record, $status, $reason, $amount)
     {
         $record->gateway_status = $status;
-        $record->gateway_response = $reason;
+        if (!$status) {
+            $record->gateway_response = $reason;
+        }
         $record->gateway_amount = $amount;
         $record->finished = true;
         $record->save();
