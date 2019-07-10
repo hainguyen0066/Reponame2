@@ -18,6 +18,12 @@ class NapTheNhanhPayment implements CardPaymentInterface
     const CARD_TYPE_MOBIFONE = 'MOBIFONE';
     const CARD_TYPE_VINAPHONE = 'VINAPHONE';
 
+    public static $callbackReason = [
+        0 => "Thẻ không hợp lệ",
+        2 => "Thẻ đang chờ xử lý",
+        3 => "Thẻ sai mệnh giá",
+    ];
+
     /**
      * @var string
      */
@@ -63,7 +69,6 @@ class NapTheNhanhPayment implements CardPaymentInterface
             'sign'       => $signature,
             'tranid'     => $paymentId,
         ];
-        dump($params['form_params']);
         $response = $this->client->post(self::ENDPOINT, $params);
 
         return new NapTheNhanhResponse($response, $card);
@@ -104,13 +109,13 @@ class NapTheNhanhPayment implements CardPaymentInterface
     }
 
     /**
-     * @param $reasonCode
+     * @param $callbackCode
      *
      * @return string
      */
-    public function getReasonPhrase($reasonCode)
+    public function getCallbackMessage($callbackCode)
     {
-        return isset(self::$callbackReason[$reasonCode]) ? self::$callbackReason[$reasonCode] : "Lỗi không xác định `{$reasonCode}`";
+        return isset(self::$callbackReason[$callbackCode]) ? self::$callbackReason[$callbackCode] : "Lỗi không xác định `{$callbackCode}`";
     }
 
     /**
@@ -130,10 +135,10 @@ class NapTheNhanhPayment implements CardPaymentInterface
      */
     public function parseCallbackRequest(\Illuminate\Http\Request $request)
     {
-        $status = intval($request->get('status'));
-        $reason = $request->get('message');
+        $status = intval($request->get('status')) == 1 ? true : false;
+        $responseCode = $request->get('status');
         $amount = intval($request->get('amount'));
 
-        return [$status, $amount, $reason];
+        return [$status, $amount, $responseCode];
     }
 }

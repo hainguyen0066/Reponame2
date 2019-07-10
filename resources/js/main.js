@@ -1,3 +1,5 @@
+require('lightbox2');
+
 $(document).ready(function(){
     $('.menu-news div').click(function(){
         var tab_id = $(this).data('tab');
@@ -28,7 +30,19 @@ $(document).ready(function(){
 		prevArrow: '.pre-arrow',
 
     });
-    $(".popup-banner").click(function(){        
+    $(".popup-banner").click(function(){
         $(".popup-banner").css("display", "none");
-    })
+    });
+
+    $('.main-details-content img').each(function (index, element) {
+        let $image = $(element);
+        if ($image.width() < 50) {
+            return;
+        }
+        let lighboxClicker = $('<a data-lightbox="post-images' + index + '" style="cursor:zoom-in;"></a>');
+        lighboxClicker.insertBefore($(element));
+        lighboxClicker.prop('href', $(element).prop('src'));
+        $(element).appendTo(lighboxClicker);
+    });
+    lightbox({imageFadeDuration: 300, imageFadeDuration: 100, imageFadeDuration: 300});
 })

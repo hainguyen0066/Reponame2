@@ -25,10 +25,14 @@ class PasswordController extends BaseFrontController
 
     public function showChangePasswordForm()
     {
+        $this->setMetaTitle("Đổi mật khẩu cấp 1");
+
         return view('pages.change_password');
     }
     public function showChangePassword2Form()
     {
+        $this->setMetaTitle("Đổi mật khẩu cấp 2");
+
         return view('pages.change_password2');
     }
 

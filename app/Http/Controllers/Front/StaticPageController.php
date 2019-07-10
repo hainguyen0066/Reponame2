@@ -20,6 +20,8 @@ class StaticPageController extends BaseFrontController
             throw new NotFoundHttpException();
         }
 
+        $this->setMetaTitle($page->title);
+
         return view('pages.static_page', ['page' => $page]);
     }
 }

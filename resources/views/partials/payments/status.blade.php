@@ -21,7 +21,7 @@
         case \App\Models\Payment::PAYMENT_STATUS_GATEWAY_ADD_GOLD_ERROR:
             $classes = "{$defaultClasses} label-danger c-red";
             if ($isAdmin) {
-                $extraText = "Recard phản hồi OK! nhưng lỗi API nạp tiền. <br/>Có thể duyệt lại thẻ.";
+                $extraText = "Đối tác phản hồi OK! nhưng lỗi API nạp tiền. <br/>Có thể duyệt lại thẻ.";
             }
             $text = "Có lỗi xảy ra" . $extended;
             break;
@@ -31,7 +31,7 @@
             break;
         case \App\Models\Payment::PAYMENT_STATUS_RECARD_NOT_ACCEPT:
             $classes = "{$defaultClasses} label-danger c-red";
-            $text = $isAdmin ? "Recard không chấp nhận thẻ" : "Thẻ không hợp lệ";
+            $text = $isAdmin ? "Đối tác không chấp nhận thẻ" : "Thẻ không hợp lệ";
             break;
     }
 @endphp

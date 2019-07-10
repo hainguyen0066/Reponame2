@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Payment;
 use Illuminate\Notifications\Notifiable;
 
 /**
@@ -34,6 +35,23 @@ use Illuminate\Notifications\Notifiable;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereSettings($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string|null $utm_source
+ * @property string|null $utm_medium
+ * @property string|null $utm_campaign
+ * @property string|null $registered_ip
+ * @property string|null $phone
+ * @property string|null $raw_password
+ * @property string|null $password2
+ * @property string|null $raw_password2
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Payment[] $payments
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User wherePassword2($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User wherePhone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereRawPassword($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereRawPassword2($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereRegisteredIp($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereUtmCampaign($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereUtmMedium($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereUtmSource($value)
  */
 class User extends \TCG\Voyager\Models\User
 {
@@ -56,6 +74,30 @@ class User extends \TCG\Voyager\Models\User
     protected $hidden = [
         'password', 'remember_token', 'raw_password', 'password2', 'raw_password2'
     ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
+    }
+
+    /**
+     * @return int|mixed
+     */
+    public function getTotalPaid()
+    {
+        if ($this->payments->count() > 0) {
+            $paidArray = $this->payments->map(function ($item) {
+                return $item->status ? $item->amount : 0;
+            });
+
+            return $paidArray->sum();
+        }
+
+        return 0;
+    }
 
     /**
      * @return string
@@ -102,5 +144,13 @@ class User extends \TCG\Voyager\Models\User
     public function validatePassword2($password2)
     {
         return $password2 == $this->getRawPassword2();
+    }
+
+    /**
+     * @return bool
+     */
+    public function isNormalUser()
+    {
+        return empty($this->role_id);
     }
 }

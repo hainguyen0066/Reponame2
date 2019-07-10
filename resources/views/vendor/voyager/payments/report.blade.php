@@ -60,7 +60,7 @@
                                 <a href="#revenue_chart" aria-controls="revenue_chart" role="tab" data-toggle="tab">Biểu đồ</a>
                             </li>
                             {{--<li role="presentation">--}}
-                                {{--<a href="#users_paid_chart" aria-controls="users_paid_chart" role="tab" data-toggle="tab">Nguồn đăng ký</a>--}}
+                            {{--<a href="#users_paid_chart" aria-controls="users_paid_chart" role="tab" data-toggle="tab">Nguồn đăng ký</a>--}}
                             {{--</li>--}}
                         </ul>
 
@@ -70,7 +70,7 @@
                                 @include('admin.payments.revenue_chart')
                             </div>
                             {{--<div role="tabpanel" class="tab-pane" id="users_paid_chart">--}}
-                                {{--@include('admin.payments.users_paid_chart')--}}
+                            {{--@include('admin.payments.users_paid_chart')--}}
                             {{--</div>--}}
                         </div>
                     </div>

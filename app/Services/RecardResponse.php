@@ -42,7 +42,7 @@ class RecardResponse extends AbstractCardPaymentResponse
      *
      * @return mixed|string
      */
-    public function getReasonPhrase($reason)
+    public function getCallbackMessage($reason)
     {
         return isset(self::$callbackReason[$reason]) ? self::$callbackReason[$reason] : "Unknown reason `{$reason}`";
     }

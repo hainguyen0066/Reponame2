@@ -40,6 +40,12 @@ class RecardPayment implements CardPaymentInterface
      */
     private $client;
 
+    /**
+     * RecardPayment constructor.
+     *
+     * @param $merchantId
+     * @param $secretKey
+     */
     public function __construct($merchantId, $secretKey)
     {
         $this->merchantId = $merchantId;
@@ -109,19 +115,15 @@ class RecardPayment implements CardPaymentInterface
     }
 
     /**
-     * @param $reason
-     *
-     * @return mixed|string
+     * @inheritdoc
      */
-    public function getReasonPhrase($reason)
+    public function getCallbackMessage($callbackCode)
     {
-        return isset(self::$callbackReason[$reason]) ? self::$callbackReason[$reason] : "Lỗi không xác định `{$reason}`";
+        return isset(self::$callbackReason[$callbackCode]) ? self::$callbackReason[$callbackCode] : "Lỗi không xác định `{$callbackCode}`";
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
-     *
-     * @return string
+     * @inheritdoc
      */
     public function getTransactionCodeFromCallback(\Illuminate\Http\Request $request)
     {
@@ -134,9 +136,7 @@ class RecardPayment implements CardPaymentInterface
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
-     *
-     * @return array [$status, $amount, $reason]
+     * @inheritdoc
      */
     public function parseCallbackRequest(\Illuminate\Http\Request $request)
     {

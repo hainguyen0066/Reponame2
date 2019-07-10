@@ -27,8 +27,19 @@ class PaymentBreadController extends VoyagerBaseController
     const VOYAGER_SLUG = 'payments';
 
     protected $searchable = [
-        'id', 'username', 'user_id', 'card_serial', 'card_pin', 'card_type', 'payment_type', 'created_at'
+        'username', 'card_pin', 'card_serial', 'card_type', 'note', 'id', 'payment_type'
     ];
+
+    public function index(Request $request)
+    {
+        \Voyager::onLoadingView('voyager::payments.browse', function ($view, &$params) {
+            $types = Payment::getPaymentTypes();
+            unset($types[Payment::PAYMENT_TYPE_CARD]);
+            $params['paymentTypes'] = $types;
+        });
+
+        return parent::index($request);
+    }
 
     public function create(Request $request)
     {
@@ -122,9 +133,9 @@ class PaymentBreadController extends VoyagerBaseController
         // Check permission
         $this->authorize('add', app($dataType->model_name));
         $rules = [
-            'user_id'      => 'required|exists:users,id',
+            'user_id' => 'required|exists:users,id',
             'payment_type' => ['required', Rule::in(array_keys(Payment::getPaymentTypes()))],
-            'amount'       => 'integer|gte:10000',
+            'amount' => 'integer|gte:10000'
         ];
         $validator = Validator::make($request->all(), $rules);
 
@@ -226,6 +237,8 @@ class PaymentBreadController extends VoyagerBaseController
      */
     public function insertUpdateData($request, $slug, $rows, $data)
     {
+        /** @var PaymentRepository $paymentRepository */
+        $paymentRepository = app(PaymentRepository::class);
         if (empty($data->id)) {
             if ($error = $this->isPaymentAdded($request->get('user_id'), $request->get('amount'))) {
                 throw new PaymentApiException($error);
@@ -240,11 +253,17 @@ class PaymentBreadController extends VoyagerBaseController
             if ($data->payment_type == Payment::PAYMENT_TYPE_BANK_TRANSFER) {
                 $fields[] = 'pay_from';
             }
+            $currentStatus = Payment::getPaymentStatus($data);
+            if (
+                $data->payment_type == Payment::PAYMENT_TYPE_ADVANCE_DEBT
+                && $request->get('payment_type') != Payment::PAYMENT_TYPE_ADVANCE_DEBT
+                && $currentStatus == Payment::PAYMENT_STATUS_ADVANCE_DEBT_SUCCESS
+            ) {
+                $paymentRepository->payAdvanceDebt($data);
+            }
             $input = array_only($request->all(), $fields);
             $data->fill($input);
             if (isset($input['amount'])) {
-                /** @var PaymentRepository $paymentRepository */
-                $paymentRepository = app(PaymentRepository::class);
                 list($knb, $xu) = $paymentRepository->exchangeGamecoin($input['amount'], $data->payment_type);
                 $data->gamecoin = $knb + $xu;
             }
@@ -312,7 +331,7 @@ class PaymentBreadController extends VoyagerBaseController
         $extraData = [];
         $paymentType = $request->get('payment_type');
         $amount = $request->get('amount');
-        list($knb, $soxu) = $paymentRepository->exchangeGameCoin($amount, $paymentType);
+        $isSupportFee = $request->get('support_fee');
         $extraData['pay_method'] = Payment::displayPaymentType($paymentType);
         if ($paymentType == Payment::PAYMENT_TYPE_BANK_TRANSFER) {
             $extraData['pay_from'] = $request->get('pay_from');
@@ -320,8 +339,18 @@ class PaymentBreadController extends VoyagerBaseController
         if ($note = $request->get('note')) {
             $extraData['note'] = $note;
         }
-
+        if ($isSupportFee) {
+            // phí support không add xu cho gamer
+            $knb = $soxu = 0;
+        } else {
+            list($knb, $soxu) = $paymentRepository->exchangeGameCoin($amount, $paymentType);
+        }
         $payment = $paymentRepository->createPayment($user, $paymentType, $amount, $soxu, $extraData);
+        if ($isSupportFee) {
+            // phí support không add xu cho gamer
+            $paymentRepository->setDone($payment, true, false);
+            return $payment;
+        }
         /** @var JXApiClient $jxApi */
         $jxApi = app(JXApiClient::class);
         if ($addGoldStatus = $jxApi->addGold($user->name, $knb, $soxu)) {

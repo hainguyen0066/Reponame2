@@ -25,6 +25,9 @@ use Illuminate\Database\Eloquent\Builder;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Server whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Server whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string|null $game_server_id
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Server active()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BaseEloquentModel orderByPublishDate()
  */
 class Server extends BaseEloquentModel
 {

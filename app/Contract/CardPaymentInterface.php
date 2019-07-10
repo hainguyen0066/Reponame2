@@ -23,11 +23,11 @@ interface CardPaymentInterface
     public function useCard(MobileCard $card, $paymentId = '');
 
     /**
-     * @param $reasonCode
+     * @param $callbackCode
      *
      * @return string
      */
-    public function getReasonPhrase($reasonCode);
+    public function getCallbackMessage($callbackCode);
 
     /**
      * @param \Illuminate\Http\Request $request
@@ -39,7 +39,7 @@ interface CardPaymentInterface
     /**
      * @param \Illuminate\Http\Request $request
      *
-     * @return array [$status, $amount, $reason]
+     * @return array [$status, $amount, $callbackCode]
      */
     public function parseCallbackRequest(\Illuminate\Http\Request $request);
 }

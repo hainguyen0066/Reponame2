@@ -66,7 +66,7 @@ class CardPaymentApiClientMocked
                     )
                 );
             } else {
-                $response = new Response(200, [], json_encode(['tranid' => time(), 'success' => true]));
+                $response = new Response(200, [], json_encode(['transaction_code' => time(), 'success' => true]));
             }
 
         }

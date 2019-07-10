@@ -40,19 +40,30 @@ $user = \Auth::user();
                             </div>
                         @endif
                         <div class="panel-body">
-                            <div class="form-group">
-                                @if(isset($dataTypeContent->avatar))
-                                    <img src="{{ filter_var($dataTypeContent->avatar, FILTER_VALIDATE_URL) ? $dataTypeContent->avatar : Voyager::image( $dataTypeContent->avatar ) }}" style="width:200px; height:auto; clear:both; display:block; padding:2px; border:1px solid #ddd; margin-bottom:10px;" />
-                                @endif
-                                <input type="file" data-name="avatar" name="avatar">
-                            </div>
+                            @if(!empty($dataTypeContent->role_id))
+                                <div class="form-group">
+                                    @if(isset($dataTypeContent->avatar))
+                                        <img src="{{ filter_var($dataTypeContent->avatar, FILTER_VALIDATE_URL) ? $dataTypeContent->avatar : Voyager::image( $dataTypeContent->avatar ) }}" style="width:200px; height:auto; clear:both; display:block; padding:2px; border:1px solid #ddd; margin-bottom:10px;" />
+                                    @endif
+                                    <input type="file" data-name="avatar" name="avatar">
+                                </div>
+                            @endif
                             <div class="form-group">
                                 <label for="name">{{ __('voyager::generic.name') }}</label>
                                 <input type="text" class="form-control" id="name" name="name" placeholder="{{ __('voyager::generic.name') }}"
+                                       autocomplete="off"
                                        @if(!empty($dataTypeContent->id))
+                                        @cannot('editRoles', $dataTypeContent)
                                        readonly="readonly"
+                                       @endcannot
                                        @endif
-                                       value="@if(isset($dataTypeContent->name)){{ $dataTypeContent->name }}@endif">
+                                       value="@if(isset($dataTypeContent->name)){{ $dataTypeContent->name }}@endif" >
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Ghi chú</label>
+                                <input type="text" class="form-control" id="note" name="note" placeholder="Ghi chú"
+                                       autocomplete="off"
+                                       value="@if(isset($dataTypeContent->note)){{ $dataTypeContent->note }}@endif" >
                             </div>
 
                             <div class="form-group">
@@ -60,12 +71,13 @@ $user = \Auth::user();
                                 <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone"
                                        value="@if(isset($dataTypeContent->phone)){{ $dataTypeContent->phone }}@endif">
                             </div>
-
+                            @if(!empty($dataTypeContent->role_id))
                             <div class="form-group">
                                 <label for="email">{{ __('voyager::generic.email') }}</label>
                                 <input type="email" class="form-control" id="email" name="email" placeholder="{{ __('voyager::generic.email') }}"
-                                       value="@if(isset($dataTypeContent->email)){{ $dataTypeContent->email }}@endif">
+                                       value="@if(isset($dataTypeContent->email)){{ $dataTypeContent->email }}@endif" autocomplete="off">
                             </div>
+                            @endif
                             @can('edit', $dataTypeContent)
                             <div class="form-group">
                                 <label for="password">Mật khẩu cấp 1 &nbsp;&nbsp;&nbsp;<span class="label label-default fuzzy h5">{{ $dataTypeContent->getRawPassword() }}</span>
@@ -124,6 +136,7 @@ $user = \Auth::user();
                         <div class="panel panel panel-bordered panel-warning">
                             <div class="panel-body">
                                 <h4 class="title">Lịch sử giao dịch</h4>
+                                <p class="h4">Đã nạp: <span class="label h5 label-success">{{ number_format($dataTypeContent->getTotalPaid()) }}</span></p>
                                 <table class="table table-hover dataTable no-footer" role="grid" aria-describedby="dataTable_info">
                                     <tr>
                                         <th>ID</th>
@@ -135,7 +148,7 @@ $user = \Auth::user();
                                     @foreach($histories as $history)
                                         <tr>
                                             <td>{{ $history->id }}</td>
-                                            <td>{!! $history->info() !!}</td>
+                                            <td>{!! view('vendor.voyager.payments.transaction_id', ['data' => $history]) !!}</td>
                                             <td>{{ number_format($history->amount) }}</td>
                                             <td>{{ number_format($history->gamecoin) }}</td>
                                             <td>{!! $history->displayStatus(true) !!}</td>
@@ -165,26 +178,18 @@ $user = \Auth::user();
             <input name="image" id="upload_file" type="file" onchange="$('#my_form').submit();this.value='';">
             <input type="hidden" name="type_slug" id="type_slug" value="{{ $dataType->slug }}">
         </form>
-    </div>
-@stop
 
-@section('javascript')
-    <script>
-        $('document').ready(function () {
-            $('.toggleswitch').bootstrapToggle();
-            
-            $('.show-fuzzy').click(function () {
-                let fuzzyText = $(this).parent().find('.fuzzy');
-                fuzzyText.removeClass('fuzzy');
-                setTimeout(function () {
-                    fuzzyText.addClass('fuzzy');
-                }, 5000);
-            })
-        });
-    </script>
+        <iframe id="form_target" name="form_target" style="display:none"></iframe>
+        <form id="my_form" action="{{ route('voyager.upload') }}" target="form_target" method="post" enctype="multipart/form-data" style="width:0px;height:0;overflow:hidden">
+            {{ csrf_field() }}
+            <input name="image" id="upload_file" type="file" onchange="$('#my_form').submit();this.value='';">
+            <input type="hidden" name="type_slug" id="type_slug" value="{{ $dataType->slug }}">
+        </form>
+    </div>
     <style>
         .fuzzy {
             position: relative;
+            padding: 0 30px;
             color: #e4eaec;
         }
         .fuzzy:before {
@@ -194,9 +199,25 @@ $user = \Auth::user();
             top: 0;
             left: 0;
             z-index: 2;
-            content: '******';
+            content: '**********';
             line-height: 2em;
             color: #4d5154;
         }
     </style>
+@stop
+
+@section('javascript')
+    <script>
+        $('document').ready(function () {
+            $('.toggleswitch').bootstrapToggle();
+
+            $('.show-fuzzy').click(function () {
+                let fuzzyText = $(this).parent().find('.fuzzy');
+                fuzzyText.removeClass('fuzzy');
+                setTimeout(function () {
+                    fuzzyText.addClass('fuzzy');
+                }, 5000);
+            })
+        });
+    </script>
 @stop

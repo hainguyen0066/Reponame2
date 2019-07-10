@@ -7,8 +7,7 @@ use App\Models\Payment;
 use App\Repository\PaymentRepository;
 use App\Services\DiscordWebHookClient;
 use App\Services\JXApiClient;
-use App\Services\NapTheNhanhPayment;
-use App\Services\RecardPayment;
+use App\Services\T2GNotifierParser;
 use App\Util\MobileCard;
 use Illuminate\Http\Request;
 
@@ -52,7 +51,8 @@ class PaymentController extends BaseFrontController
         if ($error) {
             return response()->json(['error' => $error]);
         }
-        $cardPayment = $this->getCardPaymentService();
+        /** @var CardPaymentInterface $cardPayment */
+        $cardPayment = app(CardPaymentInterface::class);
         list($knb, $soxu) = $paymentRepository->exchangeGamecoin($card->getAmount(), Payment::PAYMENT_TYPE_CARD);
         $payment = $paymentRepository->createCardPayment($user, $card, $knb);
         if ($card->getType() == MobileCard::TYPE_ZING){
@@ -106,54 +106,13 @@ class PaymentController extends BaseFrontController
         return false;
     }
 
-    public function recardCallback(PaymentRepository $paymentRepository, JXApiClient $gameApiClient)
-    {
-        $response = [
-            'status' => false
-        ];
-        $transactionCode = request('transaction_code');
-        $status = intval(request('status'));
-        $reason = request('reason');
-        $amount = request('amount');
-//        $comment = request('comment');
-        $secretKey = request('secret_key');
-        if (!$transactionCode || $secretKey != env('RECARD_SECRET_KEY')) {
-            return response()->json($response);
-        }
-        $record = $paymentRepository->getByTransactionCode($transactionCode);
-        if (!$record) {
-            $record['message'] = "Transaction not found";
-            return response()->json($response, 404);
-        }
-        if (!empty($record->status)) {
-            $record['message'] = "Transaction was processed successfully before";
-            return response()->json($response);
-        }
-        // add gold
-        $recardStatus = $status === 1 ? true : false;
-        $paymentRepository->updateRecardTransaction($record, $status, $reason, $amount);
-        if (!$recardStatus) {
-            return response()->json($response);
-        }
-        if ($recardStatus && empty($record->gold_added)) {
-            $gamecoin = $record->gamecoin;
-            $result = $gameApiClient->addGold($record->username, $gamecoin);
-            $paymentRepository->updateRecordAddedGold($record, $result);
-        }
-        $response = [
-            'status' => true,
-            'message' => 'Processed'
-        ];
-
-        return response()->json($response);
-    }
-
     public function cardPaymentCallback(PaymentRepository $paymentRepository, JXApiClient $gameApiClient, Request $request)
     {
         $response = [
             'status' => false
         ];
-        $cardPayment = $this->getCardPaymentService();
+        /** @var CardPaymentInterface $cardPayment */
+        $cardPayment = app(CardPaymentInterface::class);
         $transactionCode = $cardPayment->getTransactionCodeFromCallback($request);
         if (!$transactionCode) {
             return response()->json($response);
@@ -161,17 +120,17 @@ class PaymentController extends BaseFrontController
         /** @var Payment $record */
         $record = $paymentRepository->getByTransactionCode($transactionCode);
         if (!$record) {
-            $record['message'] = "Transaction not found";
+            $response['message'] = "Transaction not found";
             return response()->json($response, 404);
         }
         if (!empty($record->status)) {
-            $record['message'] = "Transaction was processed successfully before";
+            $response['message'] = "Transaction was processed successfully before";
             return response()->json($response);
         }
-        list($status, $amount, $reason) = $cardPayment->parseCallbackRequest($request);
+        list($status, $amount, $callbackCode) = $cardPayment->parseCallbackRequest($request);
         // add gold
         $cardStatus = $status === 1 ? true : false;
-        $paymentRepository->updateCardPaymentTransaction($record, $status, $cardPayment->getReasonPhrase($reason), $amount);
+        $paymentRepository->updateCardPaymentTransaction($record, $status, $cardPayment->getCallbackMessage($callbackCode), $amount);
         if (!$cardStatus) {
             return response()->json($response);
         }
@@ -209,7 +168,12 @@ class PaymentController extends BaseFrontController
         return $card;
     }
 
-    public function alertTransaction()
+    /**
+     * Received Internet Banking SMS alert from T2G_Notifier Android app and send to Discord webhook
+     *
+     * @param \App\Services\T2GNotifierParser $parser
+     */
+    public function alertTransaction(T2GNotifierParser $parser)
     {
         $message = request('message');
         $createdAt = request('createdAt');
@@ -220,53 +184,13 @@ class PaymentController extends BaseFrontController
         $stkVCB = env('BANKING_ACCOUNT_VIETCOMBANK');
         $alert = "";
         if ($stkDongA && strpos($message, "TK {$stkDongA}") !== false) {
-            //DongA Bank thong bao: TK 0110666501 da thay doi: +200,000 VND. Nop tien mat(NGUYEN VAN LOI NOP TM-LONG NHAN 11). So du hien tai la:...
-            $checkReceivedMoney = strpos($message, 'da thay doi: +');
-            if($checkReceivedMoney === false) {
-                return;
-            }
-            $beginOfAmount = $checkReceivedMoney + 14;
-            $endOfAmount = strpos(substr($message, $beginOfAmount), 'VND');
-            $amount = trim(substr($message, $beginOfAmount, $endOfAmount));
-            $note = trim(substr($message, $beginOfAmount + $endOfAmount + 4));
-            $note = trim(substr($note, 0, strpos($note, "So du hien tai")));
-            $alert = "[Đông Á Bank] Nhận được số tiền `{$amount}` vào lúc `{$createdAt}`. Nội dung: `{$note}`";
-
+            $alert = $parser->parseDongABankSms($message, $createdAt);
         } elseif ($stkVCB && strpos($message, "TK {$stkVCB}") !== false) {
-            //SD TK 0071001400512 +200,000VND luc 19-06-2019 20:50:40. SD 83,157,241VND. Ref IBVCB.1906190052065001.dangthanhhai
-            $checkReceivedMoney = strpos($message, "TK {$stkVCB} +");
-            if($checkReceivedMoney === false) {
-                return;
-            }
-            $beginOfAmount = $checkReceivedMoney + 18;
-            $endOfAmount = strpos(substr($message, $beginOfAmount), 'VND');
-            $amount = trim(substr($message, $beginOfAmount, $endOfAmount));
-            $note = trim(substr($message, strpos($message, '. Ref') + 6));
-            $alert = "[Vietcombank] Nhận được số tiền `{$amount}` vào lúc `{$createdAt}`. Nội dung: `{$note}`";
+            $alert = $parser->parseVietcomBankSms($stkVCB, $message, $createdAt);
         }
 
         if ($alert) {
             $this->discord->send($alert);
         }
-    }
-
-    /**
-     * @return \App\Contract\CardPaymentInterface
-     */
-    private function getCardPaymentService()
-    {
-        if (env('CARD_PAYMENT_PARTNER') == CardPaymentInterface::PARTNER_NAPTHENHANH) {
-            $service = new NapTheNhanhPayment(
-                env('NAPTHENHANH_PARTNER_ID'),
-                env('NAPTHENHANH_PARTNER_KEY')
-            );
-        } else {
-            $service = new RecardPayment(
-                env('RECARD_MERCHANT_ID'),
-                env('RECARD_SECRET_KEY')
-            );
-        }
-
-        return $service;
     }
 }

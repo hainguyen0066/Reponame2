@@ -26,14 +26,15 @@ class UserPolicy extends \TCG\Voyager\Policies\UserPolicy
      */
     public function edit(User $user, $model)
     {
+        /** @var \App\User $model */
         // Does this record belong to the current user?
         $current = $user->id === $model->id;
 
         return $current
             || (
-                (   $user->hasRole('admin') && !$model->hasRole('admin'))
-                    || ($user->hasRole('operator') && !$model->hasRole('operator') && !$model->hasRole('admin')
-                )
+                ( $user->hasRole('admin') && !$model->hasRole('admin'))
+                || ($user->hasRole('dev') && !$model->hasRole('dev') && !$model->hasRole('admin'))
+                || ($user->hasRole('operator') && $model->isNormalUser())
                 && $this->checkPermission($user, $model, 'edit')
             );
     }
@@ -54,7 +55,7 @@ class UserPolicy extends \TCG\Voyager\Policies\UserPolicy
         return (
             $user->hasRole('admin')
             && (
-                $current || !$model->hasRole('admin')
+                $user->id == 1 || $current || !$model->hasRole('admin')
                 // admin cannot change role of other admin
             )
         );

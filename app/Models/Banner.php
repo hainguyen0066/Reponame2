@@ -27,6 +27,8 @@ use TCG\Voyager\Traits\Resizable;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Banner whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Banner whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BaseEloquentModel active()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BaseEloquentModel orderByPublishDate()
  */
 class Banner extends BaseEloquentModel
 {

@@ -10,7 +10,7 @@
     <link rel="shortcut icon" href="{{ voyager_asset('images/logo-icon.png') }}" type="image/x-icon">
     <!-- App CSS -->
     <link rel="stylesheet" href="{{ voyager_asset('css/app.css') }}">
-    @yield('css')
+@yield('css')
 
 <!-- Few Dynamic Styles -->
     <style type="text/css">
@@ -27,9 +27,12 @@
         .voyager .breadcrumb a{
             color:{{ config('voyager.primary_color','#22A7F0') }};
         }
+        .table, .form-control, label{
+            color: black;
+        }
     </style>
 
-    @if(!empty(config('voyager.additional_css')))<!-- Additional CSS -->
+@if(!empty(config('voyager.additional_css')))<!-- Additional CSS -->
     @foreach(config('voyager.additional_css') as $css)<link rel="stylesheet" type="text/css" href="{{ asset($css) }}">@endforeach
     @endif
 
@@ -100,9 +103,22 @@
     @include('voyager::partials.app-footer')
 </div>
 
+<div tabindex="-1" class="modal fade" id="thumbnailModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script type="text/javascript" src="{{ voyager_asset('js/app.js') }}"></script>
 <script>
-    @if(Session::has('alerts'))
+            @if(Session::has('alerts'))
     let alerts = {!! json_encode(Session::get('alerts')) !!};
     helpers.displayAlerts(alerts, toastr);
     @endif

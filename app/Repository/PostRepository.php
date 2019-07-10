@@ -102,12 +102,10 @@ class PostRepository extends AbstractEloquentRepository
      *
      * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|null|object
      */
-    public function getPublishedPostBySlug($postSlug)
+    public function getPostBySlug($postSlug)
     {
         $query = $this->query();
-        $query->published()
-            ->whereSlug($postSlug)
-        ;
+        $query->whereSlug($postSlug);
 
         return $query->first();
     }
