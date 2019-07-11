@@ -35,6 +35,23 @@ use Illuminate\Notifications\Notifiable;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereSettings($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string|null $utm_source
+ * @property string|null $utm_medium
+ * @property string|null $utm_campaign
+ * @property string|null $registered_ip
+ * @property string|null $phone
+ * @property string|null $raw_password
+ * @property string|null $password2
+ * @property string|null $raw_password2
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Payment[] $payments
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User wherePassword2($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User wherePhone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereRawPassword($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereRawPassword2($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereRegisteredIp($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereUtmCampaign($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereUtmMedium($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereUtmSource($value)
  */
 class User extends \TCG\Voyager\Models\User
 {

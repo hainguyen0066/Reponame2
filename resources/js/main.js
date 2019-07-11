@@ -39,7 +39,7 @@ $(document).ready(function(){
         if ($image.width() < 50) {
             return;
         }
-        let lighboxClicker = $('<a data-lightbox="post-images' + index + '"></a>');
+        let lighboxClicker = $('<a data-lightbox="post-images' + index + '" style="cursor:zoom-in;"></a>');
         lighboxClicker.insertBefore($(element));
         lighboxClicker.prop('href', $(element).prop('src'));
         $(element).appendTo(lighboxClicker);

@@ -29,6 +29,8 @@ namespace App\Models;
  * @method static \Illuminate\Database\Eloquent\Builder|\TCG\Voyager\Models\Category withTranslation($locale = null, $fallback = true)
  * @method static \Illuminate\Database\Eloquent\Builder|\TCG\Voyager\Models\Category withTranslations($locales = null, $fallback = true)
  * @mixin \Eloquent
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Category active()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Category orderByPublishDate()
  */
 class Category extends \TCG\Voyager\Models\Category
 {

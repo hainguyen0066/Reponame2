@@ -90,7 +90,7 @@ class BaseFrontController extends Controller
      */
     protected function setMetaImage($image)
     {
-        if (strpos(trim($image), 'http') !== 0) {
+        if ($image && strpos(trim($image), 'http') !== 0) {
             $image = url($image);
         }
         view()->share('meta_image', $image ?? asset(config('site.seo.meta_image')));

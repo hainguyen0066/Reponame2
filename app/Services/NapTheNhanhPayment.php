@@ -6,50 +6,43 @@ use App\Util\MobileCard;
 use Illuminate\Http\Request;
 
 /**
- * Class RecardPayment
+ * Class NapTheNhanhPayment
  *
  * @package \App\Services
  */
-class RecardPayment extends AbstractCardPayment
+class NapTheNhanhPayment extends AbstractCardPayment
 {
-    const ENDPOINT = "/api/card";
-    const BASE_URL = "https://recard.vn";
-    const CARD_TYPE_VIETTEL = 1;
-    const CARD_TYPE_MOBIFONE = 2;
-    const CARD_TYPE_VINAPHONE = 3;
+    const ENDPOINT = "/api/charging-wcb";
+    const BASE_URL = "http://sys.napthenhanh.com";
+    const CARD_TYPE_VIETTEL = 'VIETTEL';
+    const CARD_TYPE_MOBIFONE = 'MOBIFONE';
+    const CARD_TYPE_VINAPHONE = 'VINAPHONE';
 
     public static $callbackReason = [
-        1 => "Thẻ không tồn tại",
-        2 => "Thẻ đã được sử dụng",
-        3 => "Thẻ không sử dụng được",
-        4 => "Thẻ sai mệnh giá",
+        0 => "Thẻ không hợp lệ",
+        2 => "Thẻ đang chờ xử lý",
+        3 => "Thẻ sai mệnh giá",
     ];
 
     /**
      * @var string
      */
-    private $merchantId;
+    private $partnerId;
 
     /**
      * @var string
      */
-    private $secretKey;
+    private $partnerKey;
 
     /**
      * @var \GuzzleHttp\Client
      */
     private $client;
 
-    /**
-     * RecardPayment constructor.
-     *
-     * @param $merchantId
-     * @param $secretKey
-     */
-    public function __construct($merchantId, $secretKey)
+    public function __construct($partnerId, $partnerKey)
     {
-        $this->merchantId = $merchantId;
-        $this->secretKey = $secretKey;
+        $this->partnerId = $partnerId;
+        $this->partnerKey = $partnerKey;
         if (env('CARD_PAYMENT_API_MOCK', false)) {
             $this->client = new CardPaymentApiClientMocked();
         } else {
@@ -66,32 +59,33 @@ class RecardPayment extends AbstractCardPayment
      */
     public function useCard(MobileCard $card, $paymentId = '')
     {
-        $signature = $this->sign($card);
+        $signature = $this->sign($card, $paymentId);
         $params['form_params'] = [
-            'merchant_id' => $this->merchantId,
-            'secret_key'  => $this->secretKey,
-            'type'        => $this->getCardType($card),
-            'serial'      => $card->getSerial(),
-            'code'        => $card->getCode(),
-            'amount'      => $card->getAmount(),
-            'signature'   => $signature,
+            'partner_id' => $this->partnerId,
+            'type'       => $this->getCardType($card),
+            'serial'     => $card->getSerial(),
+            'pin'        => $card->getCode(),
+            'amount'     => $card->getAmount(),
+            'sign'       => $signature,
+            'tranid'     => $paymentId,
         ];
         $response = $this->client->post(self::ENDPOINT, $params);
 
-        return new RecardResponse($response, $card);
+        return new NapTheNhanhResponse($response, $card);
     }
 
     /**
-     * @param $card
+     * @param \App\Util\MobileCard $card
+     * @param                      $paymentId
      *
      * @return string
      */
-    private function sign(MobileCard $card)
+    private function sign(MobileCard $card, $paymentId)
     {
         $type = $this->getCardType($card);
-        $data = $this->merchantId . $type . $card->getSerial() . $card->getCode() . $card->getAmount();
+        $signature = $this->partnerId . $this->partnerKey . $type . $card->getCode() . $card->getSerial() . $card->getAmount() . $paymentId;
 
-        return hash_hmac('sha256', $data, $this->secretKey);
+        return md5($signature);
     }
 
     /**
@@ -127,12 +121,7 @@ class RecardPayment extends AbstractCardPayment
      */
     public function getTransactionCodeFromCallback(Request $request)
     {
-        $secretKey = $request->get('secret_key');
-        if ($secretKey != $this->secretKey) {
-            return '';
-        }
-
-        return $request->get('transaction_code');
+        return $request->get('tranid');
     }
 
     /**
@@ -140,11 +129,10 @@ class RecardPayment extends AbstractCardPayment
      */
     public function parseCallbackRequest(Request $request)
     {
-        $status = intval($request->get('status'));
-        $reason = $request->get('reason');
+        $status = intval($request->get('status')) == 1 ? true : false;
+        $responseCode = $request->get('status');
         $amount = intval($request->get('amount'));
 
-        return [$status, $amount, $reason];
+        return [$status, $amount, $responseCode];
     }
-
 }

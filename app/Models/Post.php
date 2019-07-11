@@ -51,6 +51,9 @@ use Illuminate\Support\Carbon;
  * @method static \Illuminate\Database\Eloquent\Builder|\TCG\Voyager\Models\Post withTranslation($locale = null, $fallback = true)
  * @method static \Illuminate\Database\Eloquent\Builder|\TCG\Voyager\Models\Post withTranslations($locales = null, $fallback = true)
  * @mixin \Eloquent
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Post active()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Post categorySlug($categorySlug)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Post orderByPublishDate()
  */
 class Post extends \TCG\Voyager\Models\Post
 {

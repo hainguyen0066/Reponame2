@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Front;
 
+use App\Contract\CardPaymentInterface;
 use App\Models\Payment;
 use App\Repository\PaymentRepository;
 use App\Services\DiscordWebHookClient;
 use App\Services\JXApiClient;
-use App\Services\RecardPayment;
+use App\Services\T2GNotifierParser;
 use App\Util\MobileCard;
+use Illuminate\Http\Request;
 
 /**
  * Class PaymentController
@@ -49,18 +51,16 @@ class PaymentController extends BaseFrontController
         if ($error) {
             return response()->json(['error' => $error]);
         }
-        $recard = new RecardPayment(
-            env('RECARD_MERCHANT_ID'),
-            env('RECARD_SECRET_KEY')
-        );
+        /** @var CardPaymentInterface $cardPayment */
+        $cardPayment = app(CardPaymentInterface::class);
         list($knb, $soxu) = $paymentRepository->exchangeGamecoin($card->getAmount(), Payment::PAYMENT_TYPE_CARD);
         $payment = $paymentRepository->createCardPayment($user, $card, $knb);
         if ($card->getType() == MobileCard::TYPE_ZING){
             $this->discord->send("`{$user->name}` vừa submit 1 thẻ Zing `" . $card->getAmount() / 1000 . "k`");
         } else {
-            $result = $recard->useCard($card);
+            $result = $cardPayment->useCard($card, $payment->getKey());
             if ($result->isSuccess() && $transactionCode = $result->getTransactionCode()) {
-                $paymentRepository->updateRecardPayment($payment, $transactionCode);
+                $paymentRepository->updateCardPayment($payment, $transactionCode);
             } else {
                 return response()->json(["error" => implode('<br/>', array_first(array_values($result->getErrors())))]);
             }
@@ -106,48 +106,43 @@ class PaymentController extends BaseFrontController
         return false;
     }
 
-    public function recardCallback(PaymentRepository $paymentRepository, JXApiClient $gameApiClient)
+    public function cardPaymentCallback(PaymentRepository $paymentRepository, JXApiClient $gameApiClient, Request $request)
     {
         $response = [
             'status' => false
         ];
-        $transactionCode = request('transaction_code');
-        $status = intval(request('status'));
-        $reason = request('reason');
-        $amount = request('amount');
-//        $comment = request('comment');
-        $secretKey = request('secret_key');
-        $posts = request();
-        if (isset($posts['secret_key'])) {
-            unset($posts['secret_key']);
-        }
-        if (!$transactionCode || $secretKey != env('RECARD_SECRET_KEY')) {
+        /** @var CardPaymentInterface $cardPayment */
+        $cardPayment = app(CardPaymentInterface::class);
+        $cardPayment->logCallbackRequest($request);
+        $transactionCode = $cardPayment->getTransactionCodeFromCallback($request);
+        if (!$transactionCode) {
+            $response['message'] = "No transaction code found";
+            $cardPayment->logCallbackProcessed($response['message']);
             return response()->json($response);
         }
+        /** @var Payment $record */
         $record = $paymentRepository->getByTransactionCode($transactionCode);
         if (!$record) {
-            $record['message'] = "Transaction not found";
+            $response['message'] = "Transaction not found";
+            $cardPayment->logCallbackProcessed($response['message']);
             return response()->json($response, 404);
         }
         if (!empty($record->status)) {
-            $record['message'] = "Transaction was processed successfully before";
+            $response['message'] = "Transaction was processed successfully before";
+            $cardPayment->logCallbackProcessed($response['message']);
             return response()->json($response);
         }
+        list($status, $amount, $callbackCode) = $cardPayment->parseCallbackRequest($request);
         // add gold
-        $recardStatus = $status === 1 ? true : false;
-        $paymentRepository->updateRecardTransaction($record, $status, $reason, $amount);
-        if (!$recardStatus) {
-            return response()->json($response);
-        }
-        if ($recardStatus && empty($record->gold_added)) {
+        $paymentRepository->updateCardPaymentTransaction($record, $status, $cardPayment->getCallbackMessage($callbackCode), $amount);
+        if ($status && empty($record->gold_added)) {
             $gamecoin = $record->gamecoin;
             $result = $gameApiClient->addGold($record->username, $gamecoin);
             $paymentRepository->updateRecordAddedGold($record, $result);
+            $response['status'] = true;
         }
-        $response = [
-            'status' => true,
-            'message' => 'Processed'
-        ];
+        $response['message'] = 'Processed';
+        $cardPayment->logCallbackProcessed($response['message']);
 
         return response()->json($response);
     }
@@ -175,13 +170,13 @@ class PaymentController extends BaseFrontController
 
     /**
      * Received Internet Banking SMS alert from T2G_Notifier Android app and send to Discord webhook
+     *
+     * @param \App\Services\T2GNotifierParser $parser
      */
-    public function alertTransaction()
+    public function alertTransaction(T2GNotifierParser $parser)
     {
-        $sender = request('sender');
         $message = request('message');
         $createdAt = request('createdAt');
-        \Log::info("Banking Alert received: Sender {$sender}, message: {$message}");
         if (!$message) {
             exit();
         }
@@ -189,61 +184,13 @@ class PaymentController extends BaseFrontController
         $stkVCB = env('BANKING_ACCOUNT_VIETCOMBANK');
         $alert = "";
         if ($stkDongA && strpos($message, "TK {$stkDongA}") !== false) {
-            $alert = $this->parseDongABankSms($message, $createdAt, $sender);
+            $alert = $parser->parseDongABankSms($message, $createdAt);
         } elseif ($stkVCB && strpos($message, "TK {$stkVCB}") !== false) {
-            $alert = $this->parseVietcomBankSms($stkVCB, $message, $createdAt, $sender);
+            $alert = $parser->parseVietcomBankSms($stkVCB, $message, $createdAt);
         }
 
         if ($alert) {
             $this->discord->send($alert);
         }
-    }
-
-    /**
-     * @param        $message
-     * @param        $createdAt
-     * @param string $sender
-     *
-     * @return string|void
-     */
-    private function parseDongABankSms($message, $createdAt, $sender = '')
-    {
-        //DongA Bank thong bao: TK 0110666501 da thay doi: +200,000 VND. Nop tien mat(NGUYEN VAN LOI NOP TM-LONG NHAN 11). So du hien tai la:...
-        $checkReceivedMoney = strpos($message, 'da thay doi: +');
-        if($checkReceivedMoney === false) {
-            return;
-        }
-        $beginOfAmount = $checkReceivedMoney + 14;
-        $endOfAmount = strpos(substr($message, $beginOfAmount), 'VND');
-        $amount = trim(substr($message, $beginOfAmount, $endOfAmount));
-        $note = trim(substr($message, $beginOfAmount + $endOfAmount + 4));
-        $note = trim(substr($note, 0, strpos($note, "So du hien tai")));
-        $alert = "[Đông Á Bank] Nhận được số tiền `{$amount}` vào lúc `{$createdAt}`. Nội dung: `{$note}`";
-
-        return $alert;
-    }
-
-    /**
-     * @param        $stkVCB
-     * @param        $message
-     * @param        $createdAt
-     * @param string $sender
-     *
-     * @return string|void
-     */
-    private function parseVietcomBankSms($stkVCB, $message, $createdAt, $sender = '')
-    {
-        //SD TK 0071001400512 +200,000VND luc 19-06-2019 20:50:40. SD 83,157,241VND. Ref IBVCB.1906190052065001.dangthanhhai
-        $checkReceivedMoney = strpos($message, "TK {$stkVCB} +");
-        if($checkReceivedMoney === false) {
-            return;
-        }
-        $beginOfAmount = $checkReceivedMoney + 18;
-        $endOfAmount = strpos(substr($message, $beginOfAmount), 'VND');
-        $amount = trim(substr($message, $beginOfAmount, $endOfAmount));
-        $note = trim(substr($message, strpos($message, '. Ref') + 6));
-        $alert = "[Vietcombank] Nhận được số tiền `{$amount}` vào lúc `{$createdAt}`. Nội dung: `{$note}`";
-
-        return $alert;
     }
 }

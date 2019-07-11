@@ -2,9 +2,13 @@
 
 namespace App\Providers;
 
+use App\Contract\CardPaymentInterface;
 use App\Observers\UserObserver;
 use App\Services\JXApiClient;
+use App\Services\NapTheNhanhPayment;
+use App\Services\RecardPayment;
 use App\User;
+use function foo\func;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
@@ -36,5 +40,22 @@ class AppServiceProvider extends ServiceProvider
 
             return new JXApiClient($baseUrl, $apiKey);
         });
+
+        $this->app->singleton(CardPaymentInterface::class, function($app) {
+            if (env('CARD_PAYMENT_PARTNER') == CardPaymentInterface::PARTNER_NAPTHENHANH) {
+                $service = new NapTheNhanhPayment(
+                    env('NAPTHENHANH_PARTNER_ID'),
+                    env('NAPTHENHANH_PARTNER_KEY')
+                );
+            } else {
+                $service = new RecardPayment(
+                    env('RECARD_MERCHANT_ID'),
+                    env('RECARD_SECRET_KEY')
+                );
+            }
+            $service->setLogger(\Log::channel('card_payment'));
+
+            return $service;
+       });
     }
 }
