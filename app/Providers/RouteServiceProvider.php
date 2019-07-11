@@ -56,6 +56,11 @@ class RouteServiceProvider extends ServiceProvider
             'as' => 'front.payment.transaction_alert'
         ]);
 
+        Route::any('/payment/card-callback', [
+            'uses' => '\App\Http\Controllers\Front\PaymentController@cardPaymentCallback',
+            'as' => 'front.payment.card_payment_callback'
+        ]);
+
         Route::middleware('web')
              ->namespace($this->namespace)
              ->group(base_path('routes/web.php'));
@@ -64,15 +69,6 @@ class RouteServiceProvider extends ServiceProvider
             ->namespace($this->namespace . "\Front")
             ->group(base_path('routes/front.php'));
 
-        Route::post('/payment/recard', [
-            'uses' => '\App\Http\Controllers\Front\PaymentController@recardCallback',
-            'as' => 'front.payment.recard_callback'
-        ]);
-
-        Route::any('/payment/card-callback', [
-            'uses' => '\App\Http\Controllers\Front\PaymentController@cardPaymentCallback',
-            'as' => 'front.payment.card_payment_callback'
-        ]);
     }
 
     /**
