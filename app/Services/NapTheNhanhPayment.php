@@ -41,6 +41,7 @@ class NapTheNhanhPayment extends AbstractCardPayment
 
     public function __construct($partnerId, $partnerKey)
     {
+        parent::__construct();
         $this->partnerId = $partnerId;
         $this->partnerKey = $partnerKey;
         if (env('CARD_PAYMENT_API_MOCK', false)) {

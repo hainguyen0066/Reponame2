@@ -48,6 +48,7 @@ class RecardPayment extends AbstractCardPayment
      */
     public function __construct($merchantId, $secretKey)
     {
+        parent::__construct();
         $this->merchantId = $merchantId;
         $this->secretKey = $secretKey;
         if (env('CARD_PAYMENT_API_MOCK', false)) {

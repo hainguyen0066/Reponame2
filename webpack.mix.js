@@ -24,8 +24,8 @@ mix.copyDirectory('resources/images', 'public/images')
     .sass('resources/sass/web_launcher.scss', 'public/css/web_launcher.css')
     .version();
 
-mix.js('resources/js/landing/index.js', 'public/js/landing.js') // tương tự JS    
-    .copyDirectory('resources/images/landing', 'public/images/landing')
+mix.copyDirectory('resources/images/landing', 'public/images/landing')
+    // .js('resources/js/landing/index.js', 'public/js/landing.js')
     .sass('resources/sass/landing.scss', 'public/css/landing.css')
     .version();
 

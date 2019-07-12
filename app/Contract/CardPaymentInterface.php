@@ -65,4 +65,11 @@ interface CardPaymentInterface
      * @return void
      */
     public function logCallbackProcessed($message);
+
+    /**
+     * @param \App\Contract\CardPaymentResponseInterface $result
+     *
+     * @return void
+     */
+    public function logCardPaymentError(CardPaymentResponseInterface $result);
 }

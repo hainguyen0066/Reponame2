@@ -20,11 +20,11 @@
         "vue": "^2.6.10"
     },
     "dependencies": {
-        "alertifyjs": "^1.11.2",
         "chart.js": "^2.8.0",
         "daterangepicker": "^3.0.3",
         "highcharts": "^7.0.1",
         "jquery": "^3.3.1",
+        "jquery-confirm": "^3.3.4",
         "lightbox2": "^2.11.0",
         "moment": "^2.24.0"
     }

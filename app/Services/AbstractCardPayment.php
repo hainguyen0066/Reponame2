@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Contract\CardPaymentInterface;
+use App\Contract\CardPaymentResponseInterface;
 use Illuminate\Http\Request;
 use Psr\Log\LoggerInterface;
 
@@ -19,6 +20,19 @@ abstract class AbstractCardPayment implements CardPaymentInterface
     protected $logger;
 
     /**
+     * @var string
+     */
+    protected $gateway;
+
+    /**
+     * AbstractCardPayment constructor.
+     */
+    public function __construct()
+    {
+        $this->gateway = env('CARD_PAYMENT_PARTNER');
+    }
+
+    /**
      * @param \Psr\Log\LoggerInterface $logger
      *
      * @return \App\Contract\CardPaymentInterface|void
@@ -33,7 +47,7 @@ abstract class AbstractCardPayment implements CardPaymentInterface
      */
     public function logCallbackRequest(Request $request)
     {
-        $this->logger->info("Card payment callback received", ['data' => $request->all(), 'gateway' => env('CARD_PAYMENT_PARTNER')]);
+        $this->logger->info("Card payment callback received", ['data' => $request->all(), 'gateway' => $this->gateway]);
     }
 
     /**
@@ -41,6 +55,14 @@ abstract class AbstractCardPayment implements CardPaymentInterface
      */
     public function logCallbackProcessed($message)
     {
-        $this->logger->info("Card payment callback processed", ['status' => $message, 'gateway' => env('CARD_PAYMENT_PARTNER')]);
+        $this->logger->info("Card payment callback processed", ['status' => $message, 'gateway' => $this->gateway]);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function logCardPaymentError(CardPaymentResponseInterface $response)
+    {
+        $this->logger->info("Card payment error", ['data' => $response->getBody(), 'gateway' => $this->gateway]);
     }
 }

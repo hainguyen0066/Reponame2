@@ -1,4 +1,4 @@
-require('lightbox2');
+import * as lightbox from 'lightbox2';
 
 $(document).ready(function(){
     $('.menu-news div').click(function(){
@@ -44,5 +44,5 @@ $(document).ready(function(){
         lighboxClicker.prop('href', $(element).prop('src'));
         $(element).appendTo(lighboxClicker);
     });
-    lightbox({imageFadeDuration: 300, imageFadeDuration: 100, imageFadeDuration: 300});
+    lightbox.option({imageFadeDuration: 300, imageFadeDuration: 100, imageFadeDuration: 300});
 })

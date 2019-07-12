@@ -62,7 +62,8 @@ class PaymentController extends BaseFrontController
             if ($result->isSuccess() && $transactionCode = $result->getTransactionCode()) {
                 $paymentRepository->updateCardPayment($payment, $transactionCode);
             } else {
-                return response()->json(["error" => implode('<br/>', array_first(array_values($result->getErrors())))]);
+                $cardPayment->logCardPaymentError($result);
+                return response()->json(["error" => implode('<br/>', array_first($result->getErrors()))]);
             }
         }
 
