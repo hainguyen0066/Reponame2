@@ -1,4 +1,4 @@
-import * as lightbox from 'lightbox2';
+require('jquery-confirm');
 
 $(document).ready(function(){
     $('.menu-news div').click(function(){
@@ -34,15 +34,23 @@ $(document).ready(function(){
         $(".popup-banner").css("display", "none");
     });
 
-    $('.main-details-content img').each(function (index, element) {
+    $('.main-details-content .post-body img').each(function (index, element) {
         let $image = $(element);
         if ($image.width() < 50) {
             return;
         }
-        let lighboxClicker = $('<a data-lightbox="post-images' + index + '" style="cursor:zoom-in;"></a>');
+        let lighboxClicker = $('<a href="javascript:;" style="cursor:zoom-in;"></a>');
         lighboxClicker.insertBefore($(element));
-        lighboxClicker.prop('href', $(element).prop('src'));
         $(element).appendTo(lighboxClicker);
+        lighboxClicker.click(function (e) {
+            e.preventDefault();
+            jconfirm({
+                title: '',
+                content: '<div style="text-align:center"><img style="max-width: 800px" src="'+$(this).find('img').prop('src')+'"/></div>',
+                useBootstrap: false,
+                theme: 'material',
+                backgroundDismiss: true,
+            });
+        });
     });
-    lightbox.option({imageFadeDuration: 300, imageFadeDuration: 100, imageFadeDuration: 300});
 })

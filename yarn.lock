@@ -3697,11 +3697,6 @@ lcid@^1.0.0:
   dependencies:
     invert-kv "^1.0.0"
 
-lightbox2@^2.11.0:
-  version "2.11.0"
-  resolved "https://registry.yarnpkg.com/lightbox2/-/lightbox2-2.11.0.tgz#fe3df40010a732a680296f6f554360f06e0f3bfa"
-  integrity sha512-ABzZ96qKu1KqzVAwrmkXwoW7GWOsR9vLTr7i9UIj36T01euVivDPrGuBl51ZK1UskmdqEkOYKqoYX6pqxBL6Zg==
-
 load-json-file@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/load-json-file/-/load-json-file-1.1.0.tgz#956905708d58b4bab4c2261b04f59f31c99374c0"

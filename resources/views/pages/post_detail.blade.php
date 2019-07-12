@@ -10,7 +10,9 @@ $activeSlug = $post->getCategorySlug();
             {{ Breadcrumbs::render('post', $post) }}
         </div>
         <div class="main-details-content">
-            {!! $post->body !!}
+            <div class="post-body">
+                {!! $post->body !!}
+            </div>
             <div class="ps">
                 <img src="{{ asset('images/ps-icon.png') }}" alt="" height="20" width="20">
                 &nbsp; Võ Lâm Trung Nguyên &nbsp;

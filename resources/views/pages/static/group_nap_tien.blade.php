@@ -20,7 +20,9 @@
                 </ul>
             </div>
         </div>
-        {!! $page->body !!}
+        <div class="post-body">
+            {!! $page->body !!}
+        </div>
         @if(view()->exists('pages.static.group.' . $page->view))
             @include('pages.static.group.' . $page->view)
         @endif

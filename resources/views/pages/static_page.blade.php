@@ -12,7 +12,9 @@
             {{ Breadcrumbs::render('static', $page) }}
         </div>
         <div class="main-details-content">
-            {!! $page->body !!}
+            <div class="post-body">
+                {!! $page->body !!}
+            </div>
         </div>
     </div>
     @endif
