@@ -53,13 +53,22 @@ function validateCard() {
 
 function showPrompt() {
     let amount = $('#card_amount option:selected').text();
+    let card_serial = $('#card_serial').val();
+    let card_pin = $('#card_pin').val();
+    let card_type = $('#card_type option:selected').text();
     jconfirm({
         type: 'orange',
         title: 'Lưu Ý',
-        content: '<div>Vui lòng kiểm tra lại mệnh giá thẻ để tránh mất thẻ.</div><div>Mệnh giá hiện tại: <span class="c-red">' + amount + '</span></div>',
+        content: '' +
+            '<div>Vui lòng kiểm tra lại thông tin thẻ <em class="c-red">(đặc biệt là mệnh giá)</em>.</div>' +
+            '<div>Loại thẻ: <span>' + card_type + '</span></div>' +
+            '<div>Số Seri: <span>' + card_serial + '</span></div>' +
+            '<div>Mã thẻ: <span>' + card_pin + '</span></div>' +
+            '<div>Mệnh giá: <span class="c-red">' + amount + '</span></div>' +
+            '<hr/><div class="c-red">Nếu chọn sai mệnh giá thẻ sẽ mất thẻ và không nhận được Tiền Đồng.</div>',
         useBootstrap: false,
         theme: 'material',
-        boxWidth: '400px',
+        boxWidth: '430px',
         buttons: {
             ok: {
                 btnClass: "btn-green",
