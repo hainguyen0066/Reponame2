@@ -96,7 +96,7 @@ $rowClass = 'col-xs-12 col-md-4';
                 <label for="payment_type">Ngân hàng</label>
                 <select required class="form-control select2" name="pay_from" id="pay_from">
                     @php
-                        $banks = ['Vietcombank']
+                        $banks = ['Đông Á', 'Vietcombank']
                     @endphp
                     @foreach($banks as $bank)
                         <option {{ old('pay_from', empty($isBrowsing) ? $dataTypeContent->pay_from : '') == $bank || empty($dataTypeContent->pay_from) ? 'selected="selected"' : '' }} value="{{ $bank }}">{{ $bank }}</option>
