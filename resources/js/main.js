@@ -11,6 +11,15 @@ $(document).ready(function(){
         $("."+tab_id+"-content").addClass('active');
         $('.menu-news .news-more').attr('href',link)
     });
+
+    $('.activity-tabs a').click(function(){
+        let tab = $(this).data('tab');
+        $('.activity-tabs a').removeClass('active');
+        $(this).addClass('active');
+        $(".activity-tab-container").removeClass('active');
+        $(".activity-tab-container." + tab).addClass('active');
+    });
+
     $('.my-slider').slick({
         arrows: false,
         fade: false,

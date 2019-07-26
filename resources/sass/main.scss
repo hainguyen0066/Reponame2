@@ -131,7 +131,7 @@ a {
             -webkit-transform-style: preserve-3d;
             -o-transform-style: preserve-3d;
             -ms-transform-style: preserve-3d;
-            
+
           }
           @-webkit-keyframes myAnimate {
             from {
@@ -266,25 +266,52 @@ a {
         background: url('../images/bg-act-daily.jpg') no-repeat;
         padding: 90px 0px 0px 15px;
         font-family: 'Roboto', sans-serif;
+        position: relative;
+
+        .activity-tabs {
+          a {
+            display: block;
+            position: absolute;
+            top: 13px;
+            width: 90px;
+            height: 30px;
+            text-indent: -9999px;
+            overflow: hidden;
+
+            &.link-tab-activity {
+              left: 120px;
+              width: 100px;
+            }
+          }
+        }
+
         table {
           font-size: 14px;
-          height: 385px;
-          .td-time {
-            color: #ff191e;
-            width: 60px;
+
+          &.active {
+            display: table !important;
           }
-          .td-content {
-            width: 140px;
-            a {
-              float: right;
-              color: #2444be;
-              line-height: 8px;
+
+          td {
+            height: 35px;
+            &.td-time {
+              color: #ff191e;
+              width: 60px;
+            }
+            &.td-content {
+              width: 140px;
+              a {
+                float: right;
+                color: #2444be;
+                line-height: 8px;
+              }
             }
           }
         }
         .act-daily-view-more {
           width: 205px;
-          margin-top: 5px;
+          position: absolute;
+          bottom: 15px;
           a {
             margin-right: 10px;
             float: right;
@@ -731,7 +758,7 @@ a {
       }
     }
     li:last-child {
-      background: none;      
+      background: none;
       font-size: 15px;
     }
   }
@@ -1195,7 +1222,7 @@ a {
               background: url('../images/lantern.png') no-repeat;
             }
           }
-        }        
+        }
         .register-login {
           width: 100%;
           .register-btn {
