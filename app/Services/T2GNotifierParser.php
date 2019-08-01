@@ -54,4 +54,19 @@ class T2GNotifierParser
 
         return $alert;
     }
+
+    public function isSkippedMessage($message)
+    {
+        // check MoMo cashout
+        if (strpos($message, '.MOMO') !== false && strpos($message, '.CashOut') !== false) {
+            return true;
+        }
+
+        // check NapTheNhanh cashout
+        if (strpos($message, '.ntn') !== false) {
+            return true;
+        }
+
+        return false;
+    }
 }

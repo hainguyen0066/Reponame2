@@ -190,7 +190,7 @@ class PaymentController extends BaseFrontController
             $alert = $parser->parseVietcomBankSms($stkVCB, $message, $createdAt);
         }
 
-        if ($alert) {
+        if ($alert && !$parser->isSkippedMessage($message)) {
             $this->discord->send($alert);
         }
     }
