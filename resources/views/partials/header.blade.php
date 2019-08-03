@@ -9,6 +9,7 @@
                 <li><a href="{{ route('front.static.nap_the_cao') }}">Nạp Thẻ</a></li>
                 <li><a href="{{ config('site.fb.page_url') }}" target="_blank">Fanpage</a></li>
                 <li><a href="{{ config('site.fb.group_url') }}" target="_blank">Group</a></li>
+                <li><a href="{{ route('front.support.index') }}">Hỗ trợ</a></li>
             </ul>
         </div>
     </div>
