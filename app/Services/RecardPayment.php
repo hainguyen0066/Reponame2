@@ -141,7 +141,7 @@ class RecardPayment extends AbstractCardPayment
      */
     public function parseCallbackRequest(Request $request)
     {
-        $status = intval($request->get('status'));
+        $status = intval($request->get('status')) === 1 ? true : false;
         $reason = $request->get('reason');
         $amount = intval($request->get('amount'));
 
