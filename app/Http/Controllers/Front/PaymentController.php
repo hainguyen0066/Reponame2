@@ -100,9 +100,9 @@ class PaymentController extends BaseFrontController
         if (!$checkCardFormat) {
             return "Thẻ định dạng không đúng. Vui lòng kiểm tra lại.";
         }
-        if($paymentRepository->isCardExisted($card)){
-            return  "Thẻ đã có trong hệ thống.";
-        }
+//        if($paymentRepository->isCardExisted($card)){
+//            return  "Thẻ đã có trong hệ thống.";
+//        }
 
         return false;
     }
