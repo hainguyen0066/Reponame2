@@ -145,31 +145,35 @@ body{
     .container{
         position: relative;
         div{
-            width: 150px;
-            height: 43px;
+            width: 245px;
+            height: 318px;
             position: absolute;
         }
         .volamtranhba{
-            left: 490px;
-            top: 550px;
+            left: 435px;
+            top: 294px;
         }
         .quanhunghoitu{
-            left: 780px;
-            top: 550px;
+            left: 730px;
+            top: 294px;
         }
         .anhhungthiep{
-            left: 345px;
-            top: 910px;
+            left: 295px;
+            top: 650px;
         }
         .denhatbanghoi{
-            left: 640px;
-            top: 910px;
+            left: 590px;
+            top: 650px;
+        }
+        .code{
+            left: 885px;
+            top: 650px;
         }
     }
 }
 .footer{
     height: 205px;
-    background: url('../images/landing/bg-footer.jpg') center no-repeat; 
+    background: url('../images/landing/bg-footer.jpg') center no-repeat;
     .container{
         position: relative;
         margin-top: 125px;
@@ -177,7 +181,7 @@ body{
             display: inline;
         }
     }
-}  
+}
 .footer .bottom-logo {
     background: url("../images/logo-bottom.png") center no-repeat;
     height: 70px;
