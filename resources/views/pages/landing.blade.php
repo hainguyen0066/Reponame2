@@ -57,10 +57,10 @@
         <div class="section-05">
             <div class="container">
                 <div class="volamtranhba"><a href="{{ route('front.details.post', ['tong-hop','su-kien-dua-top-may-chu-ba-l-ng-huyen'])}}"></a></div>
-                <div class="quanhunghoitu"><a href="{{ route('front.details.post', ['tong-hop','chuoi-su-kien-close-beta-18-06-khai-mo-server-ba-l-ng-huyen']) }}"></a></div>
-                <div class="anhhungthiep"><a href="{{ route('front.details.post', ['tong-hop','chuoi-su-kien-close-beta-18-06-khai-mo-server-ba-l-ng-huyen']) }}"></a></div>
+                <div class="quanhunghoitu"><a href="{{ route('front.details.post', ['tong-hop','chuoi-su-kien-close-beta-16-08-khai-mo-server-ba-l-ng-huyen']) }}"></a></div>
+                <div class="anhhungthiep"><a href="{{ route('front.details.post', ['tong-hop','chuoi-su-kien-close-beta-16-08-khai-mo-server-ba-l-ng-huyen']) }}"></a></div>
                 <div class="denhatbanghoi"><a href="{{ route('front.details.post', ['tong-hop', 'de-nhat-bang-hoi-may-chu-ba-l-ng-huyen']) }}"></a></div>
-                <div class="code"><a href="{{ route('front.details.post', ['tong-hop','chuoi-su-kien-close-beta-18-06-khai-mo-server-ba-l-ng-huyen']) }}"></a></div>
+                <div class="code"><a href="{{ route('front.details.post', ['tong-hop','chuoi-su-kien-close-beta-16-08-khai-mo-server-ba-l-ng-huyen']) }}"></a></div>
             </div>
         </div>
         <div class="footer">
