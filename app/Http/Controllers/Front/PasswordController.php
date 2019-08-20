@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Front;
 
 use App\Repository\UserRepository;
+use App\Rules\SimplePassword;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -12,11 +13,6 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class PasswordController extends BaseFrontController
 {
-    const RULES_UPDATE_PASSWORD = [
-        'old_password' => 'required|string|min:6',
-        'password'     => 'required|string|min:6|confirmed',
-    ];
-
     const RULES_UPDATE_PASSWORD2 = [
         'old_password'  => 'required_without:old_password2',
         'old_password2' => 'required_without:old_password|string|min:6',
@@ -44,7 +40,7 @@ class PasswordController extends BaseFrontController
      */
     public function changePassword(Request $request, UserRepository $userRepository)
     {
-        $validator = $this->validator($request->all(), self::RULES_UPDATE_PASSWORD);
+        $validator = $this->validator($request->all(), $this->getPasswordRules());
         if (!$validator->passes()) {
             return $this->sendFailedResponse($request, $validator->getMessageBag()->toArray());
         }
@@ -113,6 +109,20 @@ class PasswordController extends BaseFrontController
     protected function validator(array $data, $rules)
     {
         return \Validator::make($data, $rules);
+    }
+
+    private function getPasswordRules()
+    {
+        return [
+            'old_password' => 'required|string|min:6',
+            'password' => [
+                'required',
+                'string',
+                'between:6,32',
+                'confirmed',
+                new SimplePassword(),
+            ]
+        ];
     }
 
 }

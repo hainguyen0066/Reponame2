@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Front;
 
 use App\Repository\PaymentRepository;
 use App\Repository\UserRepository;
+use App\Rules\SimplePassword;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -72,7 +73,13 @@ class ManageAccountController extends BaseFrontController
     {
         return \Validator::make($data, [
             'old_password' => 'required|string|min:6',
-            'password'     => 'required|string|min:6|confirmed',
+            'password' => [
+                'required',
+                'string',
+                'between:6,32',
+                'confirmed',
+                new SimplePassword(),
+            ]
         ]);
     }
 }
