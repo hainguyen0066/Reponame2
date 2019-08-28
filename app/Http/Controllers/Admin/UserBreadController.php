@@ -53,16 +53,14 @@ class UserBreadController extends VoyagerBaseController
         $userRepository = app(UserRepository::class);
         /** @var \App\User $user */
         $user = $data;
-        $user->fill(array_only($request->all(), ['name', 'phone', 'email', 'role_id', 'note']));
         if ($password = $request->get('password')) {
             $userRepository->updatePassword($user, $password);
         }
         if ($password2 = $request->get('password2')) {
             $userRepository->updatePassword2($user, $password2);
         }
-        if (!$password && !$password2) {
-            $user->save();
-        }
+        $user->fill(array_only($request->all(), ['name', 'phone', 'email', 'role_id', 'note']));
+        $user->save();
 
         return $user;
     }
@@ -100,6 +98,6 @@ class UserBreadController extends VoyagerBaseController
 
     protected function getEditableFields()
     {
-        return ['password', 'password2', 'phone'];
+        return ['password', 'password2', 'phone', 'note'];
     }
 }
