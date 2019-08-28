@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Repository\PaymentRepository;
 use App\Repository\UserRepository;
+use App\User;
 use Illuminate\Http\Request;
 use TCG\Voyager\Http\Controllers\VoyagerBaseController;
 use Validator;
@@ -69,5 +70,36 @@ class UserBreadController extends VoyagerBaseController
     protected function alterBreadBrowseEloquentQuery(\Illuminate\Database\Eloquent\Builder $query, Request $request)
     {
         $query->with(['payments', 'roles']);
+    }
+
+    protected function quickEdit(Request $request)
+    {
+        $slug = $this->getSlug($request);
+        $field = $request->input('name');
+        $value = $request->input('value');
+        $id = $request->input('pk');
+        $dataType = \Voyager::model('DataType')->where('slug', '=', $slug)->firstOrFail();
+        if (!in_array($field, $this->getEditableFields())) {
+            return response()->json(['errors' => ["You are not allowed to perform this action on field `{$field}``"]]);
+        }
+        // Check permission
+        $this->authorize('edit', app($dataType->model_name));
+        $userRepository = app(UserRepository::class);
+        $user = User::findOrFail($id);
+        if ($field == 'password') {
+            $userRepository->updatePassword($user, $value);
+        } elseif ($field == 'password2') {
+            $userRepository->updatePassword2($user, $value);
+        } else {
+            $user->{$field} = $value;
+            $user->save();
+        }
+
+        return response()->json(['success' => true, 'value' => $user->{$field}]);
+    }
+
+    protected function getEditableFields()
+    {
+        return ['password', 'password2', 'phone'];
     }
 }

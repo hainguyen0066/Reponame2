@@ -3,7 +3,7 @@
 
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.7.3 on 2019-07-08 11:36:16.
+ * Generated for Laravel 5.7.3 on 2019-08-28 14:36:07.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -14888,6 +14888,16 @@ namespace TCG\Voyager\Facades {
         public static function displayField($dataType, $row, $data)
         {
             return \TCG\Voyager\Voyager::displayField($dataType, $row, $data);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function getBreadView($view, $slug)
+        {
+            return \TCG\Voyager\Voyager::getBreadView($view, $slug);
         }
          
     }

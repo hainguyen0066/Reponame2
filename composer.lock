@@ -3975,12 +3975,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/trungtnm/voyager.git",
-                "reference": "b2d37a38f2703eeba41455d33d65b3278e99c345"
+                "reference": "81615fe2d983d61147c5bfc90e1b516394009cb1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/trungtnm/voyager/zipball/b2d37a38f2703eeba41455d33d65b3278e99c345",
-                "reference": "b2d37a38f2703eeba41455d33d65b3278e99c345",
+                "url": "https://api.github.com/repos/trungtnm/voyager/zipball/81615fe2d983d61147c5bfc90e1b516394009cb1",
+                "reference": "81615fe2d983d61147c5bfc90e1b516394009cb1",
                 "shasum": ""
             },
             "require": {
@@ -4042,7 +4042,7 @@
                 "issues": "https://github.com/the-control-group/voyager/issues",
                 "source": "https://github.com/the-control-group/voyager"
             },
-            "time": "2019-07-08T04:34:53+00:00"
+            "time": "2019-08-28T07:31:39+00:00"
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",

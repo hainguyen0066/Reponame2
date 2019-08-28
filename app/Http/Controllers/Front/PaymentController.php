@@ -63,7 +63,7 @@ class PaymentController extends BaseFrontController
                 $paymentRepository->updateCardPayment($payment, $transactionCode);
             } else {
                 $cardPayment->logCardPaymentError($result);
-                return response()->json(["error" => implode('<br/>', array_first($result->getErrors()))]);
+                return response()->json(["error" => implode('<br/>', $result->getErrors())]);
             }
         }
 

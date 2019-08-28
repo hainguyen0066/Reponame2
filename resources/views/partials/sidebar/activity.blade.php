@@ -9,6 +9,10 @@
             <td class="td-content"><a href="{{ route('front.details.post', ['huong-dan','phong-l-ng-do'])}}">Phong Lăng Độ</a></td>
         </tr>
         <tr>
+            <td class="td-time">Cả ngày</td>
+            <td class="td-content"><a href="{{ route('front.details.post', ['huong-dan','tinh-n-ng-v-ot-ai-thach-thuc-thoi-gian'])}}">Vượt ải</a></td>
+        </tr>
+        <tr>
             <td class="td-time">11:00</td>
             <td class="td-content"><a href="{{ route('front.details.post', ['huong-dan','chien-tr-ong-tong-kim'])}}">Chiến trường tống kim</a></td>
         </tr>
