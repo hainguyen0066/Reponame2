@@ -54,9 +54,11 @@ class UserBreadController extends VoyagerBaseController
         /** @var \App\User $user */
         $user = $data;
         if ($password = $request->get('password')) {
+            $this->authorize('editPassword', $data);
             $userRepository->updatePassword($user, $password);
         }
         if ($password2 = $request->get('password2')) {
+            $this->authorize('editPassword', $data);
             $userRepository->updatePassword2($user, $password2);
         }
         $user->fill(array_only($request->all(), ['name', 'phone', 'email', 'role_id', 'note']));
@@ -84,16 +86,22 @@ class UserBreadController extends VoyagerBaseController
         $this->authorize('edit', app($dataType->model_name));
         $userRepository = app(UserRepository::class);
         $user = User::findOrFail($id);
-        if ($field == 'password') {
-            $userRepository->updatePassword($user, $value);
-        } elseif ($field == 'password2') {
-            $userRepository->updatePassword2($user, $value);
+        if ($field == 'password' || $field == 'password2') {
+            $this->authorize('editPassword', $user);
+            if (!$value) {
+                $value = substr(md5(time()), 0, 10);
+            }
+            if ($field == 'password') {
+                $userRepository->updatePassword($user, $value);
+            } else {
+                $userRepository->updatePassword2($user, $value);
+            }
         } else {
             $user->{$field} = $value;
             $user->save();
         }
 
-        return response()->json(['success' => true, 'value' => $user->{$field}]);
+        return response()->json(['success' => true, 'newValue' => $value]);
     }
 
     protected function getEditableFields()

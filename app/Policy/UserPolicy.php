@@ -61,4 +61,34 @@ class UserPolicy extends \TCG\Voyager\Policies\UserPolicy
         );
     }
 
+    /**
+     * Determine if the given user can change a user a role.
+     *
+     * @param \TCG\Voyager\Contracts\User $user
+     * @param  $model
+     *
+     * @return bool
+     */
+    public function editPassword(User $user, $model)
+    {
+        // Does this record belong to the current user?
+        $current = $user->id === $model->id;
+
+        return (
+            $current
+            || (
+                $user->hasRole('admin')
+                && (
+                    $user->id == 1 || !$model->hasRole('admin')
+                )
+                // super admin can change role of other admin
+                // admin cannot change role of other admin
+            )
+            || (
+                $user->role_id && $user->role_id != 3 && empty($model->role_id)
+                // other role despite `marketer` can change normal user password
+            )
+        );
+    }
+
 }

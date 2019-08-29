@@ -48,6 +48,11 @@ $user = \Auth::user();
                                     <input type="file" data-name="avatar" name="avatar">
                                 </div>
                             @endif
+                            @if($dataTypeContent->created_at)
+                                <div class="form-group">
+                                    <label for="created_at">Ngày tạo: <span class="badge">{{ $dataTypeContent->created_at->format('d-m-Y H:i') }}</span></label>
+                                </div>
+                            @endif
                             <div class="form-group">
                                 <label for="name">{{ __('voyager::generic.name') }}</label>
                                 <input type="text" class="form-control" id="name" name="name" placeholder="{{ __('voyager::generic.name') }}"
@@ -78,7 +83,7 @@ $user = \Auth::user();
                                        value="@if(isset($dataTypeContent->email)){{ $dataTypeContent->email }}@endif" autocomplete="off">
                             </div>
                             @endif
-                            @can('edit', $dataTypeContent)
+                            @can('editPassword', $dataTypeContent)
                             <div class="form-group">
                                 <label for="password">Mật khẩu cấp 1 &nbsp;&nbsp;&nbsp;<span class="label label-default fuzzy h5">{{ $dataTypeContent->getRawPassword() }}</span>
                                     <a class="show-fuzzy" href="javascript:;"><i class="voyager-eye"></i></a>
