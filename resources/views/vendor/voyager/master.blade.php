@@ -9,7 +9,7 @@
     <!-- Favicon -->
     <link rel="shortcut icon" href="{{ voyager_asset('images/logo-icon.png') }}" type="image/x-icon">
     <!-- App CSS -->
-    <link rel="stylesheet" href="{{ voyager_asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ voyager_asset('css/app.css?v=' . config('site.version')) }}">
 @yield('css')
 
 <!-- Few Dynamic Styles -->
@@ -116,7 +116,7 @@
     </div>
 </div>
 
-<script type="text/javascript" src="{{ voyager_asset('js/app.js') }}"></script>
+<script type="text/javascript" src="{{ voyager_asset('js/app.js?v=' . config('site.version')) }}"></script>
 <script>
             @if(Session::has('alerts'))
     let alerts = {!! json_encode(Session::get('alerts')) !!};
@@ -148,7 +148,7 @@
 @yield('javascript')
 
 @if(!empty(config('voyager.additional_js')))<!-- Additional Javascript -->
-@foreach(config('voyager.additional_js') as $js)<script type="text/javascript" src="{{ asset($js) }}"></script>@endforeach
+@foreach(config('voyager.additional_js') as $js)<script type="text/javascript" src="{{ asset($js . '?v=' . config('site.version')) }}"></script>@endforeach
 @endif
 
 @stack('extra-js')
