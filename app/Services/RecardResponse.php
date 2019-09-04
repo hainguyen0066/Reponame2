@@ -67,7 +67,9 @@ class RecardResponse extends AbstractCardPaymentResponse
             if (isset($result['statusCode'])) {
                 unset($result['statusCode']);
             }
-            $this->errors = array_values($result);
+            foreach ($result as $field => $error) {
+                $this->errors = array_merge($this->errors, $error);
+            }
         }
         if ($this->statusCode == 200 && !empty($result['success']) && !empty($result['transaction_code'])) {
             $this->success = true;
