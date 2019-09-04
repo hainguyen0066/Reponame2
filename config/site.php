@@ -11,7 +11,7 @@ return [
     'fb'  => [
         'app_id'   => '1041939975989453',
         'page_id'  => '334751893828311',
-        'page_url' => 'https://www.facebook.com/volamtrungnguyen20192',
+        'page_url' => 'https://www.facebook.com/volamtrungnguyen20192/',
         'group_url' => 'https://www.facebook.com/groups/vltrungnguyen'
     ],
     'ga'  => [
