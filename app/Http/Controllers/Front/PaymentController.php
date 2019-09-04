@@ -100,9 +100,9 @@ class PaymentController extends BaseFrontController
         if (!$checkCardFormat) {
             return "Thẻ định dạng không đúng. Vui lòng kiểm tra lại.";
         }
-//        if($paymentRepository->isCardExisted($card)){
-//            return  "Thẻ đã có trong hệ thống.";
-//        }
+        if($paymentRepository->isCardExisted($card)){
+            return  "Thẻ đã có trong hệ thống.";
+        }
 
         return false;
     }
@@ -188,6 +188,8 @@ class PaymentController extends BaseFrontController
             $alert = $parser->parseDongABankSms($message, $createdAt);
         } elseif ($stkVCB && strpos($message, "TK {$stkVCB}") !== false) {
             $alert = $parser->parseVietcomBankSms($stkVCB, $message, $createdAt);
+        } else {
+            $alert = $parser->parseFptShopSms($message, $createdAt);
         }
 
         if ($alert && !$parser->isSkippedMessage($message)) {

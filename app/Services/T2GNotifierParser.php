@@ -55,6 +55,28 @@ class T2GNotifierParser
         return $alert;
     }
 
+    /**
+     * @param        $message
+     * @param        $createdAt
+     *
+     * @return string|void
+     */
+    public function parseFptShopSms($message, $createdAt)
+    {
+        //'(FPTShop) Vi Momo 01263998413da nap so tien 500,000 d.Tang KH 20.000d 09X2X7NBCJ726 mua Phu kien tu 50.000d hoac Sim-Phan mem tu 80.000d HSD 10/09'
+
+        $regex = '/^\(FPTShop\) Vi Momo ([0-9]+)da nap so tien ([0-9,]+) d./';
+        preg_match($regex, $message, $matches);
+        if (!$matches || count($matches) != 3) {
+            return null;
+        }
+        $sdt = $matches[1];
+        $amount = $matches[2];
+        $alert = "[MoMo] Nhận được số tiền `{$amount}đ` từ `{$sdt}` (FPTShop) vào lúc {$createdAt}";
+
+        return $alert;
+    }
+
     public function isSkippedMessage($message)
     {
         // check MoMo cashout
