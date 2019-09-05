@@ -76,13 +76,13 @@ $user = \Auth::user();
                                 <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone"
                                        value="@if(isset($dataTypeContent->phone)){{ $dataTypeContent->phone }}@endif">
                             </div>
-                            @if(!empty($dataTypeContent->role_id))
+                            @can('editRoles', $dataTypeContent)
                             <div class="form-group">
                                 <label for="email">{{ __('voyager::generic.email') }}</label>
                                 <input type="email" class="form-control" id="email" name="email" placeholder="{{ __('voyager::generic.email') }}"
                                        value="@if(isset($dataTypeContent->email)){{ $dataTypeContent->email }}@endif" autocomplete="off">
                             </div>
-                            @endif
+                            @endcan
                             @can('editPassword', $dataTypeContent)
                             <div class="form-group">
                                 <label for="password">Mật khẩu cấp 1 &nbsp;&nbsp;&nbsp;<span class="label label-default fuzzy h5">{{ $dataTypeContent->getRawPassword() }}</span>
