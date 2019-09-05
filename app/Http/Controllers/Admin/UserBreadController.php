@@ -53,6 +53,7 @@ class UserBreadController extends VoyagerBaseController
         $userRepository = app(UserRepository::class);
         /** @var \App\User $user */
         $user = $data;
+        $user->fill(array_only($request->all(), ['name', 'phone', 'email', 'role_id', 'note']));
         if ($password = $request->get('password')) {
             $this->authorize('editPassword', $data);
             $userRepository->updatePassword($user, $password);
@@ -61,8 +62,9 @@ class UserBreadController extends VoyagerBaseController
             $this->authorize('editPassword', $data);
             $userRepository->updatePassword2($user, $password2);
         }
-        $user->fill(array_only($request->all(), ['name', 'phone', 'email', 'role_id', 'note']));
-        $user->save();
+        if (!$password && !$password2) {
+            $user->save();
+        }
 
         return $user;
     }
