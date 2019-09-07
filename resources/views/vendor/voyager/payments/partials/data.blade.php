@@ -121,13 +121,7 @@
         </div>
     </div>
     <div class="pull-right">
-        {{ $dataTypeContent->appends([
-            's' => $search->value,
-            'filter' => $search->filter,
-            'key' => $search->key,
-            'order_by' => $orderBy,
-            'sort_order' => $sortOrder
-        ])->links() }}
+        {{ $dataTypeContent->appends(request()->all())->links() }}
     </div>
 @endif
 <style>

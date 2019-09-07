@@ -36,6 +36,8 @@ class PaymentBreadController extends VoyagerBaseController
             $types = Payment::getPaymentTypes();
             unset($types[Payment::PAYMENT_TYPE_CARD]);
             $params['paymentTypes'] = $types;
+            $params['payMethods'] = Payment::getPayMethods();
+            $params['statuses'] = Payment::getStatusCodes();
         });
 
         return parent::index($request);
@@ -57,7 +59,7 @@ class PaymentBreadController extends VoyagerBaseController
 
     public function report(Request $request, PaymentRepository $paymentRepository)
     {
-        $fromDate = $request->get('fromDate', date('Y-m-d', strtotime("-2 weeks")));
+        $fromDate = $request->get('fromDate', date('Y-m-d', strtotime("-1 weeks")));
         $toDate = $request->get('toDate', date('Y-m-d', strtotime('today')));
         $revenue = $paymentRepository->getRevenueChartData($fromDate, $toDate);
 
@@ -377,5 +379,42 @@ class PaymentBreadController extends VoyagerBaseController
         $key = "ADD_GOLD_LOCKED_{$userId}_{$amount}";
 
         return \Cache::get($key);
+    }
+
+    protected function alterBreadBrowseEloquentQuery(\Illuminate\Database\Eloquent\Builder $query, Request $request)
+    {
+        if ($keyword = $request->get('keyword')) {
+            $query->whereRaw("card_pin LIKE '%{$keyword}%' OR card_serial LIKE '%{$keyword}%'");
+        }
+        if ($id = $request->get('id')) {
+            $query->where('id', $id);
+        }
+        if ($userId = $request->get('user_id')) {
+            $query->where('user_id', $userId);
+        }
+        if ($payMethod = $request->get('pay_method')) {
+            $query->where('pay_method', $payMethod);
+        }
+        if ($createdAt = trim($request->get('created_at'))) {
+            if (strpos($createdAt, '>') === 0 || strpos($createdAt, '<') === 0) {
+                $operator = $createdAt[0];
+                $createdAt = trim(str_replace($operator, '', $createdAt));
+                $query->whereRaw("created_at {$operator} '{$createdAt}'");
+            } else {
+                $query->where('created_at', 'LIKE', $createdAt . "%");
+            }
+
+        }
+        if ($cardType = $request->get('card_type')) {
+            $query->where('card_type', $cardType);
+        }
+
+        if ($cardType = $request->get('pay_from')) {
+            $query->where('pay_from', $cardType);
+        }
+
+        if ($statusCode = $request->get('status_code')) {
+            $query->where('status_code', $statusCode);
+        }
     }
 }

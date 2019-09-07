@@ -3,12 +3,13 @@
 namespace App\Providers;
 
 use App\Contract\CardPaymentInterface;
+use App\Models\Payment;
+use App\Observers\PaymentObserver;
 use App\Observers\UserObserver;
 use App\Services\JXApiClient;
 use App\Services\NapTheNhanhPayment;
 use App\Services\RecardPayment;
 use App\User;
-use function foo\func;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
@@ -22,6 +23,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         User::observe(UserObserver::class);
+        Payment::observe(PaymentObserver::class);
         Paginator::defaultView('vendor.pagination.default');
         \Voyager::addAction(\App\Action\AcceptPaymentAction::class);
         \Voyager::addAction(\App\Action\RejectPaymentAction::class);

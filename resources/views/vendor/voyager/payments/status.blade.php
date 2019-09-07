@@ -1,1 +1,1 @@
-{!! $data->statusText(true) !!}
+{!! $data->getStatusText(true) !!}

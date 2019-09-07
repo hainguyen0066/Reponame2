@@ -33,25 +33,27 @@
                 </div>
             </div>
             <div class="row report-registered">
-                <form action="" id="formReportPayment" class="form-horizontal">
-                    <div class="col-xs-12">
+                <div class="col-xs-12">
+                    <form action="" id="formReportPayment">
                         <div class="form-group">
-                            <label for="reportRange" class="col-sm-3 control-label">
-                                Chọn thời gian thống kê
-                            </label>
-                            <div class="col-sm-4">
+                            <div class="col-xs-12">
+                                <label for="reportRange" class="control-label">
+                                    Chọn thời gian thống kê
+                                </label>
+                            </div>
+                            <div class="col-xs-9">
                                 <div class="form-group">
                                     @include('admin.partials.input_daterange')
                                 </div>
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-xs-3">
                                 <div class="form-group">
                                     <button type="submit" id="btnReportPayment" class="btn btn-info" style="margin-top: 0">Report</button>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
                 <div class="col-xs-12" id="dashboardReport">
                     <div>
                         <!-- Nav tabs -->
