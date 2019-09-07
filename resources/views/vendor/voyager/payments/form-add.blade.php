@@ -1,32 +1,29 @@
 @php
 $rowClass = 'col-xs-12 col-md-4';
 @endphp
-<div class="panel panel-primary panel-bordered">
-    <div class="panel-header">
-        <div class="panel-heading">
-            <h3 class="panel-title panel-icon">
-                @if(isset($dataTypeContent->id))
-                    <i class="voyager-edit"></i> Edit payment <span class="label label-default">#{{ $dataTypeContent->id }}</span>
-                @else
-                    <i class="voyager-plus"></i> Add Payment
-                @endif
-            </h3>
-        </div>
+<div class="panel panel-transparent panel-bordered">
+    <div class="panel-heading">
+        <h3 class="panel-title panel-icon">
+            @if(isset($dataTypeContent->id))
+                <i class="voyager-edit"></i> Edit payment <span class="label label-default">#{{ $dataTypeContent->id }}</span>
+            @else
+                <i class="voyager-plus"></i> Add Payment
+            @endif
+        </h3>
         <div class="panel-actions">
-            <a class="panel-action voyager-angle-up" data-toggle="panel-collapse" aria-hidden="true"></a>
+            <a class="btn panel-action {{ !empty($isBrowsing) && !request('search') ? 'panel-collapsed voyager-double-down' : 'voyager-double-up' }}" data-up="voyager-double-up" data-down="voyager-double-down" data-toggle="panel-collapse" aria-hidden="true"></a>
         </div>
     </div>
-    <!-- form start -->
-    <form role="form"
-          class="form-edit-add"
-          action="@if(empty($isBrowsing) && !is_null($dataTypeContent->getKey())){{ route('voyager.'.$dataType->slug.'.update', $dataTypeContent->getKey()) }}@else{{ route('voyager.'.$dataType->slug.'.store') }}@endif"
-          method="POST" enctype="multipart/form-data">
-        <!-- PUT Method if we are editing -->
-        @if(isset($dataTypeContent->id))
-            {{ method_field("PUT") }}
-        @endif
-        {{ csrf_field() }}
-        <div class="panel-body">
+    <div class="panel-body" style="{{ !empty($isBrowsing) && request('search') ? 'display:none' : '' }}">
+        <form role="form"
+              class="form-edit-add"
+              action="@if(empty($isBrowsing) && !is_null($dataTypeContent->getKey())){{ route('voyager.'.$dataType->slug.'.update', $dataTypeContent->getKey()) }}@else{{ route('voyager.'.$dataType->slug.'.store') }}@endif"
+              method="POST" enctype="multipart/form-data">
+            <!-- PUT Method if we are editing -->
+            @if(isset($dataTypeContent->id))
+                {{ method_field("PUT") }}
+            @endif
+            {{ csrf_field() }}
             @if (count($errors) > 0)
                 <div class="alert alert-danger">
                     <ul>
@@ -38,7 +35,7 @@ $rowClass = 'col-xs-12 col-md-4';
             @endif
             @if(!empty($dataTypeContent->id))
                 <p>
-                    {!! $dataTypeContent->displayStatus(true) !!}
+                    {!! $dataTypeContent->getStatusText(true) !!}
                     @if($dataTypeContent->gateway_response)
                         <span class="help-block text-danger">{{ $dataTypeContent->gateway_response }}</span>
                     @endif
@@ -89,9 +86,9 @@ $rowClass = 'col-xs-12 col-md-4';
             </div>
 
             <div class="form-group {{ $rowClass }}
-                    @if(!isset($dataTypeContent->payment_type) || $dataTypeContent->payment_type != \App\Models\Payment::PAYMENT_TYPE_BANK_TRANSFER)
+            @if(!isset($dataTypeContent->payment_type) || $dataTypeContent->payment_type != \App\Models\Payment::PAYMENT_TYPE_BANK_TRANSFER)
                     hidden
-                    @endif
+@endif
                     " id="bankWrapper">
                 <label for="payment_type">Ngân hàng</label>
                 <select required class="form-control select2" name="pay_from" id="pay_from">
@@ -124,15 +121,16 @@ $rowClass = 'col-xs-12 col-md-4';
                     <span class="h3" id="addGoldReview"></span> <=> <span class="h3"><span class="label label-success" id="moneyText"></span></span>
                 </div>
             </div>
-        </div><!-- panel-body -->
 
-        <div class="panel-footer">
-            @if(empty($isBrowsing))
-            <a href="{{ route('voyager.payments.index') }}" class="btn btn-default back">Back</a>
-            @endif
-            <button type="submit" class="btn btn-primary save">Save</button>
-        </div>
-    </form>
+            <div class="panel-footer">
+                @if(empty($isBrowsing))
+                    <a href="{{ route('voyager.payments.index') }}" class="btn btn-default back">Back</a>
+                @endif
+                <button type="submit" class="btn btn-primary save">Save</button>
+            </div>
+        </form>
+    </div>
+
 </div>
 
 @push('extra-js')
@@ -185,6 +183,7 @@ $rowClass = 'col-xs-12 col-md-4';
             });
             @if(!empty($isBrowsing) || !$dataTypeContent->user_id)
             $('#selectUser').select2({
+                width: '100%',
                 ajax: {
                     url: '{{ route('autocomplete.users') }}',
                 }

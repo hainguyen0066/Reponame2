@@ -156,7 +156,7 @@ $user = \Auth::user();
                                             <td>{!! view('vendor.voyager.payments.transaction_id', ['data' => $history]) !!}</td>
                                             <td>{{ number_format($history->amount) }}</td>
                                             <td>{{ number_format($history->gamecoin) }}</td>
-                                            <td>{!! $history->displayStatus(true) !!}</td>
+                                            <td>{!! $history->getStatusText(true) !!}</td>
                                         </tr>
                                     @endforeach
                                     @if($histories->total() == 0)

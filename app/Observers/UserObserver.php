@@ -69,6 +69,7 @@ class UserObserver
 
         return true;
     }
+
     /**
      * Handle the user "created" event.
      *

@@ -7,7 +7,7 @@ $pageTitle = "Lịch sử giao dịch";
 <div class="columns-right">
     <div class="details-content">
         @include('partials.manage_account.breadcrumbs')
-        <div class="main-details-content">                                
+        <div class="main-details-content">
             <div class="manage-account">
                 <div class="features">
                     <div class="title">Lịch sử giao dịch</div>
@@ -34,7 +34,7 @@ $pageTitle = "Lịch sử giao dịch";
                                 </td>
                                 <td align="right">{{ number_format($history->amount) }} VNĐ</td>
                                 <td align="right">{{ number_format($history->gamecoin) }}</td>
-                                <td align="center">{!! $history->displayStatus(false) !!}</td>
+                                <td align="center">{!! $history->getStatusText(false) !!}</td>
                             </tr>
                         @endforeach
                         @if($histories->total() == 0)
