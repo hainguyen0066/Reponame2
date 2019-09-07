@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'version' => '201908291445', // version named for cache buster in admincp
+    'version' => '201909071148', // version named for cache buster in admincp
     'seo' => [
         'title'            => 'Võ Lâm Trung Nguyên',
         'meta_keyword'     => 'vo lam trung nguyen, vltk hay, game pk hay, volam1, ctc, vo lam ctc, vo lam cong thanh chien, vo lam 1',
