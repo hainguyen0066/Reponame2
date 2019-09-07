@@ -7,6 +7,8 @@ use App\Models\Payment;
 use App\Repository\PaymentRepository;
 use App\Services\DiscordWebHookClient;
 use App\Services\JXApiClient;
+use App\Services\NapTheNhanhPayment;
+use App\Services\RecardPayment;
 use App\Services\T2GNotifierParser;
 use App\Util\MobileCard;
 use Illuminate\Http\Request;
@@ -40,19 +42,16 @@ class PaymentController extends BaseFrontController
         if (!$user) {
             return response()->json(["error" => 'Vui lòng đăng nhập lại để tiếp tục thao tác', 'relogin' => true]);
         }
-        $now = time();
-        $startMaintenance = (\DateTime::createFromFormat('Y-m-d H:i', date('Y-m-d 16:25')))->getTimestamp();
-        $endMaintenance = (\DateTime::createFromFormat('Y-m-d H:i', date('Y-m-d 16:55')))->getTimestamp();
-        if ($now > $startMaintenance && $now < $endMaintenance) {
+        if ($this->isInMaintenancePeriod()) {
             return response()->json(["error" => 'Server đang trong thời gian bảo trì định kỳ, vui lòng thử lại sau 17:00H.']);
         }
+
         $card = $this->createCardInstance();
         $error = $this->validateCard($card, $paymentRepository);
         if ($error) {
             return response()->json(['error' => $error]);
         }
-        /** @var CardPaymentInterface $cardPayment */
-        $cardPayment = app(CardPaymentInterface::class);
+        $cardPayment = $this->getCardPaymentService();
         list($knb, $soxu) = $paymentRepository->exchangeGamecoin($card->getAmount(), Payment::PAYMENT_TYPE_CARD);
         $payment = $paymentRepository->createCardPayment($user, $card, $knb);
         if ($card->getType() == MobileCard::TYPE_ZING){
@@ -109,43 +108,33 @@ class PaymentController extends BaseFrontController
 
     public function cardPaymentCallback(PaymentRepository $paymentRepository, JXApiClient $gameApiClient, Request $request)
     {
-        $response = [
-            'status' => false
-        ];
-        /** @var CardPaymentInterface $cardPayment */
-        $cardPayment = app(CardPaymentInterface::class);
+        $this->getCardPaymentService();
+        $cardPayment = $this->getCardPaymentServiceForCallback($request);
         $cardPayment->logCallbackRequest($request);
         $transactionCode = $cardPayment->getTransactionCodeFromCallback($request);
         if (!$transactionCode) {
-            $response['message'] = "No transaction code found";
-            $cardPayment->logCallbackProcessed($response['message']);
-            return response()->json($response);
+            return $this->responseForCallback($cardPayment, "No transaction code found");
         }
-        /** @var Payment $record */
         $record = $paymentRepository->getByTransactionCode($transactionCode);
         if (!$record) {
-            $response['message'] = "Transaction not found";
-            $cardPayment->logCallbackProcessed($response['message']);
-            return response()->json($response, 404);
+            return $this->responseForCallback($cardPayment, "Transaction not found", 404);
         }
         if (!empty($record->status)) {
-            $response['message'] = "Transaction was processed successfully before";
-            $cardPayment->logCallbackProcessed($response['message']);
-            return response()->json($response);
+            return $this->responseForCallback($cardPayment, "Transaction was processed successfully before");
         }
-        list($status, $amount, $callbackCode) = $cardPayment->parseCallbackRequest($request);
+
         // add gold
+        $responseStatus = false;
+        list($status, $amount, $callbackCode) = $cardPayment->parseCallbackRequest($request);
         $paymentRepository->updateCardPaymentTransaction($record, $status, $cardPayment->getCallbackMessage($callbackCode), $amount);
         if ($status && empty($record->gold_added)) {
             $gamecoin = $record->gamecoin;
             $result = $gameApiClient->addGold($record->username, $gamecoin);
             $paymentRepository->updateRecordAddedGold($record, $result);
-            $response['status'] = true;
+            $responseStatus = true;
         }
-        $response['message'] = 'Processed';
-        $cardPayment->logCallbackProcessed($response['message']);
 
-        return response()->json($response);
+        return $this->responseForCallback($cardPayment, "Processed", 200, $responseStatus);
     }
 
     /**
@@ -183,7 +172,6 @@ class PaymentController extends BaseFrontController
         }
         $stkDongA = env('BANKING_ACCOUNT_DONGA');
         $stkVCB = env('BANKING_ACCOUNT_VIETCOMBANK');
-        $alert = "";
         if ($stkDongA && strpos($message, "TK {$stkDongA}") !== false) {
             $alert = $parser->parseDongABankSms($message, $createdAt);
         } elseif ($stkVCB && strpos($message, "TK {$stkVCB}") !== false) {
@@ -195,5 +183,68 @@ class PaymentController extends BaseFrontController
         if ($alert && !$parser->isSkippedMessage($message)) {
             $this->discord->send($alert);
         }
+    }
+
+    /**
+     * @return bool
+     */
+    private function isInMaintenancePeriod()
+    {
+        $now = time();
+        $startMaintenance = (\DateTime::createFromFormat('Y-m-d H:i', date('Y-m-d 16:25')))->getTimestamp();
+        $endMaintenance = (\DateTime::createFromFormat('Y-m-d H:i', date('Y-m-d 16:55')))->getTimestamp();
+
+        return $now > $startMaintenance && $now < $endMaintenance;
+    }
+
+    /**
+     * @return \App\Contract\CardPaymentInterface
+     */
+    private function getCardPaymentService()
+    {
+        $autoSwitch = boolval(\Voyager::setting('site.card_payment_auto_switch', false));
+        // auto switch handle
+        $hour = intval(date('G'));
+        if ($autoSwitch && ($hour > 21 || $hour < 9)) {
+            return app(env('CARD_PAYMENT_PARTNER_POS2', NapTheNhanhPayment::class));
+        }
+
+        return app(CardPaymentInterface::class);
+    }
+
+    /**
+     * Create CardPaymentInterface based on callback request
+     * @param \Illuminate\Http\Request $request
+     * @return \App\Contract\CardPaymentInterface
+     */
+    private function getCardPaymentServiceForCallback(Request $request)
+    {
+        if ($request->get('secret_key') && $request->get('transaction_code')) {
+            return app(RecardPayment::class);
+        }
+        if ($request->get('tranid')) {
+            return app(NapTheNhanhPayment::class);
+        }
+
+        return app(CardPaymentInterface::class);
+    }
+
+    /**
+     * @param \App\Contract\CardPaymentInterface $cardPayment
+     * @param                                    $message
+     * @param int                                $statusCode
+     * @param bool                               $responseStatus
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    private function responseForCallback(CardPaymentInterface $cardPayment, $message, $statusCode = 200, $responseStatus = false)
+    {
+        $response = [
+            'status'  => $responseStatus,
+            'message' => $message,
+        ];
+        $cardPayment->logCallbackProcessed($message);
+
+        return response()->json($response, $statusCode);
     }
 }

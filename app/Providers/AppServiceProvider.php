@@ -43,21 +43,38 @@ class AppServiceProvider extends ServiceProvider
             return new JXApiClient($baseUrl, $apiKey);
         });
 
-        $this->app->singleton(CardPaymentInterface::class, function($app) {
-            if (env('CARD_PAYMENT_PARTNER') == CardPaymentInterface::PARTNER_NAPTHENHANH) {
-                $service = new NapTheNhanhPayment(
-                    env('NAPTHENHANH_PARTNER_ID'),
-                    env('NAPTHENHANH_PARTNER_KEY')
-                );
-            } else {
-                $service = new RecardPayment(
-                    env('RECARD_MERCHANT_ID'),
-                    env('RECARD_SECRET_KEY')
-                );
-            }
+        $this->registerCardPaymentService();
+    }
+
+    private function registerCardPaymentService()
+    {
+        $this->app->singleton(RecardPayment::class, function ($app) {
+            $service = new RecardPayment(
+                env('RECARD_MERCHANT_ID'),
+                env('RECARD_SECRET_KEY')
+            );
             $service->setLogger(\Log::channel('card_payment'));
 
             return $service;
-       });
+        });
+
+        $this->app->singleton(NapTheNhanhPayment::class, function ($app) {
+            $service = new NapTheNhanhPayment(
+                env('NAPTHENHANH_PARTNER_ID'),
+                env('NAPTHENHANH_PARTNER_KEY')
+            );
+            $service->setLogger(\Log::channel('card_payment'));
+
+            return $service;
+        });
+
+        $this->app->singleton(CardPaymentInterface::class, function($app) {
+            $partnerSetting = \Voyager::setting('site.card_payment_partner', env('CARD_PAYMENT_PARTNER'));
+            if ($partnerSetting == CardPaymentInterface::PARTNER_NAPTHENHANH) {
+                return app(NapTheNhanhPayment::class);
+            } else {
+                return app(RecardPayment::class);
+            }
+        });
     }
 }
