@@ -11,14 +11,15 @@
                     <button class="btn btn-primary" type="submit">
                         <i class="voyager-icon voyager-search"></i>
                     </button>
-                    <button class="btn {{ request('search') ? 'voyager-double-up' : 'collapsed voyager-double-down' }} " type="button" data-toggle="collapse"
+                    <button class="btn {{ request('search') ? 'voyager-double-up' : 'collapsed voyager-double-down' }} "
+                            type="button" data-toggle="collapse"
                             data-target="#searchForm" aria-controls="searchForm"
                             data-up="voyager-double-up" data-down="voyager-double-down">
                     </button>
                 </div>
             </div><!-- /input-group -->
         </div>
-        <div class="collapse-content {{ request('search') ? '' : 'collapse' }}" id="searchForm">
+        <div class="collapse-content {{ request('search') ? 'in' : 'collapse' }}" id="searchForm">
             <div class="mt10"></div>
             <div class="row">
                 <div class="form-search-content">
