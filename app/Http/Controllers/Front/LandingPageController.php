@@ -17,7 +17,7 @@ class LandingPageController extends BaseFrontController
         if (setting('site.landing_page_enabled')) {
             return view('pages.landing');
         }
-        return view('pages.landing');
+
         return redirect(route('front.home'));
     }
 }
