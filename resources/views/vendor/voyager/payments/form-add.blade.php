@@ -10,9 +10,11 @@ $rowClass = 'col-xs-12 col-md-4';
                 <i class="voyager-plus"></i> Add Payment
             @endif
         </h3>
+        @if(!empty($isBrowsing))
         <div class="panel-actions">
-            <a class="btn panel-action {{ !empty($isBrowsing) && !request('search') ? 'panel-collapsed voyager-double-down' : 'voyager-double-up' }}" data-up="voyager-double-up" data-down="voyager-double-down" data-toggle="panel-collapse" aria-hidden="true"></a>
+            <a class="btn panel-action {{ request('search') ? 'panel-collapsed voyager-double-down' : 'voyager-double-up' }}" data-up="voyager-double-up" data-down="voyager-double-down" data-toggle="panel-collapse" aria-hidden="true"></a>
         </div>
+        @endif
     </div>
     <div class="panel-body" style="{{ !empty($isBrowsing) && request('search') ? 'display:none' : '' }}">
         <form role="form"
