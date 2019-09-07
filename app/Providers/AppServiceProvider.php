@@ -69,7 +69,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
         $this->app->singleton(CardPaymentInterface::class, function($app) {
-            $partnerSetting = \Voyager::setting('card_payment_partner', env('CARD_PAYMENT_PARTNER'));
+            $partnerSetting = \Voyager::setting('site.card_payment_partner', env('CARD_PAYMENT_PARTNER'));
             if ($partnerSetting == CardPaymentInterface::PARTNER_NAPTHENHANH) {
                 return app(NapTheNhanhPayment::class);
             } else {
