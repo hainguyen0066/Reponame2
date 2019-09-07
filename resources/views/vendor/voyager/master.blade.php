@@ -33,8 +33,10 @@
     </style>
 
 @if(!empty(config('voyager.additional_css')))<!-- Additional CSS -->
-    @foreach(config('voyager.additional_css') as $css)<link rel="stylesheet" type="text/css" href="{{ asset($css) }}">@endforeach
-    @endif
+    @foreach(config('voyager.additional_css') as $css)
+        <link rel="stylesheet" type="text/css" href="{{ asset($css . '?v=' . config('site.version')) }}">
+    @endforeach
+@endif
 
     @yield('head')
 </head>
@@ -148,7 +150,9 @@
 @yield('javascript')
 
 @if(!empty(config('voyager.additional_js')))<!-- Additional Javascript -->
-@foreach(config('voyager.additional_js') as $js)<script type="text/javascript" src="{{ asset($js . '?v=' . config('site.version')) }}"></script>@endforeach
+    @foreach(config('voyager.additional_js') as $js)
+    <script type="text/javascript" src="{{ asset($js . '?v=' . config('site.version')) }}"></script>
+    @endforeach
 @endif
 
 @stack('extra-js')
