@@ -384,7 +384,7 @@ class PaymentBreadController extends VoyagerBaseController
     protected function alterBreadBrowseEloquentQuery(\Illuminate\Database\Eloquent\Builder $query, Request $request)
     {
         if ($keyword = $request->get('keyword')) {
-            $query->whereRaw("card_pin LIKE '%{$keyword}%' OR card_serial LIKE '%{$keyword}%'");
+            $query->whereRaw("(card_pin LIKE '%{$keyword}%' OR card_serial LIKE '%{$keyword}%')");
         }
         if ($id = $request->get('id')) {
             $query->where('id', $id);
