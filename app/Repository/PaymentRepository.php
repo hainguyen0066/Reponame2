@@ -3,7 +3,6 @@
 namespace App\Repository;
 
 use App\Models\Payment;
-use App\Services\RecardResponse;
 use App\User;
 use App\Util\CommonHelper;
 use App\Util\MobileCard;
@@ -28,6 +27,7 @@ class PaymentRepository extends AbstractEloquentRepository
      * @param \App\Util\MobileCard $card
      *
      * @return int
+     * @throws \Exception
      */
     public function isCardExisted(MobileCard $card)
     {
@@ -140,6 +140,12 @@ class PaymentRepository extends AbstractEloquentRepository
         return $query;
     }
 
+    /**
+     * @param \App\User $user
+     * @param int       $limit
+     *
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
     public function getUserPaymentHistory(User $user, $limit = 10)
     {
         $query = $this->makeUserPaymentHistoryQuery($user);
@@ -156,8 +162,8 @@ class PaymentRepository extends AbstractEloquentRepository
     public function exchangeGamecoin($moneyAmount, $paymentType)
     {
         $knb = $xu = 0;
-        $gameCoinAmount = ceil($moneyAmount / env('GOLD_EXCHANGE_RATE', 1000));
-        if ($paymentType == Payment::PAYMENT_TYPE_BANK_TRANSFER || $paymentType == Payment::PAYMENT_TYPE_MOMO) {
+        $gameCoinAmount = round($moneyAmount / env('GOLD_EXCHANGE_RATE', 1000));
+        if (in_array($paymentType, [Payment::PAYMENT_TYPE_BANK_TRANSFER, Payment::PAYMENT_TYPE_MOMO, Payment::PAYMENT_TYPE_ADVANCE_DEBT])) {
             $xu = $gameCoinAmount + ceil($gameCoinAmount * env('GOLD_EXCHANGE_BONUS', 20) / 100);
         } else {
             $knb = $gameCoinAmount;
@@ -294,5 +300,11 @@ class PaymentRepository extends AbstractEloquentRepository
         }
 
         return $money;
+    }
+
+    public function payAdvanceDebt(Payment $payment)
+    {
+        $payment->status = true;
+        $payment->finished = true;
     }
 }

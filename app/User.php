@@ -52,6 +52,8 @@ use Illuminate\Notifications\Notifiable;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereUtmCampaign($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereUtmMedium($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereUtmSource($value)
+ * @property string|null $note
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereNote($value)
  */
 class User extends \TCG\Voyager\Models\User
 {
