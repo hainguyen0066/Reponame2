@@ -80,7 +80,7 @@
         },
         "t2g": {
             "type": "vcs",
-            "url": "git@gitlab.com:t2game/common.git"
+            "url": "https://gitlab.com/t2game/common.git"
         },
         "hooks": {
             "type": "composer",

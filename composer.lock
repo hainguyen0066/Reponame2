@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "392dd1628ea20e894415fad6a94bf316",
+    "content-hash": "daf908e8adc865badc9d5dc9286dd1d4",
     "packages": [
         {
             "name": "arrilot/laravel-widgets",
@@ -3975,12 +3975,12 @@
             "source": {
                 "type": "git",
                 "url": "git@gitlab.com:t2game/common.git",
-                "reference": "ccea5a33e0e3e1a169764f7f2622658e0d6b934b"
+                "reference": "994eb87f283944a3bf1be2aa609d5fd7acfa1cda"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/t2game%2Fcommon/repository/archive.zip?sha=ccea5a33e0e3e1a169764f7f2622658e0d6b934b",
-                "reference": "ccea5a33e0e3e1a169764f7f2622658e0d6b934b",
+                "url": "https://gitlab.com/api/v4/projects/t2game%2Fcommon/repository/archive.zip?sha=994eb87f283944a3bf1be2aa609d5fd7acfa1cda",
+                "reference": "994eb87f283944a3bf1be2aa609d5fd7acfa1cda",
                 "shasum": ""
             },
             "require": {
@@ -4034,7 +4034,7 @@
                 "t2g",
                 "voyager"
             ],
-            "time": "2019-09-25T07:56:51+00:00"
+            "time": "2019-09-25T08:23:14+00:00"
         },
         {
             "name": "tcg/voyager",
