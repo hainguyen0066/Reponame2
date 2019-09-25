@@ -86,11 +86,6 @@ Route::group(['as' => 'front.'], function() {
             'uses' => 'PasswordController@changePassword',
             'as' => 'password.change.submit'
         ]);
-
-        Route::post('/nhan-qua', [
-            'uses' => 'GiftCodeController@getWelcomeCode',
-            'as'   => 'get_welcome_code',
-        ]);
     });
 
     $staticPages = [

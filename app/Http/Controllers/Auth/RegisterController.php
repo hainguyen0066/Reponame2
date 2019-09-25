@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Repository\UserRepository;
 use App\Http\Controllers\Controller;
-use App\Rules\SimplePassword;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use T2G\Common\Repository\UserRepository;
+use T2G\Common\Rules\SimplePassword;
 
 class RegisterController extends Controller
 {
@@ -48,7 +47,7 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
+        return \Validator::make($data, [
             'name'     => 'required|regex:/^[a-z0-9]{5,50}$/i|unique:users',
             'phone'    => 'required|digits_between:10,14',
             'password' => [
@@ -64,8 +63,10 @@ class RegisterController extends Controller
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
-     * @return \App\User
+     * @param  array $data
+     *
+     * @return \T2G\Common\Models\AbstractUser
+     * @throws \Throwable
      */
     protected function create(array $data)
     {
