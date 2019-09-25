@@ -1,1 +1,1 @@
-<a href="{{ route('voyager.users.edit', [$data->user_id]) }}" target="_blank">{{ $data->username }}</a>
+@include('t2g_common::voyager.payments.username')

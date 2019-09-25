@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Front;
 
-use App\Repository\PostRepository;
-use App\Repository\SliderRepository;
+use T2G\Common\Controllers\Front\BaseFrontController;
+use T2G\Common\Repository\PostRepository;
+use T2G\Common\Repository\SliderRepository;
 
 /**
  * Class WebLauncherController

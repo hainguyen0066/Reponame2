@@ -1,1 +1,1 @@
-{!! $data->getStatusText(true) !!}
+@include('t2g_common::voyager.payments.status')

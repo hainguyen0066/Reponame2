@@ -24,8 +24,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('notifier:momo')->everyFiveMinutes();
-        $schedule->command('mysql:backup mysql')->twiceDaily();
+        $schedule->command('t2g_common:notifier:momo')->everyFiveMinutes();
+        $schedule->command('t2g_common:mysql:backup mysql')->twiceDaily();
     }
 
     /**

@@ -1,5 +1,5 @@
 @php
-$categories = \App\Util\CommonHelper::getCategories();
+$categories = \App\Util\Helper::getCategories();
 $activeSlug = $activeSlug ?? null;
 @endphp
 <div class="menu">

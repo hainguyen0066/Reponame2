@@ -29,13 +29,13 @@ Breadcrumbs::for('changepass', function ($trail) {
     $trail->push('Đổi mật khẩu');
 });
 // Home > [Category]
-Breadcrumbs::for('category', function ($trail, \App\Models\Category $category) {
+Breadcrumbs::for('category', function ($trail, \T2G\Common\Models\Category $category) {
     $trail->parent('home');
     $trail->push($category->name, route('front.category', $category->slug));
 });
 
 // Home > [Category] > [Post]
-Breadcrumbs::for('post', function ($trail, \App\Models\Post $post) {
+Breadcrumbs::for('post', function ($trail, \T2G\Common\Models\Post $post) {
     $trail->parent('category', $post->category);
     $trail->push($post->title);
 });

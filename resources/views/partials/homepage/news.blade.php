@@ -1,5 +1,5 @@
 @php
-    $categories = \App\Util\CommonHelper::getNewsCategories();
+    $categories = \App\Util\Helper::getNewsCategories();
     $i = 0;
 @endphp
 <div class="news">

@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Front;
 
-use App\Repository\PaymentRepository;
-use App\Repository\UserRepository;
-use App\Rules\SimplePassword;
 use Symfony\Component\HttpFoundation\Request;
+use T2G\Common\Controllers\Front\BaseFrontController;
+use T2G\Common\Repository\PaymentRepository;
+use T2G\Common\Repository\UserRepository;
+use T2G\Common\Rules\SimplePassword;
 
 /**
  * Class ManageAccount
@@ -33,9 +34,9 @@ class ManageAccountController extends BaseFrontController
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \App\Repository\UserRepository            $userRepository
+     * @param \T2G\Common\Repository\UserRepository     $userRepository
      *
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
     public function changePassword(Request $request, UserRepository $userRepository)
     {

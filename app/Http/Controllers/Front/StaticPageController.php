@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Front;
 
-use App\Repository\PageRepository;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use T2G\Common\Controllers\Front\BaseFrontController;
+use T2G\Common\Repository\PageRepository;
 
 /**
  * Class StaticPageController

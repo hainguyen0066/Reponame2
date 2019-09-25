@@ -1,7 +1,7 @@
 @extends('layouts.front')
 @php
 $activeSlug = $post->getCategorySlug();
-/** @var \App\Models\Post $post */
+/** @var \T2G\Common\Models\Post $post */
 @endphp
 @section('content')
     <div class="details-content">

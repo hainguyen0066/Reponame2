@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6bc27584ebe9f3ad73c182c3bf35e3ee",
+    "content-hash": "392dd1628ea20e894415fad6a94bf316",
     "packages": [
         {
             "name": "arrilot/laravel-widgets",
@@ -3970,17 +3970,84 @@
             "time": "2018-08-02T09:24:26+00:00"
         },
         {
+            "name": "t2g/common",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "git@gitlab.com:t2game/common.git",
+                "reference": "ccea5a33e0e3e1a169764f7f2622658e0d6b934b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://gitlab.com/api/v4/projects/t2game%2Fcommon/repository/archive.zip?sha=ccea5a33e0e3e1a169764f7f2622658e0d6b934b",
+                "reference": "ccea5a33e0e3e1a169764f7f2622658e0d6b934b",
+                "shasum": ""
+            },
+            "require": {
+                "ext-imap": "*",
+                "ext-json": "*",
+                "guzzlehttp/guzzle": "^6.3",
+                "miraris/monolog-discord-handler": "^0.2.0",
+                "symfony/dom-crawler": "^4.3",
+                "tcg/voyager": "dev-dev",
+                "webklex/laravel-imap": "^1.4"
+            },
+            "require-dev": {
+                "laravel/framework": "~5.4.36|~5.5.0|~5.6.0",
+                "phpunit/phpcov": "~3.0|~4.0",
+                "phpunit/phpunit": "~5.7.14|~6.1|~7.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "T2G\\Common\\ServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "T2G\\Common\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "T2G\\Common\\Tests\\": "tests/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Trung Tran",
+                    "email": "trungtran@t2gcorp.com"
+                }
+            ],
+            "description": "An package of common things in T2G web apps",
+            "homepage": "https://gitlab.com/t2game",
+            "keywords": [
+                "laravel",
+                "t2g",
+                "voyager"
+            ],
+            "time": "2019-09-25T07:56:51+00:00"
+        },
+        {
             "name": "tcg/voyager",
             "version": "dev-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/trungtnm/voyager.git",
-                "reference": "9deca13dec83d6632457f69f74797e0d7b766c8a"
+                "reference": "82e4924b6bb6bee2ce27251a47d436a7877227c0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/trungtnm/voyager/zipball/9deca13dec83d6632457f69f74797e0d7b766c8a",
-                "reference": "9deca13dec83d6632457f69f74797e0d7b766c8a",
+                "url": "https://api.github.com/repos/trungtnm/voyager/zipball/82e4924b6bb6bee2ce27251a47d436a7877227c0",
+                "reference": "82e4924b6bb6bee2ce27251a47d436a7877227c0",
                 "shasum": ""
             },
             "require": {
@@ -4042,7 +4109,7 @@
                 "issues": "https://github.com/the-control-group/voyager/issues",
                 "source": "https://github.com/the-control-group/voyager"
             },
-            "time": "2019-09-06T16:56:26+00:00"
+            "time": "2019-09-25T07:12:42+00:00"
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",
@@ -6219,6 +6286,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "t2g/common": 20,
         "tcg/voyager": 20
     },
     "prefer-stable": true,

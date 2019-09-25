@@ -38,7 +38,7 @@ return [
             'driver' => 'stack',
             'channels' => ['single', 'discord'],
         ],
-
+        // logging configurations for T2G\Common
         'game_api' => [
             'driver' => 'stack',
             'channels' => ['discord', 'game_api_request'],
@@ -47,7 +47,7 @@ return [
         'discord' => [
             'driver' => 'custom',
             'url' => env('LOG_DISCORD_WEBHOOK_URL', ''),
-            'via' => App\Logging\DiscordMonologFactory::class,
+            'via' => \T2G\Common\Logging\DiscordMonologFactory::class,
             'level' => 'error',
         ],
 
@@ -67,6 +67,7 @@ return [
             'path' => storage_path('logs/card_payment_mocked.log'),
             'level' => 'debug',
         ],
+        // end logging configurations for T2G\Common
 
         'single' => [
             'driver' => 'single',

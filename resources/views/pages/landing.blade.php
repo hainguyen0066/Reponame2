@@ -3,16 +3,16 @@
 <head>
     @component('meta')
         @slot('title')
-        @section('title'){{ $title ?? config('site.seo.title') }}@show
+        @section('title'){{ $title ?? config('t2g_common.site.seo.title') }}@show
         @endslot
         @slot('meta_description')
-            {{ $meta_description ?? config('site.seo.meta_description') }}
+            {{ $meta_description ?? config('t2g_common.site.seo.meta_description') }}
         @endslot
         @slot('meta_keywords')
-            {{ $meta_keywords ?? config('site.seo.meta_keyword') }}
+            {{ $meta_keywords ?? config('t2g_common.site.seo.meta_keyword') }}
         @endslot
         @slot('meta_image')
-            {{ $meta_image ?? asset(config('site.seo.meta_image')) }}
+            {{ $meta_image ?? asset(config('t2g_common.site.seo.meta_image')) }}
         @endslot
     @endcomponent
     <link rel="stylesheet" href="{{ mix('css/landing.css') }}">

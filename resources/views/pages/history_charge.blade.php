@@ -1,6 +1,6 @@
 @extends('layouts.front')
 @php
-$cardTypes = \App\Util\MobileCard::getCardList();
+$cardTypes = \T2G\Common\Util\MobileCard::getCardList();
 $pageTitle = "Lịch sử giao dịch";
 @endphp
 @section('content')
@@ -24,9 +24,9 @@ $pageTitle = "Lịch sử giao dịch";
                                 <td align="center">{{ $history->id }}</td>
                                 <td>
                                     <h4>
-                                        {{ \App\Models\Payment::displayPaymentType($history->payment_type) }}
+                                        {{ \T2G\Common\Models\Payment::displayPaymentType($history->payment_type) }}
                                     </h4>
-                                    @if($history->payment_type == \App\Models\Payment::PAYMENT_TYPE_CARD)
+                                    @if($history->payment_type == \T2G\Common\Models\Payment::PAYMENT_TYPE_CARD)
                                         <p>Mã thẻ: {{ $history->card_pin }}</p>
                                         <p>Serial: {{ $history->card_serial }}</p>
                                         <p>Loại thẻ: {{ $history->card_type }}</p>

@@ -52,6 +52,7 @@ Route::group(['as' => 'front.'], function() {
         'uses' => 'PostController@search',
         'as' => 'search'
     ]);
+
     ## --------------------- Secured Routes --------------------- ##
     Route::group(['middleware' => 'auth'], function() {
         Route::get('/quan-ly-tai-khoan', [
@@ -93,9 +94,9 @@ Route::group(['as' => 'front.'], function() {
     });
 
     $staticPages = [
-        'nap_the_cao' => '/nap-the/the-cao',
-        'vi_momo' => '/nap-the/vi-momo',
-        'chuyen_khoan' => '/nap-the/chuyen-khoan'
+        'nap_the_cao'  => '/nap-the/the-cao',
+        'vi_momo'      => '/nap-the/vi-momo',
+        'chuyen_khoan' => '/nap-the/chuyen-khoan',
     ];
     foreach ($staticPages as $name => $uri) {
         Route::get($uri, [

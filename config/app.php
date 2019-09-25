@@ -160,6 +160,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Webklex\IMAP\Providers\LaravelServiceProvider::class,
+        T2G\Common\ServiceProvider::class
     ],
 
     /*

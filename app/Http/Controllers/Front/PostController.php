@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Front;
 
-use App\Models\Category;
-use App\Repository\CategoryRepository;
-use App\Repository\PostRepository;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use T2G\Common\Controllers\Front\BaseFrontController;
+use T2G\Common\Models\Category;
+use T2G\Common\Repository\CategoryRepository;
+use T2G\Common\Repository\PostRepository;
 
 /**
  * Class PostController
@@ -55,11 +56,8 @@ class PostController extends BaseFrontController
         return view('pages.post_detail', $data);
     }
 
-    public function list(
-        $categorySlug,
-        PostRepository $postRepository,
-        CategoryRepository $categoryRepository
-    ) {
+    public function list($categorySlug, PostRepository $postRepository, CategoryRepository $categoryRepository)
+    {
         if ($categorySlug == self::CATEGORY_SLUG_ALL) {
             $category = new Category();
             $category->name = 'Tổng hợp';
@@ -83,11 +81,9 @@ class PostController extends BaseFrontController
         return view('pages.category', $data);
     }
 
-    public function search(
-        PostRepository $postRepository,
-        Request $request
-    ) {
-        $keyword = $request->input('search');
+    public function search(PostRepository $postRepository, Request $request)
+    {
+        $keyword = $request->get('search');
         $posts = $postRepository->searchPost($keyword, self::POSTS_PER_PAGE);
         $data = [
             'posts'    => $posts,
