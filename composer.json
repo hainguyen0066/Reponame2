@@ -79,7 +79,7 @@
             "url": "https://github.com/trungtnm/voyager"
         },
         "t2g": {
-            "type": "vcs",
+            "type": "git",
             "url": "https://gitlab.com/t2game/common.git"
         },
         "hooks": {

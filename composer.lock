@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "daf908e8adc865badc9d5dc9286dd1d4",
+    "content-hash": "048d6485301b1fdd1fddb5b055f3c3ca",
     "packages": [
         {
             "name": "arrilot/laravel-widgets",
@@ -3974,7 +3974,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "git@gitlab.com:t2game/common.git",
+                "url": "https://gitlab.com/t2game/common.git",
                 "reference": "994eb87f283944a3bf1be2aa609d5fd7acfa1cda"
             },
             "dist": {
