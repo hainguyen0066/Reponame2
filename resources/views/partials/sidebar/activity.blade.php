@@ -60,11 +60,11 @@
         </tr>
         <tr>
             <td class="td-time">Thứ 5</td>
-            <td class="td-content"><a href="{{ route('front.details.post', ['huong-dan','tinh-n-ng-loi-dai-cong-thanh'])}}">Lôi đài - Phượng Tường</a></td>
+            <td class="td-content"><a href="{{ route('front.details.post', ['huong-dan','tinh-n-ng-cong-thanh-chien-tam-tru'])}}">Công thành - Tương Dương</a></td>
         </tr>
         <tr>
-            <td class="td-time">Thứ 6</td>
-            <td class="td-content"><a href="{{ route('front.details.post', ['huong-dan','tinh-n-ng-cong-thanh-chien-tam-tru'])}}">Công thành - Tương Dương</a></td>
+            <td class="td-time">Thứ 5</td>
+            <td class="td-content"><a href="{{ route('front.details.post', ['huong-dan','tinh-n-ng-loi-dai-cong-thanh'])}}">Lôi đài - Phượng Tường</a></td>
         </tr>
         <tr>
             <td class="td-time">Thứ 6</td>
