@@ -3975,13 +3975,7 @@
             "source": {
                 "type": "git",
                 "url": "git@gitlab.com:t2game/common.git",
-                "reference": "994eb87f283944a3bf1be2aa609d5fd7acfa1cda"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/t2game%2Fcommon/repository/archive.zip?sha=994eb87f283944a3bf1be2aa609d5fd7acfa1cda",
-                "reference": "994eb87f283944a3bf1be2aa609d5fd7acfa1cda",
-                "shasum": ""
+                "reference": "47b0e1c5bbd93f9baa3d73fb7cca308fb25a373c"
             },
             "require": {
                 "ext-imap": "*",
@@ -4034,7 +4028,7 @@
                 "t2g",
                 "voyager"
             ],
-            "time": "2019-09-25T08:23:14+00:00"
+            "time": "2019-09-26T04:22:36+00:00"
         },
         {
             "name": "tcg/voyager",

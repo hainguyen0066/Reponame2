@@ -32,6 +32,10 @@ class Kernel extends ConsoleKernel
      * Register the commands for the application.
      *
      * @return void
+     *             $('#support_fee').bootstrapToggle({
+    on: 'Yes',
+    off: 'No'
+    });
      */
     protected function commands()
     {
