@@ -24,18 +24,15 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('t2g_common:notifier:momo')->everyFiveMinutes();
+        $schedule->command('t2g_common:momo:notifier')->everyFiveMinutes();
         $schedule->command('t2g_common:mysql:backup mysql')->twiceDaily();
+        $schedule->command('t2g_common:ccu:update')->everyTenMinutes();
     }
 
     /**
      * Register the commands for the application.
      *
      * @return void
-     *             $('#support_fee').bootstrapToggle({
-    on: 'Yes',
-    off: 'No'
-    });
      */
     protected function commands()
     {

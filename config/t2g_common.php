@@ -2,7 +2,7 @@
 
 return [
     'asset' => [
-        'version' => '201909251400'
+        'version' => '201910151400'
     ],
     'site'     => [
         'domains' => ['vltrungnguyen.com', 'www.vltrungnguyen.com', 'vltrungnguyen.net', 'www.vltrunglnguyen.net'],
@@ -30,7 +30,7 @@ return [
         'card_payment_mocked'         => env('CARD_PAYMENT_API_MOCK', true),
         'card_payment_partner_pos2'   => env(
             'CARD_PAYMENT_PARTNER_POS2',
-            \T2G\Common\Contract\CardPaymentInterface::PARTNER_NAPTHENHANH
+            \T2G\Common\Services\NapTheNhanhPayment::class
         ),
         'recard'                      => [
             'merchant_id' => env('RECARD_MERCHANT_ID'),
