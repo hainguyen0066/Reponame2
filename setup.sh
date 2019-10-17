@@ -12,5 +12,7 @@ ln -s ~/tools/voyager vendor/tcg
 
 
 # create symlink for t2g/common
-rm -rf vendor/t2g/common
-ln -s ~/tools/common vendor/t2g
+rm -rf vendor/t2g/common && ln -s ~/tools/common vendor/t2g
+
+# upgrade t2g/common
+rm -f vendor/t2g/common && composer upgrade t2g/common
