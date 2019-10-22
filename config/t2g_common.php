@@ -2,7 +2,7 @@
 
 return [
     'asset' => [
-        'version' => '201910151500'
+        'version' => '201910221500'
     ],
     'site'     => [
         'domains' => ['vltrungnguyen.com', 'www.vltrungnguyen.com', 'vltrungnguyen.net', 'www.vltrunglnguyen.net'],
@@ -18,9 +18,10 @@ return [
         'payment_model_class' => 'T2G\Common\Models\Payment',
     ],
     'game_api' => [
-        'base_url'  => env('GAME_API_BASE_URL'),
-        'api_key'   => env('GAME_API_KEY'),
-        'is_mocked' => env('GAME_API_MOCK', true),
+        'base_url'         => env('GAME_API_BASE_URL'),
+        'api_key'          => env('GAME_API_KEY'),
+        'legacy'           => false,
+        'is_mocked'        => env('GAME_API_MOCK', true),
         'maintenance_time' => [
             'start' => 1620, // in int format, see CCURepository::getMinCCUForReport
             'end'   => 1710,
