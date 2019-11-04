@@ -2,7 +2,7 @@
 
 return [
     'asset' => [
-        'version' => '201910221500'
+        'version' => '201911041722'
     ],
     'site'     => [
         'domains' => ['vltrungnguyen.com', 'www.vltrungnguyen.com', 'vltrungnguyen.net', 'www.vltrunglnguyen.net'],

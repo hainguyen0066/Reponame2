@@ -3975,7 +3975,7 @@
             "source": {
                 "type": "git",
                 "url": "git@gitlab.com:t2game/common.git",
-                "reference": "3c0db658ddfc3408f22b3735aa8bc7b067b4837b"
+                "reference": "cdc4fa38722f3c5f00888432c02011b1f461a6d3"
             },
             "require": {
                 "ext-imap": "*",
@@ -4028,7 +4028,7 @@
                 "t2g",
                 "voyager"
             ],
-            "time": "2019-10-22T08:48:29+00:00"
+            "time": "2019-11-04T09:49:57+00:00"
         },
         {
             "name": "tcg/voyager",
@@ -4036,12 +4036,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/trungtnm/voyager.git",
-                "reference": "82e4924b6bb6bee2ce27251a47d436a7877227c0"
+                "reference": "56dd46491c119fb219ef7e88bfdd2b170eb1a8c6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/trungtnm/voyager/zipball/82e4924b6bb6bee2ce27251a47d436a7877227c0",
-                "reference": "82e4924b6bb6bee2ce27251a47d436a7877227c0",
+                "url": "https://api.github.com/repos/trungtnm/voyager/zipball/56dd46491c119fb219ef7e88bfdd2b170eb1a8c6",
+                "reference": "56dd46491c119fb219ef7e88bfdd2b170eb1a8c6",
                 "shasum": ""
             },
             "require": {
@@ -4103,7 +4103,7 @@
                 "issues": "https://github.com/the-control-group/voyager/issues",
                 "source": "https://github.com/the-control-group/voyager"
             },
-            "time": "2019-09-25T07:12:42+00:00"
+            "time": "2019-11-04T08:31:22+00:00"
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",
