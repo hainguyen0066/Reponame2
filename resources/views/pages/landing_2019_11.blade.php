@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html lang="vi" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta name="viewport" content="width=1920, initial-scale=1, user-scalable=no">
+    <meta name="viewport" content="width=1920, initial-scale=1">
     @component('meta')
         @slot('title')
         @section('title'){{ $title ?? config('t2g_common.site.seo.title') }}@show
@@ -18,6 +18,7 @@
     @endcomponent
     <link rel="stylesheet" href="{{ mix('css/landing-2019-11.css') }}">
     <link rel="stylesheet" href="{{ mix('css/account.css') }}">
+    @include('schemas.home')
 </head>
 <body>
 @php

@@ -13,3 +13,6 @@
     @endsection
 @endif
 
+@push('schemas')
+    @include('schemas.home')
+@endpush
