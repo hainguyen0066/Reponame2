@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="viewport" content="width=1920, initial-scale=1, user-scalable=no">
     @component('meta')
         @slot('title')
         @section('title'){{ $title ?? config('t2g_common.site.seo.title') }}@show

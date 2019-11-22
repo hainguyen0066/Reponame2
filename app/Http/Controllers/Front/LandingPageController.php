@@ -13,7 +13,10 @@ class LandingPageController extends BaseFrontController
     public function index()
     {
         if (setting('site.landing_page_enabled')) {
-            return view('pages.landing_2019_11');
+            if (request('test')) {
+                return view('pages.landing_2019_11');
+            }
+
             return view('pages.landing');
         }
 

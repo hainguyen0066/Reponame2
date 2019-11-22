@@ -170,9 +170,9 @@ body{
             height: 362px;
             position: absolute;
             cursor: pointer;
-            background: url('../images/landing-2019-11/btn-chitiet.jpg') 30px 298px no-repeat;
+            //background: url('../images/landing-2019-11/btn-chitiet.jpg') 30px 298px no-repeat;
             &:hover {
-                background: url('../images/landing-2019-11/btn-chitiet-hover.jpg') 29px 297px no-repeat;
+                background: url('../images/landing-2019-11/btn-chitiet-hover.jpg') 29px 298px no-repeat;
             }
             &.volamtranhba {
                 left: 41px;
@@ -189,6 +189,9 @@ body{
             &.denhatbanghoi {
                 left: 788px;
                 top: 332px;
+                &:hover {
+                    background: url('../images/landing-2019-11/btn-chitiet-hover.jpg') 30px 298px no-repeat;
+                }
             }
             a {
                 display: block;
@@ -209,40 +212,38 @@ body{
             display: inline;
         }
     }
-}
-.footer .bottom-logo {
-    height: 101px;
-    width: 174px;
-    margin-left: 10px;
-    background-size: contain;
-    margin-top: 7px;
-}
+    .bottom-logo {
+        height: 101px;
+        width: 174px;
+        margin-left: 10px;
+        background-size: contain;
+        margin-top: 7px;
+        a {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+    }
 
-.footer .bottom-logo a {
-    display: block;
-    width: 100%;
-    height: 100%;
-}
+    .footer-contents {
+        margin-left: 50px;
+        margin-top: 15px;
 
-.footer .footer-contents {
-    margin-left: 50px;
-    margin-top: 15px;
-}
+        p {
+            color: #75919f;
+            font-size: 16px;
+            line-height: 25px;
+        }
 
-.footer .footer-contents p {
-    color: #75919f;
-    font-size: 16px;
-    line-height: 25px;
-}
+        a {
+            color: #ffffff;
+        }
 
-.footer .footer-contents a {
-    color: #ffffff;
-}
-
-.footer .footer-contents span {
-    color: #ffffff;
-}
-
-.footer .footer-contents span.blue {
-    color: #1759df;
+        span {
+            color: #ffffff;
+            &.blue {
+                color: #1759df;
+            }
+        }
+    }
 }
