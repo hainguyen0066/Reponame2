@@ -36,11 +36,12 @@ $cacheBuster = "?v=" . config('t2g_common.asset.version');
                 </div>
                 <div class="three-button">
                     @if(!$user)
-                    <div class="register-btn account-register"></div>
+                    <a class="register-btn account-register" title="Đăng ký"></a>
                     @endif
-                    <div class="download {{ $user ? 'logged' : '' }}"> <a href="{{ route('front.page.download')}}"></a></div>
+                    <a class="download {{ $user ? 'logged' : '' }}"
+                       href="{{ route('front.page.download')}}" title="Tải game"></a>
                     @if(!$user)
-                    <div class="login-btn account-login"></div>
+                    <a class="login-btn account-login" title="Đăng nhập"></a>
                     @endif
                 </div>
             </div>
