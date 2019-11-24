@@ -27,6 +27,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('t2g_common:momo:notifier')->everyFiveMinutes();
         $schedule->command('t2g_common:mysql:backup mysql')->twiceDaily();
         $schedule->command('t2g_common:ccu:update')->everyFiveMinutes();
+        $schedule->command('t2g_common:users:update_last_login')->dailyAt('23:58');
     }
 
     /**

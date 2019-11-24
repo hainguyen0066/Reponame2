@@ -54,6 +54,8 @@ use T2G\Common\Models\Payment;
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUtmSource($value)
  * @property string|null $note
  * @method static \Illuminate\Database\Eloquent\Builder|User whereNote($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\T2G\Common\Models\Revision[] $advancedRevisionHistory
+ * @property-read \Illuminate\Database\Eloquent\Collection|\T2G\Common\Models\Revision[] $revisionHistory
  */
 class User extends AbstractUser
 {
