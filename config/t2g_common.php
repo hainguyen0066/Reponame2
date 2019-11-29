@@ -9,8 +9,8 @@ return [
         'seo'     => [
             'title'            => 'Võ Lâm Trung Nguyên',
             'meta_keyword'     => 'vo lam trung nguyen, vltk hay, game pk hay, volam1, ctc, vo lam ctc, vo lam cong thanh chien, vo lam 1',
-            'meta_description' => 'Ôn lại hồi ức thời hoàng kim của võ lâm. Lộ trình phát triển rõ ràng, update tính năng liên tục và đều đặn.',
-            'meta_image'       => 'images/share.1.5.jpg',
+            'meta_description' => 'Open Server Nam Nhạc Trấn 07/12/2019. Ôn lại hồi ức thời hoàng kim của võ lâm. Lộ trình phát triển rõ ràng, update tính năng liên tục và đều đặn.',
+            'meta_image'       => 'images/share.1.6.jpg',
         ],
     ],
     'models'   => [

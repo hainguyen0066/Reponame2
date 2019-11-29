@@ -63,7 +63,7 @@ $cacheBuster = "?v=" . config('t2g_common.asset.version');
                 <div class="frame-button volamtranhba"><a href="{{ route('front.details.post', ['tong-hop','su-kien-dua-top-may-chu-ba-l-ng-huyen'])}}"></a></div>
                 <div class="frame-button quanhunghoitu"><a href="{{ route('front.details.post', ['tong-hop','chuoi-su-kien-close-beta-16-08-khai-mo-server-ba-l-ng-huyen']) }}"></a></div>
                 <div class="frame-button anhhungthiep"><a href="{{ route('front.details.post', ['tong-hop','chuoi-su-kien-close-beta-16-08-khai-mo-server-ba-l-ng-huyen']) }}"></a></div>
-                <div class="frame-button denhatbanghoi"><a href="{{ route('front.details.post', ['tong-hop', 'de-nhat-bang-hoi-may-chu-ba-l-ng-huyen']) }}"></a></div>
+                {{--<div class="frame-button denhatbanghoi"><a href="{{ route('front.details.post', ['tong-hop', 'de-nhat-bang-hoi-may-chu-ba-l-ng-huyen']) }}"></a></div>--}}
                 <div class="footer">
                     <div class="bottom-logo f-left"><a href="{{ route('front.home') }}"></a></div>
                     <div class="footer-contents f-left">

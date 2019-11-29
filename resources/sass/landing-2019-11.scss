@@ -200,28 +200,34 @@ a {
     position: relative;
 
     .frame-button {
-      width: 193px;
-      height: 362px;
+      width: 293px;
+      height: 363px;
       position: absolute;
       cursor: pointer;
       //background: url('../images/landing-2019-11/btn-chitiet.jpg') 30px 298px no-repeat;
       &:hover {
-        background: url('../images/landing-2019-11/btn-chitiet-hover.jpg') 29px 298px no-repeat;
+        background: url('../images/landing-2019-11/btn-chitiet-hover.jpg') 79px 297px no-repeat;
       }
 
       &.volamtranhba {
         left: 41px;
         top: 332px;
+        &:hover {
+          background: url('../images/landing-2019-11/btn-chitiet-hover.jpg') 79px 298px no-repeat;
+        }
       }
 
       &.quanhunghoitu {
-        left: 290px;
+        left: 381px;
         top: 383px;
       }
 
       &.anhhungthiep {
-        left: 540px;
-        top: 383px;
+        left: 718px;
+        top: 334px;
+        &:hover {
+          background: url('../images/landing-2019-11/btn-chitiet-hover.jpg') 82px 296px no-repeat;
+        }
       }
 
       &.denhatbanghoi {
@@ -229,7 +235,7 @@ a {
         top: 332px;
 
         &:hover {
-          background: url('../images/landing-2019-11/btn-chitiet-hover.jpg') 30px 298px no-repeat;
+          background: url('../images/landing-2019-11/btn-chitiet-hover.jpg') 82px 294px no-repeat;
         }
       }
 
