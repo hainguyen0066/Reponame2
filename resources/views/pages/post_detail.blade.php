@@ -35,3 +35,7 @@ $activeSlug = $post->getCategorySlug();
         </div>
     </div>
 @endsection
+
+@push('schemas')
+    @include('t2g_common::schemas.post')
+@endpush

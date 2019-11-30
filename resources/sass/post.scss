@@ -2,6 +2,15 @@
   .main-details-content {
     font-family: Tahoma, Geneva, Verdana, sans-serif !important;
     font-size: 1rem;
+    padding-bottom: 100px;
+    background: #fff url("../images/bg-post-body.jpg") bottom center no-repeat;
+
+    &.auto {
+      min-height: initial;
+      .news {
+        background: none;
+      }
+    }
     h1 {
       font-size: 2rem;
     }
@@ -59,4 +68,23 @@
     color: #47aa71;
     line-height: 2rem;
   }
+  &.welcome {
+    p.list-group {
+      margin-top: 30px;
+      background: url("../images/icon-list-new.png") left center no-repeat;
+      text-indent: 30px;
+      font-size: 1.5em;
+      font-family: 'PhilosopherBold', Tahoma, Arial, sans-serif;
+    }
+    .listnews {
+      ul li {
+        list-style-position: inside;
+        margin: 10px 0;
+        :before {
+          content: '>';
+        }
+      }
+    }
+  }
+
 }

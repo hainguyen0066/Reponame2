@@ -1,7 +1,7 @@
 <meta charset="utf-8">
 <meta content="vi-VN" itemprop="inLanguage"/>
 <meta name="apple-mobile-web-app-capable" content="yes"/>
-<meta name="apple-mobile-web-app-title" content="{{ env('APP_NAME') }}"/>
+<meta name="apple-mobile-web-app-title" content="{{ config('app.name') }}"/>
 <link rel="dns-prefetch" href="//www.google-analytics.com"/>
 <link rel="dns-prefetch" href="//www.googletagmanager.com"/>
 <link rel="dns-prefetch" href="//www.facebook.com"/>

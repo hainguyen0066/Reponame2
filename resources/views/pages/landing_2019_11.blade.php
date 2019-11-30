@@ -18,7 +18,7 @@
     @endcomponent
     <link rel="stylesheet" href="{{ mix('css/landing-2019-11.css') }}">
     <link rel="stylesheet" href="{{ mix('css/account.css') }}">
-    @include('schemas.home')
+    @include('t2g_common::schemas.home')
 </head>
 <body>
 @php
@@ -60,9 +60,9 @@ $cacheBuster = "?v=" . config('t2g_common.asset.version');
         </section>
         <section class="section-05" data-bg="{{ asset('images/landing-2019-11/bg-frame5-high.jpg') . $cacheBuster  }}">
             <div class="container">
-                <div class="frame-button volamtranhba"><a href="{{ route('front.details.post', ['tong-hop','su-kien-dua-top-may-chu-ba-l-ng-huyen'])}}"></a></div>
-                <div class="frame-button quanhunghoitu"><a href="{{ route('front.details.post', ['tong-hop','chuoi-su-kien-close-beta-16-08-khai-mo-server-ba-l-ng-huyen']) }}"></a></div>
-                <div class="frame-button anhhungthiep"><a href="{{ route('front.details.post', ['tong-hop','chuoi-su-kien-close-beta-16-08-khai-mo-server-ba-l-ng-huyen']) }}"></a></div>
+                <div class="frame-button volamtranhba"><a href="{{ route('front.details.post', ['tong-hop','su-kien-dua-top-may-chu-nam-nhac-tran'])}}"></a></div>
+                <div class="frame-button quanhunghoitu"><a href="{{ route('front.details.post', ['tong-hop','chuoi-su-kien-closebeta-nam-nhac-tran-may-chu-thu-phi']) }}"></a></div>
+                <div class="frame-button anhhungthiep"><a href="{{ route('front.details.post', ['tong-hop','chuoi-su-kien-closebeta-nam-nhac-tran-may-chu-thu-phi']) }}"></a></div>
                 {{--<div class="frame-button denhatbanghoi"><a href="{{ route('front.details.post', ['tong-hop', 'de-nhat-bang-hoi-may-chu-ba-l-ng-huyen']) }}"></a></div>--}}
                 <div class="footer">
                     <div class="bottom-logo f-left"><a href="{{ route('front.home') }}"></a></div>

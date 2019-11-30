@@ -81,7 +81,7 @@ class RegisterController extends Controller
      */
     protected function redirectTo()
     {
-        return route('front.home');
+        return route('front.welcome');
     }
 
     /**
@@ -104,6 +104,8 @@ class RegisterController extends Controller
                 'intended' => $this->redirectPath(),
             ]);
         }
+
+        return null;
     }
 
     private function updateTracking($user)

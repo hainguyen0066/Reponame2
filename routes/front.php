@@ -31,7 +31,7 @@ Route::group(['as' => 'front.'], function() {
 //     BEGIN CONTENT ROUTES
     Route::get('/download', [
         'uses' => 'PostController@download',
-        'as' => 'page.download'
+        'as' => 'page.download_alternative'
     ]);
     Route::get('/tai-game', [
         'uses' => 'PostController@download',
@@ -85,6 +85,11 @@ Route::group(['as' => 'front.'], function() {
         Route::post('/doi-mat-khau', [
             'uses' => 'PasswordController@changePassword',
             'as' => 'password.change.submit'
+        ]);
+
+        Route::get('/dang-ky-thanh-cong', [
+            'uses' => 'HomepageController@welcome',
+            'as' => 'welcome'
         ]);
     });
 

@@ -32,8 +32,8 @@ class PostController extends BaseFrontController
         ];
 
         $this->setMetaTitle($post->title)
-            ->setMetaDescription($post->excerpt)
-            ->setMetaImage(\Voyager::image($post->getImage()));
+            ->setMetaDescription($post->getDescription())
+            ->setMetaImage($post->getImage());
 
         return view('pages.post_detail', $data);
     }
@@ -50,8 +50,8 @@ class PostController extends BaseFrontController
             'others' => $otherPosts,
         ];
         $this->setMetaTitle($post->title)
-            ->setMetaDescription($post->excerpt)
-            ->setMetaImage(\Voyager::image($post->getImage()));
+            ->setMetaDescription($post->getDescription())
+            ->setMetaImage($post->getImage());
 
         return view('pages.post_detail', $data);
     }

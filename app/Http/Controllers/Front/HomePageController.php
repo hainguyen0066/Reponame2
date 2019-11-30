@@ -16,6 +16,7 @@ class HomePageController extends BaseFrontController
 {
     const HOMEPAGE_LIMIT_POSTS = 7;
     const HOMEPAGE_LIMIT_SLIDERS = 5;
+    const WELCOME_PAGE_LIMIT_NEW_POSTS = 5;
 
     public function index(PostRepository $postRepository, SliderRepository $sliderRepository, BannerRepository $bannerRepository)
     {
@@ -37,5 +38,21 @@ class HomePageController extends BaseFrontController
             'guides'         => $guides,
             'banner'         => $banners
         ]);
+    }
+
+    public function welcome(PostRepository $postRepository)
+    {
+        $welcomePostSlugs = [
+            'ho-tro-tan-thu',
+            'thong-tin-sever-vo-lam-trung-nguyen',
+            'trung-gian-giao-dich-admin',
+        ];
+
+        $data= [
+            'welcomePosts' => $postRepository->getPostsBySlugs($welcomePostSlugs, count($welcomePostSlugs)),
+            'newPosts'     => $postRepository->listPostByCategory('', self::WELCOME_PAGE_LIMIT_NEW_POSTS),
+        ];
+
+        return view('pages.registered', $data);
     }
 }

@@ -14,5 +14,5 @@
 @endif
 
 @push('schemas')
-    @include('schemas.home')
+    @include('t2g_common::schemas.home')
 @endpush
