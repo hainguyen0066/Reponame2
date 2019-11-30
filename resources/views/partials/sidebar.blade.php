@@ -4,7 +4,7 @@
     {{--@include('partials.sidebar.search')--}}
     @include('partials.sidebar.hotline')
     @include('partials.sidebar.activity')
-    @if(!in_array(Route::currentRouteName(), ['front.home', 'front.welcome_new_user']))
+    @if(!in_array(Route::currentRouteName(), ['front.home', 'front.welcome']))
         @include('partials.sidebar.supports')
     @endif
     @include('partials.fb_fanpage')
