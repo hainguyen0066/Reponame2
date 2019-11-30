@@ -88,7 +88,7 @@ Route::group(['as' => 'front.'], function() {
         ]);
 
         Route::get('/dang-ky-thanh-cong', [
-            'uses' => 'HomepageController@welcome',
+            'uses' => 'HomePageController@welcome',
             'as' => 'welcome'
         ]);
     });
