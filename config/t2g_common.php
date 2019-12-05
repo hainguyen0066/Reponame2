@@ -12,6 +12,11 @@ return [
             'meta_description' => 'Open Server Nam Nhạc Trấn 07/12/2019. Ôn lại hồi ức thời hoàng kim của võ lâm. Lộ trình phát triển rõ ràng, update tính năng liên tục và đều đặn.',
             'meta_image'       => 'images/share.1.6.jpg',
         ],
+        // Open Graph configs
+        'og' => [
+            'section' => 'Gaming',
+            'tag' => 'Võ Lâm Trung Nguyên'
+        ]
     ],
     'models'   => [
         'user_model_class'    => 'App\User',

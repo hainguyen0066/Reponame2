@@ -3975,7 +3975,7 @@
             "source": {
                 "type": "git",
                 "url": "git@gitlab.com:t2game/common.git",
-                "reference": "55802f272da78a5c0442ad2a1475a0bf597586cb"
+                "reference": "b487d730c8be7a680dc6d654f8316ca033850f2e"
             },
             "require": {
                 "ext-imap": "*",
@@ -4029,7 +4029,7 @@
                 "t2g",
                 "voyager"
             ],
-            "time": "2019-11-30T08:20:32+00:00"
+            "time": "2019-12-05T04:31:17+00:00"
         },
         {
             "name": "tcg/voyager",

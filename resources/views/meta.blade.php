@@ -15,7 +15,7 @@
 <meta property="og:url" itemprop="url" content="{{ url()->current() }}"/>
 <meta property="og:site_name" content="{{ $title }}"/>
 <meta property="og:locale" content="vi_VN"/>
-<meta property="og:type" content="website"/>
+<meta property="og:type" content="{{ $og_type ?? 'website' }}"/>
 <meta name="keywords" content="{{ $meta_keywords }}"/>
 <meta name="description" content="{{ $meta_description }}"/>
 <link rel="canonical" href="{{ url()->current() }}"/>

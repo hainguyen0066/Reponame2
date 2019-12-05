@@ -23,6 +23,6 @@ class StaticPageController extends BaseFrontController
 
         $this->setMetaTitle($page->title);
 
-        return view('pages.static_page', ['page' => $page]);
+        return view('pages.static_page', ['page' => $page, 'og_type' => 'article']);
     }
 }

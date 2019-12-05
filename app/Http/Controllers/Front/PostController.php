@@ -29,6 +29,7 @@ class PostController extends BaseFrontController
         $data = [
             'post'   => $post,
             'others' => $otherPosts,
+            'og_type' => 'article',
         ];
 
         $this->setMetaTitle($post->title)
@@ -48,6 +49,7 @@ class PostController extends BaseFrontController
         $data = [
             'post'   => $post,
             'others' => $otherPosts,
+            'og_type' => 'article',
         ];
         $this->setMetaTitle($post->title)
             ->setMetaDescription($post->getDescription())
