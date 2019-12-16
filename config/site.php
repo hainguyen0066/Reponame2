@@ -3,8 +3,8 @@
 return [
     'fb'  => [
         'app_id'   => '1041939975989453',
-        'page_id'  => '334751893828311',
-        'page_url' => 'https://www.facebook.com/vltrungnguyen2019/',
+        'page_id'  => '108727673959116',
+        'page_url' => 'https://www.facebook.com/jxtrungnguyen2005/',
         'group_url' => 'https://www.facebook.com/groups/vltrungnguyen'
     ],
     'ga'  => [
