@@ -77,4 +77,13 @@ return [
             'add_gold'      => env('DISCORD_ADD_GOLD_WEBHOOK_URL'),
         ],
     ],
+    'kibana' => [
+        'elasticsearch_config' => [
+            'hosts' => [
+                '167.71.206.77:9200'
+            ],
+            'handler' => \Elasticsearch\ClientBuilder::singleHandler()
+        ],
+        'index_suffix' => '_c02*'
+    ]
 ];
