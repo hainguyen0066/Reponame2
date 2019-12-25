@@ -1,5 +1,5 @@
 <div class="charge">
-    <a href="{{ route('front.static.nap_the_cao') }}">
+    <a href="{{ route('front.payment.index') }}">
         <span></span>
     </a>
 </div>

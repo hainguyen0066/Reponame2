@@ -10,5 +10,8 @@ use T2G\Common\Controllers\Front\PaymentController as T2GPaymentController;
  */
 class PaymentController extends T2GPaymentController
 {
-
+    public function index()
+    {
+        return redirect(route('front.static.vi_momo'));
+    }
 }
