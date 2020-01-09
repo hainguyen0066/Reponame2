@@ -88,7 +88,7 @@ class RegisterController extends Controller
      * The user has been registered.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  mixed  $user
+     * @param  \T2G\Common\Models\AbstractUser  $user
      * @return mixed
      */
     protected function registered(\Illuminate\Http\Request $request, $user)

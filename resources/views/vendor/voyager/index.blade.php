@@ -10,10 +10,9 @@
             {!! $widgetCCU !!}
             <div class="clearfix"></div>
         </div>
-        @if(in_array(\Auth::id(), [1, 2, 3, 256]))
+        @if(in_array(\Auth::id(), [1, 2, 3, 256, 5292]))
             <div class="panel panel-bordered">
-                <div class="panel-body">
-                    <iframe src="https://kibana.t2gcorp.com/app/kibana#/dashboard/3e651840-201b-11ea-a4ca-e330c3a6d192?embed=true&_g=(refreshInterval%3A(pause%3A!t%2Cvalue%3A0)%2Ctime%3A(from%3Anow-15d%2Cto%3Anow))" height="1500" width="100%" frameborder="0"></iframe>
+                <div class="panel-body"><iframe src="https://kibana.t2gcorp.com/app/kibana#/dashboard/3e651840-201b-11ea-a4ca-e330c3a6d192?embed=true&_g=(refreshInterval%3A(pause%3A!t%2Cvalue%3A0)%2Ctime%3A(from%3Anow-15d%2Cto%3Anow))" height="1500" width="100%" frameborder="0"></iframe>
                 </div>
             </div>
         @endif
