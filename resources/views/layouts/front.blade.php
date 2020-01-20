@@ -21,7 +21,7 @@
     @endcomponent
     @include('partials.styles')
 </head>
-<body>
+<body class="tet">
 @include('partials.trackers')
 <div class="wrapper">
     @include('partials.header')
