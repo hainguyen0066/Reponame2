@@ -4250,12 +4250,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/trungtnm/voyager.git",
-                "reference": "56dd46491c119fb219ef7e88bfdd2b170eb1a8c6"
+                "reference": "c496630aa07eb7df12e8c833cfe57ba6b30c50e7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/trungtnm/voyager/zipball/56dd46491c119fb219ef7e88bfdd2b170eb1a8c6",
-                "reference": "56dd46491c119fb219ef7e88bfdd2b170eb1a8c6",
+                "url": "https://api.github.com/repos/trungtnm/voyager/zipball/c496630aa07eb7df12e8c833cfe57ba6b30c50e7",
+                "reference": "c496630aa07eb7df12e8c833cfe57ba6b30c50e7",
                 "shasum": ""
             },
             "require": {
