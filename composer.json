@@ -19,7 +19,8 @@
         "symfony/dom-crawler": "^4.3",
         "t2g/common": "dev-master",
         "tcg/voyager": "dev-dev",
-        "webklex/laravel-imap": "^1.4"
+        "webklex/laravel-imap": "^1.4",
+        "ext-iconv": "*"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.2",
