@@ -32,6 +32,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('t2g_common:monitor:gold_gm')->everyFiveMinutes();
         $schedule->command('t2g_common:monitor:gold_trading')->everyThirtyMinutes();
         $schedule->command('t2g_common:monitor:money_trading 10')->everyThirtyMinutes();
+        $schedule->command('t2g_common:monitor:multiple_login')->everyFifteenMinutes();
     }
 
     /**

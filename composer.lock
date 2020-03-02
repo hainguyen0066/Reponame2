@@ -4187,7 +4187,7 @@
             "source": {
                 "type": "git",
                 "url": "git@gitlab.com:t2game/common.git",
-                "reference": "e6f5c2d8e5f3cc9b792978d8565b90871f6e43e2"
+                "reference": "2fe70b563f6be8e2a64a672347539873bc1be53b"
             },
             "require": {
                 "elasticsearch/elasticsearch": "^7.4",
@@ -4242,7 +4242,7 @@
                 "t2g",
                 "voyager"
             ],
-            "time": "2020-02-26T09:35:06+00:00"
+            "time": "2020-03-02T05:35:07+00:00"
         },
         {
             "name": "tcg/voyager",
