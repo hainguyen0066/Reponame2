@@ -88,5 +88,8 @@ return [
             'handler' => \Elasticsearch\ClientBuilder::singleHandler()
         ],
         'index_suffix' => '_c02*'
+    ],
+    'jx_monitor' => [
+        'multi_login_excluded_accounts' => ['admin01', 'admin02', 'sgns01', 'sgns02', 'sgns03', 'sgns04', 'sgns05', 'sgns06', 'sgns07', 'sgns08', 'sgns09', 'sgns10', 'sgns11', 'sgns12', 'sgns13', 'sgns14', 'sgns15', 'sgns16', 'sgns17', 'sgns18', 'sgns19', 'sgns20', 'sgns21', 'sgns22', 'sgns23', 'sgns24', 'sgns25', 'sgns26', 'sgns27', 'sgns28', 'sgns29', 'sgns30', 'sgns31', 'sgns32', 'sgns33', 'sgns34', 'sgns35', 'babykums01', 'babykums02', 'babykums03', 'babykums04', 'babykums05', 'babykums06', 'babykums07', 'babykums08', 'babykums09', 'babykums10', 'babykums11', 'babykums12', 'babykums13', 'babykums14', 'babykums15', 'babykums16', 'babykums17', 'babykums18', 'babykums19', 'babykums20', 'babykums21', 'babykums22', 'babykums23', 'babykums24', 'baongocs01', 'baongocs02', 'baongocs03', 'baongocs04', 'baongocs05', 'baongocs06', 'baongocs07', 'baongocs08', 'baongocs09', 'baongocs10', 'baongocs11', 'baongocs12', 'baongocs13', 'baongocs14', 'baongocs15', 'baongocs16', 'baongocs17', 'baongocs18', 'baongocs19', 'baongocs20']
     ]
 ];
