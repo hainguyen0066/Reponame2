@@ -4237,7 +4237,7 @@
             "source": {
                 "type": "git",
                 "url": "git@gitlab.com:t2game/common.git",
-                "reference": "1142468d34602d075403673bc95536ca5390ddb6"
+                "reference": "afbbc72cfa3968ee6857b20f3f349311e4f89719"
             },
             "require": {
                 "elasticsearch/elasticsearch": "^7.4",
@@ -4245,6 +4245,7 @@
                 "ext-json": "*",
                 "guzzlehttp/guzzle": "^6.3",
                 "miraris/monolog-discord-handler": "^0.2.0",
+                "predis/predis": "^1.1",
                 "symfony/dom-crawler": "^4.3",
                 "tcg/voyager": "dev-dev",
                 "venturecraft/revisionable": "^1.33",
@@ -4292,7 +4293,7 @@
                 "t2g",
                 "voyager"
             ],
-            "time": "2020-03-05T09:22:00+00:00"
+            "time": "2020-03-18T09:01:43+00:00"
         },
         {
             "name": "tcg/voyager",
