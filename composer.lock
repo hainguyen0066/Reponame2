@@ -4237,7 +4237,7 @@
             "source": {
                 "type": "git",
                 "url": "git@gitlab.com:t2game/common.git",
-                "reference": "60e52697a52533f31d5259348767df32d9cf9f5a"
+                "reference": "3de15dab7bc6395c8a742feb209ba36c57ec44f2"
             },
             "require": {
                 "elasticsearch/elasticsearch": "^7.4",
@@ -4293,7 +4293,7 @@
                 "t2g",
                 "voyager"
             ],
-            "time": "2020-04-03T10:13:53+00:00"
+            "time": "2020-04-03T11:16:54+00:00"
         },
         {
             "name": "tcg/voyager",
@@ -4301,12 +4301,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/trungtnm/voyager.git",
-                "reference": "c496630aa07eb7df12e8c833cfe57ba6b30c50e7"
+                "reference": "7d6a235b452c3b4feaaadaa9e97b5365ee460632"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/trungtnm/voyager/zipball/c496630aa07eb7df12e8c833cfe57ba6b30c50e7",
-                "reference": "c496630aa07eb7df12e8c833cfe57ba6b30c50e7",
+                "url": "https://api.github.com/repos/trungtnm/voyager/zipball/7d6a235b452c3b4feaaadaa9e97b5365ee460632",
+                "reference": "7d6a235b452c3b4feaaadaa9e97b5365ee460632",
                 "shasum": ""
             },
             "require": {
