@@ -1335,36 +1335,36 @@ a {
 body.tet {
   background: #fff;
   .wrapper {
-    background: url('../images/bg-tet-header.jpg') top center no-repeat, url('../images/bg-tet-footer.jpg') bottom center no-repeat;
+    background: url('../images/bg-tet-header.jpg') top center no-repeat, url('../images/bg-bottom.jpg') bottom center no-repeat;
   }
   .details-content .main-details-content {
     border: 1px solid #cecece;
     width: initial;
   }
-  &:before {
-    display: block;
-    position: fixed;
-    content: ' ';
-    top: 0;
-    left: 20px;
-    z-index: 50;
-    background: url('../images/luyen-trai.png') no-repeat;
-    background-size: 100% 100%;
-    width: 149px;
-    height: 362px;
-  }
-  &:after {
-    display: block;
-    position: fixed;
-    content: ' ';
-    top: 0;
-    right: 20px;
-    z-index: 50;
-    background: url('../images/luyen-phai.png') no-repeat;
-    background-size: 100% 100%;
-    width: 149px;
-    height: 362px;
-  }
+  //&:before {
+  //  display: block;
+  //  position: fixed;
+  //  content: ' ';
+  //  top: 0;
+  //  left: 20px;
+  //  z-index: 50;
+  //  background: url('../images/luyen-trai.png') no-repeat;
+  //  background-size: 100% 100%;
+  //  width: 149px;
+  //  height: 362px;
+  //}
+  //&:after {
+  //  display: block;
+  //  position: fixed;
+  //  content: ' ';
+  //  top: 0;
+  //  right: 20px;
+  //  z-index: 50;
+  //  background: url('../images/luyen-phai.png') no-repeat;
+  //  background-size: 100% 100%;
+  //  width: 149px;
+  //  height: 362px;
+  //}
   .main_content .two-columns .columns-right {
     .newbies, .news {
       border: 1px solid #cecece;

@@ -2,7 +2,7 @@ require('jquery-confirm');
 
 $(document).ready(function(){
     $('.menu-news div').click(function(){
-        var tab_id = $(this).data('tab');
+        let tab_id = $(this).data('tab');
         let link= $(this).data('link');
         $('.menu-news .tab-link').removeClass('active');
         $('.tab-content').removeClass('active');
@@ -48,6 +48,9 @@ $(document).ready(function(){
         if ($image.width() < 50) {
             return;
         }
+        if ($image.parent('a').length) {
+            return;
+        }
         let lighboxClicker = $('<a href="javascript:;" style="cursor:zoom-in;"></a>');
         lighboxClicker.insertBefore($(element));
         $(element).appendTo(lighboxClicker);
@@ -62,4 +65,4 @@ $(document).ready(function(){
             });
         });
     });
-})
+});
