@@ -40,6 +40,13 @@ Breadcrumbs::for('post', function ($trail, \T2G\Common\Models\Post $post) {
     $trail->push($post->title);
 });
 
+// Home > [Group Name] > [Post]
+Breadcrumbs::for('postGroup', function ($trail, \T2G\Common\Models\Post $post) {
+    $trail->parent('home');
+    $trail->push($post->group_name, route('front.post.group', [$post->group_slug]));
+    $trail->push($post->title);
+});
+
 Breadcrumbs::for('static', function ($trail, \TCG\Voyager\Models\Page $page) {
     $trail->parent('home');
     $trail->push($page->title);

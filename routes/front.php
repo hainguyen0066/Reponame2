@@ -105,6 +105,10 @@ Route::group(['as' => 'front.'], function() {
         ]);
     }
 
+    Route::get('/tinh-nang-dac-sac/{group}', [
+        'uses' => 'PostController@group',
+        'as' => 'post.group'
+    ]);
 
     Route::get('/{categorySlug}', [
         'uses' => 'PostController@list',

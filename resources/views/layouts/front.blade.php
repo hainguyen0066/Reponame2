@@ -45,6 +45,7 @@
 @section('js')
     @include('partials.scripts')
 @show
+@stack('extra-js')
 @include('partials.tracker.fb_chat')
 </body>
 </html>

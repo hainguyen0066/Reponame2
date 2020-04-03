@@ -86,5 +86,58 @@
       }
     }
   }
+  .menu-news {
+    position: relative;
+    margin-bottom: 15px;
+    background: url('../images/line.png') bottom left repeat-x;
+    > li {
+      display: inline-block;
+      background-color: #444e6f;
+      margin-bottom: 5px;
+      a, span {
+        font-family: PhilosopherBold, Arial, Tahoma, sans-serif;
+        text-align: center;
+        padding: 0 12px;
+        display: block;
+        font-size: 16px;
+        color: #fff;
+        line-height: 30px;
+        margin-right: 3px;
+        &:hover, &.active {
+          color: #f68b07;
+        }
+      }
+    }
+  }
 
+  .menu-subs {
+    font-family: PhilosopherBold, Arial, Tahoma, sans-serif;
+    margin-bottom: 15px;
+    ul {
+      display: none;
+      border: 1px solid #444e6f;
+      list-style-type: disc;
+      list-style-position: outside;
+      margin-top: -15px;
+      padding: 10px;
+      li {
+        width: 33%;
+        float: left;
+        text-indent: 20px;
+        a {
+          color: #000000;
+          text-align: left;
+          display: block;
+        }
+        &:hover, &.active {
+          a {
+            color: #985f0d;
+          }
+        }
+      }
+      &:hover, &.active {
+        display: block;
+      }
+    }
+  }
 }
