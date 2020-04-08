@@ -26,7 +26,11 @@ class HomePageController extends BaseFrontController
             'thong-bao' => $postRepository->getHomePostsByCategory('thong-bao', $postsLimit),
             'su-kien'   => $postRepository->getHomePostsByCategory('su-kien', $postsLimit),
         ];
-        $guides = $postRepository->getHomePostsByCategory('huong-dan', $postsLimit);
+        $featuredPosts = [
+            'Tính năng đặc sắc' => $postRepository->getGroupPostsWithoutSubs('tinh-nang-dac-sac', $postsLimit),
+            'Nhiệm vụ tân thủ' => $postRepository->getGroupPostsWithoutSubs('nhiem-vu-tan-thu', $postsLimit),
+            'Môn phái & Trang bị' => $postRepository->getGroupPostsWithoutSubs('mon-phai%', $postsLimit),
+        ];
         $slides = $sliderRepository->getHomeSlider(self::HOMEPAGE_LIMIT_SLIDERS);
         $banners = $bannerRepository ->getActiveBanner();
 
@@ -34,9 +38,9 @@ class HomePageController extends BaseFrontController
 
         return view('pages.home', [
             'newsByCategory' => $newsByCategory,
+            'featuredPosts'  => $featuredPosts,
             'slides'         => $slides,
-            'guides'         => $guides,
-            'banner'         => $banners
+            'banner'         => $banners,
         ]);
     }
 

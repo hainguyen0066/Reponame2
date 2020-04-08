@@ -12,6 +12,17 @@ $(document).ready(function(){
         $('.menu-news .news-more').attr('href',link)
     });
 
+    $('.newbies .newbies-header .newbies-title').click(function(){
+        let tab_id = $(this).data('tab');
+        let link= $(this).data('link');
+        $('.newbies .newbies-header .newbies-title').removeClass('active');
+        $('.newbies .tab-content').removeClass('active');
+
+        $(this).addClass('active');
+        $(".newbies ."+tab_id+"-content").addClass('active');
+        $('.newbies .newbies-header .newbies-more a').attr('href',link);
+    });
+
     $('.activity-tabs a').click(function(){
         let tab = $(this).data('tab');
         $('.activity-tabs a').removeClass('active');

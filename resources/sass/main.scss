@@ -696,18 +696,27 @@ a {
         margin-top: 10px;
         padding: 10px;
         width: calc(100% - 20px);
-
+        .tab-content {
+          display: none;
+          &.active {
+            display: block;
+          }
+        }
         .newbies-header {
           height: 35px;
           width: 100%;
           background: url('../images/line.png') bottom left repeat-x;
 
           .newbies-title {
-            color: #c73002;
+            color: #39425e;
             font-size: 18px;
             margin-left: 10px;
-            width: 300px;
             line-height: 40px;
+            padding-right: 50px;
+            cursor: pointer;
+            &:hover, &.active {
+              color: #c73002;
+            }
           }
 
           .newbies-more {

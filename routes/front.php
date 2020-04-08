@@ -105,7 +105,7 @@ Route::group(['as' => 'front.'], function() {
         ]);
     }
 
-    Route::get('/tinh-nang-dac-sac/{group}', [
+    Route::get('/cam-nang/{group}', [
         'uses' => 'PostController@group',
         'as' => 'post.group'
     ]);
