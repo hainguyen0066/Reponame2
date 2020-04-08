@@ -5,7 +5,7 @@ $(document).ready(function(){
         let tab_id = $(this).data('tab');
         let link= $(this).data('link');
         $('.menu-news .tab-link').removeClass('active');
-        $('.tab-content').removeClass('active');
+        $('.news .tab-content').removeClass('active');
 
         $(this).addClass('active');
         $("."+tab_id+"-content").addClass('active');
