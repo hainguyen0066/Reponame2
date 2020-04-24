@@ -34,6 +34,11 @@ mix.copyDirectory('resources/images/landing', 'public/images/landing-2019-11')
     .sass('resources/sass/landing-2019-11.scss', 'public/css/landing-2019-11.css')
     .version();
 
+mix.copyDirectory('resources/images/landing', 'public/images/landing-2020-04')
+    .js('resources/js/landing/landing-2020-04.js', 'public/js/landing-2020-04.js')
+    .sass('resources/sass/landing-2020-04.scss', 'public/css/landing-2020-04.css')
+    .version();
+
 mix.js('resources/js/admin/index.js', 'public/js/admin/app.js')
     .sass('resources/sass/admin/app.scss', 'public/css/admin/app.css')
     .version();

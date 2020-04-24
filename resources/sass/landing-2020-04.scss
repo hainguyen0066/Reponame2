@@ -1,0 +1,356 @@
+@import "reset.css";
+@font-face {
+  font-family: 'MyriadPro';
+  src: url('../fonts/MyriadPro-BoldCond.otf');
+}
+
+.f-left {
+  float: left;
+}
+
+.f-right {
+  float: right;
+}
+.clearfix {
+  clear: both;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer !important;
+}
+body {
+  z-index: 0;
+  .sprite {
+    background: url("../images/landing-2020-04/bg-sprite.png") no-repeat;
+  }
+
+  .icon-scroll {
+    text-indent: -999px;
+    overflow: hidden;
+    display: block;
+    width: 62px;
+    height: 86px;
+    position: fixed;
+    z-index: 3;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: url(../images/landing-2020-04/bg-sprite.png) 0 -440px no-repeat;
+    animation-name: icon-scroll-floating;
+    animation-duration: 0.75s;
+    animation-iteration-count: infinite;
+
+    &.scrolling {
+      left: initial;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 110px;
+      animation-name: icon-scroll-floating-scrolling;
+      animation-duration: 0.75s;
+      animation-iteration-count: infinite;
+    }
+  }
+
+  .section-01, .section-02, .section-03, .section-04, .section-05, .footer {
+    width: 100%;
+    height: 1000px;
+    margin: 0 auto;
+    overflow: hidden;
+
+    .container {
+      margin: 0 auto;
+      width: 1170px;
+      height: 100%;
+    }
+  }
+
+  .section-01 {
+    overflow: hidden;
+    max-width: 100%;
+    background: url('../images/landing-2020-04/bg-f1-l.jpg') top center no-repeat;
+
+    #intro {
+      display: none;
+      position: relative;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1920px;
+      height: 1080px;
+      &.active {
+        display: initial;
+      }
+    }
+    .container {
+      position: absolute;
+      top: 0;
+      z-index: 2;
+      margin: 0 auto;
+      left: 50%;
+      transform: translateX(-50%);
+      height: 1000px;
+      .logo a {
+        display: block;
+        background: url(../images/logo.png) no-repeat;
+        width: 192px;
+        height: 192px;
+        position: absolute;
+        left: 30px;
+        top: 10px;
+      }
+
+      .menu {
+        font-family: MyriadPro, Tahoma, Arial, sans-serif;
+        width: 494px;
+        height: 51px;
+        position: absolute;
+        right: 10px;
+        background: url('../images/landing-2020-04/bg-menu.png') no-repeat;
+        ul {
+          margin-left: 50px;
+
+          li {
+            position: relative;
+            list-style: none;
+            float: left;
+            text-align: center;
+            width: 123px;
+            height: 100%;
+
+            &:not(:last-child) {
+              &:after {
+                position: absolute;
+                right: 0px;
+                top: 6px;
+                color: #5f5c5c;
+                content: "|";
+                font-weight: 100;
+              }
+            }
+
+            a {
+              color: #fff;
+              font-size: 15px;
+              font-family: Tahoma, Arial, sans-serif;
+              text-transform: uppercase;
+              line-height: 30px;
+            }
+
+            a:hover {
+              color: #f16600;
+            }
+          }
+        }
+      }
+
+      .three-button {
+        left: 165px;
+        position: absolute;
+        bottom: 130px;
+        a {
+          display: block;
+          float: left;
+          cursor: pointer;
+          &.register-btn {
+            width: 252px;
+            height: 82px;
+            background-position: 0 -556px;
+            &:hover {
+              background-position: 0 -649px;
+            }
+          }
+
+          &.download {
+            width: 252px;
+            height: 82px;
+            margin-left: 35px;
+            background-position: 0 -743px;
+            &.logged {
+              margin-left: 175px;
+            }
+            &:hover {
+              background-position: 0 -836px;
+            }
+          }
+        }
+      }
+
+    }
+  }
+
+  .section-02 {
+    background: url('../images/landing-2020-04/bg-f2-l.jpg') center no-repeat;
+
+    &.ready {
+      background: url('../images/landing-2020-04/bg-f2-h.jpg') center no-repeat;
+    }
+  }
+
+  .section-03 {
+    display: none;
+
+    &.ready {
+      display: block;
+      background: url('../images/landing-2020-04/bg-f3-h.jpg') top center no-repeat;
+    }
+
+    .container {
+      position: relative;
+
+      .download a {
+        display: block;
+        width: 270px;
+        height: 75px;
+        background-position: 0 -89px;
+        position: absolute;
+        bottom: 63px;
+        left: 50%;
+        transform: translateX(-50%);
+        &:hover {
+          background-position: 0 -180px;
+        }
+      }
+    }
+  }
+
+  .section-04 {
+    display: none;
+
+    &.ready {
+      display: block;
+      background: url('../images/landing-2020-04/bg-f4-h.jpg') center no-repeat;
+    }
+
+    .container {
+      position: relative;
+
+      .download a {
+        display: block;
+        width: 270px;
+        height: 60px;
+        position: absolute;
+        bottom: 64px;
+        right: 135px;
+        background-position: 0 -271px;
+        &:hover {
+          background-position: 0 -362px;
+        }
+      }
+    }
+  }
+
+  .section-05 {
+    display: none;
+    height: 800px;
+
+    &.ready {
+      display: block;
+      background: url('../images/landing-2020-04/bg-f5-h.jpg') top center no-repeat;
+    }
+
+    .container {
+      position: relative;
+
+      .frame-button {
+        width: 290px;
+        height: 365px;
+        cursor: pointer;
+        background-repeat: no-repeat;
+        float: left;
+        margin-top: 254px;
+        margin-left: 60px;
+        &:hover {
+          margin-top: 235px;
+        }
+        &.volamtranhba {
+          background-position: -285px 0;
+        }
+
+        &.quanhunghoitu {
+          background-position: -285px -373px;
+        }
+
+        &.anhhungthiep {
+          background-position: -285px -746px;
+        }
+
+        a {
+          display: block;
+          width: 100%;
+          height: 100%;
+          position: relative;
+          cursor: pointer;
+          span {
+            display: block;
+            width: 117px;
+            height: 35px;
+            position: absolute;
+            bottom: 55px;
+            left: 85px;
+            background: url(../images/landing-2020-04/bg-sprite.png) no-repeat;
+          }
+          &:hover span {
+            background-position: 0 -40px;
+          }
+        }
+      }
+      #goTop {
+        display: block;
+        width: 65px;
+        height: 110px;
+        background-position: -96px -445px;
+        position: absolute;
+        text-indent: -999px;
+        overflow: hidden;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        &:hover {
+          animation-name: goTop-floating;
+          animation-duration: 0.75s;
+          animation-iteration-count: infinite;
+        }
+      }
+    }
+  }
+
+  footer {
+    background-color: #0d0d0f;
+    text-align: center;
+    padding: 15px 0;
+    p {
+      color: #fff;
+      font-size: 16px;
+      line-height: 25px;
+    }
+
+    a {
+      color: #e76201;
+    }
+
+    span {
+      color: #e76201;
+    }
+  }
+}
+
+
+@keyframes goTop-floating {
+  0%   {bottom: 0}
+  50%  {bottom: 5px}
+  100% {bottom: 0}
+}
+
+@keyframes icon-scroll-floating {
+  0%   {bottom: 20px}
+  50%  {bottom: 25px}
+  100% {bottom: 20px}
+}
+
+@keyframes icon-scroll-floating-scrolling {
+  0%   {margin-top: 0}
+  50%  {margin-top: -5px}
+  100% {margin-top: 0}
+}
+

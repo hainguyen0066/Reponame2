@@ -427,6 +427,7 @@
             "keywords": [
                 "laravel"
             ],
+            "abandoned": true,
             "time": "2018-10-30T22:06:33+00:00"
         },
         {
@@ -4239,7 +4240,7 @@
             "source": {
                 "type": "git",
                 "url": "git@gitlab.com:t2game/common.git",
-                "reference": "10ad939871ba795b0ec7af38426ba2b98686eb82"
+                "reference": "fdd28782247a7cae4c10cdc141c464730e35d90b"
             },
             "require": {
                 "elasticsearch/elasticsearch": "^7.4",
@@ -4295,7 +4296,7 @@
                 "t2g",
                 "voyager"
             ],
-            "time": "2020-04-08T18:59:44+00:00"
+            "time": "2020-04-24T11:06:23+00:00"
         },
         {
             "name": "tcg/voyager",
