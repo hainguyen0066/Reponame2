@@ -62,13 +62,13 @@ $cacheBuster = "?v=" . config('t2g_common.asset.version');
         <section class="section-05" data-bg="{{ asset('images/landing-2020-04/bg-f5-h.jpg') . $cacheBuster  }}">
             <div class="container">
                 <div class="frame-button volamtranhba sprite">
-                    <a href="{{ route('front.details.post', ['tong-hop','su-kien-dua-top-may-chu-nam-nhac-tran'])}}"><span>&nbsp;</span></a>
+                    <a href="{{ route('front.details.post', ['su-kien','dua-top-level-100'])}}"><span>&nbsp;</span></a>
                 </div>
                 <div class="frame-button quanhunghoitu sprite">
-                    <a href="{{ route('front.details.post', ['tong-hop','chuoi-su-kien-closebeta-nam-nhac-tran-may-chu-thu-phi']) }}"><span>&nbsp;</span></a>
+                    <a href="{{ route('front.details.post', ['su-kien','quan-hung-hoi-tu-khai-mo-may-chu-bien-kinh']) }}"><span>&nbsp;</span></a>
                 </div>
                 <div class="frame-button anhhungthiep sprite">
-                    <a href="{{ route('front.details.post', ['tong-hop','chuoi-su-kien-closebeta-nam-nhac-tran-may-chu-thu-phi']) }}"><span>&nbsp;</span></a>
+                    <a href="{{ route('front.details.post', ['su-kien','anh-hung-thiep-khai-mo-may-chu-bien-kinh']) }}"><span>&nbsp;</span></a>
                 </div>
                 <div class="clearfix"></div>
                 <a href="javascript:" id="goTop" class="sprite">Go top</a>
