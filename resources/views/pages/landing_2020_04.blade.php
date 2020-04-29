@@ -31,7 +31,7 @@ $cacheBuster = "?v=" . config('t2g_common.asset.version');
                 <source src="{{ asset('images/landing-2020-04/landing_page.mp4') }}" type="video/mp4">
             </video>
             <div class="container">
-                {{--<div class="logo"><a href="{{ route('front.home')}}"></a></div>--}}
+                <div class="logo"><a href="{{ route('front.home')}}"></a></div>
                 <div class="menu">
                     <ul>
                         <li><a href="{{ route('front.home')}}">Trang chủ</a></li>
