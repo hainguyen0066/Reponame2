@@ -53,6 +53,11 @@ Route::group(['as' => 'front.'], function() {
         'as' => 'search'
     ]);
 
+    Route::get('/nhap-code', [
+        'uses' => 'GiftCodeController@index',
+        'as' => 'gift_code'
+    ]);
+
     ## --------------------- Secured Routes --------------------- ##
     Route::group(['middleware' => 'auth'], function() {
         Route::get('/quan-ly-tai-khoan', [
@@ -90,6 +95,11 @@ Route::group(['as' => 'front.'], function() {
         Route::get('/dang-ky-thanh-cong', [
             'uses' => 'HomePageController@welcome',
             'as' => 'welcome'
+        ]);
+
+        Route::post('/nhap-code', [
+            'uses' => 'GiftCodeController@useCode',
+            'as' => 'gift_code.use_code'
         ]);
     });
 

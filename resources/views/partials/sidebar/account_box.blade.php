@@ -1,7 +1,7 @@
 <div class="charge">
-    <a href="{{ route('front.payment.index') }}">
-        <span></span>
-    </a>
+    <a href="{{ route('front.payment.index') }}" class="btn btn-charge" title="Nạp tiền"></a>
+    <a href="{{ route("front.gift_code") }}" class="btn btn-gift-code" title="Nhập Code"></a>
+    <div class="clearfix"></div>
 </div>
 @if(!Auth::user())
 <div class="register-login">
