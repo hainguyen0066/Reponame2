@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Front;
 
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use T2G\Common\Controllers\Front\BaseFrontController;
 use T2G\Common\Exceptions\GiftCodeException;
 use T2G\Common\Repository\PageRepository;
@@ -23,9 +22,6 @@ class GiftCodeController extends BaseFrontController
      */
     public function index(PageRepository $pageRepository)
     {
-        if (!\Auth::check() || empty(\Auth::user()->role_id)) {
-            throw new NotFoundHttpException();
-        }
         $pageContent = $pageRepository->getPageByUri('nhap-code');
 
         return view('pages.use_code', ['page' => $pageContent]);
@@ -40,6 +36,9 @@ class GiftCodeController extends BaseFrontController
     public function useCode(UseCodeRequest $request, GiftCodeService $giftCodeService)
     {
         $user = \Auth::user();
+        if (empty($user->role_id)) {
+            return back()->withErrors(['code' => "Code chỉ có thể sử dụng khi Open Beta máy chủ Biện Kinh."]);
+        }
         $data = $request->validated();
         $error = '';
         try {
