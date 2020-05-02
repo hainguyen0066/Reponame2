@@ -24,7 +24,7 @@ return [
     ],
     'game_api' => [
         'base_url'         => env('GAME_API_BASE_URL'),
-        'timeout'          => 10, // seconds
+        'timeout'          => 30, // seconds
         'api_key'          => env('GAME_API_KEY'),
         'legacy'           => false,
         'is_mocked'        => env('GAME_API_MOCK', true),

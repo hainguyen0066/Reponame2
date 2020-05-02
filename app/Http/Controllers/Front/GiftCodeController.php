@@ -35,10 +35,8 @@ class GiftCodeController extends BaseFrontController
      */
     public function useCode(UseCodeRequest $request, GiftCodeService $giftCodeService)
     {
+        /** @var \App\User $user */
         $user = \Auth::user();
-        if (empty($user->role_id)) {
-            return back()->withErrors(['code' => "Code chỉ có thể sử dụng khi Open Beta máy chủ Biện Kinh."]);
-        }
         $data = $request->validated();
         $error = '';
         try {
