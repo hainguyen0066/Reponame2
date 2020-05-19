@@ -1,6 +1,6 @@
 <div class="act-daily">
     <div class="activity-tabs">
-        <a href="javascript:;" class="link-tab-daily" data-tab="tab-daily">Hằng ngày</a>
+        <a href="javascript:;" class="link-tab-daily active" data-tab="tab-daily">Hằng ngày</a>
         <a href="javascript:;" class="link-tab-activity" data-tab="tab-activity">Hoạt động</a>
     </div>
     <table class="activity-tab-container hide active tab-daily">

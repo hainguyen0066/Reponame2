@@ -1,3 +1,5 @@
+import $ from "jquery";
+
 require('jquery-confirm');
 
 $(document).ready(function(){
@@ -76,4 +78,13 @@ $(document).ready(function(){
             });
         });
     });
+
+    // let $intro = $('#intro');
+    // $intro.addClass('active');
+    // setTimeout(function () {
+    //     if ($intro[0].paused) {
+    //         $intro[0].play();
+    //     }
+    //
+    // }, 1000);
 });

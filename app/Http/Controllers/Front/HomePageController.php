@@ -14,7 +14,7 @@ use T2G\Common\Repository\SliderRepository;
  */
 class HomePageController extends BaseFrontController
 {
-    const HOMEPAGE_LIMIT_POSTS = 7;
+    const HOMEPAGE_LIMIT_POSTS = 10;
     const HOMEPAGE_LIMIT_SLIDERS = 5;
     const WELCOME_PAGE_LIMIT_NEW_POSTS = 5;
 

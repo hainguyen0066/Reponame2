@@ -12,7 +12,7 @@
                     $viewMoreSlug = $slug;
                 }
             @endphp
-            <div class="newbies-title f-left {{ $slug }} {{ $i++ == 0 ? 'active' : '' }}"
+            <div class="newbies-title sprite f-left {{ $slug }} {{ $i++ == 0 ? 'active' : '' }}"
                  data-tab="{{ $slug }}" data-link="{{ route('front.post.group', [$slug]) }}">
                 {{ $featureName }}
             </div>

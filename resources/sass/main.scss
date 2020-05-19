@@ -4,8 +4,8 @@
 }
 
 body {
-  background: url('../images/bg-middle.jpg');
-  font-family: PhilosopherBold, Arial, Tahoma, sans-serif;
+  background-color: #060100;
+  font-family: PhilosopherBold, Tahoma, Arial, sans-serif;
   font-size: 13px;
 }
 
@@ -13,10 +13,14 @@ a {
   text-decoration: none;
 }
 
+.sprite {
+  background: url(../images/bg-sprite.png) no-repeat;
+}
+
 .wrapper {
   width: 100%;
   overflow: hidden;
-  background: url('../images/bg-top.jpg') top center no-repeat, url('../images/bg-bottom.jpg') bottom center no-repeat;
+  background: url('../images/bg-header.jpg') top center no-repeat, url('../images/bg-footer.png') bottom center repeat-x;
   min-height: 2000px;
   position: relative;
 }
@@ -27,66 +31,79 @@ a {
 }
 
 .header {
-  overflow: hidden;
-
-  .top-logo {
-    float: left;
-    width: 172px;
-    height: 172px;
-    background-size: cover;
-    background: url('../images/logo.png') no-repeat 0 -26px;
-
-    a {
-      display: block;
-      width: 100%;
-      height: 100%;
-    }
+  //height: 620px;
+  height: 500px;
+  .header-content {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    background: url("../images/bg-header-menu.png") no-repeat;
   }
-
   .top-menu {
     ul {
       padding: 0;
-      display: table;
-      width: calc(1000px - (172px + 50px));
-      margin-left: 50px;
-      float: left;
     }
 
     li {
-      display: table-cell;
+      display: block;
+      float: left;
       height: 50px;
-
+      padding: 0 23px;
       a {
         cursor: pointer;
         display: block;
         height: 100%;
         width: 100%;
         color: #ffffff;
-        font-family: PhilosopherBold;
+        font-family: PhilosopherBold, Tahoma, Arial, sans-serif;
         font-weight: bold;
         font-size: 18px;
         line-height: 60px;
       }
-    ;
-
       a:hover, a.active {
         color: #c73002;
       }
+      &.logo {
+        overflow: hidden;
+        width: 192px;
+        height: 192px;
+        padding: 0;
+        background-size: cover;
+        background: url('../images/logo.png') no-repeat 0 -26px;
+        margin-left: 10px;
+        a {
+          display: block;
+          width: 100%;
+          height: 100%;
+          text-indent: -999px;
+        }
+      }
+    }
+  }
+  #intro {
+    display: none;
+    position: relative;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1920px;
+    height: 1080px;
+    &.active {
+      display: initial;
     }
   }
 }
 
 .main_content {
+  position: absolute;
+  z-index: 5;
+  width: 100%;
   .slick-slide {
     outline: none;
   }
-
   overflow: hidden;
-
-  .slogan {
-    height: calc(580px - 120px);
-    width: 100%;
-  }
 
   .two-columns {
     min-height: 500px;
@@ -125,19 +142,18 @@ a {
           margin-top: 10px;
           display: block;
           width: 100%;
-          height: 59px;
+          height: 81px;
           text-indent: -999px;
-          background: url('../images/bg-napthe-nhapcode.png') no-repeat;
           &.btn-charge {
-            background-position:0 -8px;
+            background-position: -186px -124px;
             &:hover {
-              background-position: 0 -68px;
+              background-position: -415px -124px;
             }
           }
           &.btn-gift-code{
-            background-position: 0 -126px;
+            background-position: -186px -204px;
             &:hover {
-              background-position: 0 -193px;
+              background-position: -415px -204px;
             }
           }
         }
@@ -149,27 +165,23 @@ a {
         .register-btn {
           cursor: pointer;
           width: 100%;
-          height: 60px;
+          height: 81px;
           margin-top: 10px;
-          background: url('../images/DangKy.png') no-repeat;
-          background-size: contain;
-        }
-
-        .register-btn_:hover {
-          background: url('../images/register-btn-hover.png') no-repeat;
+          background-position: -186px -284px;
+          &:hover {
+            background-position: -415px -284px;
+          }
         }
 
         .login-btn {
           cursor: pointer;
           width: 100%;
-          height: 60px;
+          height: 81px;
           margin-top: 10px;
-          background: url('../images/DangNhap.png') no-repeat;
-          background-size: contain;
-        }
-
-        .login-btn_:hover {
-          background: url('../images/login-btn-hover.png') no-repeat;
+          background-position: -186px -364px;
+          &:hover {
+            background-position: -415px -364px;
+          }
         }
       }
 
@@ -191,7 +203,7 @@ a {
             font-size: 18px;
             font-weight: bold;
             line-height: 35px;
-            font-family: PhilosopherBold;
+            font-family: PhilosopherBold, Tahoma, Arial, sans-serif;
           }
         }
 
@@ -202,7 +214,7 @@ a {
             font-size: 16px;
             color: #171b1e;
             line-height: 35px;
-            font-family: PhilosopherBold;
+            font-family: PhilosopherBold, Tahoma, Arial, sans-serif;
 
             span {
               color: #c2433d
@@ -277,7 +289,7 @@ a {
         width: 210px;
         height: 420px;
         background: url('../images/bg-act-daily.jpg') no-repeat;
-        padding: 90px 10px 0px 10px;
+        padding: 90px 10px 0 10px;
         font-family: 'Roboto', sans-serif;
         position: relative;
 
@@ -286,18 +298,23 @@ a {
             display: block;
             position: absolute;
             top: 13px;
-            width: 90px;
-            height: 30px;
+            left: 4px;
+            width: 108px;
+            height: 29px;
             text-indent: -9999px;
             overflow: hidden;
-            background: url("../images/hang-ngay-btn.png") center center;
-            margin-left: 5px;
-
+            background: url("../images/bg-act-daily-btn.png") 0 -31px;
+            &:hover, &.active {
+              background-position: 0 1px;
+            }
             &.link-tab-activity {
-              left: 120px;
-              width: 100px;
-              margin-left: 4px;
-              background: url("../images/hoat-dong-btn.png") center center;
+              right: 7px;
+              width: 108px;
+              background-position: -108px 1px;
+              left: initial;
+              &:hover, &.active {
+                background-position: -108px -31px;
+              }
             }
           }
         }
@@ -349,6 +366,7 @@ a {
         div {
           height: 115px;
           margin-top: 10px;
+          background-size: 701px 489px;
         }
 
         a {
@@ -356,27 +374,21 @@ a {
           width: 100%;
           height: 100%;
         }
-
-        .charge {
-          background: url('../images/btn-charge.jpg') no-repeat;
-        }
-
         .trade {
-          background: url('../images/btn-trade.jpg') no-repeat;
+          background-position: -237px 0;
         }
 
         .info-sv {
-          background: url('../images/btn-info-sv.jpg') no-repeat;
+          background-position: -473px 0;
         }
       }
 
       .hot-line {
-        background: url('../images/bg-hot-line.jpg') no-repeat;
+        background: url('../images/bg-hotline.jpg') no-repeat;
         width: 100%;
         height: 100px;
         margin-top: 10px;
         padding: 50px 0px 0px 50px;
-
         p {
           color: #ffae21;
           font-size: 24px;
@@ -401,6 +413,7 @@ a {
         .my-slider, .slick-slider, .slick-list {
           width: 760px;
           height: 270px;
+          background: url(../images/bg-slider-nav.jpg) repeat-x;
 
           a {
             display: block;
@@ -449,14 +462,14 @@ a {
               border-left: 1px solid #1b2233;
               border-right: 1px solid #1b2233;
               cursor: pointer;
-              color: #39425e;
+              color: #767676;
               line-height: 40px;
               text-align: center;
               font-size: 16px;
             }
 
             div:hover, div.active, .slick-current {
-              color: #ff9000;
+              color: #fff;
             }
           }
         }
@@ -468,24 +481,17 @@ a {
 
         div {
           float: left;
-          width: 246px;
+          width: 247px;
           height: 115px;
         }
 
-        .charge {
-          background: url('../images/btn-charge.jpg');
-          background-size: 100% 100%;
-        }
-
         .trade {
-          background: url('../images/btn-trade.jpg');
-          background-size: 100% 100%;
-          margin-left: 10px;
+          background-position: -256px 0;
+          margin-left: 5px;
         }
 
         .info-sv {
-          background: url('../images/btn-info-sv.jpg');
-          background-size: 100% 100%;
+          background-position: -513px 0;
           float: right;
         }
 
@@ -498,7 +504,6 @@ a {
 
       .news {
         background-color: #ffffff;
-        height: 335px;
         margin-top: 10px;
         padding: 10px;
         width: calc(100% - 20px);
@@ -513,31 +518,31 @@ a {
           float: left;
 
           .menu-news {
-            height: 35px;
+            height: 40px;
             background: url('../images/line.png') bottom left repeat-x;
 
-            div {
+            .tab-link {
+              background-position: -489px -459px;
+              display: block;
+              text-align: center;
+              width: 122px;
               font-size: 16px;
-              color: #39425e;
+              color: #060100;
               float: left;
               cursor: pointer;
               line-height: 30px;
-            }
-
-            div:hover, div.active {
-              color: #c73002;
-            }
-
-            .tong-hop {
-              margin-left: 10px;
-            }
-
-            .thong-bao {
-              margin-left: 20px;
-            }
-
-            .su-kien {
-              margin-left: 20px;
+              &:hover, &.active {
+                background-position: -359px -459px;
+                color: #fff;
+              }
+              &.tong-hop {
+              }
+              &.thong-bao {
+                margin-left: 20px;
+              }
+              &.su-kien {
+                margin-left: 20px;
+              }
             }
 
             .news-more {
@@ -614,7 +619,7 @@ a {
 
           .list-news {
             width: 100%;
-            height: 190px;
+            height: 285px;
             margin-top: 25px;
 
             ul {
@@ -627,7 +632,6 @@ a {
 
             li {
               display: table-row;
-              background: url('../images/icon-list-new.png') left top no-repeat;
 
               a {
                 display: block;
@@ -637,9 +641,8 @@ a {
                 font-family: 'Roboto', sans-serif;
                 font-size: 14px;
                 font-weight: normal;
-                padding-left: 25px;
+                padding-left: 5px;
                 line-height: 20px;
-
                 span {
                   float: right;
                 }
@@ -653,16 +656,15 @@ a {
         }
 
         .column-second {
-          width: 175px;
-          height: 100%;
+          width: 173px;
+          height: 336px;
           float: right;
-          background: url('../images/img-hot-news.jpg') no-repeat;
+          background-position: 0 -115px;
         }
       }
 
       .newbies {
         background-color: white;
-        height: 355px;
         margin-top: 10px;
         padding: 10px;
         width: calc(100% - 20px);
@@ -673,19 +675,23 @@ a {
           }
         }
         .newbies-header {
-          height: 35px;
+          height: 40px;
           width: 100%;
           background: url('../images/line.png') bottom left repeat-x;
 
           .newbies-title {
-            color: #39425e;
+            display: block;
+            width: 171px;
+            text-align: center;
+            background-position: -180px -459px;
+            color: #060100;
             font-size: 18px;
-            margin-left: 10px;
-            line-height: 40px;
-            padding-right: 50px;
+            line-height: 31px;
             cursor: pointer;
+            margin-right: 20px;
             &:hover, &.active {
-              color: #c73002;
+              color: #fff;
+              background-position: 0 -459px;
             }
           }
 
@@ -759,7 +765,7 @@ a {
 
         .list-news {
           width: 100%;
-          height: 190px;
+          height: 285px;
           margin-top: 25px;
 
           ul {
@@ -772,8 +778,6 @@ a {
 
           li {
             display: table-row;
-            background: url('../images/icon-list-new.png') left top no-repeat;
-
             a {
               display: block;
               width: calc(100% - 25px);
@@ -782,7 +786,7 @@ a {
               font-family: 'Roboto', sans-serif;
               font-size: 14px;
               font-weight: normal;
-              padding-left: 25px;
+              padding-left: 5px;
               line-height: 20px;
 
               span {
@@ -802,7 +806,7 @@ a {
 
 .footer {
   height: 80px;
-  padding-top: 180px;
+  padding-top: 60px;
 }
 
 .footer .bottom-logo {
@@ -862,17 +866,19 @@ a {
 
     li {
       float: left;
-      padding-right: 30px;
-      background: url('../images/bg-li-arrow.jpg') right no-repeat;
-
+      padding-right: 10px;
+      &:after {
+        content: ' >> ';
+        margin-left: 10px;
+      }
+      &:last-child:after {
+        content: '';
+      }
       a {
         font-size: 15px;
-      }
-    }
-
-    li:first-child {
-      a {
-        color: #64719a;
+        &:hover, &.active {
+          color: #ff7f02;
+        }
       }
     }
 
@@ -930,7 +936,7 @@ a {
         padding-left: 40px;
         color: #151925;
         font-size: 20px;
-        font-family: PhilosopherBold;
+        font-family: PhilosopherBold, Tahoma, Arial, sans-serif;
         font-weight: bold;
       }
 
@@ -962,7 +968,7 @@ a {
           text-align: center;
           color: #fff7e7;
           font-size: 16px;
-          font-family: PhilosopherBold;
+          font-family: PhilosopherBold, Tahoma, Arial, sans-serif;
           font-weight: bold;
           cursor: pointer;
           outline: none;
@@ -1051,7 +1057,7 @@ a {
             line-height: 16px;
             margin-top: 5px;
             text-align: center;
-            font-family: PhilosopherBold, Arial;
+            font-family: PhilosopherBold, Tahoma, Arial, sans-serif;
             font-weight: bold;
           }
         }
@@ -1074,7 +1080,7 @@ a {
 
         a {
           font-size: 20px;
-          font-family: PhilosopherBold;
+          font-family: PhilosopherBold, Tahoma, Arial, sans-serif;
           color: #39425e;
           line-height: 25px;
           font-weight: bold;
@@ -1167,14 +1173,14 @@ a {
         padding-left: 40px;
         color: #151925;
         font-size: 20px;
-        font-family: PhilosopherBold;
+        font-family: PhilosopherBold, Tahoma, Arial, sans-serif;
         font-weight: bold;
       }
 
       .head-title {
         color: #c33203;
         font-size: 30px;
-        font-family: PhilosopherBold;
+        font-family: PhilosopherBold, Tahoma, Arial, sans-serif;
         font-weight: bold;
         text-align: center;
       }
@@ -1197,13 +1203,12 @@ a {
           margin-top: 15px;
 
           a {
-            display: block;
             width: 100px;
             height: 100%;
             color: #fff7e7;
             font-size: 16px;
             text-align: center;
-            font-family: PhilosopherBold;
+            font-family: PhilosopherBold, Tahoma, Arial, sans-serif;
             font-weight: bold;
             display: flex;
             align-items: center;
@@ -1238,7 +1243,7 @@ a {
               float: left;
               color: #151925;
               font-size: 1.2rem;
-              font-family: PhilosopherBold;
+              font-family: PhilosopherBold, Tahoma, Arial, sans-serif;
               font-weight: bold;
               line-height: 55px;
               margin-left: 50px;
@@ -1289,7 +1294,7 @@ a {
               text-align: center;
               color: #fff7e7;
               font-size: 16px;
-              font-family: PhilosopherBold;
+              font-family: PhilosopherBold, Tahoma, Arial, sans-serif;
               font-weight: bold;
               cursor: pointer;
               outline: none;
@@ -1307,47 +1312,6 @@ a {
           }
         }
       }
-    }
-  }
-}
-
-body.tet {
-  background: #fff;
-  .wrapper {
-    background: url('../images/bg-tet-header.jpg') top center no-repeat, url('../images/bg-bottom.jpg') bottom center no-repeat;
-  }
-  .details-content .main-details-content {
-    border: 1px solid #cecece;
-    width: initial;
-  }
-  //&:before {
-  //  display: block;
-  //  position: fixed;
-  //  content: ' ';
-  //  top: 0;
-  //  left: 20px;
-  //  z-index: 50;
-  //  background: url('../images/luyen-trai.png') no-repeat;
-  //  background-size: 100% 100%;
-  //  width: 149px;
-  //  height: 362px;
-  //}
-  //&:after {
-  //  display: block;
-  //  position: fixed;
-  //  content: ' ';
-  //  top: 0;
-  //  right: 20px;
-  //  z-index: 50;
-  //  background: url('../images/luyen-phai.png') no-repeat;
-  //  background-size: 100% 100%;
-  //  width: 149px;
-  //  height: 362px;
-  //}
-  .main_content .two-columns .columns-right {
-    .newbies, .news {
-      border: 1px solid #cecece;
-      width: initial;
     }
   }
 }

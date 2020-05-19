@@ -27,7 +27,6 @@
     @include('partials.header')
     <div class="main_content">
         <div class="container">
-            <div class="slogan"></div>
             <div class="two-columns">
                 @include('partials.sidebar')
                 <div class="columns-right">

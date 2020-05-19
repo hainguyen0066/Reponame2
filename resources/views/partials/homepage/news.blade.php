@@ -6,7 +6,7 @@
     <div class="column-first">
         <div class="menu-news">
             @foreach($categories as $categorySlug => $categoryName)
-                <div class="tab-link {{ $categorySlug }} {{ $i++ == 0 ? 'active' : '' }}"
+                <div class="tab-link sprite {{ $categorySlug }} {{ $i++ == 0 ? 'active' : '' }}"
                      data-tab="{{ $categorySlug }}"
                      data-link="{{ route('front.category', [$categorySlug]) }}">{{ $categoryName }}</div>
             @endforeach
@@ -59,5 +59,6 @@
             </div>
         @endforeach
     </div>
-    <div class="column-second"></div>
+    <div class="column-second sprite"></div>
+    <div class="clearfix"></div>
 </div>

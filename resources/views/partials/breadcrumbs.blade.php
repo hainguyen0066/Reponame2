@@ -20,7 +20,7 @@
                     <a href="{{ $breadcrumb->url }}">{{ $breadcrumb->title }}</a>
                 </li>
             @else
-                <li class="breadcrumb-item active">{{ str_limit($breadcrumb->title, 40) }}</li>
+                <li class="breadcrumb-item active">{{ $breadcrumb->title }}</li>
             @endif
         @endforeach
     </ol>
