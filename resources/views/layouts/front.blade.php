@@ -32,6 +32,7 @@
                 <div class="columns-right">
                     @yield('content')
                 </div>
+                <div class="clearfix"></div>
             </div>
         </div>
     </div>
