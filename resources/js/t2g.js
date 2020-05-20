@@ -11,7 +11,7 @@ const loadIntro = (videoId) => {
     req.onload = function() {
         // Onload is triggered even on 404
         // so we need to check the status code
-        if (this.status === 200) {
+        if (this.status === 200 || this.status === 206) {
             let videoBlob = this.response;
             // Video is now downloaded
             // and we can set it as source on the video element
