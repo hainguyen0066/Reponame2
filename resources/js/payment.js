@@ -1,5 +1,4 @@
 import Account from './account';
-require('jquery-confirm');
 
 const urlUseCard = '/nap-the';
 const btnUseCard = $('#btnUseCard');
@@ -11,7 +10,7 @@ $(document).ready(function () {
         onCardSubmission();
         return false;
     })
-})
+});
 
 function clearMessage() {
     message.text('');
@@ -27,10 +26,10 @@ function showError(error) {
 }
 
 function validateCard() {
-    var card_type = $('#card_type').val();
-    var card_amount = $('#card_amount').val();
-    var card_serial = $('#card_serial').val();
-    var card_pin = $('#card_pin').val();
+    let card_type = $('#card_type').val();
+    let card_amount = $('#card_amount').val();
+    let card_serial = $('#card_serial').val();
+    let card_pin = $('#card_pin').val();
     if (card_type == '') {
         showError('Vui lòng chọn loại thẻ cào');
         return false;

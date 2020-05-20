@@ -22,21 +22,29 @@ mix.copyDirectory('resources/images', 'public/images')
     .sass('resources/sass/auth.scss', 'public/css/auth.css')
     .sass('resources/sass/popup-account.scss', 'public/css/account.css')
     .sass('resources/sass/web_launcher.scss', 'public/css/web_launcher.css')
+    .options({
+        processCssUrls: false
+    })
     .version();
 
-mix.copyDirectory('resources/images/landing', 'public/images/landing')
-    // .js('resources/js/landing/index.js', 'public/js/landing.js')
-    .sass('resources/sass/landing.scss', 'public/css/landing.css')
+mix.sass('resources/sass/landing.scss', 'public/css/landing.css')
+    .options({
+        processCssUrls: false
+    })
     .version();
 
-mix.copyDirectory('resources/images/landing', 'public/images/landing-2019-11')
-    .js('resources/js/landing/landing-2019-11.js', 'public/js/landing-2019-11.js')
+mix.js('resources/js/landing/landing-2019-11.js', 'public/js/landing-2019-11.js')
     .sass('resources/sass/landing-2019-11.scss', 'public/css/landing-2019-11.css')
+    .options({
+        processCssUrls: false
+    })
     .version();
 
-mix.copyDirectory('resources/images/landing', 'public/images/landing-2020-04')
-    .js('resources/js/landing/landing-2020-04.js', 'public/js/landing-2020-04.js')
+mix.js('resources/js/landing/landing-2020-04.js', 'public/js/landing-2020-04.js')
     .sass('resources/sass/landing-2020-04.scss', 'public/css/landing-2020-04.css')
+    .options({
+        processCssUrls: false
+    })
     .version();
 
 mix.js('resources/js/admin/index.js', 'public/js/admin/app.js')

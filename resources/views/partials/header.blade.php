@@ -1,10 +1,10 @@
 <div class="header">
-    {{--<video id="intro" autoplay loop muted>--}}
-        {{--<source src="{{ asset('images/trang_chu.mp4') }}" type="video/mp4">--}}
-    {{--</video>--}}
-    <div class="slogan"></div>
+    <video id="intro" data-url="{{ asset('images/trang_chu.mp4') }}" loop muted>
+        <source src="" type="video/mp4">
+    </video>
     <div class="header-content">
         <div class="container">
+            <div id="slogan"></div>
             <div class="top-menu">
                 <ul>
                     <li><a href="{{ route('front.home') }}" class="active">Trang Chủ</a></li>

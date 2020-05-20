@@ -1,4 +1,5 @@
 import $ from 'jquery';
+
 const MSG_TYPE_SUCCESS = 'success';
 const MSG_TYPE_ERROR = 'error';
 const activeClass = 'active';
@@ -132,7 +133,7 @@ const Account = {
             dataType: 'json'
         });
     },
-}
+};
 
 $(document).ready(() => {
     const $popupContainer = $(popupContainerSelector);

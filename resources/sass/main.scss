@@ -38,8 +38,19 @@ a {
     width: 100%;
     top: 0;
     left: 0;
-    z-index: 2;
+    z-index: 3;
     background: url("../images/bg-header-menu.png") no-repeat;
+
+    #slogan {
+      position: absolute;
+      top: 139px;
+      left: 50%;
+      transform: translateX(-50%);
+      margin-left: -186px;
+      width: 516px;
+      height: 240px;
+      background: url("../images/slogan.jpg");
+    }
   }
   .top-menu {
     ul {
@@ -88,8 +99,8 @@ a {
     top: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 1920px;
-    height: 1080px;
+    width: 2000px;
+    height: 1800px;
     &.active {
       display: initial;
     }
@@ -97,6 +108,7 @@ a {
 }
 
 .main_content {
+  position: relative;
   z-index: 5;
   width: 100%;
   .slick-slide {
@@ -125,7 +137,7 @@ a {
 
           .lantern {
             position: relative;
-            top: 0px;
+            top: 0;
             left: -77px;
             z-index: 1;
             float: left;
@@ -259,14 +271,14 @@ a {
           background: url('../images/bg-form-search.png') no-repeat;
           width: 215px;
           height: 32px;
-          padding: 1px 0px 0px 10px;
+          padding: 1px 0 0 10px;
           margin-left: 5px;
         }
 
         input[type=text] {
           height: 30px;
-          padding: 0px;
-          border: 0px;
+          padding: 0;
+          border: 0;
         }
 
         input:focus {
@@ -277,7 +289,7 @@ a {
           background: url(../images/btn-search.png) no-repeat;
           width: 15px;
           height: 15px;
-          padding: 0px;
+          padding: 0;
           border: none;
           cursor: pointer;
         }
@@ -387,7 +399,7 @@ a {
         width: 100%;
         height: 100px;
         margin-top: 10px;
-        padding: 50px 0px 0px 50px;
+        padding: 50px 0 0 50px;
         p {
           color: #ffae21;
           font-size: 24px;
@@ -891,7 +903,7 @@ a {
     margin-top: 10px;
     width: 700px;
     background: #ffffff;
-    min-height: 1400px;
+    min-height: 1610px;
     padding: 50px 30px;
     font-family: 'Roboto', sans-serif !important;
 
@@ -902,7 +914,7 @@ a {
     .view-more {
       margin-top: 30px;
       background: url('../images/bg-view-more.jpg') top no-repeat;
-      padding: 60px 0px;
+      padding: 60px 0;
 
       li {
         width: 700px;
@@ -1276,7 +1288,7 @@ a {
               border-radius: 5px;
               border: 1px solid black;
               outline: none;
-              padding: 0px;
+              padding: 0;
               text-align: center;
             }
 

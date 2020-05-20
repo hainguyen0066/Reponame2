@@ -1,6 +1,6 @@
 import $ from "jquery";
-
 require('jquery-confirm');
+import loadIntro from "./t2g";
 
 $(document).ready(function(){
     $('.menu-news div').click(function(){
@@ -40,7 +40,7 @@ $(document).ready(function(){
         autoplay:true,
         infinite: true,
         dots:false
-    })
+    });
 
     $('.slider-nav-thumbnails').slick({
         slidesToShow: 3,
@@ -79,12 +79,5 @@ $(document).ready(function(){
         });
     });
 
-    // let $intro = $('#intro');
-    // $intro.addClass('active');
-    // setTimeout(function () {
-    //     if ($intro[0].paused) {
-    //         $intro[0].play();
-    //     }
-    //
-    // }, 1000);
+    loadIntro('intro');
 });
