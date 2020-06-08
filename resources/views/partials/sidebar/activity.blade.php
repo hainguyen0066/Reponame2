@@ -55,12 +55,20 @@
             <td class="td-content"><a href="{{ route('front.details.post', ['huong-dan','quoc-chien-thien-tu'])}}">Quốc chiến Thiên Tử</a></td>
         </tr>
         <tr>
-            <td class="td-time">Thứ 3, 4</td>
+            <td class="td-time">Thứ 3</td>
             <td class="td-content"><a href="{{ route('front.details.post', ['huong-dan','trung-nguyen-tieu-cuc-tinh-n-ng-van-tieu'])}}">Vận tiêu</a></td>
+        </tr>
+        <tr>
+            <td class="td-time">Thứ 4</td>
+            <td class="td-content"><a href="{{ route('front.details.post', ['huong-dan','trung-nguyen-loan-chien'])}}">Trung Nguyên loạn chiến</a></td>
         </tr>
         <tr>
             <td class="td-time">Thứ 6</td>
             <td class="td-content"><a href="{{ route('front.details.post', ['huong-dan','that-thanh-dai-chien'])}}">Thất thành đại chiến</a></td>
+        </tr>
+        <tr>
+            <td class="td-time">Chủ nhật</td>
+            <td class="td-content"><a href="{{ route('front.details.post', ['huong-dan','trung-nguyen-loan-chien'])}}">Trung Nguyên loạn chiến</a></td>
         </tr>
     </table>
     <div class="act-daily-view-more"><a href="{{ route('front.category', ['huong-dan']) }}">Xem thêm >></a></div>
