@@ -2,6 +2,9 @@
 <html lang="vi" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta name="viewport" content="width=1920, initial-scale=1">
+    <link rel="preload" href="{{ mix('css/landing-2020-04.css') }}" as="style">
+    <link rel="preload" href="{{ mix('js/landing-2020-04.js') }}" as="script">
+    <link rel="preload" href="{{ asset('images/landing-2020-04/bg-f1-h.jpg') . $cacheBuster  }}" as="image">
     @component('meta')
         @slot('title')
         @section('title'){{ $title ?? config('t2g_common.site.seo.title') }}@show
