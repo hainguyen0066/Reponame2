@@ -83,8 +83,10 @@ body {
   .section-01 {
     overflow: hidden;
     max-width: 100%;
-    background: url('../images/landing-2020-04/bg-f1-l.jpg') top center no-repeat;
-
+    background: url('../images/landing-2020-04/bg-f1-l.jpg?v=1') top center no-repeat;
+    &.ready {
+      background: url('../images/landing-2020-04/bg-f1-h.jpg?v=1') center no-repeat;
+    }
     #intro {
       display: none;
       position: relative;

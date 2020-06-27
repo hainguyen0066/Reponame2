@@ -26,7 +26,7 @@ $cacheBuster = "?v=" . config('t2g_common.asset.version');
 @endphp
     <div class="wrapper">
         <a href="javascript:" class="icon-scroll" title="Scroll xuống để xem tiếp">Scroll xuống để xem tiếp</a>
-        <section class="section-01">
+        <section class="section-01" data-bg="{{ asset('images/landing-2020-04/bg-f1-h.jpg') . $cacheBuster  }}">
             <video id="intro" data-url="{{ asset('images/landing-2020-04/landing_page.mp4') }}" loop muted>
                 <source src="" type="video/mp4">
             </video>
