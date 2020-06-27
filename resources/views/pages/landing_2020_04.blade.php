@@ -61,14 +61,14 @@ $cacheBuster = "?v=" . config('t2g_common.asset.version');
         </section>
         <section class="section-05" data-bg="{{ asset('images/landing-2020-04/bg-f5-h.jpg') . $cacheBuster  }}">
             <div class="container">
-                <div class="frame-button volamtranhba sprite">
-                    <a href="{{ route('front.details.post', ['su-kien','dua-top-level-100'])}}"><span>&nbsp;</span></a>
+                <div class="frame-button volamtranhba sprite animate__animated animate__">
+                    <a href="{{ route('front.details.post', ['su-kien','anh-hung-thiep-khai-mo-may-chu-lam-an'])}}"><span>&nbsp;</span></a>
                 </div>
-                <div class="frame-button quanhunghoitu sprite">
-                    <a href="{{ route('front.details.post', ['su-kien','quan-hung-hoi-tu-khai-mo-may-chu-bien-kinh']) }}"><span>&nbsp;</span></a>
+                <div class="frame-button quanhunghoitu sprite animate__animated animate__">
+                    <a href="{{ route('front.details.post', ['su-kien','quan-hung-hoi-tu-khai-mo-may-chu-lam-an']) }}"><span>&nbsp;</span></a>
                 </div>
-                <div class="frame-button anhhungthiep sprite">
-                    <a href="{{ route('front.details.post', ['su-kien','anh-hung-thiep-khai-mo-may-chu-bien-kinh']) }}"><span>&nbsp;</span></a>
+                <div class="frame-button anhhungthiep sprite animate__animated animate__">
+                    <a href="{{ route('front.details.post', ['su-kien','chien-than-tong-kim-nhan-ngay-tien-mat']) }}"><span>&nbsp;</span></a>
                 </div>
                 <div class="clearfix"></div>
                 <a href="javascript:" id="goTop" class="sprite">Go top</a>
@@ -79,6 +79,26 @@ $cacheBuster = "?v=" . config('t2g_common.asset.version');
             <p>Địa chỉ: 21 Nguyễn Thái Học, phường Bến Nghé, Quận 1, Thành phố Hồ Chí Minh</p>
             <p>Điện thoại: <span>0898 002 151</span> Fanpage : <a href="{{ config('site.fb.page_url') }}" target="blank" title="Fanpage">{{ config('site.fb.page_url') }}</a></p>
         </footer>
+    </div>
+    <div class="anchor">
+        <ul>
+            <li>
+                <a href="{{ route('front.page.download') }}" target="_blank">
+                    tải game
+                </a>
+            </li>
+            <li>
+                <a href="javascript:" class="account-register">
+                    đăng ký
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('front.payment.index') }}" target="_blank">
+                    nạp thẻ
+                </a>
+            </li>
+
+        </ul>
     </div>
 @include('partials.trackers')
 @if(!$user)

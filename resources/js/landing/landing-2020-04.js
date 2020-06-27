@@ -7,6 +7,9 @@ $(document).ready(function () {
     $(window).scroll(function (e) {
         if ($(this).scrollTop() > 30) {
             $('.icon-scroll').addClass('scrolling');
+            $('.anchor').addClass('run');
+        } else {
+            $('.anchor').removeClass('run');
         }
         if ($(this).scrollTop() > 3600) {
             $('.icon-scroll').hide(300);
@@ -18,5 +21,5 @@ $(document).ready(function () {
         $("html, body").animate({ scrollTop: 0 }, 500);
     });
 
-    loadIntro('intro');
+    // loadIntro('intro');
 });
