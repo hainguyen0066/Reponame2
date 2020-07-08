@@ -93,9 +93,15 @@
                 </a>
             </li>
             <li>
+                @if(empty($user))
                 <a href="javascript:" class="account-register">
                     đăng ký
                 </a>
+                @else
+                    <a href="{{ route('logout') }}">
+                        thoát
+                    </a>
+                @endif
             </li>
             <li>
                 <a href="{{ route('front.payment.index') }}" target="_blank">
