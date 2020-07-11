@@ -297,60 +297,51 @@ a {
 
       .act-daily {
         margin-top: 10px;
-        width: 210px;
+        width: 217px;
         height: 420px;
-        background: url('../images/bg-act-daily.jpg') no-repeat;
-        padding: 90px 10px 0 10px;
+        background: url('../images/bg-act-daily-new.jpg') no-repeat;
+        padding: 90px 5px 0 5px;
         font-family: 'Roboto', sans-serif;
         position: relative;
 
         .activity-tabs {
+          position: absolute;
+          top: 51px;
+          text-indent: 1px;
           a {
-            display: block;
-            position: absolute;
-            top: 13px;
-            left: 4px;
-            width: 108px;
-            height: 29px;
-            text-indent: -9999px;
-            overflow: hidden;
-            background: url("../images/bg-act-daily-btn.png") 0 -31px;
+            display: inline-block;
+            text-align: center;
+            padding: 5px;
+            color: #fff;
+            font-size: 14px;
             &:hover, &.active {
-              background-position: 0 1px;
-            }
-            &.link-tab-activity {
-              right: 7px;
-              width: 108px;
-              background-position: -108px 1px;
-              left: initial;
-              &:hover, &.active {
-                background-position: -108px -31px;
-              }
+              background-color: #ff191e;
+              border-radius: 3px;
             }
           }
         }
 
         table {
           font-size: 14px;
-
+          width: 100%;
           &.active {
             display: table !important;
           }
 
           td {
+            font-size: 12px;
             &.td-time {
               padding-top: 5px;
               vertical-align: top;
               color: #ff191e;
-              width: 60px;
+              width: 70px;
+              text-align: right;
+              padding-right: 5px;
             }
 
             &.td-content {
-              width: 150px;
-              padding: 5px 5px 10px 5px;
-              line-height: 1.3em;
-              text-align: right;
-
+              width: 141px;
+              padding: 5px 0px 10px 2px;
               a {
                 color: #2444be;
               }
