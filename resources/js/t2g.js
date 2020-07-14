@@ -1,5 +1,8 @@
 const loadIntro = (videoId) => {
     let video = document.getElementById(videoId);
+    video.className += ' active';
+    video.play();
+    return;
     const videoUrl = video.getAttribute('data-url');
     if (!videoUrl) {
         console.log(`No video url defined in data-url attribute. ${videoUrl}`);

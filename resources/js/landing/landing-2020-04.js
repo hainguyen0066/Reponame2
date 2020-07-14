@@ -1,6 +1,7 @@
 require('../bootstrap');
 import Account from '../account';
 import loadIntro from './../t2g';
+const lottie = require('lottie-web');
 
 $(document).ready(function () {
     $('body, section').addClass('ready');
@@ -21,5 +22,5 @@ $(document).ready(function () {
         $("html, body").animate({ scrollTop: 0 }, 500);
     });
 
-    // loadIntro('intro');
+    loadIntro('intro');
 });

@@ -13,6 +13,7 @@ const mix = require('laravel-mix');
 mix.copyDirectory('resources/images', 'public/images')
     .copyDirectory('resources/fonts', 'public/fonts')
     .copyDirectory('resources/css', 'public/css')
+    .copyDirectory('resources/lottie', 'public/lottie')
     .copy('resources/images/favicon.ico', 'public/favicon.ico')
     .js('resources/js/app.js', 'public/js')
     // .js('resources/js/admin/index.js', 'public/js/admin/index.js')

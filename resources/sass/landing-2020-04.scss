@@ -89,8 +89,8 @@ body {
     }
     #intro {
       display: none;
-      position: relative;
-      top: 0;
+      position: absolute;
+      top: -40px;
       left: 50%;
       transform: translateX(-50%);
       width: 1920px;

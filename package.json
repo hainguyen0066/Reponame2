@@ -26,6 +26,7 @@
         "highcharts": "^7.0.1",
         "jquery": "^3.3.1",
         "jquery-confirm": "^3.3.4",
+        "lottie-web": "^5.7.0",
         "moment": "^2.24.0"
     }
 }

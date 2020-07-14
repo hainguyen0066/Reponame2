@@ -7,8 +7,9 @@
     <meta name="viewport" content="width=1920, initial-scale=1">
     <link rel="preload" href="{{ mix('css/landing-2020-04.css') }}" as="style">
     <link rel="preload" href="{{ mix('js/landing-2020-04.js') }}" as="script">
+    <link rel="preload" href="{{ asset('images/lam_an.mp4') }}" as="video">
     <link rel="preload" href="{{ asset('images/landing-2020-04/bg-f1-l.jpg') . $cacheBuster  }}" as="image">
-    <link rel="preload" href="{{ asset('images/landing-2020-04/bg-f1-h.jpg') }}" as="image">
+    <link rel="preload" href="{{ asset('images/landing-2020-04/bg-f1-h.jpg') . $cacheBuster }}" as="image">
     <link rel="preload" href="{{ asset('images/landing-2020-04/bg-sprite.png?v=1') }}" as="image">
     @component('meta')
         @slot('title')
@@ -32,9 +33,7 @@
     <div class="wrapper">
         <a href="javascript:" class="icon-scroll" title="Scroll xuống để xem tiếp">Scroll xuống để xem tiếp</a>
         <section class="section-01" data-bg="{{ asset('images/landing-2020-04/bg-f1-h.jpg') . $cacheBuster  }}">
-            <video id="intro" data-url="{{ asset('images/landing-2020-04/landing_page.mp4') }}" loop muted>
-                <source src="" type="video/mp4">
-            </video>
+            @include('partials.intro')
             <div class="container">
                 <div class="logo"><a href="{{ route('front.home')}}"></a></div>
                 <div class="menu">
