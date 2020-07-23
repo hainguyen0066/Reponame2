@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Front;
 
+use Symfony\Component\HttpFoundation\Cookie;
 use T2G\Common\Controllers\Front\BaseFrontController;
 use T2G\Common\Repository\BannerRepository;
 use T2G\Common\Repository\PostRepository;
@@ -32,16 +33,20 @@ class HomePageController extends BaseFrontController
             'Môn phái & Trang bị' => $postRepository->getGroupPostsWithoutSubs('mon-phai%', $postsLimit),
         ];
         $slides = $sliderRepository->getHomeSlider(self::HOMEPAGE_LIMIT_SLIDERS);
-        $banners = $bannerRepository ->getActiveBanner();
-
+        $banner = $bannerRepository ->getActiveBanner();
         $this->setMetaTitle('Trang chủ');
 
-        return view('pages.home', [
+        $response = response(view('pages.home', [
             'newsByCategory' => $newsByCategory,
             'featuredPosts'  => $featuredPosts,
             'slides'         => $slides,
-            'banner'         => $banners,
-        ]);
+            'banner'         => $banner,
+        ]));
+        if ($banner && !request()->cookie('HomeBanner' . $banner->getKey())) {
+            $response = $response->withCookie(new Cookie('HomeBanner' . $banner->getKey(), true, time() + 24 * 3600 * 3));
+        }
+
+        return $response;
     }
 
     public function welcome(PostRepository $postRepository)

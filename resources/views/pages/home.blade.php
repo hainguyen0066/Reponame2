@@ -7,7 +7,7 @@
     @include('partials.homepage.newbies')
 @endsection
 
-@if(!empty($banner))
+@if(!empty($banner) && !request()->cookie('HomeBanner' . $banner->getKey()))
     @section('banner')
         @include('modal.banner')
     @endsection
