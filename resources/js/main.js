@@ -1,6 +1,5 @@
 import $ from "jquery";
 require('jquery-confirm');
-import loadIntro from "./t2g";
 
 $(document).ready(function(){
     $('.menu-news div').click(function(){
@@ -79,5 +78,5 @@ $(document).ready(function(){
         });
     });
 
-    loadIntro('intro');
+    $('#intro').addClass('active');
 });

@@ -1,6 +1,6 @@
 require('../bootstrap');
+import $ from "jquery";
 import Account from '../account';
-import loadIntro from './../t2g';
 
 $(document).ready(function () {
     $('body, section').addClass('ready');
@@ -21,5 +21,5 @@ $(document).ready(function () {
         $("html, body").animate({ scrollTop: 0 }, 500);
     });
 
-    loadIntro('intro');
+    $('#intro').addClass('active');
 });

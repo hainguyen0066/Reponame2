@@ -26,7 +26,7 @@
 <body>
     <div class="wrapper">
         <a href="javascript:" class="icon-scroll" title="Scroll xuống để xem tiếp">Scroll xuống để xem tiếp</a>
-        <section class="section-01" data-bg="{{ asset('images/landing-2020-04/bg-f1-h.jpg') . $cacheBuster  }}">
+        <section class="section-01">
             @include('partials.intro')
             <div class="container">
                 <div class="logo"><a href="{{ route('front.home')}}"></a></div>
