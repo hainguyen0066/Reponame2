@@ -82,32 +82,19 @@ body {
       height: 100%;
     }
   }
-  .video-background {
+  #intro {
+    display: none;
     position: relative;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: -99;
-    .video-foreground, iframe {
-      position: absolute;
-      top: -40px;
-      pointer-events: none;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 1920px;
-      height: 1080px;
-    }
-    .video-foreground {
-      top: 0;
-      background: url('../images/landing-2020-04/bg-f1-h.jpg?v=3') top center no-repeat;
-    }
-    #intro-container {
-      display: none;
-      &.active {
-        display: initial;
-      }
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1920px;
+    height: 1080px;
+    &.active {
+      display: initial;
     }
   }
+
   .section-01 {
     overflow: hidden;
     max-width: 100%;
