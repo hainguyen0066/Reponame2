@@ -19,8 +19,8 @@
             {{ $meta_image ?? asset(config('t2g_common.site.seo.meta_image')) }}
         @endslot
     @endcomponent
-    <link rel="stylesheet" href="{{ mix('css/landing-2020-04.css') }}">
-    <link rel="stylesheet" href="{{ mix('css/account.css') }}">
+    <link rel="stylesheet" href="{{ staticUrl('css/landing-2020-04.css', true) }}">
+    <link rel="stylesheet" href="{{ staticUrl('css/account.css', true) }}">
     @include('t2g_common::schemas.home')
 </head>
 <body>
@@ -112,7 +112,7 @@
     <script>
         window.user_id = '{{ \Auth::check() ? \Auth::user()->id : '' }}';
     </script>
-    <script type="text/javascript" src="{{ mix('js/landing-2020-04.js') }}"></script>
+    <script type="text/javascript" src="{{ staticUrl('js/landing-2020-04.js', true) }}"></script>
 @show
 @include('partials.tracker.fb_chat')
 </body>

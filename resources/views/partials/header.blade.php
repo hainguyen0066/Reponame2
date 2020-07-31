@@ -1,8 +1,8 @@
 <div class="header">
     <video id="intro"
-        poster="{{ asset('images/landing-2020-04/bg-f1-l.jpg?v=1') }}"
+        poster="{{ staticUrl('images/landing-2020-04/bg-f1-l.jpg?v=1') }}"
         preload="auto" loop muted autoplay playsinline>
-        <source src="{{ asset('images/trang_chu.mp4') }}" type="video/mp4">
+        <source src="{{ staticUrl('images/trang_chu.mp4') }}" type="video/mp4">
     </video>
     <div class="header-content">
         <div class="container">

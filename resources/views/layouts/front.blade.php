@@ -13,7 +13,7 @@
             {{ $meta_keywords ?? config('t2g_common.site.seo.meta_keyword') }}
         @endslot
         @slot('meta_image')
-            {{ $meta_image ?? asset(config('t2g_common.site.seo.meta_image')) }}
+            {{ $meta_image ?? staticUrl(config('t2g_common.site.seo.meta_image')) }}
         @endslot
         @slot('og_type')
             {{ $og_type ?? 'website' }}

@@ -2,7 +2,8 @@
 
 return [
     'asset' => [
-        'version' => '20200714'
+        'version' => '20200714',
+        'base_url' => env('ASSET_BASE_URL'),
     ],
     'site'     => [
         'domains' => ['vltrungnguyen.com', 'www.vltrungnguyen.com', 'vltrungnguyen.net', 'www.vltrunglnguyen.net'],
