@@ -35,15 +35,15 @@
                 </ul>
             </div>
             <a class="register-btn {{ $user ? 'logged' : 'account-register' }}" title="Đăng ký"></a>
-            <a class="download" href="{{ route('front.page.download')}}" title="Tải game"></a>
+            <a class="download" target="_blank" href="{{ route('front.page.download')}}" title="Tải game"></a>
             <a href="javascript:" class="icon-scroll" title="Scroll xuống để xem tiếp">Scroll xuống để xem tiếp</a>
             <div class="text"></div>
         </section>
         <section class="section-02">
             <div class="char animate__animated animate__pulse animate__infinite"></div>
-            <a href="{{ $user ? route('front.page.download') : 'javascript:;' }}"
+            <a href="{{ !$user ? route('front.page.download') : 'javascript:;' }}"
                data-aos="zoom-out-down"
-               class="btn-join {{ $user ? 'account-register' : '' }}"></a>
+               class="btn-join {{ $user ? '' : 'account-register' }}"></a>
         </section>
         <section class="section-03">
             <div class="download"> <a class="" href="{{ route('front.page.download')}}"></a></div>
@@ -51,31 +51,31 @@
             <div class="event-2" data-aos="zoom-out-down" data-aos-delay="300"></div>
             <div class="event-3" data-aos="zoom-out-down" data-aos-delay="600"></div>
             <div class="char animate__animated animate__headShake animate__infinite"></div>
-            <a href="{{ $user ? route('front.page.download') : 'javascript:;' }}"
+            <a href="{{ !$user ? route('front.page.download') : 'javascript:;' }}"
                data-aos="zoom-out-down"
-               class="btn-join {{ $user ? 'account-register' : '' }}"></a>
+               class="btn-join {{ $user ? '' : 'account-register' }}"></a>
         </section>
         <section class="section-04">
             <a class="btn-try" href="{{ route('front.page.download')}}" data-aos="zoom-out-down"></a>
         </section>
         <section class="section-05">
             <div class="frame-button volamtranhba" data-aos="zoom-in-right">
-                <a href="{{ route('front.details.post', ['su-kien','vo-lam-tranh-ba'])}}">
+                <a  target="_blank" href="{{ route('front.details.post', ['su-kien','vo-lam-tranh-ba'])}}">
                     <span class="center">&nbsp;</span>
                 </a>
             </div>
             <div class="frame-button quanhunghoitu" data-aos="zoom-in-right">
-                <a href="{{ route('front.details.post', ['su-kien','tong-kim-xung-ba-cung-xi-ngau']) }}">
+                <a  target="_blank" href="{{ route('front.details.post', ['su-kien','tong-kim-xung-ba-cung-xi-ngau']) }}">
                     <span class="center">&nbsp;</span>
                 </a>
             </div>
             <div class="frame-button anhhungthiep" data-aos="zoom-in-left">
-                <a href="{{ route('front.details.post', ['su-kien','anh-hung-thiep-khai-mo-server-phuong-tuong']) }}">
+                <a  target="_blank" href="{{ route('front.details.post', ['su-kien','anh-hung-thiep-khai-mo-server-phuong-tuong']) }}">
                     <span class="center">&nbsp;</span>
                 </a>
             </div>
             <div class="frame-button tuyetdinhsuquan" data-aos="zoom-in-left">
-                <a href="{{ route('front.details.post', ['su-kien','tuyet-dinh-su-quan-server-phuong-tuong']) }}">
+                <a  target="_blank" href="{{ route('front.details.post', ['su-kien','tuyet-dinh-su-quan-server-phuong-tuong']) }}">
                     <span class="center">&nbsp;</span>
                 </a>
             </div>
