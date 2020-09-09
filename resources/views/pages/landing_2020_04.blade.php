@@ -65,7 +65,7 @@
                 </a>
             </div>
             <div class="frame-button quanhunghoitu" data-aos="zoom-in-right">
-                <a href="{{ route('front.details.post', ['su-kien','chuoi-su-kien-close-beta-server-phuong-tuong']) }}">
+                <a href="{{ route('front.details.post', ['su-kien','tong-kim-xung-ba-cung-xi-ngau']) }}">
                     <span class="center">&nbsp;</span>
                 </a>
             </div>
@@ -75,7 +75,7 @@
                 </a>
             </div>
             <div class="frame-button tuyetdinhsuquan" data-aos="zoom-in-left">
-                <a href="{{ route('front.details.post', ['tong-hop','trieu-tap-bang-hoi']) }}">
+                <a href="{{ route('front.details.post', ['su-kien','tuyet-dinh-su-quan-server-phuong-tuong']) }}">
                     <span class="center">&nbsp;</span>
                 </a>
             </div>

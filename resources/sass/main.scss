@@ -403,7 +403,7 @@ a {
         width: 100%;
 
         div {
-          height: 115px;
+          height: 90px;
           margin-top: 10px;
           background-size: 701px 489px;
         }
@@ -560,7 +560,7 @@ a {
             background: url('../images/line.png') bottom left repeat-x;
 
             .tab-link {
-              background-position: -489px -459px;
+              background-position: -489px -566px;
               display: block;
               text-align: center;
               width: 122px;
@@ -570,7 +570,7 @@ a {
               cursor: pointer;
               line-height: 30px;
               &:hover, &.active {
-                background-position: -359px -459px;
+                background-position: -359px -566px;
                 color: #fff;
               }
               &.tong-hop {
@@ -694,8 +694,8 @@ a {
         }
 
         .column-second {
-          width: 173px;
-          height: 336px;
+          width: 175px;
+          height: 450px;
           float: right;
           background-position: 0 -115px;
         }
@@ -721,7 +721,7 @@ a {
             display: block;
             width: 171px;
             text-align: center;
-            background-position: -180px -459px;
+            background-position: -180px -566px;
             color: #060100;
             font-size: 18px;
             line-height: 31px;
@@ -729,7 +729,7 @@ a {
             margin-right: 20px;
             &:hover, &.active {
               color: #fff;
-              background-position: 0 -459px;
+              background-position: 0 -566px;
             }
           }
 
