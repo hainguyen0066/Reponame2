@@ -1,5 +1,6 @@
 const mix = require('laravel-mix');
 
+mix.browserSync('c02.test');
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -26,31 +27,33 @@ mix.copyDirectory('resources/images', 'public/images')
     .options({
         processCssUrls: false
     })
-    .version();
+;
 
 mix.sass('resources/sass/landing.scss', 'public/css/landing.css')
     .options({
         processCssUrls: false
     })
-    .version();
+;
 
 mix.js('resources/js/landing/landing-2019-11.js', 'public/js/landing-2019-11.js')
     .sass('resources/sass/landing-2019-11.scss', 'public/css/landing-2019-11.css')
     .options({
         processCssUrls: false
     })
-    .version();
+;
 
 mix.js('resources/js/landing/landing-2020-04.js', 'public/js/landing-2020-04.js')
     .sass('resources/sass/landing-2020-04.scss', 'public/css/landing-2020-04.css')
     .options({
         processCssUrls: false
     })
-    .version();
+;
 
 mix.js('resources/js/admin/index.js', 'public/js/admin/app.js')
     .sass('resources/sass/admin/app.scss', 'public/css/admin/app.css')
-    .version();
 
+if (mix.inProduction()) {
+    mix.version();
+}
 // mix.js('vendor/tcg/voyager/resources/assets/js/app.js', 'public/voyager/js')
 //     .sass('vendor/tcg/voyager/resources/assets/sass/app.scss', 'public/voyager/css');

@@ -30,6 +30,7 @@
             <div class="two-columns">
                 @include('partials.sidebar')
                 <div class="columns-right">
+                    @include('partials.form_search')
                     @yield('content')
                 </div>
                 <div class="clearfix"></div>
@@ -42,6 +43,8 @@
     @include('modal.account')
 @endif
 @yield('banner')
+@include('partials.btn_giftcode')
+@include('modal.giftcode')
 @section('js')
     @include('partials.scripts')
 @show

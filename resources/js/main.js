@@ -78,5 +78,24 @@ $(document).ready(function(){
         });
     });
 
-    $('#intro').addClass('active');
+    function resize() {
+        let wwidth = $(window).width();
+        let ratio = wwidth / 1920;
+
+        $('.btn-giftcode').css({
+            width: 500 * ratio,
+            height: 400 * ratio
+        });
+        $('.btn-giftcode span').css({
+            "font-size": (24 * ratio) + 'px'
+        });
+        setTimeout(() => $('.btn-giftcode').show(500), 1000);
+    }
+    resize();
+    $(window).resize(function () {
+        resize();
+    });
+    $('.logged').click(() => {
+        $('#popupGiftCode').show();
+    });
 });

@@ -1,12 +1,11 @@
 <div class="header">
     <video id="intro"
-        poster="{{ staticUrl('images/landing-2020-04/bg-f1-l.jpg?v=1') }}"
+        poster="{{ staticUrl('images/bg-header.jpg') }}"
         preload="auto" loop muted autoplay playsinline>
-        <source src="{{ staticUrl('images/trang_chu.mp4') }}" type="video/mp4">
+        <source src="{{ staticUrl('images/trang_chu_vid.mp4') }}" type="video/mp4">
     </video>
     <div class="header-content">
         <div class="container">
-            <div id="slogan"></div>
             <div class="top-menu">
                 <ul>
                     <li><a href="{{ route('front.home') }}" class="active">Trang Chủ</a></li>

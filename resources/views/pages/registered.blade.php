@@ -59,10 +59,8 @@
         @include('partials.homepage.guides')
     </div>
 @endsection
-@if(env('APP_ENV') == 'prod' && $user->created_at->getTimestamp() > strtotime("2 minutes"))
-    {{--@push('extra-js')--}}
-        {{--<script>--}}
-            {{--gtag('event', 'conversion', {'send_to': 'AW-772272124/B4NGCLDo47EBEPzfn_AC'});--}}
-        {{--</script>--}}
-    {{--@endpush--}}
-@endif
+@push('extra-js')
+    <script>
+        $(document).ready(() => document.getElementById('popupGiftCode').style.display = 'initial');
+    </script>
+@endpush

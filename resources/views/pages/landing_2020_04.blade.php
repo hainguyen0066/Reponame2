@@ -1,10 +1,7 @@
 <!DOCTYPE html>
 <html lang="vi" xmlns="http://www.w3.org/1999/xhtml">
-@php
-    $cacheBuster = "?v=" . config('t2g_common.asset.version');
-@endphp
 <head>
-    <meta name="viewport" content="width=1920, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
     @component('meta')
         @slot('title')
         @section('title'){{ $title ?? config('t2g_common.site.seo.title') }}@show
@@ -24,53 +21,65 @@
     @include('t2g_common::schemas.home')
 </head>
 <body>
+    <div class="loader"></div>
+    @include('partials.btn_giftcode')
     <div class="wrapper">
-        <a href="javascript:" class="icon-scroll" title="Scroll xuống để xem tiếp">Scroll xuống để xem tiếp</a>
         <section class="section-01">
             @include('partials.intro')
-            <div class="container">
-                <div class="logo"><a href="{{ route('front.home')}}"></a></div>
-                <div class="menu">
-                    <ul>
-                        <li><a href="{{ route('front.home')}}">Trang chủ</a></li>
-                        <li><a href="{{ config('site.fb.page_url') }}" target="_blank">Fanpage</a></li>
-                        <li><a href="{{ config('site.fb.group_url')}}" target="_blank">Group</a></li>
-                    </ul>
-                </div>
-                <div class="three-button">
-                    @if(!$user)
-                    <a class="register-btn account-register sprite" title="Đăng ký"></a>
-                    @endif
-                    <a class="download {{ $user ? 'logged' : '' }} sprite"
-                       href="{{ route('front.page.download')}}" title="Tải game"></a>
-                </div>
+            <div class="logo"><a href="{{ route('front.home')}}"></a></div>
+            <div class="menu">
+                <ul>
+                    <li><a href="{{ route('front.home')}}">Trang chủ</a></li>
+                    <li><a href="{{ config('site.fb.page_url') }}" target="_blank">Fanpage</a></li>
+                    <li><a href="{{ config('site.fb.group_url')}}" target="_blank">Group</a></li>
+                </ul>
             </div>
+            <a class="register-btn {{ $user ? 'logged' : 'account-register' }}" title="Đăng ký"></a>
+            <a class="download" href="{{ route('front.page.download')}}" title="Tải game"></a>
+            <a href="javascript:" class="icon-scroll" title="Scroll xuống để xem tiếp">Scroll xuống để xem tiếp</a>
+            <div class="text"></div>
         </section>
-        <section class="section-02" data-bg="{{ asset('images/landing-2020-04/bg-f2-h.jpg') . $cacheBuster  }}"></section>
-        <section class="section-03" data-bg="{{ asset('images/landing-2020-04/bg-f3-h.jpg') . $cacheBuster  }}">
-            <div class="container">
-                <div class="download"> <a class="sprite" href="{{ route('front.page.download')}}"></a></div>
-            </div>
+        <section class="section-02">
+            <div class="char animate__animated animate__pulse animate__infinite"></div>
+            <a href="{{ $user ? route('front.page.download') : 'javascript:;' }}"
+               data-aos="zoom-out-down"
+               class="btn-join {{ $user ? 'account-register' : '' }}"></a>
         </section>
-        <section class="section-04" data-bg="{{ asset('images/landing-2020-04/bg-f4-h.jpg') . $cacheBuster  }}">
-            <div class="container">
-                <div class="download"> <a class="sprite" href="{{ route('front.page.download')}}"></a></div>
-            </div>
+        <section class="section-03">
+            <div class="download"> <a class="" href="{{ route('front.page.download')}}"></a></div>
+            <div class="event-1" data-aos="zoom-out-down" data-aos-delay=""></div>
+            <div class="event-2" data-aos="zoom-out-down" data-aos-delay="300"></div>
+            <div class="event-3" data-aos="zoom-out-down" data-aos-delay="600"></div>
+            <div class="char animate__animated animate__headShake animate__infinite"></div>
+            <a href="{{ $user ? route('front.page.download') : 'javascript:;' }}"
+               data-aos="zoom-out-down"
+               class="btn-join {{ $user ? 'account-register' : '' }}"></a>
         </section>
-        <section class="section-05" data-bg="{{ asset('images/landing-2020-04/bg-f5-h.jpg') . $cacheBuster  }}">
-            <div class="container">
-                <div class="frame-button volamtranhba sprite animate__animated animate__">
-                    <a href="{{ route('front.details.post', ['su-kien','anh-hung-thiep-khai-mo-may-chu-lam-an'])}}"><span>&nbsp;</span></a>
-                </div>
-                <div class="frame-button quanhunghoitu sprite animate__animated animate__">
-                    <a href="{{ route('front.details.post', ['su-kien','quan-hung-hoi-tu-khai-mo-may-chu-lam-an']) }}"><span>&nbsp;</span></a>
-                </div>
-                <div class="frame-button anhhungthiep sprite animate__animated animate__">
-                    <a href="{{ route('front.details.post', ['su-kien','chien-than-tong-kim-nhan-ngay-tien-mat']) }}"><span>&nbsp;</span></a>
-                </div>
-                <div class="clearfix"></div>
-                <a href="javascript:" id="goTop" class="sprite">Go top</a>
+        <section class="section-04">
+            <a class="btn-try" href="{{ route('front.page.download')}}" data-aos="zoom-out-down"></a>
+        </section>
+        <section class="section-05">
+            <div class="frame-button volamtranhba" data-aos="zoom-in-right">
+                <a href="{{ route('front.details.post', ['su-kien','vo-lam-tranh-ba'])}}">
+                    <span class="center">&nbsp;</span>
+                </a>
             </div>
+            <div class="frame-button quanhunghoitu" data-aos="zoom-in-right">
+                <a href="{{ route('front.details.post', ['su-kien','chuoi-su-kien-close-beta-server-phuong-tuong']) }}">
+                    <span class="center">&nbsp;</span>
+                </a>
+            </div>
+            <div class="frame-button anhhungthiep" data-aos="zoom-in-left">
+                <a href="{{ route('front.details.post', ['su-kien','anh-hung-thiep-khai-mo-server-phuong-tuong']) }}">
+                    <span class="center">&nbsp;</span>
+                </a>
+            </div>
+            <div class="frame-button tuyetdinhsuquan" data-aos="zoom-in-left">
+                <a href="{{ route('front.details.post', ['tong-hop','trieu-tap-bang-hoi']) }}">
+                    <span class="center">&nbsp;</span>
+                </a>
+            </div>
+            <a href="javascript:" id="goTop" class="">Go top</a>
         </section>
         <footer>
             <p>Bản quyền &copy;2019 Phát hành duy nhất tại: <span>jxtrungnguyen2005.com</span></p>
@@ -78,36 +87,37 @@
             <p>Điện thoại: <span>0898 002 151</span> Fanpage : <a href="{{ config('site.fb.page_url') }}" target="blank" title="Fanpage">{{ config('site.fb.page_url') }}</a></p>
         </footer>
     </div>
-    <div class="anchor">
-        <ul>
-            <li>
-                <a href="{{ route('front.page.download') }}" target="_blank">
-                    tải game
-                </a>
-            </li>
-            <li>
-                @if(empty($user))
-                <a href="javascript:" class="account-register">
-                    đăng ký
-                </a>
-                @else
-                    <a href="{{ route('logout') }}">
-                        thoát
-                    </a>
-                @endif
-            </li>
-            <li>
-                <a href="{{ route('front.payment.index') }}" target="_blank">
-                    nạp thẻ
-                </a>
-            </li>
+{{--    <div class="anchor">--}}
+{{--        <ul>--}}
+{{--            <li>--}}
+{{--                <a href="{{ route('front.page.download') }}" target="_blank">--}}
+{{--                    tải game--}}
+{{--                </a>--}}
+{{--            </li>--}}
+{{--            <li>--}}
+{{--                @if(empty($user))--}}
+{{--                <a href="javascript:" class="account-register">--}}
+{{--                    đăng ký--}}
+{{--                </a>--}}
+{{--                @else--}}
+{{--                    <a href="{{ route('logout') }}">--}}
+{{--                        thoát--}}
+{{--                    </a>--}}
+{{--                @endif--}}
+{{--            </li>--}}
+{{--            <li>--}}
+{{--                <a href="{{ route('front.payment.index') }}" target="_blank">--}}
+{{--                    nạp thẻ--}}
+{{--                </a>--}}
+{{--            </li>--}}
 
-        </ul>
-    </div>
+{{--        </ul>--}}
+{{--    </div>--}}
 @include('partials.trackers')
 @if(!$user)
     @include('modal.account')
 @endif
+@include('modal.giftcode')
 @section('js')
     <script>
         window.user_id = '{{ \Auth::check() ? \Auth::user()->id : '' }}';

@@ -1,62 +1,50 @@
 .details-content {
   .main-details-content {
-    font-family: Tahoma, Geneva, Verdana, sans-serif !important;
-    font-size: 1rem;
-    padding-bottom: 100px;
-
-    &.auto {
-      min-height: initial;
-      .news {
-        background: none;
+    padding-top: 30px;
+    margin-top: 0;
+    .post-body {
+      font-size: 14px;
+      padding-bottom: 100px;
+      &.auto {
+        min-height: initial;
+        .news {
+          background: none;
+        }
       }
-    }
-    h1 {
-      font-size: 2rem;
-    }
-
-    h2 {
-      font-size: 1.6rem
-    }
-
-    h3 {
-      font-size: 1.3rem;
-    }
-
-    h4 {
-      font-size: 1.1rem;
-    }
-
-    h5 {
-      font-size: 0.83rem;
-    }
-
-    strong, b {
-      font-weight: bold;
-    }
-
-    h1, h2, h3, h4, h5, h6 {
-      span {
-        font-size: 1em !important;
+      h1 {
+        font-size: 1.2rem;
+        font-weight: bold;
       }
-    }
 
-    em, i {
-      font-style: italic;
-    }
+      strong, b {
+        font-weight: bold;
+      }
 
-    * {
-      max-width: 700px !important;
-      line-height: 1.35rem;
-    }
+      em, i {
+        font-style: italic;
+      }
 
-    td {
-      border: 1px solid #c3bdbd;
-      padding: 5px 10px;
-    }
+      * {
+        max-width: 700px !important;
+        line-height: 1.35rem;
+      }
 
-    p, span {
-        line-height: 1.35em;
-        font-size: 1.05rem !important;
+      td {
+        border: 1px solid #c3bdbd;
+        padding: 5px 10px;
+      }
+
+      p, span {
+        line-height: 1.25em;
+      }
+
+      a {
+        color: #0a0aef;
+        text-decoration: underline;
+        &:hover {
+          text-decoration-color: #4498f1;
+        }
+      }
     }
   }
 

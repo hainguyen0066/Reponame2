@@ -18,6 +18,7 @@ class HomePageController extends BaseFrontController
     const HOMEPAGE_LIMIT_POSTS = 10;
     const HOMEPAGE_LIMIT_SLIDERS = 5;
     const WELCOME_PAGE_LIMIT_NEW_POSTS = 5;
+    const MAX_BANNER_SHOWING_TIMES = 3;
 
     public function index(PostRepository $postRepository, SliderRepository $sliderRepository, BannerRepository $bannerRepository)
     {
@@ -35,15 +36,21 @@ class HomePageController extends BaseFrontController
         $slides = $sliderRepository->getHomeSlider(self::HOMEPAGE_LIMIT_SLIDERS);
         $banner = $bannerRepository ->getActiveBanner();
         $this->setMetaTitle('Trang chủ');
-
-        $response = response(view('pages.home', [
+        $data = [
             'newsByCategory' => $newsByCategory,
             'featuredPosts'  => $featuredPosts,
             'slides'         => $slides,
-            'banner'         => $banner,
-        ]));
-        if ($banner && !request()->cookie('HomeBanner' . $banner->getKey())) {
-            $response = $response->withCookie(new Cookie('HomeBanner' . $banner->getKey(), true, time() + 24 * 3600 * 3));
+        ];
+
+        $bannerCookie = 'HomeBanner' . $banner->getKey();
+        $bannerCounterCookie = request()->cookie($bannerCookie, 0);
+        if ($banner && $bannerCounterCookie < self::MAX_BANNER_SHOWING_TIMES) {
+            $newBannerCookie =  new Cookie($bannerCookie, $bannerCounterCookie + 1, time() + 24 * 3600 * 3);
+            $data['banner'] = $banner;
+        }
+        $response = response(view('pages.home', $data));
+        if (!empty($newBannerCookie)) {
+            $response = $response->withCookie($newBannerCookie);
         }
 
         return $response;

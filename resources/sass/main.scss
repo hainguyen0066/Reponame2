@@ -2,6 +2,19 @@
   font-family: 'PhilosopherBold';
   src: url('../fonts/Philosopher-Bold.ttf');
 }
+@font-face {
+  font-family: 'geoslab703-extra';
+  src: url("../fonts/GeoSlab703-Extra.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'geoslab703-medium';
+  src: url("../fonts/GeoSlab703-Medium.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
 
 body {
   background-color: #060100;
@@ -32,7 +45,7 @@ a {
 
 .header {
   //height: 620px;
-  height: 500px;
+  height: 525px;
   .header-content {
     position: absolute;
     width: 100%;
@@ -94,13 +107,11 @@ a {
     }
   }
   #intro {
-    display: none;
     position: relative;
     top: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 2000px;
-    height: 1800px;
+    width: 1920px;
     &.active {
       display: initial;
     }
@@ -114,37 +125,60 @@ a {
   .slick-slide {
     outline: none;
   }
-  overflow: hidden;
 
   .two-columns {
     min-height: 500px;
     width: 100%;
 
+    .search {
+      width: 100%;
+      background: url('../images/bg-form-search.png');
+      height: 50px;
+      .form-search {
+        //padding: 10px 5px 10px 20px;
+
+        input[type=text] {
+          height: 36px;
+          background: transparent;
+          outline: none;
+          border: none;
+          padding: 8px 30px;
+          width: 545px;
+          color: #ff7f02;
+          font-size: 15px;
+          line-height: 32px;
+        }
+        button {
+          height: 32px;
+          background: transparent;
+          outline: none;
+          border: none;
+          width: 145px;
+          padding: 10px 20px;
+          color: #fff;
+          line-height: 32px;
+          font-size: 16px;
+        }
+      }
+    }
     .columns-left {
       float: left;
       width: 227px;
       min-height: 500px;
+      position: relative;
+      padding-top: 176px;
 
       .download-btn {
-        background: url('../images/download-game.gif') no-repeat;
-        width: 227px;
-        height: 178px;
+        width: 288px;
+        height: 235px;
+        position: absolute;
+        left: -56px;
+        top: -54px;
 
         a {
           display: block;
           width: 100%;
           height: 100%;
-
-          .lantern {
-            position: relative;
-            top: 0;
-            left: -77px;
-            z-index: 1;
-            float: left;
-            width: 106px;
-            height: 236px;
-            background: url('../images/lantern.png') no-repeat;
-          }
         }
       }
 
@@ -348,6 +382,9 @@ a {
             }
           }
         }
+        table.tab-T6 td.td-content {
+          padding: 5px 0px 8px 2px;
+        }
 
         .act-daily-view-more {
           width: 205px;
@@ -401,10 +438,9 @@ a {
     }
 
     .columns-right {
-      overflow: hidden;
       float: left;
       margin-left: 13px;
-      width: calc(1000px - (13px + 227px));
+      width: 760px;
       min-height: 500px;
 
       .slider {
@@ -1071,7 +1107,7 @@ a {
     }
 
     .menu {
-      margin-top: -30px;
+      margin-top: -20px;
       border-bottom: #404040 solid 2px;
       height: 30px;
 
@@ -1375,3 +1411,6 @@ a {
   }
 }
 
+.btn-giftcode {
+  z-index: 6 !important;
+}

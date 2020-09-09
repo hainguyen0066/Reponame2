@@ -210,6 +210,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'ImapClient' => Webklex\IMAP\Facades\Client::class,
+        'DebugBar' => Barryvdh\Debugbar\Facade::class,
     ],
 
 ];
