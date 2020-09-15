@@ -12,7 +12,7 @@ return [
     ],
     // google tag manager
     'gtm' => [
-        'id'        => '',
-        'config_id' => '',
+        'id'        => 'GTM-KSZGPB5',
+        'config_id' => 'GTM-KSZGPB5',
     ]
 ];
