@@ -90,7 +90,7 @@
                     ['Boss Tiểu Hoàng Kim' => '20:00'],
                     ['Liên Đấu' => '20:00'],
                     ['Thất Thành Đại Chiến' => '20:00'],
-                    ['Quốc Chiến Thiên Tử' => '21:00'],
+                    ['Chiến Trường Tống Kim' => '21:00'],
                     ['Boss Đại Hoàng Kim' => '22:30'],
                 ],
                 'T7' => [
