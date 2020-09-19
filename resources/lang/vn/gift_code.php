@@ -8,4 +8,5 @@ return [
     'This user already claimed this type of gift code before' => 'Bạn đã sử dụng Code này rồi.',
     'used_code_successfully'                                  => "Sử dụng Code thành công, hãy vào game để nhận quà.",
     'race_condition_error'                                    => 'Lỗi hệ thống do thao tác quá nhanh, vui lòng thử lại.',
+    'login_first'                                             => 'Vui lòng đăng nhập trước khi nhập Gift Code',
 ];
