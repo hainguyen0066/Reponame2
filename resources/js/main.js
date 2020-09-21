@@ -83,11 +83,11 @@ $(document).ready(function(){
         let ratio = wwidth / 1920;
 
         $('.btn-giftcode').css({
-            width: 500 * ratio,
-            height: 400 * ratio
+            width: 350 * ratio,
+            height: 280 * ratio
         });
         $('.btn-giftcode span').css({
-            "font-size": (24 * ratio) + 'px'
+            "font-size": (18 * ratio) + 'px'
         });
         setTimeout(() => $('.btn-giftcode').show(500), 1000);
     }

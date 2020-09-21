@@ -44,7 +44,7 @@
                     ['Quả Huy Hoàng' => '19:00'],
                     ['Boss Đại Hoàng Kim' => '19:30'],
                     ['Boss Tiểu Hoàng Kim' => '20:00'],
-                    ['Quốc Chiến Thiên Tử' => '21:00'],
+                    ['Chiến Trường Tống Kim' => '21:00'],
                     ['Boss Đại Hoàng Kim' => '22:30'],
                 ],
                 'T4' => [
@@ -59,7 +59,7 @@
                     ['Boss Đại Hoàng Kim' => '19:30'],
                     ['Trung Nguyên Loạn Chiến' => '20:00'],
                     ['Boss Tiểu Hoàng Kim' => '20:00'],
-                    ['Quốc Chiến Thiên Tử' => '21:00'],
+                    ['Chiến Trường Tống Kim' => '21:00'],
                     ['Boss Đại Hoàng Kim' => '22:30'],
                 ],
                 'T5' => [
@@ -73,7 +73,7 @@
                     ['Quả Huy Hoàng' => '19:00'],
                     ['Boss Đại Hoàng Kim' => '19:30'],
                     ['Boss Tiểu Hoàng Kim' => '20:00'],
-                    ['Quốc Chiến Thiên Tử' => '21:00'],
+                    ['Chiến Trường Tống Kim' => '21:00'],
                     ['Boss Đại Hoàng Kim' => '22:30'],
                 ],
                 'T6' => [
@@ -105,7 +105,7 @@
                     ['Boss Đại Hoàng Kim' => '19:30'],
                     ['Boss Tiểu Hoàng Kim' => '20:00'],
                     ['Liên Đấu' => '20:00'],
-                    ['Quốc Chiến Thiên Tử' => '21:00'],
+                    ['Chiến Trường Tống Kim' => '21:00'],
                     ['Boss Đại Hoàng Kim' => '22:30'],
                 ],
                 'CN' => [
@@ -121,7 +121,7 @@
                     ['Boss Tiểu Hoàng Kim' => '20:00'],
                     ['Liên Đấu' => '20:00'],
                     ['Trung Nguyên Loạn Chiến' => '20:00'],
-                    ['Quốc Chiến Thiên Tử' => '21:00'],
+                    ['Chiến Trường Tống Kim' => '21:00'],
                     ['Boss Đại Hoàng Kim' => '22:30'],
                 ]
             ];

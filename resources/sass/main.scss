@@ -1413,4 +1413,10 @@ a {
 
 .btn-giftcode {
   z-index: 6 !important;
+  width: 350px;
+  height: 280px;
+  span {
+    font-size: 18px;
+    right: 13.5%;
+  }
 }
