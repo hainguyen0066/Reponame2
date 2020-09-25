@@ -75,11 +75,7 @@ class User extends AbstractUser
     public function scopeRegisteredNumber($query)
     {
         $query->where('created_at', '>', '2020-09-09');
-        $start = strtotime('2020-09-09');
-        $day = 3600 * 24;
-        $today = time();
-        $daysPassed = ($today - $start) / $day;
 
-        return ceil($query->count() + (ceil($daysPassed) * 300 * sqrt(2)));
+        return $query->count() + 7300;
     }
 }
