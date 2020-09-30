@@ -48,17 +48,7 @@ class PostController extends BaseFrontController
         if (!$post) {
             throw new NotFoundHttpException();
         }
-        $otherPosts = $postRepository->getOtherPosts($post);
-        $data = [
-            'post'   => $post,
-            'others' => $otherPosts,
-            'og_type' => 'article',
-        ];
-        $this->setMetaTitle($post->title)
-            ->setMetaDescription($post->getDescription())
-            ->setMetaImage($post->getImage());
-
-        return view('pages.post_detail', $data);
+        return $this->detail($post->getCategorySlug(), $post->slug, $postRepository);
     }
 
     public function list($categorySlug, PostRepository $postRepository, CategoryRepository $categoryRepository)
