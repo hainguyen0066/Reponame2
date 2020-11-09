@@ -472,7 +472,7 @@
             "keywords": [
                 "laravel"
             ],
-            "abandoned": true,
+            "abandoned": "diglactic/laravel-breadcrumbs",
             "time": "2019-12-30T22:50:51+00:00"
         },
         {
@@ -1258,6 +1258,7 @@
                 "reflection",
                 "static"
             ],
+            "abandoned": "roave/better-reflection",
             "time": "2020-03-27T11:06:43+00:00"
         },
         {
@@ -5849,7 +5850,7 @@
             "source": {
                 "type": "git",
                 "url": "git@gitlab.com:t2game/common.git",
-                "reference": "2889dc7b80d63acc273ad937b6bc0adbc2e7577c"
+                "reference": "f6239e7f52d9762c27e17efac80a1e121c757b20"
             },
             "require": {
                 "elasticsearch/elasticsearch": "^7.4",
@@ -5903,7 +5904,7 @@
                 "t2g",
                 "voyager"
             ],
-            "time": "2020-09-25T09:34:18+00:00"
+            "time": "2020-11-09T05:03:39+00:00"
         },
         {
             "name": "tcg/voyager",
