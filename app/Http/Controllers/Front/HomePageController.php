@@ -56,6 +56,11 @@ class HomePageController extends BaseFrontController
         return $response;
     }
 
+    /**
+     * @param \T2G\Common\Repository\PostRepository $postRepository
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function welcome(PostRepository $postRepository)
     {
         $welcomePostSlugs = [

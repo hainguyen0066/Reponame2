@@ -5850,7 +5850,7 @@
             "source": {
                 "type": "git",
                 "url": "git@gitlab.com:t2game/common.git",
-                "reference": "f6239e7f52d9762c27e17efac80a1e121c757b20"
+                "reference": "9962fda5641ff71d3a127d188ac5edb26a1bd693"
             },
             "require": {
                 "elasticsearch/elasticsearch": "^7.4",
@@ -5904,7 +5904,7 @@
                 "t2g",
                 "voyager"
             ],
-            "time": "2020-11-09T05:03:39+00:00"
+            "time": "2020-11-30T08:00:01+00:00"
         },
         {
             "name": "tcg/voyager",
@@ -6618,6 +6618,7 @@
                 "faker",
                 "fixtures"
             ],
+            "abandoned": true,
             "time": "2019-12-12T13:22:17+00:00"
         },
         {
