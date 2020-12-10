@@ -36,8 +36,7 @@ a {
   background: url('../images/bg-header.jpg') top center no-repeat, url('../images/bg-footer.png') bottom center repeat-x;
   min-height: 2000px;
   position: relative;
-  background-size: contain;
-  padding-bottom: 60px;
+  padding-bottom: 10px;
 }
 
 .container {
@@ -637,7 +636,7 @@ a {
 
             .hot-des {
               height: 100%;
-              width: 350px;
+              width: 320px;
               margin-left: 10px;
 
               p:nth-child(2) {
@@ -648,7 +647,7 @@ a {
 
             .hot-time {
               height: 100%;
-              width: 60px;
+              width: 90px;
             }
 
             .hot-title {
@@ -794,7 +793,7 @@ a {
 
           .hot-time {
             height: 100%;
-            width: 60px;
+            width: 90px;
           }
 
           .hot-title {
