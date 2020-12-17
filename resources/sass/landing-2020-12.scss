@@ -539,7 +539,19 @@ body {
       left: 67.5%;
     }
   }
-
+  #section-05 {
+    height: 900px;
+    background-image: url('../images/landing-2020-12/section-05-bg.jpg');
+    position: relative;
+    .dinhhuong-phattrien {
+      background : url('../images/landing-2020-12/section-05-content.png') no-repeat center center;
+      width: 1165px;
+      height: 811px;
+      position: absolute;
+      top: 4%;
+      left: 25%;
+    }
+  }
   #section-06 {
     height: 1000px;
     background-image: url('../images/landing-2020-12/section-06-bg.jpg');

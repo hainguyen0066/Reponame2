@@ -17,7 +17,7 @@ $(document).ready(function () {
     const section03 = $('#section-03');
     const menu03    = $('#menu03');
 
-    const section04 = $('#section-04');
+    const section05 = $('#section-05');
     const menu04    = $('#menu04');
 
     const section06 = $('#section-06');
@@ -42,13 +42,13 @@ $(document).ready(function () {
             menu02.removeClass('active');
         }
 
-        if(scrollTop >= section03.offset().top && scrollTop <=  section04.offset().top) {
+        if(scrollTop >= section03.offset().top && scrollTop <=  section05.offset().top) {
             menu03.addClass('active');
         } else {
             menu03.removeClass('active');
         }
 
-        if(scrollTop >= section04.offset().top && scrollTop <=  section06.offset().top) {
+        if(scrollTop >= section05.offset().top && scrollTop <=  section06.offset().top) {
             menu04.addClass('active');
         } else {
             menu04.removeClass('active');

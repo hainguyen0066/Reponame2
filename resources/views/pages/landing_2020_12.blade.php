@@ -43,11 +43,11 @@
                     <div class="dac-diem">
                         <a href="#section-03">
                             <div id="menu03" class="trang-chu-number"><span>03</span></div>
-                            <div class="number-content">đặc điểm</div>
+                            <div class="number-content">đặc sắc</div>
                         </a>
                     </div>
                     <div class="dinh-huong">
-                        <a href="#section-04">
+                        <a href="#section-05">
                             <div id="menu04" class="trang-chu-number"><span>04</span></div>
                             <div class="number-content">định hướng</div>
                         </a>
@@ -134,7 +134,7 @@
             <div data-aos="fade-down-left" class="character"></div>
         </div>
         <section id="section-05">
-            <div class="dinhhuong-phattrien"></div>
+                <div data-aos="zoom-in" class="dinhhuong-phattrien"></div>
         </section>
         <section id="section-06">
             <div class="container">
