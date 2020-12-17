@@ -10,8 +10,8 @@ return [
         'seo'     => [
             'title'            => 'Võ Lâm Trung Nguyên',
             'meta_keyword'     => 'vo lam trung nguyen, vltk hay, game pk hay, volam1, ctc, vo lam ctc, vo lam cong thanh chien, vo lam 1',
-            'meta_description' => 'Khai mở Server Phượng Tường - 19h00 ngày 19/09/2020. Máy Chủ Cực Mạnh - Miễn Phí Giờ Chơi - Khơi Lại Ký Ức. Sự trở lại của 1 huyền thoại với 1 diện mạo hoàn toàn mới',
-            'meta_image'       => 'images/share_phuong_tuong.jpg',
+            'meta_description' => 'Khai mở Server Thành Đô - 19h00 ngày 26/12/2020. Máy Chủ Cực Mạnh - Miễn Phí Giờ Chơi - Khơi Lại Ký Ức. Sự trở lại của 1 huyền thoại với 1 diện mạo hoàn toàn mới',
+            'meta_image'       => 'images/share_thanh_do.jpg',
         ],
         // Open Graph configs
         'og' => [
