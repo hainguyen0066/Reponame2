@@ -113,7 +113,7 @@ body {
         text-transform: uppercase;
         z-index: 200;
         left: 0.9%;
-        top: 20%;
+        top: 25%;
         a {
           color: #d58f02;
         }
@@ -128,8 +128,7 @@ body {
           }
         }
 
-        > div:after {
-          content: '';
+        .separator {
           position: absolute;
           height: 10px;
           width: 1px;
@@ -157,7 +156,7 @@ body {
         width: 29px;
         height: 219px;
         position: fixed;
-        top: -3%;
+        top: 0;
         left: 3%;
         z-index: 200;
       }
@@ -170,7 +169,7 @@ body {
         height: 219px;
         position: fixed;
         left: 2.5%;
-        top: 77%;
+        bottom: 0;
         z-index: 200;
       }
 
@@ -545,7 +544,8 @@ body {
     .character {
       position: absolute;
       background-image: url(../images/landing-2020-12/character.png);
-      background-repeat: no-repeat;
+      -webkit-background-size: cover;
+      background-size: cover;
       width: 495px;
       height: 642px;
       bottom: 0;
