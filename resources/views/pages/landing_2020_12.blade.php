@@ -22,42 +22,46 @@
 <body>
     <div class="wrapper">
         <section id="section-01" >
-{{--            <div  class="menu-left">--}}
-{{--                <div class="icon-top"></div>--}}
-{{--                <div class="menu-left-content">--}}
-{{--                    <div class="trang-chu">--}}
-{{--                        <a href="#section-01">--}}
-{{--                            <div id="menu01" class="trang-chu-number"><span>01</span></div>--}}
-{{--                            <div class="number-content">trang chủ</div>--}}
-{{--                        </a>--}}
-{{--                    </div>--}}
-{{--                    <div class="su-kien">--}}
-{{--                        <a href="#section-02">--}}
-{{--                            <div id="menu02" class="trang-chu-number"><span>02</span></div>--}}
-{{--                            <div class="number-content">sự kiện</div>--}}
-{{--                        </a>--}}
-{{--                    </div>--}}
-{{--                    <div class="dac-diem">--}}
-{{--                        <a href="#section-03">--}}
-{{--                            <div id="menu03" class="trang-chu-number"><span>03</span></div>--}}
-{{--                            <div class="number-content">đặc sắc</div>--}}
-{{--                        </a>--}}
-{{--                    </div>--}}
-{{--                    <div class="dinh-huong">--}}
-{{--                        <a href="#section-05">--}}
-{{--                            <div id="menu04" class="trang-chu-number"><span>04</span></div>--}}
-{{--                            <div class="number-content">định hướng</div>--}}
-{{--                        </a>--}}
-{{--                    </div>--}}
-{{--                    <div class="ho-tro">--}}
-{{--                        <a href="#section-06">--}}
-{{--                            <div id="menu05" class="trang-chu-number"><span>05</span></div>--}}
-{{--                            <div class="number-content">hỗ trợ</div>--}}
-{{--                        </a>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--                <div class="icon-bottom"></div>--}}
-{{--            </div>--}}
+            <div class="menu-left">
+                <div class="icon-top"></div>
+                <div class="menu-left-content">
+                    <div class="trang-chu">
+                        <a href="#section-01">
+                            <div id="menu01" class="trang-chu-number"><span>01</span></div>
+                            <div class="number-content">trang chủ</div>
+                            <div class="separator"></div>
+                        </a>
+                    </div>
+                    <div class="su-kien">
+                        <a href="#section-02">
+                            <div id="menu02" class="trang-chu-number"><span>02</span></div>
+                            <div class="number-content">sự kiện</div>
+                            <div class="separator"></div>
+                        </a>
+                    </div>
+                    <div class="dac-diem">
+                        <a href="#section-03">
+                            <div id="menu03" class="trang-chu-number"><span>03</span></div>
+                            <div class="number-content">đặc sắc</div>
+                            <div class="separator"></div>
+                        </a>
+                    </div>
+                    <div class="dinh-huong">
+                        <a href="#section-05">
+                            <div id="menu04" class="trang-chu-number"><span>04</span></div>
+                            <div class="number-content">định hướng</div>
+                            <div class="separator"></div>
+                        </a>
+                    </div>
+                    <div class="ho-tro">
+                        <a href="#section-06">
+                            <div id="menu05" class="trang-chu-number"><span>05</span></div>
+                            <div class="number-content">hỗ trợ</div>
+                        </a>
+                    </div>
+                </div>
+                <div class="icon-bottom"></div>
+            </div>
             <div class="logo"><a href="{{ route('front.home')}}"></a></div>
             <div data-aos="fade-right"  class="menu">
                 <ul>
@@ -74,7 +78,7 @@
                 <a class="download" target="_blank" href="{{ route('front.page.download')}}" title="Tải game">
                     <video id="intro" data-url="{{ asset('images/landing-2020-12/nut_tai_game_thanh_do.webm') }}"
                            preload="auto" loop muted autoplay playsinline>
-                        <source src="{{ staticUrl('images/landing-2020-12/nut_tai_game_thanh_do.webm') }}" type="video/mp4">
+                        <source src="{{ staticUrl('images/landing-2020-12/nut_tai_game_thanh_do.webm') }}" type="video/webm">
                     </video>
 
                 </a>
