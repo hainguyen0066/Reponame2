@@ -18,6 +18,7 @@
 @import '~aos/dist/aos.css';
 @import "banner";
 @import "giftcode";
+@import "popup-account";
 
 .f-left {
   float: left;
@@ -151,6 +152,8 @@ body {
 
       .icon-top {
         background-image: url("../images/landing-2020-12/icon-menuleft-top.png");
+        -webkit-background-size: cover;
+        background-size: cover;
         width: 29px;
         height: 219px;
         position: fixed;
@@ -161,6 +164,8 @@ body {
 
       .icon-bottom {
         background-image: url("../images/landing-2020-12/icon-menuleft-bottom.png");
+        -webkit-background-size: cover;
+        background-size: cover;
         width: 34px;
         height: 219px;
         position: fixed;
@@ -237,6 +242,7 @@ body {
     .down-and-giftcode {
       position: absolute;
       background-image: url("../images/landing-2020-12/khung-nen.png");
+      background-size: cover;
       width: 669px;
       height: 140px;
       // 709 453
@@ -245,6 +251,7 @@ body {
 
       a.download {
         background-image: url("../images/landing-2020-12/btn-taigame.jpg");
+        background-size: cover;
         position: absolute;
         width: 246px;
         height: 118px;
@@ -257,6 +264,7 @@ body {
 
       a.register {
         background-image: url("../images/landing-2020-12/giftcode-dangky.png");
+        background-size: cover;
         position: absolute;
         width: 317px;
         height: 120px;
@@ -265,7 +273,6 @@ body {
 
         &:hover {
           background-image: url("../images/landing-2020-12/giftcode-dangky-hover.png");
-
         }
       }
     }
@@ -276,7 +283,7 @@ body {
       background-repeat: no-repeat;
       width: 89%;
       height: 282px;
-      background-size: contain;
+      background-size: cover;
       max-width: 1162px;
       //// 709 453
       //left: 19.53%;
@@ -325,7 +332,8 @@ body {
 
   #section-02 {
     height: 496px;
-    background: url('../images/landing-2020-12/section-02-bg.jpg') center no-repeat;
+    background: url('../images/landing-2020-12/section-02-bg.jpg');
+    background-size: cover;
     position: relative;
     display: flex;
     justify-content: center;
@@ -337,7 +345,8 @@ body {
     }
 
     .event-title {
-      background: url('../images/landing-2020-12/section-02-title.png') no-repeat center center;
+      background: url('../images/landing-2020-12/section-02-title.png');
+      background-size: 100% 100%;
       width: 100%;
       height: 92px;
       margin-top: 30px;
@@ -350,10 +359,11 @@ body {
       width: 100%;
 
       a {
-        background-size: contain;
         background-repeat: no-repeat;
         width: 24%;
         height: 238px;
+        -webkit-background-size: cover;
+        background-size: cover;
       }
 
       a:nth-child(1) {
@@ -405,6 +415,7 @@ body {
 
       .update-title {
         background: url('../images/landing-2020-12/section-03-title.png') no-repeat center center;
+        background-size: 100% 100%;
         width: 100%;
         height: 92px;
         margin-bottom: 45px;
@@ -419,8 +430,7 @@ body {
         left: 20.5%;
 
         a {
-          background-size: contain;
-          background-repeat: no-repeat;
+          background-size: cover;
           width: 31.14%;
           height: 210px;
         }
@@ -442,7 +452,8 @@ body {
 
   #section-04 {
     width: 100%;
-    background: url('../images/landing-2020-12/section-04-bg.jpg') no-repeat top left;
+    background: url('../images/landing-2020-12/section-04-bg.jpg');
+    background-size: cover;
     position: relative;
     display: flex;
     justify-content: center;
@@ -451,6 +462,7 @@ body {
     .info-server {
       .info-title {
         background-image: url('../images/landing-2020-12/section-04-title.png');
+        background-size: cover;
         width: 331px;
         height: 38px;
         margin-top: 20px;
@@ -486,6 +498,7 @@ body {
               display: inline-block;
               vertical-align: middle;
               background: url('../images/landing-2020-12/section-04-icon.png') no-repeat top left;
+              background-size: cover;
               width: 16px;
               height: 22px;
               margin-right: 10px;
@@ -518,6 +531,7 @@ body {
 
     .join-btn {
       background-image: url('../images/landing-2020-12/btn-thamgiangay.png');
+      z-index: 11;
       background-size: contain;
       width: 228px;
       height: 62px;
@@ -539,12 +553,17 @@ body {
       left: 67.5%;
     }
   }
+
   #section-05 {
     height: 900px;
     background-image: url('../images/landing-2020-12/section-05-bg.jpg');
+    -webkit-background-size: cover;
+    background-size: cover;
     position: relative;
     .dinhhuong-phattrien {
-      background : url('../images/landing-2020-12/section-05-content.png') no-repeat center center;
+      background : url('../images/landing-2020-12/section-05-content.png');
+      -webkit-background-size: cover;
+      background-size: cover;
       width: 1165px;
       height: 811px;
       position: absolute;
@@ -561,32 +580,33 @@ body {
     flex-direction: column;
 
     .hotro-tanthu-title {
-      background: url('../images/landing-2020-12/section-06-title.png') no-repeat center center;
+      background: url('../images/landing-2020-12/section-06-title.png');
+      background-size: 100% 100%;
       height: 92px;
       margin: 30px 0;
     }
 
     .hotro-tanthu-content {
       display: flex;
-      padding: 0 80px;
+      padding-right: 80px;
 
       .gift-left {
-        background: url('../images/landing-2020-12/hotro-bg-lv10.png') no-repeat top left;
+        background: url('../images/landing-2020-12/hotro-bg-lv10.png');
+        background-size: 100% 100%;
         height: 631px;
-        position: relative;
 
         .gift-lv10 {
           position: absolute;
           font-size: 24px;
           font-weight: 700;
           top: 13%;
-          left: 22%;
+          left: 35%;
           text-transform: uppercase;
           color: #fff;
         }
 
         > ul {
-          width: 57%;
+          width: 80%;
           text-transform: uppercase;
           margin-left: 62px;
           margin-top: 190px;
@@ -604,7 +624,8 @@ body {
             .icon {
               display: inline-block;
               vertical-align: middle;
-              background: url(../images/landing-2020-12/icon-arr.png) no-repeat top left;
+              background: url(../images/landing-2020-12/icon-arr.png);
+              background-size: cover;
               width: 16px;
               height: 22px;
               margin-right: 10px;
@@ -620,11 +641,13 @@ body {
       .gift-right {
         height: 600px;
         position: absolute;
-        top: 14%;
-        left: 50%;
+        top: 12.5%;
+        left: 62%;
 
         .gift-lv {
           background-image: url("../images/landing-2020-12/hotro-tanthu-lv-bg.png");
+          -webkit-background-size: cover;
+          background-size: cover;
           width: 489px;
           height: 94px;
           position: relative;
@@ -662,6 +685,7 @@ body {
 
             .icon {
               background-image: url('../images/landing-2020-12/icon-arr.png');
+              background-size: cover;
               width: 16px;
               height: 22px;
               margin-right: 10px;
@@ -672,15 +696,18 @@ body {
     }
 
     .volam-2005 {
-      background: url('../images/landing-2020-12/trainghiem-volam2005-bg.jpg') no-repeat;
+      background: url('../images/landing-2020-12/trainghiem-volam2005-bg.jpg');
+      -webkit-background-size: cover;
+      background-size: cover;
       position: absolute;
-      bottom: 9.5%;
-      left: 21%;
+      top: 82%;
+      left: 30%;
       width: 950px;
       height: 110px;
 
       .btn-volam2005 {
-        background: url('../images/landing-2020-12/btn-toimuonthu.png') no-repeat;
+        background: url('../images/landing-2020-12/btn-toimuonthu.png');
+        background-size: cover;
         position: absolute;
         width: 270px;
         height: 91px;
@@ -696,14 +723,18 @@ body {
 
   #section-07 {
     height: 200px;
-    background: url('../images/landing-2020-12/section-07-bg.jpg') no-repeat;
+    background: url('../images/landing-2020-12/section-07-bg.jpg');
+    -webkit-background-size: cover;
+    background-size: cover;
     position: relative;
     display: flex;
     align-items: center;
     flex-direction: column;
 
     .character {
-      background: url('../images/landing-2020-12/character-02.png') no-repeat;
+      background: url('../images/landing-2020-12/character-02.png');
+      -webkit-background-size: cover;
+      background-size: cover;
       position: absolute;
       left: 14%;
       bottom: 0;
@@ -760,13 +791,15 @@ body {
         align-items: center;
 
         a {
-          background: url('../images/landing-2020-12/btn-lienhengay.png') no-repeat;
+          background: url('../images/landing-2020-12/btn-lienhengay.png');
+          background-size: 100% 100%;
           width: 169px;
           height: 40px;
           margin-left: 20px;
 
           &:hover {
-            background: url('../images/landing-2020-12/btn-lienhengay-hover.png') no-repeat;
+            background-image: url('../images/landing-2020-12/btn-lienhengay-hover.png');
+
           }
         }
       }

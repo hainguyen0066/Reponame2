@@ -7,7 +7,6 @@ $(document).ready(function () {
 
     $('body, section').addClass('ready');
 
-    $('.btn-giftcode').show(500);
     const section01 = $('#section-01');
     const menu01    = $('#menu01');
 
@@ -25,190 +24,309 @@ $(document).ready(function () {
 
     menu01.addClass('active');
 
-    $(window).scroll(function (e) {
-
-        const scrollTop = $(this).scrollTop() + 1;
-
-        console.log(scrollTop,section02.offset().top);
-        if(scrollTop < section01.offset().top || scrollTop  < section01.height() ) {
-            menu01.addClass('active');
-        } else {
-            menu01.removeClass('active');
-        }
-
-        if(scrollTop  >= section02.offset().top && scrollTop <=  section03.offset().top) {
-            menu02.addClass('active');
-        } else {
-            menu02.removeClass('active');
-        }
-
-        if(scrollTop >= section03.offset().top && scrollTop <=  section05.offset().top) {
-            menu03.addClass('active');
-        } else {
-            menu03.removeClass('active');
-        }
-
-        if(scrollTop >= section05.offset().top && scrollTop <=  section06.offset().top) {
-            menu04.addClass('active');
-        } else {
-            menu04.removeClass('active');
-        }
-
-        if(scrollTop >= section06.offset().top) {
-            menu05.addClass('active');
-        } else {
-            menu05.removeClass('active');
-        }
-
-    });
-
-    const SECTION1_HEIGHT = 1000;
-    const SECTION2_HEIGHT = 1000;
-    const SECTION3_HEIGHT = 1000;
-    const SECTION4_HEIGHT = 1000;
-    const SECTION5_HEIGHT = 800;
-    // function resize() {
-    //     let wwidth = $(window).width();
-    //     let ratio = wwidth / 1920;
-    //     $('.section-01').height(SECTION1_HEIGHT * ratio);
-    //     $('.section-02').height(SECTION2_HEIGHT * ratio);
-    //     $('.section-03').height(SECTION3_HEIGHT * ratio);
-    //     $('.section-04').height(SECTION4_HEIGHT * ratio);
-    //     $('.section-05').height(SECTION5_HEIGHT * ratio);
-    //     // $('body').height(BODY_HEIGHT * ratio);
-    //     $('.menu').css({
-    //         width: 495 * ratio,
-    //         height: 51 * ratio,
-    //     });
-    //     $('.section-01 .text').css({
-    //         width: 342 * ratio,
-    //         height: 109 * ratio,
-    //     });
-    //     $('.menu ul').css({
-    //         'padding-left': 95 * ratio,
-    //     });
-    //
-    //     $('.menu li').css({
-    //         width: 100 * ratio,
-    //     });
-    //
-    //     $('.menu li:eq(0)').css({
-    //         width: 115 * ratio,
-    //     });
-    //
-    //     $('.menu li a').css({
-    //         'font-size': 15 * ratio,
-    //         'line-height': `${30 * ratio }px`
-    //     });
-    //
-    //     $('.logo a').css({
-    //         width: 192 * ratio,
-    //         height: 192 * ratio
-    //     });
-    //     $('.download').css({
-    //         width: 270 * ratio,
-    //         height: 132 * ratio
-    //     });
-    //     $('.register-btn').css({
-    //         width: 215 * ratio,
-    //         height: 135 * ratio
-    //     });
-    //
-    //     $('.section-02 .char').css({
-    //         width: 533 * ratio,
-    //         height: 756 * ratio
-    //     });
-    //
-    //     $('.section-03 .event-1').css({
-    //         width: 287 * ratio,
-    //         height: 203 * ratio
-    //     });
-    //     $('.section-03 .event-2').css({
-    //         width: 319 * ratio,
-    //         height: 203 * ratio
-    //     });
-    //     $('.section-03 .event-3').css({
-    //         width: 287 * ratio,
-    //         height: 203 * ratio
-    //     });
-    //
-    //     $('.section-03 .char').css({
-    //         width: 557 * ratio,
-    //         height: 373 * ratio
-    //     });
-    //
-    //     $('.section-04 .btn-try').css({
-    //         width: 270 * ratio,
-    //         height: 90 * ratio
-    //     });
-    //
-    //     $('.btn-join').css({
-    //         width: 270 * ratio,
-    //         height: 86 * ratio,
-    //         'background-position': `0 -${ 6 * ratio}px`
-    //     });
-    //
-    //     $('.section-05 .frame-button').css({
-    //         width: 285 * ratio,
-    //         height: 359 * ratio
-    //     });
-    //
-    //     $('.section-05 .frame-button a span').css({
-    //         width: 117 * ratio,
-    //         height: 40 * ratio
-    //     });
-    //
-    //     $('footer *').css({
-    //         'font-size': 16 * ratio,
-    //         'line-height': `${25 * ratio}px`
-    //     });
-    //
-    //     $('.anchor').css({
-    //         width: 220 * ratio,
-    //         height: 241 * ratio
-    //     });
-    //
-    //     $('.icon-scroll').css({
-    //         width: 62 * ratio,
-    //         height: 86 * ratio
-    //     });
-    //     $('#goTop').css({
-    //         width: 59 * ratio,
-    //         height: 99 * ratio
-    //     });
-    //
-    //     $('.btn-giftcode').css({
-    //         width: 500 * ratio,
-    //         height: 400 * ratio
-    //     });
-    //     $('.btn-giftcode span').css({
-    //         "font-size": (24 * ratio) + 'px'
-    //     });
-    //
-    //     if (wwidth < 800) {
-    //         $('#popupGiftCode .popup-banner-container').css({
-    //             width: 480 * ratio,
-    //             height: 480 * ratio
-    //         });
-    //         $('#popupGiftCode .popup-banner-container a').css({
-    //             "font-size": (18 * ratio) + 'px'
-    //         });
-    //         $('#popupGiftCode .popup-close').css({
-    //             width: 30 * ratio,
-    //             height: 30 * ratio
-    //         });
+    // $(window).scroll(function (e) {
+    //     const scrollTop = $(this).scrollTop() + 1;
+    //     if(scrollTop < section01.offset().top || scrollTop  < section01.height() ) {
+    //         menu01.addClass('active');
+    //     } else {
+    //         menu01.removeClass('active');
     //     }
     //
-    //     $('.loader').hide();
-    //     $('.btn-giftcode').show(500);
-    // }
-    // resize();
-    // $(window).resize(function () {
-    //     resize();
+    //     if(scrollTop  >= section02.offset().top && scrollTop <=  section03.offset().top) {
+    //         menu02.addClass('active');
+    //     } else {
+    //         menu02.removeClass('active');
+    //     }
+    //
+    //     if(scrollTop >= section03.offset().top && scrollTop <=  section05.offset().top) {
+    //         menu03.addClass('active');
+    //     } else {
+    //         menu03.removeClass('active');
+    //     }
+    //
+    //     if(scrollTop >= section05.offset().top && scrollTop <=  section06.offset().top) {
+    //         menu04.addClass('active');
+    //     } else {
+    //         menu04.removeClass('active');
+    //     }
+    //
+    //     if(scrollTop >= section06.offset().top) {
+    //         menu05.addClass('active');
+    //     } else {
+    //         menu05.removeClass('active');
+    //     }
+    //
     // });
 
-    AOS.init();
-    setTimeout(() => $('.loader').hide(), 1000);
+    const SECTION1_HEIGHT = 1192;
+    const SECTION2_HEIGHT = 496;
+    const SECTION3_HEIGHT = 440;
+    const SECTION4_HEIGHT = 460;
+    const SECTION5_HEIGHT = 900;
+    const SECTION6_HEIGHT = 1000;
+    const SECTION7_HEIGHT = 202;
+    const section1 = $('#section-01');
+    const section2 = $('#section-02');
+    const section3 = $('#section-03');
+    const section4 = $('#section-04');
+    const section5 = $('#section-05');
+    const section6 = $('#section-06');
+    const section7 = $('#section-07');
+
+    function resize() {
+        let wwidth = $(window).width();
+        let ratio = wwidth / 1920;
+        section1.height(SECTION1_HEIGHT * ratio);
+        section2.height(SECTION2_HEIGHT * ratio);
+        section3.height(SECTION3_HEIGHT * ratio);
+        section4.height(SECTION4_HEIGHT * ratio);
+        section5.height(SECTION5_HEIGHT * ratio);
+        section6.height(SECTION6_HEIGHT * ratio);
+        section7.height(SECTION7_HEIGHT * ratio);
+
+        $('body .container').css({
+            width: 1170 * ratio
+        })
+        // section 1
+        section1.find('.menu').css({
+            width: 495 * ratio,
+            height: 51 * ratio,
+        });
+        section1.find('.menu ul li').css({
+            width: 115 * ratio,
+        });
+        section1.find('.menu ul li a').css({
+            'font-size': (14 * ratio) + 'px',
+        });
+
+        section1.find('.icon-top').css({
+            width: 29 * ratio,
+            height: 219 * ratio,
+        });
+        section1.find('.icon-bottom').css({
+            width: 34 * ratio,
+            height: 219 * ratio,
+        });
+
+        section1.find('.trang-chu-number').css({
+            width: 50 * ratio,
+            height: 50 * ratio,
+            'line-height': (50 * ratio) + 'px'
+        });
+
+        section1.find('.logo a').css({
+            width: 192 * ratio,
+            height: 170 * ratio,
+        });
+        section1.find('.text').css({
+            width: 632 * ratio,
+            height: 273 * ratio,
+        });
+        section1.find('.logo-congthanhchien').css({
+            width: 141 * ratio,
+            height: 121 * ratio,
+        });
+
+        section1.find('.text-server-moi').css({
+            width: 629 * ratio,
+            height: 119 * ratio,
+        });
+
+        section1.find('.down-and-giftcode').css({
+            width: 669 * ratio,
+            height: 140 * ratio,
+        });
+
+        section1.find('a.download').css({
+            width: 246 * ratio,
+            height: 118 * ratio,
+        });
+
+        section1.find('a.register').css({
+            width: 317 * ratio,
+            height: 120 * ratio,
+        });
+
+        section1.find('.update-special').css({
+            'max-width': (1162 * ratio) + 'px',
+            height: 282 * ratio,
+        });
+
+        section1.find('.menu').css({
+            width: 494 * ratio,
+            height: 51 * ratio,
+        });
+
+        // section 2
+        section2.find('.event-title').css({
+            height: 92 * ratio,
+            'margin-top': (30 * ratio) + 'px',
+            'margin-bottom': (65 * ratio) + 'px',
+        });
+        section2.find('.event-content a').css({
+            height: 238 * ratio,
+        });
+        section2.find('.btn-join').css({
+            width: 270 * ratio,
+            height: 86 * ratio,
+        });
+
+        // section 3
+        section3.find('.update-title').css({
+            height: 92 * ratio,
+            'margin-bottom': (45 * ratio) + 'px',
+            'margin-top': (30 * ratio) + 'px',
+        });
+        section3.find('.update-content').css({
+            width: 915 * ratio,
+        });
+        section3.find('.update-content a').css({
+            height: 210 * ratio,
+        });
+
+        // section 4
+        section4.css({
+            'padding-bottom': (40 * ratio) + 'px',
+        });
+        section4.find('.info-server .info-title').css({
+            width: 331 * ratio,
+            height: 38 * ratio,
+            'margin-top': 20 * ratio,
+        });
+        section4.find('.info-server .info-content').css({
+            'padding-top': (25 * ratio) + 'px',
+            'padding-left': (60 * ratio) + 'px',
+        });
+        section4.find('.info-server .info-content ul').css({
+            width: 4350 * ratio,
+        });
+        section4.find('.info-server .info-content ul:first-child').css({
+            'margin-right': 30 * ratio,
+        });
+        section4.find('.info-server .info-content ul li').css({
+            'font-size': (18 * ratio) + 'px',
+        });
+        section4.find('.info-server .info-content ul li .icon').css({
+            width: 16 * ratio,
+            height: 22 * ratio,
+            'margin-right': 10 * ratio,
+        });
+
+        // section 5
+        section5.find('.dinhhuong-phattrien').css({
+            width: 1165 * ratio,
+            height: 811 * ratio,
+        });
+
+        // section 6
+        section6.find('.hotro-tanthu-title').css({
+            height: 92 * ratio,
+            'margin-top': (30 * ratio) + 'px',
+            'margin-bottom': (30 * ratio) + 'px',
+        });
+        section6.find('.hotro-tanthu-content').css({
+            'padding-right': (80 * ratio) + 'px',
+        });
+        section6.find('.gift-left').css({
+            height: 631 * ratio,
+        });
+        section6.find('.gift-lv10').css({
+            'font-size': (24 * ratio) + 'px',
+        });
+        section6.find('.gift-left > ul').css({
+            'margin-left': (62 * ratio) + 'px',
+            'margin-top': (190 * ratio) + 'px'
+        });
+        section6.find('.gift-left > ul li p').css({
+            'font-size': (22 * ratio) + 'px',
+        });
+        section6.find('.gift-left > ul li .icon').css({
+            width: 16 * ratio,
+            height: 22 * ratio,
+            'margin-right': (10 * ratio) + 'px'
+        });
+        section6.find('.gift-right').css({
+            height: 600 * ratio,
+        });
+        section6.find('.gift-right .gift-lv').css({
+            width: 489 * ratio,
+            height: 94 * ratio,
+            'margin-top': 16 * ratio
+        });
+
+        section6.find('.gift-right .gift-lv .gift-lv-title').css({
+            'font-size': 16 * ratio
+        });
+
+        section6.find('.gift-right .gift-lv .gift-lv-content').css({
+            'padding-left': 40 * ratio,
+            'padding-top': 8 * ratio
+        });
+        section6.find('.gift-right .gift-lv .gift-lv-content > div:first-child').css({
+            'margin-right': 30 * ratio
+        });
+        section6.find('.gift-right .gift-lv .gift-lv-content p').css({
+            'font-size': 18 * ratio
+        });
+        section6.find('.gift-right .gift-lv .gift-lv-content .icon').css({
+            width: 16 * ratio,
+            height: 22 * ratio,
+            'margin-right': 10 * ratio
+        });
+        section6.find('.gift-right .gift-lv .gift-lv-content .icon').css({
+            width: 16 * ratio,
+            height: 22 * ratio,
+            'margin-right': 10 * ratio
+        });
+        section6.find('.hotro-tanthu-content .gift-left > ul li + li').css({
+            'margin-top': 30 * ratio
+        });
+        section6.find('.volam-2005').css({
+            width: 950 * ratio,
+            height: 110 * ratio,
+        });
+        section6.find('.volam-2005 .btn-volam2005').css({
+            width: 270 * ratio,
+            height: 91 * ratio,
+        });
+
+        // section 7
+        section7.find('.character').css({
+            width: 340 * ratio,
+            height: 300 * ratio,
+        });
+        section7.find('.info-support').css({
+            'margin-left': 400 * ratio,
+            'padding-top': 30 * ratio,
+        });
+        section7.find('.info-support .text span').css({
+            'font-size': 36 * ratio,
+        });
+        section7.find('.info-support .phone').css({
+            'margin-top': 20 * ratio,
+            'margin-bottom': 20 * ratio,
+        });
+        section7.find('.info-support .phone span').css({
+            'font-size': 36 * ratio,
+        });
+        section7.find('.info-support .phone span:first-child').css({
+            'margin-right': 40 * ratio,
+            'padding-right': 40 * ratio,
+        });
+        section7.find('.question').css({
+            'font-size': 22 * ratio
+        });
+
+        section7.find('.question a').css({
+            width: 169 * ratio,
+            height: 30 * ratio,
+            'margin-left': 20 * ratio,
+        });
+    }
+    resize();
+    $(window).resize(function () {
+        resize();
+    });
 
     AOS.init();
 

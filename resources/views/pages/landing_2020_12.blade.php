@@ -17,50 +17,47 @@
         @endslot
     @endcomponent
     <link rel="stylesheet" href="{{ staticUrl('css/landing-2020-12.css', true) }}">
-    <link rel="stylesheet" href="{{ staticUrl('css/account.css', true) }}">
     @include('t2g_common::schemas.home')
 </head>
 <body>
-    @include('partials.btn_giftcode')
-    <div class="loader"></div>
     <div class="wrapper">
         <section id="section-01" >
-            <div  class="menu-left">
-                <div class="icon-top"></div>
-                <div class="menu-left-content">
-                    <div class="trang-chu">
-                        <a href="#section-01">
-                            <div id="menu01" class="trang-chu-number"><span>01</span></div>
-                            <div class="number-content">trang chủ</div>
-                        </a>
-                    </div>
-                    <div class="su-kien">
-                        <a href="#section-02">
-                            <div id="menu02" class="trang-chu-number"><span>02</span></div>
-                            <div class="number-content">sự kiện</div>
-                        </a>
-                    </div>
-                    <div class="dac-diem">
-                        <a href="#section-03">
-                            <div id="menu03" class="trang-chu-number"><span>03</span></div>
-                            <div class="number-content">đặc sắc</div>
-                        </a>
-                    </div>
-                    <div class="dinh-huong">
-                        <a href="#section-05">
-                            <div id="menu04" class="trang-chu-number"><span>04</span></div>
-                            <div class="number-content">định hướng</div>
-                        </a>
-                    </div>
-                    <div class="ho-tro">
-                        <a href="#section-06">
-                            <div id="menu05" class="trang-chu-number"><span>05</span></div>
-                            <div class="number-content">hỗ trợ</div>
-                        </a>
-                    </div>
-                </div>
-                <div class="icon-bottom"></div>
-            </div>
+{{--            <div  class="menu-left">--}}
+{{--                <div class="icon-top"></div>--}}
+{{--                <div class="menu-left-content">--}}
+{{--                    <div class="trang-chu">--}}
+{{--                        <a href="#section-01">--}}
+{{--                            <div id="menu01" class="trang-chu-number"><span>01</span></div>--}}
+{{--                            <div class="number-content">trang chủ</div>--}}
+{{--                        </a>--}}
+{{--                    </div>--}}
+{{--                    <div class="su-kien">--}}
+{{--                        <a href="#section-02">--}}
+{{--                            <div id="menu02" class="trang-chu-number"><span>02</span></div>--}}
+{{--                            <div class="number-content">sự kiện</div>--}}
+{{--                        </a>--}}
+{{--                    </div>--}}
+{{--                    <div class="dac-diem">--}}
+{{--                        <a href="#section-03">--}}
+{{--                            <div id="menu03" class="trang-chu-number"><span>03</span></div>--}}
+{{--                            <div class="number-content">đặc sắc</div>--}}
+{{--                        </a>--}}
+{{--                    </div>--}}
+{{--                    <div class="dinh-huong">--}}
+{{--                        <a href="#section-05">--}}
+{{--                            <div id="menu04" class="trang-chu-number"><span>04</span></div>--}}
+{{--                            <div class="number-content">định hướng</div>--}}
+{{--                        </a>--}}
+{{--                    </div>--}}
+{{--                    <div class="ho-tro">--}}
+{{--                        <a href="#section-06">--}}
+{{--                            <div id="menu05" class="trang-chu-number"><span>05</span></div>--}}
+{{--                            <div class="number-content">hỗ trợ</div>--}}
+{{--                        </a>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--                <div class="icon-bottom"></div>--}}
+{{--            </div>--}}
             <div class="logo"><a href="{{ route('front.home')}}"></a></div>
             <div data-aos="fade-right"  class="menu">
                 <ul>
@@ -70,12 +67,18 @@
                 </ul>
             </div>
             <a  class="register-btn {{ $user ? 'logged' : 'account-register' }}" title="Đăng ký"></a>
-            <div data-aos="fade-right"  class="text"></div>
-            <div data-aos="fade-right"  class="logo-congthanhchien"></div>
-            <div data-aos="fade-right"  class="text-server-moi"></div>
-            <div data-aos="fade-left"  class="down-and-giftcode">
-                <a class="download" target="_blank" href="{{ route('front.page.download')}}" title="Tải game"></a>
-                <a class="register account-register" href="javascript:;" title="Nhận Code"></a>
+            <div data-aos="fade-right" data-aos-delay="1000"  class="text"></div>
+            <div data-aos="fade-right" data-aos-delay="1500" class="logo-congthanhchien"></div>
+            <div data-aos="fade-right" data-aos-delay="2000" class="text-server-moi"></div>
+            <div data-aos="fade-left" data-aos-delay="2000" class="down-and-giftcode">
+                <a class="download" target="_blank" href="{{ route('front.page.download')}}" title="Tải game">
+                    <video id="intro" data-url="{{ asset('images/landing-2020-12/nut_tai_game_thanh_do.webm') }}"
+                           preload="auto" loop muted autoplay playsinline>
+                        <source src="{{ staticUrl('images/landing-2020-12/nut_tai_game_thanh_do.webm') }}" type="video/mp4">
+                    </video>
+
+                </a>
+                <a class="register account-register" href="javascript:" title="Nhận Code"></a>
             </div>
             <div data-aos="zoom-in-left" class="update-special"></div>
         </section>
@@ -84,7 +87,7 @@
                 <div class="event-title"></div>
                 <div class="event-content">
                     <a data-aos="zoom-out-down" data-aos-delay="" href="{{ route('front.details.post', ['su-kien','vo-lam-tranh-ba'])}}" title="Võ Lâm Tranh Bá"></a>
-                    <a data-aos="zoom-out-down" href="{{ route('front.details.post', ['su-kien','su-kien-xung-ba-tong-kim']) }}" data-aos-delay="300" title="Tống Kim Xưng Bá""></a>
+                    <a data-aos="zoom-out-down" href="{{ route('front.details.post', ['su-kien','su-kien-xung-ba-tong-kim']) }}" data-aos-delay="300" title="Tống Kim Xưng Bá"></a>
                     <a data-aos="zoom-out-down" href="{{ route('front.details.post', ['su-kien','tuyet-dinh-su-quan']) }}" data-aos-delay="600" title="Tuyệt Đỉnh Sứ Quân"></a>
                     <a data-aos="zoom-out-down" href="{{ route('front.details.post', ['tong-hop','su-kien-anh-hung-thiep']) }}" data-aos-delay="900" title="Anh Hùng Thiếp"></a>
                 </div>
@@ -168,7 +171,7 @@
                         <div class="gift-lv">
                             <div class="gift-lv-title">thưởng lv40</div>
                             <div class="gift-lv-content">
-                                <span class="icon"></span><p>nón,nb,nhẫn kim phong</p>
+                                <span class="icon"></span><p>nón, ngọc bội, nhẫn kim phong</p>
                             </div>
                         </div>
                         <div class="gift-lv">
@@ -194,7 +197,7 @@
                     </div>
                 </div>
                 <div class="volam-2005">
-                    <a href="{{ !$user ? route('front.page.download') : 'javascript:;' }}" data-aos="zoom-out-down" class="btn-volam2005" target="_blank" href="#" title="Tôi Muốn Thử"></a>
+                    <a href="{{ !$user ? route('front.page.download') : 'javascript:;' }}" data-aos="zoom-out-down" class="btn-volam2005" target="_blank" title="Tôi Muốn Thử"></a>
                 </div>
             </div>
         </section>
@@ -203,7 +206,7 @@
             <div class="info-support">
                 <p class="text"><span>hỗ trợ chăm sóc </span><span class="text-yellow">nhiệt tình thân thiện</span></p>
                 <p class="phone"><span>0898 022 151</span><span>0762 953 004</span></p>
-                <p class="question">vẫn còn thắc mắc đặt câu hỏi <a data-aos="zoom-out-down" class="btn-support"href="{{ config('site.fb.page_url') }}" target="_blank"></a></p>
+                <p class="question">vẫn còn thắc mắc đặt câu hỏi <a data-aos="zoom-out-down" class="btn-support" href="{{ config('site.fb.page_url') }}" target="_blank"></a></p>
             </div>
         </section>
         <footer>
@@ -217,10 +220,9 @@
 @if(!$user)
     @include('modal.account')
 @endif
-@include('modal.giftcode')
 @section('js')
     <script>
-        window.user_id = '{{ \Auth::check() ? \Auth::user()->id : '' }}';
+        window.user_id = '{{ $user ? $user->id : '' }}';
     </script>
     <script type="text/javascript" src="{{ staticUrl('js/landing-2020-12.js', true) }}"></script>
 @show
