@@ -20,6 +20,8 @@
     @include('t2g_common::schemas.home')
 </head>
 <body>
+    <div class="loader"></div>
+    @include('partials.btn_giftcode')
     <div class="wrapper">
         <section id="section-01" >
             <div class="menu-left">
@@ -82,7 +84,7 @@
                     </video>
 
                 </a>
-                <a class="register account-register" href="javascript:" title="Nhận Code"></a>
+                <a class="register account-register {{ $user ? 'logged' : '' }}" href="javascript:" title="Nhận Code"></a>
             </div>
             <div data-aos="zoom-in-left" class="update-special"></div>
         </section>
@@ -137,7 +139,7 @@
         </section>
         <div class="join-now">
             <div class="join-text">phù hợp với người có ít thời gian</div>
-            <a data-aos="zoom-out-down" class="join-btn" href="{{ !$user ? route('front.page.download') : 'javascript:;' }}" title="Tham Gia Ngay"></a>
+            <a data-aos="zoom-out-down" class="join-btn" href="{{ route('front.page.download') }}" title="Tham Gia Ngay"></a>
             <div data-aos="fade-down-left" class="character"></div>
         </div>
         <section id="section-05">
@@ -201,7 +203,7 @@
                     </div>
                 </div>
                 <div class="volam-2005">
-                    <a href="{{ !$user ? route('front.page.download') : 'javascript:;' }}" data-aos="zoom-out-down" class="btn-volam2005" target="_blank" title="Tôi Muốn Thử"></a>
+                    <a href="{{ route('front.page.download') }}" data-aos="zoom-out-down" class="btn-volam2005" target="_blank" title="Tôi Muốn Thử"></a>
                 </div>
             </div>
         </section>
@@ -224,6 +226,7 @@
 @if(!$user)
     @include('modal.account')
 @endif
+    @include('modal.giftcode')
 @section('js')
     <script>
         window.user_id = '{{ $user ? $user->id : '' }}';

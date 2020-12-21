@@ -122,11 +122,11 @@ $(document).ready(function () {
             width: 105 * ratio,
         });
         section1.find('.trang-chu-number').css({
-            width: 50 * ratio,
-            height: 50 * ratio,
-            'line-height': (50 * ratio) + 'px',
-            'margin-top': 10 * ratio,
-            'margin-bottom': 10 * ratio,
+            width: 40 * ratio,
+            height: 40 * ratio,
+            'line-height': (40 * ratio) + 'px',
+            'margin-top': 8 / ratio,
+            'margin-bottom': 8 / ratio,
             border: (3 * ratio) + 'px solid #d58f02'
         });
         section1.find('.number-content').css({
@@ -270,6 +270,13 @@ $(document).ready(function () {
         section6.find('.gift-right').css({
             height: 600 * ratio,
         });
+
+        $('.join-btn').css({
+            width: 228 * ratio,
+            height: 62 * ratio,
+            'margin-left': 20 * ratio,
+        });
+
         section6.find('.gift-right .gift-lv').css({
             width: 489 * ratio,
             height: 94 * ratio,
@@ -344,6 +351,31 @@ $(document).ready(function () {
             height: 30 * ratio,
             'margin-left': 20 * ratio,
         });
+
+        $('.btn-giftcode').css({
+            width: 500 * ratio,
+            height: 400 * ratio
+        });
+        $('.btn-giftcode span').css({
+            "font-size": (24 * ratio) + 'px'
+        });
+
+        if (wwidth < 800) {
+            $('#popupGiftCode .popup-banner-container').css({
+                width: 480 * ratio,
+                height: 480 * ratio
+            });
+            $('#popupGiftCode .popup-banner-container a').css({
+                "font-size": (18 * ratio) + 'px'
+            });
+            $('#popupGiftCode .popup-close').css({
+                width: 30 * ratio,
+                height: 30 * ratio
+            });
+        }
+
+        $('.loader').hide();
+        $('.btn-giftcode').show(500);
     }
     resize();
     $(window).resize(function () {
@@ -351,6 +383,7 @@ $(document).ready(function () {
     });
 
     AOS.init();
+    setTimeout(() => $('.loader').hide(), 1000);
 
     $('.logged').click(() => {
         $('#popupGiftCode').show();
