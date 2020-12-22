@@ -87,7 +87,7 @@ body {
     position: relative;
   }
 
-  #intro {
+  .video-bg {
     position: relative;
     left: 50%;
     transform: translateX(-50%);
@@ -101,7 +101,6 @@ body {
     background-position: center center;
     background-repeat: no-repeat;
     max-width: 100%;
-    background-image: url("../images/landing-2020-12/section-01-bg.jpg");
 
     .menu-left {
       .active {
@@ -203,6 +202,7 @@ body {
       height: 170px;
       position: absolute;
       left: 26.91%;
+      z-index: 5;
     }
 
     .text {
@@ -271,7 +271,13 @@ body {
         left: 47%;
 
         &:hover {
-          background-image: url("../images/landing-2020-12/giftcode-dangky-hover.png");
+          //background-image: url("../images/landing-2020-12/giftcode-dangky-hover.png");
+        }
+        video {
+          width: 64%;
+          transform: translateX(0);
+          left: 40%;
+          top: 44%;
         }
       }
     }
@@ -290,6 +296,12 @@ body {
       top: 59%;
       left: 50%;
       transform: translate(-50%, 50%);
+    }
+    .characters-f1 {
+      position: absolute;
+      width: 40%;
+      top: 3%;
+      left: 73%;
     }
 
     .menu {

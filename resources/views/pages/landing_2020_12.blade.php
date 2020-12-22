@@ -72,20 +72,31 @@
                     <li><a href="{{ config('site.fb.group_url')}}" target="_blank">Group</a></li>
                 </ul>
             </div>
+            <video id="intro" class="video-bg" preload="auto" loop muted autoplay playsinline
+                poster="{{ staticUrl('images/landing-2020-12/section-01-bg.jpg') }}">
+                <source src="{{ staticUrl('images/landing-2020-12/bg_frame1.mp4') }}" type="video/mp4">
+            </video>
             <a  class="register-btn {{ $user ? 'logged' : 'account-register' }}" title="Đăng ký"></a>
             <div data-aos="fade-right" data-aos-delay="1000"  class="text"></div>
             <div data-aos="fade-right" data-aos-delay="1500" class="logo-congthanhchien"></div>
             <div data-aos="fade-right" data-aos-delay="2000" class="text-server-moi"></div>
             <div data-aos="fade-left" data-aos-delay="2000" class="down-and-giftcode">
                 <a class="download" target="_blank" href="{{ route('front.page.download')}}" title="Tải game">
-                    <video id="intro" data-url="{{ asset('images/landing-2020-12/nut_tai_game_thanh_do.webm') }}"
+                    <video class="video-bg" data-url="{{ staticUrl('images/landing-2020-12/nut_tai_game_thanh_do.webm') }}"
                            preload="auto" loop muted autoplay playsinline>
                         <source src="{{ staticUrl('images/landing-2020-12/nut_tai_game_thanh_do.webm') }}" type="video/webm">
                     </video>
-
                 </a>
-                <a class="register account-register {{ $user ? 'logged' : '' }}" href="javascript:" title="Nhận Code"></a>
+
+                <a class="register account-register {{ $user ? 'logged' : '' }}" href="javascript:" title="Nhận Code">
+                    <video class="video-bg" preload="auto" loop muted autoplay playsinline>
+                        <source src="{{ staticUrl('images/landing-2020-12/nut_dang_ky.webm') }}" type="video/webm">
+                    </video>
+                </a>
             </div>
+            <video class="video-bg characters-f1" preload="auto" loop muted autoplay playsinline>
+                <source src="{{ staticUrl('images/landing-2020-12/nhan_vat_frame1.webm') }}" type="video/webm">
+            </video>
             <div data-aos="zoom-in-left" class="update-special"></div>
         </section>
         <section id="section-02">
