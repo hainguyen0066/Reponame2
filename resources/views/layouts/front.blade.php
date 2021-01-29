@@ -42,8 +42,7 @@
     @include('modal.account')
 @endif
 @yield('banner')
-@include('partials.btn_giftcode')
-@include('modal.giftcode')
+@include('modal.caudoi')
 @section('js')
     @include('partials.scripts')
 @show
