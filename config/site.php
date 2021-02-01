@@ -14,5 +14,6 @@ return [
     'gtm' => [
         'id'        => 'GTM-KSZGPB5',
         'config_id' => 'GTM-KSZGPB5',
-    ]
+    ],
+    'landing_page_enabled' => false
 ];
