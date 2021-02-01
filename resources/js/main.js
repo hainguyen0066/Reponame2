@@ -89,6 +89,11 @@ $(document).ready(function(){
         $('.btn-giftcode span').css({
             "font-size": (18 * ratio) + 'px'
         });
+        $('.caudoi').css({
+            "background-size" : 'contain',
+            'height'          : (407 * ratio) + 'px',
+            'width'           : (150 * ratio) + 'px'
+        });
         setTimeout(() => $('.btn-giftcode').show(500), 1000);
     }
     resize();

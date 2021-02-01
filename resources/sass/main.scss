@@ -33,7 +33,7 @@ a {
 .wrapper {
   width: 100%;
   overflow: hidden;
-  background: url('../images/bg-header.jpg') top center no-repeat, url('../images/bg-footer.png') bottom center repeat-x;
+  background: url('../images/BG--Tet-2021.jpg') top center no-repeat, url('../images/bg-footer.png') bottom center repeat-x;
   min-height: 2000px;
   position: relative;
   padding-bottom: 10px;
@@ -112,7 +112,6 @@ a {
     top: 0;
     left: 50%;
     transform: translateX(-50%);
-    max-width: 100%;
     width: 1920px;
     &.active {
       display: initial;
@@ -1419,5 +1418,29 @@ a {
   span {
     font-size: 18px;
     right: 13.5%;
+  }
+}
+.caudoi {
+  width: 150px;
+  height: 407px;
+  position: fixed;
+  top: 0;
+  z-index: 30;
+  &.left {
+    left: 0;
+    background: url('../images/caudoi-tet2021-trai.png') no-repeat;
+  }
+  &.right {
+    right: 0;
+    background: url('../images/caudoi-tet2021-phai.png') no-repeat;
+  }
+}
+
+@media screen and (max-width: 1024px){
+  .header #intro {
+    max-width: 100%;
+  }
+  .top-menu {
+    padding: 0 40px;
   }
 }
