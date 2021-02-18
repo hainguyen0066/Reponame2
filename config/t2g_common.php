@@ -80,6 +80,11 @@ return [
             'multiple_pc'    => env('DISCORD_MULTIPLE_PC_WEBHOOK_URL'),
             'multiple_login' => env('DISCORD_MULTIPLE_LOGIN_WEBHOOK_URL'),
             'kimyen'         => env('DISCORD_KIMYEN_WEBHOOK_URL'),
+            'monitor_gold_trading'  => env('DISCORD_MONITOR_GOLD_TRADING_WEBHOOK_URL'),
+            'monitor_gold'          => env('DISCORD_MONITOR_GOLD_WEBHOOK_URL'),
+            'monitor_gold_gm'       => env('DISCORD_MONITOR_GOLD_GM_WEBHOOK_URL'),
+            'monitor_money_trading' => env('DISCORD_MONITOR_MONEY_TRADING_WEBHOOK_URL'),
+            'monitor_shop'          => env('DISCORD_MONITOR_SHOP_WEBHOOK_URL'),
         ],
     ],
     'kibana' => [
