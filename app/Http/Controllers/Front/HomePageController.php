@@ -41,13 +41,15 @@ class HomePageController extends BaseFrontController
             'featuredPosts'  => $featuredPosts,
             'slides'         => $slides,
         ];
-
-        $bannerCookie = 'HomeBanner' . $banner->getKey();
-        $bannerCounterCookie = request()->cookie($bannerCookie, 0);
-        if ($banner && $bannerCounterCookie < self::MAX_BANNER_SHOWING_TIMES) {
-            $newBannerCookie =  new Cookie($bannerCookie, $bannerCounterCookie + 1, time() + 24 * 3600 * 3);
-            $data['banner'] = $banner;
+        if ($banner) {
+            $bannerCookie = 'HomeBanner' . $banner->getKey();
+            $bannerCounterCookie = request()->cookie($bannerCookie, 0);
+            if ($banner && $bannerCounterCookie < self::MAX_BANNER_SHOWING_TIMES) {
+                $newBannerCookie =  new Cookie($bannerCookie, $bannerCounterCookie + 1, time() + 24 * 3600 * 3);
+                $data['banner'] = $banner;
+            }
         }
+
         $response = response(view('pages.home', $data));
         if (!empty($newBannerCookie)) {
             $response = $response->withCookie($newBannerCookie);
