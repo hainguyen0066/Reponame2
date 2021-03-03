@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Front;
 
 use T2G\Common\Controllers\Front\BaseFrontController;
 use T2G\Common\Repository\PostRepository;
-use T2G\Common\Repository\SliderRepository;
 
 /**
  * Class WebLauncherController
@@ -13,10 +12,10 @@ use T2G\Common\Repository\SliderRepository;
  */
 class WebLauncherController extends BaseFrontController
 {
-    const WEBLAUNCHER_LIMIT_POSTS = 8;
+    const WEBLAUNCHER_LIMIT_POSTS   = 8;
     const WEBLAUNCHER_LIMIT_SLIDERS = 4;
 
-    public function index(PostRepository $postRepository, SliderRepository $sliderRepository)
+    public function index(PostRepository $postRepository)
     {
         $postsLimit = self::WEBLAUNCHER_LIMIT_POSTS;
         $posts      = $postRepository->getHomePostsByCategory('', $postsLimit);
@@ -32,7 +31,7 @@ class WebLauncherController extends BaseFrontController
         $slides       = $postRepository->getHomePostsByCategory('', $slidersLimit);
 
         return view('pages.web_launcher_slider_2021', [
-            'slides'         => $slides
+            'slides' => $slides
         ]);
     }
 }
