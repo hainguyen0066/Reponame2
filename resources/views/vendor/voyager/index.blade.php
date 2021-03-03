@@ -5,9 +5,9 @@
         @include('voyager::alerts')
         @include('voyager::dimmers')
         <div class="t2g-widgets row">
-            {!! $widgetUser !!}
-            {!! $widgetPayment !!}
-            {!! $widgetCCU !!}
+            {!! $widgetUser ?? '' !!}
+            {!! $widgetPayment ?? ''!!}
+            {!! $widgetCCU ?? ''!!}
             <div class="clearfix"></div>
         </div>
         @if(in_array(\Auth::id(), [1, 2, 3, 256, 5292]))

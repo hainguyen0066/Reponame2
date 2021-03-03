@@ -26,6 +26,10 @@ Route::group(['as' => 'front.'], function() {
         'uses' => 'WebLauncherController@index',
         'as'   => 'web_laucher'
     ]);
+    Route::get('/web-launcher-slider',[
+        'uses' => 'WebLauncherController@showSlider',
+        'as'   => 'web_laucher'
+    ]);
 
 
 //     BEGIN CONTENT ROUTES
