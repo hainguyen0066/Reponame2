@@ -1,9 +1,7 @@
-require('./jquery-3.5.1.min');
-require('./slick.min');
-
 try {
     window.$ = window.jQuery = require('jquery');
 } catch (e) {}
+require('./slick.min');
 
 $(document).ready(() => {
     $('.slider').slick({
