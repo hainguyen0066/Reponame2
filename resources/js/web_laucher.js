@@ -1,5 +1,6 @@
-require('./jquery-3.5.1.min');
-require('./bootstrap');
+try {
+    window.$ = window.jQuery = require('jquery');
+} catch (e) {}
 require('./slick.min');
 
 $(document).ready(() => {
