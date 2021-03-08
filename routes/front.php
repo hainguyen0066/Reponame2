@@ -24,7 +24,11 @@ Route::group(['as' => 'front.'], function() {
     ]);
     Route::get('/web-launcher',[
         'uses' => 'WebLauncherController@index',
-        'as'   => 'web_laucher'
+        'as'   => 'web_launcher_news'
+    ]);
+    Route::get('/web-launcher-slider',[
+        'uses' => 'WebLauncherController@showSlider',
+        'as'   => 'web_launcher_slider'
     ]);
 
 
