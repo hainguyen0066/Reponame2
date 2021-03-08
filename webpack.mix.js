@@ -20,10 +20,12 @@ mix.copyDirectory('resources/images', 'public/images')
     // .js('resources/js/admin/index.js', 'public/js/admin/index.js')
     .js('resources/js/auth.js', 'public/js')
     .js('resources/js/account.js', 'public/js')
+    .js('resources/js/web_laucher.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css/app.css')
     .sass('resources/sass/auth.scss', 'public/css/auth.css')
     .sass('resources/sass/popup-account.scss', 'public/css/account.css')
     .sass('resources/sass/web_launcher.scss', 'public/css/web_launcher.css')
+    .sass('resources/sass/web_launcher_2021.scss', 'public/css/web_launcher_2021.css')
     .options({
         processCssUrls: false
     })

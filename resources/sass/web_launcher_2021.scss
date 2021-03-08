@@ -1,0 +1,114 @@
+@import "slick-theme";
+@import "slick";
+
+body,ul {
+  padding: 0px;
+  margin: 0px;
+  list-style: none;
+}
+body {
+  margin: 0px;font: 13px/20px Roboto-Regular,Arial,Verdana,sans-serif
+}
+a {
+  text-decoration: none;
+  outline: 0;
+  cursor: pointer;
+}
+
+img {
+  max-width: 100%;
+}
+.wrapper {
+  width:354px;
+  overflow:hidden;
+  background-color: #101828;
+  padding: 11px 10px;
+  box-sizing: border-box;
+  li {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px dashed #273042;
+    padding-bottom: 5px;
+    & + li {
+      margin-top: 5px;
+    }
+    &:last-child {
+      border: none;
+      padding-bottom: 0;
+    }
+    div.wrapper-icons {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    a {
+      color: #ffffff;
+      &:hover {
+        color: #ef8d02;
+        font-weight: 400;
+      }
+      &:visited {
+          color: #ef8d02;
+          font-weight: 400;
+      }
+    }
+  }
+}
+
+.icon-laucher {
+  display: block;
+  width: 13px;
+  height: 11px;
+  background: url("../images/icon-laucher.png");
+  margin-right: 7px;
+}
+
+.time {
+  color: #455575;
+  font-size: 13px;
+}
+//============ CUSTOM SLIDER ===============//
+
+.wrapper-slider {
+  width: 440px;
+  height: 270px;
+}
+
+.image-slider {
+}
+
+.image-slider img {
+  height: 270px;
+  border-radius:5px;
+  -webkit-border-radius:5px;
+  -moz-border-radius:5px;
+}
+.slick-dots {
+  bottom: -33px;
+  left: 160px;
+}
+
+.slick-dots li {
+  margin: 0 1px;
+}
+
+.slick-dots li button:before {
+  opacity: 1;
+  top: -35px;
+  font-size: 20px;
+  color: #090e18;
+  content: "\275A";
+  transform: rotate(90deg);
+}
+
+.slick-dots li.slick-active button:before {
+  color: #d63700;
+  opacity: 1;
+}
+
+.slick-dotted.slick-slider {
+  margin-bottom: 0;
+  overflow: hidden;
+}
+
+
