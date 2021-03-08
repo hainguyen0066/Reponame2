@@ -15,6 +15,7 @@
                             </a>
                         </div>
                         <span class="time">[{{ $item->displayPublishedDate()}}]</span>
+                        <div class="clearfix"></div>
                     </li>
                     @endforeach
                 </ul>

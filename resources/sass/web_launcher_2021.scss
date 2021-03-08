@@ -26,8 +26,6 @@ img {
   padding: 11px 10px;
   box-sizing: border-box;
   li {
-    display: flex;
-    justify-content: space-between;
     border-bottom: 1px dashed #273042;
     padding-bottom: 5px;
     & + li {
@@ -37,12 +35,8 @@ img {
       border: none;
       padding-bottom: 0;
     }
-    div.wrapper-icons {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
     a {
+      float: left;
       color: #ffffff;
       &:hover {
         color: #ef8d02;
@@ -56,8 +50,12 @@ img {
   }
 }
 
+.clearfix {
+  clear: both;
+}
 .icon-laucher {
-  display: block;
+  float: left;
+  display: inline-block;
   width: 13px;
   height: 11px;
   background: url("../images/icon-laucher.png");
@@ -65,6 +63,7 @@ img {
 }
 
 .time {
+  float: right;
   color: #455575;
   font-size: 13px;
 }
