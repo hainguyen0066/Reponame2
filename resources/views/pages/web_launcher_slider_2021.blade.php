@@ -1,6 +1,6 @@
 <html>
     <head>
-        <link rel="stylesheet" href="{{ staticUrl('css/web_launcher_2021.css') }} ">
+        <link rel="stylesheet" href="{{ staticUrl('css/web_launcher_2021.css', true) }} ">
     </head>
     <body>
         <div class="wrapper-slider">
@@ -14,6 +14,6 @@
                 </section>
             @endif
         </div>
-        <script type="text/javascript" src="{{ staticUrl('js/web_laucher.js') }}"></script>
+        <script type="text/javascript" src="{{ staticUrl('js/web_laucher.js', true) }}"></script>
     </body>
 </html>
