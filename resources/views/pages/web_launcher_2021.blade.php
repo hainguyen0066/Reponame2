@@ -1,6 +1,6 @@
 <html>
     <head>
-        <link rel="stylesheet" href="{{ mix('css/web_launcher_2021.css') }} ">
+        <link rel="stylesheet" href="{{ staticUrl('css/web_launcher_2021.css') }} ">
     </head>
     <body>
         <div class="wrapper">
