@@ -1,7 +1,7 @@
 <html>
     <head>
-        <link rel="stylesheet" href="{{ staticUrl('css/reset.css') }} ">
-        <link rel="stylesheet" href="{{ staticUrl('css/web_launcher_2021.css') }} ">
+        <link rel="stylesheet" href="{{ asset('css/reset.css') }} ">
+        <link rel="stylesheet" href="{{ asset('css/web_launcher_2021.css') }} ">
     </head>
     <body>
         <div class="wrapper">
