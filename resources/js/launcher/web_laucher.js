@@ -1,7 +1,3 @@
-require('./jquery-3.5.1.min');
-require('./bootstrap');
-require('./slick.min');
-
 $(document).ready(() => {
     $('.slider').slick({
         dots: true,
