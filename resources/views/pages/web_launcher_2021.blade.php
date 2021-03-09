@@ -9,7 +9,7 @@
                 <ul>
                     @foreach($posts as $item)
                     <li>
-                        <div class="icon-laucher"></div>
+                        <img src="../images/icon-laucher.png" class="icon-laucher">
                         <a href="{{ route('front.details.post', [$item->getCategorySlug(), $item->slug] ) }}"
                            title="Xem Thêm" target="_blank">
                             {{ str_limit($item->title, 30) }}
