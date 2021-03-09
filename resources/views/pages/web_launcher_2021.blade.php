@@ -1,5 +1,6 @@
 <html>
     <head>
+        <link rel="stylesheet" href="{{ staticUrl('css/reset.css', true) }} ">
         <link rel="stylesheet" href="{{ staticUrl('css/web_launcher_2021.css', true) }} ">
     </head>
     <body>
@@ -8,13 +9,11 @@
                 <ul>
                     @foreach($posts as $item)
                     <li>
-                        <div class="wrapper-icons">
-                            <span class="icon-laucher"></span>
-                            <a href="{{ route('front.details.post', [$item->getCategorySlug(), $item->slug] ) }}"
-                               title="Xem Thêm" target="_blank">
-                                {{ str_limit($item->title, 30) }}
-                            </a>
-                        </div>
+                        <div class="icon-laucher"></div>
+                        <a href="{{ route('front.details.post', [$item->getCategorySlug(), $item->slug] ) }}"
+                           title="Xem Thêm" target="_blank">
+                            {{ str_limit($item->title, 30) }}
+                        </a>
                         <span class="time">[{{ $item->displayPublishedDate()}}]</span>
                         <div class="clearfix"></div>
                     </li>

@@ -1,8 +1,3 @@
-try {
-    window.$ = window.jQuery = require('jquery');
-} catch (e) {}
-require('./slick.min');
-
 $(document).ready(() => {
     $('.slider').slick({
         dots: true,

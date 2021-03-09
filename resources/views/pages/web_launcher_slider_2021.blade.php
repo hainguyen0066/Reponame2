@@ -1,5 +1,8 @@
 <html>
     <head>
+        <link rel="stylesheet" href="{{ staticUrl('css/reset.css', true) }} ">
+        <link rel="stylesheet" href="{{ staticUrl('css/slick-theme.css', true) }} ">
+        <link rel="stylesheet" href="{{ staticUrl('css/slick.css', true) }} ">
         <link rel="stylesheet" href="{{ staticUrl('css/web_launcher_2021.css', true) }} ">
     </head>
     <body>
@@ -14,6 +17,8 @@
                 </section>
             @endif
         </div>
-        <script type="text/javascript" src="{{ staticUrl('js/web_laucher.js', true) }}"></script>
+        <script type="text/javascript" src="{{ staticUrl('js/launcher/jquery-3.5.js', true) }}"></script>
+        <script type="text/javascript" src="{{ staticUrl('js/launcher/slick.js', true) }}"></script>
+        <script type="text/javascript" src="{{ staticUrl('js/launcher/web_laucher.js', true) }}"></script>
     </body>
 </html>
