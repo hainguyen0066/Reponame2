@@ -1,7 +1,7 @@
 <html>
     <head>
-        <link rel="stylesheet" href="{{ staticUrl('css/reset.css', true) }} ">
-        <link rel="stylesheet" href="{{ staticUrl('css/web_launcher_2021.css', true) }} ">
+        <link rel="stylesheet" href="{{ asset('css/reset.css') }}?v={{ config('t2g_common.asset.version') }}">
+        <link rel="stylesheet" href="{{ asset('css/web_launcher_2021.css') }}?v={{ config('t2g_common.asset.version') }}">
     </head>
     <body>
         <div class="wrapper">
