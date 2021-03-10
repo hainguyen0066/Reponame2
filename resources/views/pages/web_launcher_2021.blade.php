@@ -11,7 +11,7 @@
                     <li>
                         <img src="../images/icon-laucher.png" class="icon-laucher">
                         <a href="{{ route('front.details.post', [$item->getCategorySlug(), $item->slug] ) }}"
-                           title="Xem Thêm" target="_blank">
+                           target="_blank" title="Xem Thêm" >
                             {{ str_limit($item->title, 30) }}
                         </a>
                         <span class="time">[{{ $item->displayPublishedDate()}}]</span>
