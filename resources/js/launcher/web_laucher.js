@@ -1,29 +1,22 @@
-$( document ).ready(function() {
-    $('.slider').slick({
-        dots: true,
-        autoplay:true,
-        infinite: true,
-        speed: 400,
-        autoplaySpeed: 5000,
-        arrows:false,
-        button:false,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        responsive: [
-            {
-                breakpoint: 640,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1
-                }
-            },
-            {
-                breakpoint: 480,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1
-                }
-            }
-        ]
-    });
-});
+var sliders = document.querySelectorAll(".image-slider");
+var sliderDots = document.querySelectorAll(".slide-dot");
+var i = 0;
+
+function hideSlider (k = 0) {
+    for (var i = 0; i < sliders.length; i++) {
+        sliders[i].classList.remove("active");
+        sliderDots[i].classList.remove('active');
+    }
+    sliders[k].classList.add("active");
+    sliderDots[k].classList.add('active');
+}
+
+hideSlider();
+
+setInterval(function (){
+    i++;
+    if (i === 4){
+        i = 0;
+    }
+    hideSlider(i)
+},3000);

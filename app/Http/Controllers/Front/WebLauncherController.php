@@ -29,9 +29,11 @@ class WebLauncherController extends BaseFrontController
     {
         $slidersLimit = self::WEBLAUNCHER_LIMIT_SLIDERS;
         $slides       = $postRepository->getHomePostsByCategory('', $slidersLimit);
+        $dots         = count($slides);
 
         return view('pages.web_launcher_slider_2021', [
-            'slides' => $slides
+            'slides' => $slides,
+            'dots'   => $dots
         ]);
     }
 }

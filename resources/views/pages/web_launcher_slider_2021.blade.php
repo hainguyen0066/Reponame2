@@ -17,11 +17,15 @@
                     </a>
                 </div>
             @endforeach
+            <ul class="wrapper-dots">
+                @for ($i = 0; $i < $dots; $i++)
+                    <li onclick="hideSlider({{ $i }})" class="slide-dot"></li>
+                @endfor
+            </ul>
         </section>
+        <div class="clear-fix"></div>
     @endif
 </div>
-<script type="text/javascript" src="{{ asset('js/launcher/jquery.1.12.js') }}?v={{ config('t2g_common.asset.version') }}"></script>
-<script type="text/javascript" src="{{ asset('js/launcher/slick.js') }}?v={{ config('t2g_common.asset.version') }}"></script>
 <script type="text/javascript" src="{{ asset('js/launcher/web_laucher.js') }}?v={{ config('t2g_common.asset.version') }}"></script>
 </body>
 </html>
