@@ -12,7 +12,7 @@ use T2G\Common\Repository\PostRepository;
  */
 class WebLauncherController extends BaseFrontController
 {
-    const WEBLAUNCHER_LIMIT_POSTS   = 8;
+    const WEBLAUNCHER_LIMIT_POSTS   = 7;
     const WEBLAUNCHER_LIMIT_SLIDERS = 4;
 
     public function index(PostRepository $postRepository)
