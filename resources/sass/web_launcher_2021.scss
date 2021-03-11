@@ -64,47 +64,42 @@ img {
   font-size: 13px;
 }
 //============ CUSTOM SLIDER ===============//
-
 .wrapper-slider {
   width: 440px;
   height: 270px;
+  position: relative;
 }
-
 .image-slider {
+  display: none;
 }
-
+.image-slider.active {
+  display: block;
+}
 .image-slider img {
   height: 270px;
   border-radius:5px;
   -webkit-border-radius:5px;
   -moz-border-radius:5px;
 }
-.slick-dots {
-  bottom: -33px;
-  left: 160px;
+.wrapper-dots {
+  position: absolute;;
+  width: 150px;
+  bottom: -5px;
+  right: -10px;
+  height: 30px;
+  background-color: transparent;
 }
-
-.slick-dots li {
-  margin: 0 1px;
+.slide-dot {
+  width: 17px;
+  display: inline-block;
+  height: 10px;
+  background-color: #090e18;
+  margin: 0 3px;
+  cursor: pointer;
 }
-
-.slick-dots li button:before {
-  opacity: 1;
-  top: -35px;
-  font-size: 20px;
-  color: #090e18;
-  content: "\275A";
-  transform: rotate(90deg);
-}
-
-.slick-dots li.slick-active button:before {
-  color: #d63700;
-  opacity: 1;
-}
-
-.slick-dotted.slick-slider {
-  margin-bottom: 0;
-  overflow: hidden;
+.slide-dot.active {
+  background-color: #d63700;
+  width: 25px;
 }
 
 

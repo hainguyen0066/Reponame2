@@ -2,7 +2,7 @@
 
 return [
     'asset' => [
-        'version' => '20200714',
+        'version' => '202103101678',
         'base_url' => env('ASSET_BASE_URL'),
     ],
     'site'     => [
