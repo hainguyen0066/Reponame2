@@ -2,7 +2,7 @@ var sliders = document.querySelectorAll(".image-slider");
 var sliderDots = document.querySelectorAll(".slide-dot");
 var i = 0;
 
-function hideSlider (k = 0) {
+function hideSlider (k) {
     for (var i = 0; i < sliders.length; i++) {
         sliders[i].classList.remove("active");
         sliderDots[i].classList.remove('active');
