@@ -12,7 +12,7 @@ function hideSlider (k = 0) {
 }
 
 try {
-    hideSlider(0);
+    hideSlider(1);
     setInterval(function (){
         i++;
         if (i === 4){
