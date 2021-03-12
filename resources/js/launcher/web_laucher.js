@@ -11,12 +11,16 @@ function hideSlider (k = 0) {
     sliderDots[k].classList.add('active');
 }
 
-hideSlider();
+try {
+    hideSlider(0);
+    setInterval(function (){
+        i++;
+        if (i === 4){
+            i = 0;
+        }
+        hideSlider(i)
+    },3000);
+}
+catch(err) {
+}
 
-setInterval(function (){
-    i++;
-    if (i === 4){
-        i = 0;
-    }
-    hideSlider(i)
-},3000);

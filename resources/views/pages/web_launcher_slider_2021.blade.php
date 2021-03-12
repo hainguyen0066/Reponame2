@@ -26,6 +26,7 @@
         <div class="clear-fix"></div>
     @endif
 </div>
+<script type="text/javascript" src="{{ asset('js/launcher/class_list_prototype.js') }}?v={{ config('t2g_common.asset.version') }}"></script>
 <script type="text/javascript" src="{{ asset('js/launcher/web_laucher.js') }}?v={{ config('t2g_common.asset.version') }}"></script>
 </body>
 </html>
