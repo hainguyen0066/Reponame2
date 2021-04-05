@@ -9,8 +9,8 @@
 <div class="wrapper-slider">
     @if(!empty($slides))
         <section class="slider">
-            @foreach($slides as $slide)
-                <div class="image-slider">
+            @foreach($slides as $key => $slide)
+                <div class="image-slider {{ ($key === 0) ? 'active' : '' }} ">
                     <a href="{{ route('front.details.post', [$slide->getCategorySlug(), $slide->slug] )  }}"
                        target="_blank" title="{{ $slide->title }}">
                         <img src="{{ Voyager::image($slide->image) }}" alt="{{ $slide->title }}"/>
@@ -19,13 +19,14 @@
             @endforeach
             <ul class="wrapper-dots">
                 @for ($i = 0; $i < $dots; $i++)
-                    <li onclick="hideSlider({{ $i }})" class="slide-dot"></li>
+                    <li onclick="hideSlider({{ $i }})" class="slide-dot {{ ($i === 0) ? 'active' : '' }}"></li>
                 @endfor
             </ul>
         </section>
         <div class="clear-fix"></div>
     @endif
 </div>
+<script type="text/javascript" src="{{ asset('js/launcher/class_list_prototype.js') }}?v={{ config('t2g_common.asset.version') }}"></script>
 <script type="text/javascript" src="{{ asset('js/launcher/web_laucher.js') }}?v={{ config('t2g_common.asset.version') }}"></script>
 </body>
 </html>
