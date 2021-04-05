@@ -3,12 +3,10 @@ import $ from 'jquery';
 import moment from 'moment';
 
 window.daterangepicker = require('daterangepicker');
-// Load module after Highcharts is loaded
-require('highcharts/modules/exporting')(Highcharts);
 
 $(document).ready(function () {
     initDateRangePicker();
-})
+});
 
 function initDateRangePicker() {
     $('.input-daterange').each(function (key, val) {

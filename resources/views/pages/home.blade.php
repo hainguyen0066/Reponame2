@@ -13,3 +13,6 @@
     @endsection
 @endif
 
+@push('schemas')
+    @include('t2g_common::schemas.home')
+@endpush

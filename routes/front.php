@@ -24,7 +24,11 @@ Route::group(['as' => 'front.'], function() {
     ]);
     Route::get('/web-launcher',[
         'uses' => 'WebLauncherController@index',
-        'as'   => 'web_laucher'
+        'as'   => 'web_launcher_news'
+    ]);
+    Route::get('/web-launcher-slider',[
+        'uses' => 'WebLauncherController@showSlider',
+        'as'   => 'web_launcher_slider'
     ]);
 
 
@@ -32,7 +36,7 @@ Route::group(['as' => 'front.'], function() {
 
     Route::get('/download', [
         'uses' => 'PostController@download',
-        'as' => 'page.download'
+        'as' => 'page.download_alternative'
     ]);
     Route::get('/tai-game', [
         'uses' => 'PostController@download',
@@ -53,6 +57,12 @@ Route::group(['as' => 'front.'], function() {
         'uses' => 'PostController@search',
         'as' => 'search'
     ]);
+
+    Route::get('/nhap-code', [
+        'uses' => 'GiftCodeController@index',
+        'as' => 'gift_code'
+    ]);
+
     ## --------------------- Secured Routes --------------------- ##
     Route::group(['middleware' => 'auth'], function() {
         Route::get('/ho-tro', [
@@ -92,16 +102,21 @@ Route::group(['as' => 'front.'], function() {
             'as' => 'password.change.submit'
         ]);
 
-        Route::post('/nhan-qua', [
-            'uses' => 'GiftCodeController@getWelcomeCode',
-            'as'   => 'get_welcome_code',
+        Route::get('/dang-ky-thanh-cong', [
+            'uses' => 'HomePageController@welcome',
+            'as' => 'welcome'
+        ]);
+
+        Route::post('/nhap-code', [
+            'uses' => 'GiftCodeController@useCode',
+            'as' => 'gift_code.use_code'
         ]);
     });
 
     $staticPages = [
-        'nap_the_cao' => '/nap-the/the-cao',
-        'vi_momo' => '/nap-the/vi-momo',
-        'chuyen_khoan' => '/nap-the/chuyen-khoan'
+        'nap_the_cao'  => '/nap-the/the-cao',
+        'vi_momo'      => '/nap-the/vi-momo',
+        'chuyen_khoan' => '/nap-the/chuyen-khoan',
     ];
     foreach ($staticPages as $name => $uri) {
         Route::get($uri, [
@@ -110,6 +125,10 @@ Route::group(['as' => 'front.'], function() {
         ]);
     }
 
+    Route::get('/cam-nang/{group}', [
+        'uses' => 'PostController@group',
+        'as' => 'post.group'
+    ]);
 
     Route::get('/{categorySlug}', [
         'uses' => 'PostController@list',

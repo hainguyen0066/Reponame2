@@ -1,7 +1,21 @@
 @if (count($breadcrumbs))
-    <ul class="breadcrumb">
+    <ol class="breadcrumb">
+        @php
+        $position = 1;
+        @endphp
         @foreach ($breadcrumbs as $breadcrumb)
             @if ($breadcrumb->url && !$loop->last)
+                @php
+                    $breadcrumbItems[] = [
+                        "@type" => "ListItem",
+                        "position" => $position++,
+                        "item" => [
+                            '@id' => $breadcrumb->url,
+                            'name' => $breadcrumb->title,
+                            'type' => 'WebPage',
+                        ]
+                    ];
+                @endphp
                 <li class="breadcrumb-item">
                     <a href="{{ $breadcrumb->url }}">{{ $breadcrumb->title }}</a>
                 </li>
@@ -9,5 +23,9 @@
                 <li class="breadcrumb-item active">{{ $breadcrumb->title }}</li>
             @endif
         @endforeach
-    </ul>
+    </ol>
 @endif
+
+@push('schemas')
+    @include('t2g_common::schemas.breadcrumb', $breadcrumbItems)
+@endpush

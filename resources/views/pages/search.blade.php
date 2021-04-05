@@ -1,15 +1,19 @@
 @extends('layouts.front')
+
 @section('content')
-    <div class="content-detail">
-        <div class="ctdt-header">
-            {{ Breadcrumbs::render('search') }}
+    <div class="details-content">
+        <div class="header-details-content">
+            <p class="c-white">Tìm kiếm</p>
+            {!! Breadcrumbs::render('search') !!}
         </div>
-        @include('partials.categories_list')
-        @include('partials.search')
-        @if(count($posts))
-            @include('partials.posts_list')
-        @else
-            <div class="no-result">Không tìm thấy kết quả nào phù hợp!</div>
-        @endif
+        <div class="main-details-content">
+            @if(count($posts))
+                <h3>Tìm thấy <i>{{ $posts->total() }}</i> kết quả với từ khóa "{{ request('search') }}"</h3>
+                @include('partials.posts_list')
+            @else
+                <div class="no-result">Không tìm thấy kết quả nào phù hợp!</div>
+            @endif
+        </div>
     </div>
 @endsection
+

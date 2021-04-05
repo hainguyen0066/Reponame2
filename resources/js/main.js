@@ -1,15 +1,27 @@
+import $ from "jquery";
 require('jquery-confirm');
 
 $(document).ready(function(){
     $('.menu-news div').click(function(){
-        var tab_id = $(this).data('tab');
+        let tab_id = $(this).data('tab');
         let link= $(this).data('link');
         $('.menu-news .tab-link').removeClass('active');
-        $('.tab-content').removeClass('active');
+        $('.news .tab-content').removeClass('active');
 
         $(this).addClass('active');
         $("."+tab_id+"-content").addClass('active');
         $('.menu-news .news-more').attr('href',link)
+    });
+
+    $('.newbies .newbies-header .newbies-title').click(function(){
+        let tab_id = $(this).data('tab');
+        let link= $(this).data('link');
+        $('.newbies .newbies-header .newbies-title').removeClass('active');
+        $('.newbies .tab-content').removeClass('active');
+
+        $(this).addClass('active');
+        $(".newbies ."+tab_id+"-content").addClass('active');
+        $('.newbies .newbies-header .newbies-more a').attr('href',link);
     });
 
     $('.activity-tabs a').click(function(){
@@ -27,7 +39,7 @@ $(document).ready(function(){
         autoplay:true,
         infinite: true,
         dots:false
-    })
+    });
 
     $('.slider-nav-thumbnails').slick({
         slidesToShow: 3,
@@ -48,6 +60,9 @@ $(document).ready(function(){
         if ($image.width() < 50) {
             return;
         }
+        if ($image.parent('a').length) {
+            return;
+        }
         let lighboxClicker = $('<a href="javascript:;" style="cursor:zoom-in;"></a>');
         lighboxClicker.insertBefore($(element));
         $(element).appendTo(lighboxClicker);
@@ -62,4 +77,30 @@ $(document).ready(function(){
             });
         });
     });
-})
+
+    function resize() {
+        let wwidth = $(window).width();
+        let ratio = wwidth / 1920;
+
+        $('.btn-giftcode').css({
+            width: 350 * ratio,
+            height: 280 * ratio
+        });
+        $('.btn-giftcode span').css({
+            "font-size": (18 * ratio) + 'px'
+        });
+        $('.caudoi').css({
+            "background-size" : 'contain',
+            'height'          : (407 * ratio) + 'px',
+            'width'           : (150 * ratio) + 'px'
+        });
+        setTimeout(() => $('.btn-giftcode').show(500), 1000);
+    }
+    resize();
+    $(window).resize(function () {
+        resize();
+    });
+    $('.logged').click(() => {
+        $('#popupGiftCode').show();
+    });
+});

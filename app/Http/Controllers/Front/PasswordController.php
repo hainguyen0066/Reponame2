@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Front;
 
-use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
+use T2G\Common\Controllers\Front\BaseFrontController;
+use T2G\Common\Repository\UserRepository;
+use T2G\Common\Rules\SimplePassword;
 
 /**
  * Class PasswordController
@@ -12,11 +14,6 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class PasswordController extends BaseFrontController
 {
-    const RULES_UPDATE_PASSWORD = [
-        'old_password' => 'required|string|min:6',
-        'password'     => 'required|string|min:6|confirmed',
-    ];
-
     const RULES_UPDATE_PASSWORD2 = [
         'old_password'  => 'required_without:old_password2',
         'old_password2' => 'required_without:old_password|string|min:6',
@@ -29,6 +26,7 @@ class PasswordController extends BaseFrontController
 
         return view('pages.change_password');
     }
+
     public function showChangePassword2Form()
     {
         $this->setMetaTitle("Đổi mật khẩu cấp 2");
@@ -38,16 +36,17 @@ class PasswordController extends BaseFrontController
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \App\Repository\UserRepository            $userRepository
+     * @param \T2G\Common\Repository\UserRepository     $userRepository
      *
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
     public function changePassword(Request $request, UserRepository $userRepository)
     {
-        $validator = $this->validator($request->all(), self::RULES_UPDATE_PASSWORD);
+        $validator = $this->validator($request->all(), $this->getPasswordRules());
         if (!$validator->passes()) {
             return $this->sendFailedResponse($request, $validator->getMessageBag()->toArray());
         }
+        /** @var \T2G\Common\Models\AbstractUser $user */
         $user = \Auth::user();
         if (!$user->validatePassword($request->get('old_password'))) {
             return $this->sendFailedResponse($request, [
@@ -61,9 +60,9 @@ class PasswordController extends BaseFrontController
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \App\Repository\UserRepository            $userRepository
+     * @param \T2G\Common\Repository\UserRepository     $userRepository
      *
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
     public function changePassword2(Request $request, UserRepository $userRepository)
     {
@@ -71,6 +70,7 @@ class PasswordController extends BaseFrontController
         if (!$validator->passes()) {
             return $this->sendFailedResponse($request, $validator->getMessageBag()->toArray());
         }
+        /** @var \T2G\Common\Models\AbstractUser $user */
         $user = \Auth::user();
         if ($user->password2) {
             if (!$user->validatePassword2($request->get('old_password2'))) {
@@ -107,12 +107,27 @@ class PasswordController extends BaseFrontController
 
     /**
      * @param array $data
+     * @param       $rules
      *
      * @return \Illuminate\Validation\Validator
      */
     protected function validator(array $data, $rules)
     {
         return \Validator::make($data, $rules);
+    }
+
+    private function getPasswordRules()
+    {
+        return [
+            'old_password' => 'required|string|min:6',
+            'password' => [
+                'required',
+                'string',
+                'between:6,32',
+                'confirmed',
+                new SimplePassword(),
+            ]
+        ];
     }
 
 }

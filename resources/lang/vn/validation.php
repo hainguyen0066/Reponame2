@@ -115,6 +115,7 @@ return [
     'uploaded'             => 'Trường :attribute tải lên thất bại.',
     'url'                  => 'Trường :attribute không giống với định dạng một URL.',
     'uuid'                 => 'Trường :attribute phải là một chuỗi UUID hợp lệ.',
+    'simple_password'      => 'Mật khẩu không được quá đơn giản (123123, 123456...).',
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines
@@ -133,7 +134,7 @@ return [
         ],
         'name'          => [
             'required' => 'Tên đăng nhập không được để trống',
-            'regex'    => 'Tên đăng nhập từ 5-50 ký tự và không được chứa ký tự đặc biệt',
+            'regex'    => 'Tên đăng nhập từ 5-16 ký tự và không được chứa ký tự đặc biệt',
             'unique'   => "Tên đăng nhập này đã được được sử dụng",
         ],
         'old_password'  => [

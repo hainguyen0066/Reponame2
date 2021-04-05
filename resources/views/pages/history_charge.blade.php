@@ -1,13 +1,13 @@
 @extends('layouts.front')
 @php
-$cardTypes = \App\Util\MobileCard::getCardList();
+$cardTypes = \T2G\Common\Util\MobileCard::getCardList();
 $pageTitle = "Lịch sử giao dịch";
 @endphp
 @section('content')
 <div class="columns-right">
     <div class="details-content">
         @include('partials.manage_account.breadcrumbs')
-        <div class="main-details-content">                                
+        <div class="main-details-content">
             <div class="manage-account">
                 <div class="features">
                     <div class="title">Lịch sử giao dịch</div>
@@ -24,9 +24,9 @@ $pageTitle = "Lịch sử giao dịch";
                                 <td align="center">{{ $history->id }}</td>
                                 <td>
                                     <h4>
-                                        {{ \App\Models\Payment::displayPaymentType($history->payment_type) }}
+                                        {{ \T2G\Common\Models\Payment::displayPaymentType($history->payment_type) }}
                                     </h4>
-                                    @if($history->payment_type == \App\Models\Payment::PAYMENT_TYPE_CARD)
+                                    @if($history->payment_type == \T2G\Common\Models\Payment::PAYMENT_TYPE_CARD)
                                         <p>Mã thẻ: {{ $history->card_pin }}</p>
                                         <p>Serial: {{ $history->card_serial }}</p>
                                         <p>Loại thẻ: {{ $history->card_type }}</p>
@@ -34,7 +34,7 @@ $pageTitle = "Lịch sử giao dịch";
                                 </td>
                                 <td align="right">{{ number_format($history->amount) }} VNĐ</td>
                                 <td align="right">{{ number_format($history->gamecoin) }}</td>
-                                <td align="center">{!! $history->displayStatus(false) !!}</td>
+                                <td align="center">{!! $history->getStatusText(false) !!}</td>
                             </tr>
                         @endforeach
                         @if($histories->total() == 0)

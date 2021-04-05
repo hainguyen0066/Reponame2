@@ -1,15 +1,22 @@
 @extends('layouts.front')
 @php
 $activeSlug = $post->getCategorySlug();
-/** @var \App\Models\Post $post */
+/** @var \T2G\Common\Models\Post $post */
 @endphp
+
 @section('content')
     <div class="details-content">
         <div class="header-details-content">
-            <p class="c-white">{{ $post->title }}</p>
-            {{ Breadcrumbs::render('post', $post) }}
+            @if($post->hasGroup() && count($groupPosts) > 0)
+                <p class="c-white">{{ $post->group_name }}</p>
+                {!! Breadcrumbs::render('postGroup', $post) !!}
+            @else
+                <p class="c-white">{{ $post->title }}</p>
+                {!! Breadcrumbs::render('post', $post) !!}
+            @endif
         </div>
         <div class="main-details-content">
+            @include('partials.post_group')
             <div class="post-body">
                 {!! $post->body !!}
             </div>
@@ -19,7 +26,7 @@ $activeSlug = $post->getCategorySlug();
                 <img src="{{ asset('images/ps-icon.png') }}" alt="" height="20" width="20"><br/>
                 Kính Bút!
             </div>
-            @if(count($others))
+            @if(!$post->hasGroup() && count($others))
                 <div class="view-more">
                     <ul>
                         @foreach($others as $other)
@@ -35,3 +42,21 @@ $activeSlug = $post->getCategorySlug();
         </div>
     </div>
 @endsection
+
+@push('schemas')
+    @include('t2g_common::schemas.post')
+@endpush
+
+@push('extra-js')
+<script>
+    $(document).ready(() => {
+        $('.menu-news a').hover(function(e) {
+            if ($(this).hasClass('has-subs')) {
+                $('.menu-subs ul[data-group="'+ $(this).data('group') +'"]').addClass('active');
+            } else {
+                $('.menu-subs ul').removeClass('active');
+            }
+        });
+    });
+</script>
+@endpush

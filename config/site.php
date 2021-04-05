@@ -1,16 +1,10 @@
 <?php
 
 return [
-    'seo' => [
-        'title'            => 'Võ Lâm Trung Nguyên',
-        'meta_keyword'     => 'vo lam trung nguyen, vltk hay, game pk hay, volam1, ctc, vo lam ctc, vo lam cong thanh chien, vo lam 1',
-        'meta_description' => 'Ôn lại hồi ức thời hoàng kim của võ lâm. Lộ trình phát triển rõ ràng, update tính năng liên tục và đều đặn.',
-        'meta_image'       => 'images/share.1.3.png',
-    ],
     'fb'  => [
         'app_id'   => '1041939975989453',
-        'page_id'  => '500304066823669',
-        'page_url' => 'https://www.facebook.com/volamtrungnguyen2019/',
+        'page_id'  => '101930468199629',
+        'page_url' => 'https://www.facebook.com/jxtrungnguyenctc/',
         'group_url' => 'https://www.facebook.com/groups/vltrungnguyen'
     ],
     'ga'  => [
@@ -18,10 +12,8 @@ return [
     ],
     // google tag manager
     'gtm' => [
-        'id'        => '',
-        'config_id' => '',
+        'id'        => 'GTM-KSZGPB5',
+        'config_id' => 'GTM-KSZGPB5',
     ],
-    'domains' => [
-        'vltrungnguyen.com', 'www.vltrungnguyen.com', 'vltrungnguyen.net', 'www.vltrungnguyen.net'
-    ]
+    'landing_page_enabled' => false
 ];

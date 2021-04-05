@@ -1,5 +1,4 @@
 <script>
     window.user_id = '{{ \Auth::check() ? \Auth::user()->id : '' }}';
 </script>
-<script type="text/javascript" src="{{ mix('js/app.js') }}"></script>
-{{--<script type="text/javascript" src="{{ mix('js/account.js') }}"></script>--}}
+<script type="text/javascript" src="{{ staticUrl('js/app.js', true) }}"></script>

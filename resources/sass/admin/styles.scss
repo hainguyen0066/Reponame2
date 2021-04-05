@@ -1,0 +1,49 @@
+.input-group .btn {
+  margin-top: 0;
+}
+
+.mt0 {
+  margin-top: 0;
+}
+
+.mt5 {
+  margin-top: 5px;
+}
+
+.mt10 {
+  margin-top: 10px;
+}
+
+.mt15 {
+  margin-top: 15px;
+}
+
+.highcharts-credits {display: none}
+
+.widget-goto {
+  font-size: 16px;
+  position: absolute;
+  top: 13px;
+  right: 15px;
+  float: right;
+}
+
+.panel.widget {
+  padding: 20px 30px;
+}
+
+.app-container .content-container .side-body{
+  min-height: 820px;
+}
+.blinking-text {
+  animation: blink 1s linear infinite;
+}
+.widget-small {
+  min-height: 350px;
+}
+
+@keyframes blink{
+  0%{opacity: 0;}
+  50%{opacity: .5;}
+  100%{opacity: 1;}
+}

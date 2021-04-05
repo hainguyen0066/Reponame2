@@ -1,0 +1,59 @@
+.btn-giftcode {
+  width: 500px;
+  height: 400px;
+  position: fixed;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 200;
+  video {
+    width: 100%;
+  }
+  span {
+    position: fixed;
+    right: 16.39%;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-top: 5.5%;
+    font-size: 24px;
+    color: #fff;
+    font-weight: bold;
+  }
+}
+
+
+#popupGiftCode {
+  .popup-banner-container {
+    width: 480px;
+    height: 480px;
+    background: url('../images/landing-2020-04/popup-giftcode.jpg');
+    background-size: contain;
+    position: relative;
+
+    a {
+      display: block;
+      position: absolute;
+      text-align: center;
+      top: 87%;
+      width: 100%;
+      font-size: 18px;
+      color: #312eb1;
+      text-decoration: underline;
+      font-family: 'geoslab703-extra', Tahoma, Arial, serif;
+      line-height: 1.2rem;
+    }
+  }
+
+  .popup-close {
+    position: absolute;
+    top: 3.54%;
+    right: 4.58%;
+    cursor: pointer;
+    display: block;
+    outline: none;
+    border: none;
+    width: 30px;
+    height: 30px;
+    background: none;
+  }
+}

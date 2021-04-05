@@ -160,6 +160,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Webklex\IMAP\Providers\LaravelServiceProvider::class,
+        T2G\Common\ServiceProvider::class
     ],
 
     /*
@@ -209,6 +210,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'ImapClient' => Webklex\IMAP\Facades\Client::class,
+        'DebugBar' => Barryvdh\Debugbar\Facade::class,
     ],
 
 ];

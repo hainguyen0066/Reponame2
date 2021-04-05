@@ -1,0 +1,301 @@
+@font-face {
+  font-family: 'MyriadPro';
+  src: url('../fonts/MyriadPro-BoldCond.otf');
+}
+
+@import "reset.css";
+.f-left {
+  float: left;
+}
+
+.f-right {
+  float: right;
+}
+
+a {
+  text-decoration: none;
+}
+
+.section-01, .section-02, .section-03, .section-04, .section-05, .footer {
+  width: 100%;
+  height: 1080px;
+  margin: 0 auto;
+  overflow: hidden;
+
+  .container {
+    margin: 0 auto;
+    width: 1024px;
+    height: 100%;
+  }
+}
+
+.section-01 {
+  background: url('../images/landing-2019-11/bg-frame1-low.jpg') center no-repeat;
+
+  &.ready {
+    background: url('../images/landing-2019-11/bg-frame1-high.jpg') center no-repeat;
+  }
+
+  .container {
+    position: relative;
+
+    .logo {
+      width: 250px;
+      height: 180px;
+      position: absolute;
+      left: 50%;
+      margin-left: -125px;
+    }
+
+    .menu {
+      width: 369px;
+      height: 25px;
+      position: absolute;
+      left: 107px;
+
+      li {
+        position: relative;
+        list-style: none;
+        float: left;
+        text-align: center;
+        width: 123px;
+        height: 100%;
+
+        &:not(:last-child) {
+          &:after {
+            position: absolute;
+            right: 0;
+            top: 6px;
+            color: #5f5c5c;
+            content: "|";
+            font-weight: 100;
+          }
+        }
+
+        a {
+          color: #fff;
+          font-size: 15px;
+          font-family: Tahoma, Arial, sans-serif;
+          text-transform: uppercase;
+          line-height: 30px;
+        }
+
+        a:hover {
+          color: #ffc275;
+        }
+      }
+    }
+
+    .three-button {
+      left: 38px;
+      position: absolute;
+      bottom: 120px;
+
+      a {
+        display: block;
+        float: left;
+        cursor: pointer;
+
+        &.register-btn {
+          width: 153px;
+          height: 140px;
+          background: url('../images/landing-2019-11/btn-register.png') no-repeat;
+          margin-top: 30px;
+        }
+
+        &.download {
+          width: 199px;
+          height: 183px;
+          background: url('../images/landing-2019-11/btn-download.png') no-repeat;
+          margin-left: 35px;
+
+          &.logged {
+            margin-left: 175px;
+          }
+        }
+
+        &.login-btn {
+          width: 153px;
+          height: 140px;
+          background: url('../images/landing-2019-11/btn-login.png') no-repeat;
+          margin-left: 35px;
+          margin-top: 30px;
+        }
+
+        &:hover {
+          opacity: 0.8;
+        }
+      }
+    }
+  }
+}
+
+.section-02 {
+  background: url('../images/landing-2019-11/bg-frame2-low.jpg') center no-repeat;
+
+  &.ready {
+    background: url('../images/landing-2019-11/bg-frame2-high.jpg') center no-repeat;
+  }
+}
+
+.section-03 {
+  display: none;
+
+  &.ready {
+    display: block;
+    background: url('../images/landing-2019-11/bg-frame3-high.jpg') center no-repeat;
+  }
+
+  .container {
+    position: relative;
+
+    .download a {
+      display: block;
+      width: 282px;
+      height: 80px;
+      background: url('../images/landing/tham-gia-ngay.png') no-repeat;
+      position: absolute;
+      bottom: 63px;
+      left: 560px;
+      margin-left: -191px;
+    }
+  }
+}
+
+.section-04 {
+  display: none;
+
+  &.ready {
+    display: block;
+    background: url('../images/landing-2019-11/bg-frame4-high.jpg') center no-repeat;
+  }
+
+  .container {
+    position: relative;
+
+    .download a {
+      display: block;
+      width: 230px;
+      height: 72px;
+      position: absolute;
+      bottom: 78px;
+      right: 14px;
+
+      &:hover {
+        background: url('../images/landing-2019-11/btn-try-it-hover.jpg');
+      }
+    }
+  }
+}
+
+.section-05 {
+  display: none;
+
+  &.ready {
+    display: block;
+    background: url('../images/landing-2019-11/bg-frame5-high.jpg') center no-repeat;
+  }
+
+  .container {
+    position: relative;
+
+    .frame-button {
+      width: 293px;
+      height: 363px;
+      position: absolute;
+      cursor: pointer;
+      //background: url('../images/landing-2019-11/btn-chitiet.jpg') 30px 298px no-repeat;
+      &:hover {
+        background: url('../images/landing-2019-11/btn-chitiet-hover.jpg') 79px 297px no-repeat;
+      }
+
+      &.volamtranhba {
+        left: 41px;
+        top: 332px;
+        &:hover {
+          background: url('../images/landing-2019-11/btn-chitiet-hover.jpg') 79px 298px no-repeat;
+        }
+      }
+
+      &.quanhunghoitu {
+        left: 381px;
+        top: 383px;
+      }
+
+      &.anhhungthiep {
+        left: 718px;
+        top: 334px;
+        &:hover {
+          background: url('../images/landing-2019-11/btn-chitiet-hover.jpg') 82px 296px no-repeat;
+        }
+      }
+
+      &.denhatbanghoi {
+        left: 788px;
+        top: 332px;
+
+        &:hover {
+          background: url('../images/landing-2019-11/btn-chitiet-hover.jpg') 82px 294px no-repeat;
+        }
+      }
+
+      a {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}
+
+.footer {
+  height: 140px;
+  position: absolute;
+  bottom: 0;
+
+  .container {
+    position: relative;
+    margin-top: 125px;
+
+    a {
+      display: inline;
+    }
+  }
+
+  .bottom-logo {
+    height: 101px;
+    width: 174px;
+    margin-left: 10px;
+    background-size: contain;
+    margin-top: 7px;
+
+    a {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .footer-contents {
+    margin-left: 50px;
+    margin-top: 15px;
+
+    p {
+      color: #75919f;
+      font-size: 16px;
+      line-height: 25px;
+    }
+
+    a {
+      color: #ffffff;
+    }
+
+    span {
+      color: #ffffff;
+
+      &.blue {
+        color: #1759df;
+      }
+    }
+  }
+}

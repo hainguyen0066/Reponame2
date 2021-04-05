@@ -1,12 +1,12 @@
 <div class="charge">
-    <a href="{{ route('front.static.nap_the_cao') }}">
-        <span></span>
-    </a>
+    <a href="{{ route('front.payment.index') }}" class="sprite btn btn-charge" title="Nạp tiền"></a>
+    <a href="{{ route("front.gift_code") }}" class="sprite btn btn-gift-code" title="Nhập Code"></a>
+    <div class="clearfix"></div>
 </div>
 @if(!Auth::user())
 <div class="register-login">
-    <div class="register-btn account-register"></div>
-    <div class="login-btn account-login"></div>
+    <div class="sprite register-btn account-register"></div>
+    <div class="sprite login-btn account-login"></div>
 </div>
 @else
 <div class="info-user">

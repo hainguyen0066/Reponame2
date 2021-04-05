@@ -8,7 +8,7 @@
                 <div class="content">
                     <select name="card_type" id="card_type">
                         <option value="">-- Chọn loại thẻ cào --</option>
-                        @foreach(\App\Util\MobileCard::getCardList() as $val => $name)
+                        @foreach(\T2G\Common\Util\MobileCard::getCardList() as $val => $name)
                         <option value="{{ $val }}">{{ $name }}</option>
                         @endforeach
                     </select>
@@ -31,7 +31,7 @@
                 <div class="content">
                     <select name="card_amount" id="card_amount">
                     <option value="">-- Chọn mệnh giá --</option>
-                        @foreach(\App\Util\MobileCard::getAmountList() as $val)
+                        @foreach(\T2G\Common\Util\MobileCard::getAmountList() as $val)
                             <option value="{{ $val }}">{{ number_format($val) }} VNĐ</option>
                         @endforeach
                     </select>

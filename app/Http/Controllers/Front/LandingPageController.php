@@ -2,22 +2,30 @@
 
 namespace App\Http\Controllers\Front;
 
+use T2G\Common\Repository\BannerRepository;
+use T2G\Common\Repository\PostRepository;
+use T2G\Common\Repository\SliderRepository;
+
 /**
  * Class LandingPageController
  *
  * @package \App\Http\Controllers\Front
  */
-class LandingPageController extends BaseFrontController
+class LandingPageController extends HomePageController
 {
     /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
+     * @param \T2G\Common\Repository\PostRepository   $postRepository
+     * @param \T2G\Common\Repository\SliderRepository $sliderRepository
+     * @param \T2G\Common\Repository\BannerRepository $bannerRepository
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index()
+    public function index(PostRepository $postRepository, SliderRepository $sliderRepository, BannerRepository $bannerRepository)
     {
-        if (setting('site.landing_page_enabled')) {
-            return view('pages.landing');
+        if (config('site.landing_page_enabled')) {
+            return view('pages.landing_2020_12');
         }
-        return view('pages.landing');
-        return redirect(route('front.home'));
+
+        return parent::index($postRepository, $sliderRepository, $bannerRepository);
     }
 }

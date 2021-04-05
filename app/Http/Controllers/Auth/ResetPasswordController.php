@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Repository\UserRepository;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Foundation\Auth\ResetsPasswords;
+use T2G\Common\Repository\UserRepository;
 
 class ResetPasswordController extends Controller
 {
@@ -30,14 +30,14 @@ class ResetPasswordController extends Controller
     protected $redirectTo = '/home';
 
     /**
-     * @var \App\Repository\UserRepository
+     * @var \T2G\Common\Repository\UserRepository
      */
     protected $userRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param \App\Repository\UserRepository $userRepository
+     * @param \T2G\Common\Repository\UserRepository $userRepository
      */
     public function __construct(UserRepository $userRepository)
     {

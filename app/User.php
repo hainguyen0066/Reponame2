@@ -2,8 +2,8 @@
 
 namespace App;
 
-use App\Models\Payment;
-use Illuminate\Notifications\Notifiable;
+use T2G\Common\Models\AbstractUser;
+use T2G\Common\Models\Payment;
 
 /**
  * App\User
@@ -23,17 +23,17 @@ use Illuminate\Notifications\Notifiable;
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read \TCG\Voyager\Models\Role|null $role
  * @property-read \Illuminate\Database\Eloquent\Collection|\TCG\Voyager\Models\Role[] $roles
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereAvatar($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereEmail($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereEmailVerifiedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User wherePassword($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereRememberToken($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereRoleId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereSettings($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereAvatar($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereEmailVerifiedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User wherePassword($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereRoleId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereSettings($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  * @mixin \Eloquent
  * @property string|null $utm_source
  * @property string|null $utm_medium
@@ -43,38 +43,22 @@ use Illuminate\Notifications\Notifiable;
  * @property string|null $raw_password
  * @property string|null $password2
  * @property string|null $raw_password2
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Payment[] $payments
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User wherePassword2($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User wherePhone($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereRawPassword($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereRawPassword2($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereRegisteredIp($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereUtmCampaign($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereUtmMedium($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereUtmSource($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|Payment[] $payments
+ * @method static \Illuminate\Database\Eloquent\Builder|User wherePassword2($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User wherePhone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereRawPassword($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereRawPassword2($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereRegisteredIp($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereUtmCampaign($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereUtmMedium($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereUtmSource($value)
+ * @property string|null $note
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereNote($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\T2G\Common\Models\Revision[] $advancedRevisionHistory
+ * @property-read \Illuminate\Database\Eloquent\Collection|\T2G\Common\Models\Revision[] $revisionHistory
  */
-class User extends \TCG\Voyager\Models\User
+class User extends AbstractUser
 {
-    use Notifiable;
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'name', 'email', 'password', 'utm_source', 'utm_medium', 'utm_campaign', 'phone', 'raw_password', 'role_id'
-    ];
-
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password', 'remember_token', 'raw_password', 'password2', 'raw_password2'
-    ];
-
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -84,73 +68,14 @@ class User extends \TCG\Voyager\Models\User
     }
 
     /**
-     * @return int|mixed
-     */
-    public function getTotalPaid()
-    {
-        if ($this->payments->count() > 0) {
-            $paidArray = $this->payments->map(function ($item) {
-                return $item->status ? $item->amount : 0;
-            });
-
-            return $paidArray->sum();
-        }
-
-        return 0;
-    }
-
-    /**
-     * @return string
-     */
-    public function getRawPassword()
-    {
-        return base64_decode($this->raw_password);
-    }
-
-    public function displayPhone()
-    {
-        $phone = $this->phone ? str_pad(substr($this->phone, -4), 10, '*', STR_PAD_LEFT) : '';
-        return $phone ? "<span class='text-success'>{$phone}</span>" : "<span class=\"c-red\">Chưa cập nhật</span>";
-    }
-
-    public function displayPass2()
-    {
-        return $this->password2 ? "<span class='text-success'>Đã cập nhật</span>" : "<span class=\"c-red\">Chưa cập nhật</span>";
-    }
-
-    /**
-     * @param $password
+     * @param $query
      *
-     * @return bool
+     * @return int
      */
-    public function validatePassword($password)
+    public function scopeRegisteredNumber($query)
     {
-        return $password== $this->getRawPassword();
-    }
+        $query->where('created_at', '>', '2020-09-09');
 
-    /**
-     * @return string
-     */
-    public function getRawPassword2()
-    {
-        return base64_decode($this->password2);
-    }
-
-    /**
-     * @param $password2
-     *
-     * @return bool
-     */
-    public function validatePassword2($password2)
-    {
-        return $password2 == $this->getRawPassword2();
-    }
-
-    /**
-     * @return bool
-     */
-    public function isNormalUser()
-    {
-        return empty($this->role_id);
+        return $query->count() + 7300;
     }
 }

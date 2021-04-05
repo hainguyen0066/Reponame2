@@ -1,4 +1,5 @@
 import $ from 'jquery';
+
 const MSG_TYPE_SUCCESS = 'success';
 const MSG_TYPE_ERROR = 'error';
 const activeClass = 'active';
@@ -109,8 +110,13 @@ const Account = {
             success: (rs) => {
                 Account.showMessage("Đăng ký tài khoản thành công", MSG_TYPE_SUCCESS);
                 setTimeout(() => {
-                    window.location.reload();
+                    if (rs.intended) {
+                        window.location.href = rs.intended;
+                    } else {
+                        window.location.reload();
+                    }
                 }, 2000);
+
                 FLAG_IS_SUBMITTING_DATA = false;
             },
             error: (rs) => {
@@ -127,7 +133,7 @@ const Account = {
             dataType: 'json'
         });
     },
-}
+};
 
 $(document).ready(() => {
     const $popupContainer = $(popupContainerSelector);

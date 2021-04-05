@@ -1,3 +1,1 @@
-@if(empty($data->role_id))
-    {{ $data->getRawPassword2() }}
-@endif
+@include('t2g_common::voyager.users.password2')
