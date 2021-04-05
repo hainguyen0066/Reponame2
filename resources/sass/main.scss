@@ -1218,7 +1218,7 @@ a {
       .head-title {
         color: #c33203;
         font-size: 30px;
-        font-family: PhilosopherBold, Tahoma, Arial, sans-serif;
+        font-family: Arial, Tahoma, sans-serif;
         font-weight: bold;
         text-align: center;
       }
@@ -1226,6 +1226,7 @@ a {
       .list-btn-charge {
         overflow: hidden;
         padding-bottom: 50px;
+        padding-left: 12px;
 
         ul {
           margin-left: 80px;
@@ -1236,17 +1237,17 @@ a {
           width: 158px;
           height: 42px;
           background: url('../images/btn-manage-account.png') no-repeat;
-          padding-left: 30px;
+          padding-left: 22px;
           float: left;
           margin-top: 15px;
 
           a {
-            width: 100px;
+            width: 115px;
             height: 100%;
             color: #fff7e7;
             font-size: 16px;
             text-align: center;
-            font-family: PhilosopherBold, Tahoma, Arial, sans-serif;
+            font-family: Arial, Tahoma, sans-serif;
             font-weight: bold;
             display: flex;
             align-items: center;
