@@ -33,6 +33,7 @@ Route::group(['as' => 'front.'], function() {
 
 
 //     BEGIN CONTENT ROUTES
+
     Route::get('/download', [
         'uses' => 'PostController@download',
         'as' => 'page.download_alternative'
@@ -64,6 +65,11 @@ Route::group(['as' => 'front.'], function() {
 
     ## --------------------- Secured Routes --------------------- ##
     Route::group(['middleware' => 'auth'], function() {
+        Route::get('/ho-tro', [
+            'uses' => 'SupportController@index',
+            'as' => 'support.index'
+        ]);
+
         Route::get('/quan-ly-tai-khoan', [
             'uses' => 'ManageAccountController@getAccountInfo',
             'as' => 'manage.account.info'
