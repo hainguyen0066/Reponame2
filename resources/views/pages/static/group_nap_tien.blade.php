@@ -15,7 +15,7 @@
                         <a href="{{ route('front.static.vi_momo') }}">Ví MOMO</a>
                     </li>
                     <li class="{{ Route::currentRouteName() == 'front.static.chuyen_khoan' ? 'active' : '' }}">
-                        <a href="{{ route('front.static.chuyen_khoan') }}">Chuyển khoản ngân hàng</a>
+                        <a href="{{ route('front.static.chuyen_khoan') }}">CK ngân hàng</a>
                     </li>
                 </ul>
             </div>
