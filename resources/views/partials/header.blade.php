@@ -7,12 +7,13 @@
     <div class="header-content">
         <div class="container">
             <div class="top-menu">
+
                 <ul>
-                    <li><a href="{{ route('front.home') }}" class="active">Trang Chủ</a></li>
-                    <li><a href="{{ route('front.category', ['su-kien']) }}">Sự Kiện</a></li>
-                    <li><a href="{{ route('front.category', ['huong-dan']) }}">Hướng Dẫn</a></li>
+                    <li><a href="{{ route('front.home') }}" class="{{ (\Request::is('trang-chu*') || (\Request::is('trang-chu*') )) ? 'active' : '' }}">Trang Chủ</a></li>
+                    <li><a href="{{ route('front.category', ['su-kien']) }}" class="{{ \Request::is('su-kien*') ? 'active' : '' }}">Sự Kiện</a></li>
+                    <li><a href="{{ route('front.category', ['huong-dan']) }}" class="{{ \Request::is('huong-dan*') ? 'active' : '' }}">Hướng Dẫn</a></li>
                     <li class="logo"><a href="{{ route('front.home') }}" title="Trang chủ">{{ config('app.name') }}</a></li>
-                    <li><a href="{{ route('front.static.nap_the_cao') }}">Nạp Thẻ</a></li>
+                    <li><a href="{{ route('front.static.nap_the_cao') }}" class="{{ \Request::is('nap-the*') ? 'active' : '' }}">Nạp Thẻ</a></li>
                     <li><a href="{{ config('site.fb.page_url') }}" target="_blank">Fanpage</a></li>
                     <li><a href="{{ config('site.fb.group_url') }}" target="_blank">Group</a></li>
                 </ul>
