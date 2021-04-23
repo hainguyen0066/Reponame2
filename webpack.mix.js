@@ -60,6 +60,13 @@ mix.js('resources/js/landing/landing-2020-12.js', 'public/js/landing-2020-12.js'
     })
 ;
 
+mix.js('resources/js/landing/landing-2021-05.js', 'public/js/landing-2021-05.js')
+    .sass('resources/sass/landing-2021-05.scss', 'public/css/landing-2021-05.css')
+    .options({
+        processCssUrls: false
+    })
+;
+
 mix.js('resources/js/admin/index.js', 'public/js/admin/app.js')
     .sass('resources/sass/admin/app.scss', 'public/css/admin/app.css')
 

@@ -23,7 +23,7 @@ class LandingPageController extends HomePageController
     public function index(PostRepository $postRepository, SliderRepository $sliderRepository, BannerRepository $bannerRepository)
     {
         if (config('site.landing_page_enabled')) {
-            return view('pages.landing_2020_12');
+            return view('pages.landing_2021_05');
         }
 
         return parent::index($postRepository, $sliderRepository, $bannerRepository);
