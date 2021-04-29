@@ -5850,7 +5850,7 @@
             "source": {
                 "type": "git",
                 "url": "git@gitlab.com:t2game/common.git",
-                "reference": "6ceca6d1e5d102a70622d0347662bcc8d0f1ce6b"
+                "reference": "0ffee3c434a26a0a076599cd06d5ad7133a58465"
             },
             "require": {
                 "elasticsearch/elasticsearch": "^7.4",
@@ -5867,6 +5867,7 @@
                 "laravel/framework": "^6.0|^7.0",
                 "phpunit/phpunit": "^8.0"
             },
+            "default-branch": true,
             "type": "library",
             "extra": {
                 "laravel": {
@@ -5904,7 +5905,7 @@
                 "t2g",
                 "voyager"
             ],
-            "time": "2021-02-28T06:01:04+00:00"
+            "time": "2021-04-24T16:47:35+00:00"
         },
         {
             "name": "tcg/voyager",
@@ -8337,5 +8338,6 @@
         "ext-iconv": "*",
         "ext-json": "*"
     },
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "2.0.0"
 }

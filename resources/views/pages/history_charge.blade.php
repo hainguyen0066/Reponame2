@@ -24,7 +24,7 @@ $pageTitle = "Lịch sử giao dịch";
                                 <td align="center">{{ $history->id }}</td>
                                 <td>
                                     <h4>
-                                        {{ \T2G\Common\Models\Payment::displayPaymentType($history->payment_type) }}
+                                        {{ \T2G\Common\Models\Payment::displayPaymentType($history->payment_type, false) }}
                                     </h4>
                                     @if($history->payment_type == \T2G\Common\Models\Payment::PAYMENT_TYPE_CARD)
                                         <p>Mã thẻ: {{ $history->card_pin }}</p>
