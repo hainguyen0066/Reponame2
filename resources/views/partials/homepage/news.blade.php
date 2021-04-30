@@ -38,7 +38,7 @@
                                 <p class="hot-title">{{ str_limit($firstItem->title, 100) }}</p>
                                 <p>{{ str_limit($firstItem->excerpt, 100) }}</p>
                             </div>
-                            <div class="hot-time f-right"><p>{{ $firstItem->displayPublishedDate()}}</p></div>
+                            <div class="hot-time f-right"><p>{{ \App\Util\Helper::displayUpdatedDate($firstItem)  }}</p></div>
                         </a>
                     </div>
                     @if(count($news))
@@ -47,7 +47,7 @@
                             @foreach($news as $item)
                             <li>
                                 <a href="{{ route('front.details.post', [$item->getCategorySlug(), $item->slug]) }}">
-                                    {{ str_limit($item->title, 100) }} <span>{{ $item->displayPublishedDate()}}</span>
+                                    {{ str_limit($item->title, 100) }} <span>{{  \App\Util\Helper::displayUpdatedDate($item) }}</span>
                                 </a>
                             </li>
                             @endforeach
