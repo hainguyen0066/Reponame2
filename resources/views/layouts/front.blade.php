@@ -42,7 +42,6 @@
     @include('modal.account')
 @endif
 @yield('banner')
-@include('modal.caudoi')
 @section('js')
     @include('partials.scripts')
 @show

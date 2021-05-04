@@ -132,11 +132,11 @@
             @php
                 $name = array_key_first($acts);
             @endphp
-        <tr>
+        <tr class="border-custom">
             <td class="td-content">
                 <a href="{{ route('front.details.post', $slugs[$name])}}">{{ $name }}</a>
             </td>
-            <td class="td-time">{{ $acts[$name] }}</td>
+            <td class="td-time"><span>{{ $acts[$name] }}</span></td>
         </tr>
         @endforeach
     </table>
