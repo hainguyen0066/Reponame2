@@ -12,7 +12,7 @@
                 <div class="description">
                     {{ str_limit($post->excerpt, 200) }}
                 </div>
-                <a href="{{ $url }}" class="time f-right">{{ $post->displayPublishedDate() }}</a>
+                <a href="{{ $url }}" class="time f-right">{{  \App\Util\Helper::displayUpdatedDate($post) }}</a>
             </a>
         </div>
     @endforeach

@@ -2,6 +2,8 @@
 
 namespace App\Util;
 
+use T2G\Common\Util\CommonHelper;
+
 /**
  * Class Helper
  *
@@ -32,5 +34,12 @@ class Helper
             'thong-bao' => 'Thông báo',
             'su-kien'   => 'Sự kiện',
         ];
+    }
+
+    public static function displayUpdatedDate($post,$format = 'd.m.Y')
+    {
+        $date = $post->updated_at ?? $post->created_at;
+
+        return CommonHelper::formatDate($date, $format);
     }
 }

@@ -130,7 +130,7 @@ body {
           position: absolute;
           height: 10px;
           width: 1px;
-          bottom: 0;
+          bottom: -5px;
           left: 50%;
           transform: translateY(-50%);
           border-right: 1px solid #d58f02;
@@ -155,7 +155,7 @@ body {
         height: 219px;
         position: fixed;
         top: -5%;
-        left: 3%;
+        left: 2.9%;
         z-index: 200;
       }
 

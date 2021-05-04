@@ -109,14 +109,21 @@ $(document).ready(function () {
         section1.find('.menu ul li a').css({
             'font-size': (14 * ratio) + 'px',
         });
-
         section1.find('.icon-top').css({
-            width: 29 * ratio,
-            height: 219 * ratio,
+            width: 31.5 * ratio,
+            height: 258 * ratio,
         });
+        if(ratio < 0.743) {
+            section1.find('.icon-top').css({
+                top: -5 * (ratio + 1.2) + '%',
+            });
+            section1.find('.icon-bottom').css({
+                bottom: -ratio + '%',
+            });
+        }
         section1.find('.icon-bottom').css({
             width: 34 * ratio,
-            height: 219 * ratio,
+            height: 265 * ratio,
         });
         section1.find('.menu-left-content').css({
             width: 105 * ratio,
@@ -372,6 +379,7 @@ $(document).ready(function () {
                 height: 30 * ratio
             });
         }
+        console.log(ratio);
 
         $('.loader').hide();
         $('.btn-giftcode').show(500);
@@ -391,4 +399,6 @@ $(document).ready(function () {
     $(".popup-banner").click(function(){
         $(".popup-banner").css("display", "none");
     });
+
+
 });
