@@ -2,7 +2,7 @@
 
 return [
     'asset' => [
-        'version' => '202104201238',
+        'version' => '202105056725',
         'base_url' => env('ASSET_BASE_URL'),
     ],
     'site'     => [
@@ -10,7 +10,7 @@ return [
         'seo'     => [
             'title'            => 'Võ Lâm Trung Nguyên',
             'meta_keyword'     => 'vo lam trung nguyen, vltk hay, game pk hay, volam1, ctc, vo lam ctc, vo lam cong thanh chien, vo lam 1',
-            'meta_description' => 'Khai mở Server Phật Sơn - 19h00 ngày 08/05/2021. Với sự góp mặt của các đại bang đến từ khắp chốn giang hồ. Sự trở lại của 1 huyền thoại với 1 diện mạo hoàn toàn mới - Nơi 1 Huyền Thoại mới của giới private xuất hiện',
+            'meta_description' => 'Khai mở Server Phật Sơn - 19h00 ngày 15/05/2021. Với sự góp mặt của các đại bang đến từ khắp chốn giang hồ. Sự trở lại của 1 huyền thoại với 1 diện mạo hoàn toàn mới - Nơi 1 Huyền Thoại mới của giới private xuất hiện',
             'meta_image'       => 'images/share_phat_son.jpeg',
         ],
         // Open Graph configs
