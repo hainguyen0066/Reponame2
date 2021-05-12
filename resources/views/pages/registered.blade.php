@@ -29,8 +29,8 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('front.payment.index') }}" title="Các hình thức nạp thẻ">
-                                            Các hình thức nạp thẻ
+                                        <a href="{{ route('front.details.post', ['tong-hop','thong-tin-sever-vo-lam-trung-nguyen']) }}" title="Hướng dẫn người chơi mới">
+                                            Hướng dẫn người chơi mới
                                         </a>
                                     </li>
                                 @endif
