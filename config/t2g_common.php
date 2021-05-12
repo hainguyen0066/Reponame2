@@ -90,7 +90,7 @@ return [
     'kibana' => [
         'elasticsearch_config' => [
             'hosts' => [
-                '167.71.206.77:9200'
+                '51.79.228.239:9200'
             ],
             'handler' => \Elasticsearch\ClientBuilder::singleHandler()
         ],
