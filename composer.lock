@@ -5850,7 +5850,7 @@
             "source": {
                 "type": "git",
                 "url": "git@gitlab.com:t2game/common.git",
-                "reference": "6153eafddc2ee352de455661577f91044a7981d9"
+                "reference": "76cffbf47a35b32464eca4ef132fa7b11930d88d"
             },
             "require": {
                 "elasticsearch/elasticsearch": "^7.4",
@@ -5904,7 +5904,7 @@
                 "t2g",
                 "voyager"
             ],
-            "time": "2021-05-21T10:11:32+00:00"
+            "time": "2021-05-21T10:51:02+00:00"
         },
         {
             "name": "tcg/voyager",
