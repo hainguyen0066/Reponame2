@@ -69,6 +69,7 @@ return [
     ],
     'momo'     => [
         'mailbox' => 'momo_mailbox', // mailbox name as configured in webklex/laravel-imap package config file
+        'android_package' => 'com.mservice.momotransfer',
     ],
     'discord'  => [
         'webhooks' => [
