@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "22a1908c1c50a87618285ab1caa78121",
+    "content-hash": "877420e8d2c7337f65d492ada8452ed8",
     "packages": [
         {
             "name": "arrilot/laravel-widgets",
@@ -5846,11 +5846,11 @@
         },
         {
             "name": "t2g/common",
-            "version": "dev-add-momo-notify",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "git@gitlab.com:t2game/common.git",
-                "reference": "a87bd7516217ba52f29e82478cb3fcc0b7dba712"
+                "reference": "9bc329c980617c08b71de7b2a3f3b1ec81830d49"
             },
             "require": {
                 "elasticsearch/elasticsearch": "^7.4",
@@ -5904,7 +5904,7 @@
                 "t2g",
                 "voyager"
             ],
-            "time": "2021-05-21T08:38:42+00:00"
+            "time": "2021-05-21T10:03:04+00:00"
         },
         {
             "name": "tcg/voyager",
