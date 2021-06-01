@@ -9,4 +9,5 @@ return [
     'used_code_successfully'                                  => "Sử dụng Code thành công, hãy vào game để nhận quà.",
     'race_condition_error'                                    => 'Lỗi hệ thống do thao tác quá nhanh, vui lòng thử lại.',
     'login_first'                                             => 'Vui lòng đăng nhập trước khi nhập Gift Code',
+    'This type of code was used this month'                   => 'Loại code này bạn đã sử dụng trong tháng này'
 ];

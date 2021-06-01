@@ -105,4 +105,10 @@ return [
     'features' => [
         'post_grouping_enabled' => true
     ],
+    'gift_code' => [
+        'fancung' => [
+            'enable' => true,
+            'expired' => '-30 days',
+        ]
+    ]
 ];
