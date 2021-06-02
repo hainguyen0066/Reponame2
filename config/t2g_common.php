@@ -105,4 +105,10 @@ return [
     'features' => [
         'post_grouping_enabled' => true
     ],
+    'gift_code' => [
+        'fancung_c02' => [
+            'enable_expired_in_month' => true,
+            'expired' => '-30 days',
+        ]
+    ]
 ];
