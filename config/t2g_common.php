@@ -108,7 +108,6 @@ return [
     'gift_code' => [
         'fancung_c02' => [
             'enable_expired_in_month' => true,
-            'expired' => '-30 days',
         ]
     ]
 ];
