@@ -21,7 +21,7 @@
         "laravel/ui": "^2.1",
         "predis/predis": "^1.1",
         "symfony/dom-crawler": "^4.3",
-        "t2g/common": "dev-master",
+        "t2g/common": "dev-dev",
         "tcg/voyager": "dev-dev",
         "webklex/laravel-imap": "^1.4"
     },
