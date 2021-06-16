@@ -36,7 +36,8 @@ return [
     'channels' => [
         'stack' => [
             'driver' => 'stack',
-            'channels' => ['single', 'discord'],
+            // 'channels' => ['single', 'discord'],
+            'channels' => ['daily', 'discord'],
         ],
         // logging configurations for T2G\Common
         'game_api' => [
