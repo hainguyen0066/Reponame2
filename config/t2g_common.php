@@ -109,5 +109,8 @@ return [
         'fancung_c02' => [
             'enable_expired_in_month' => true,
         ]
+    ],
+    'customers_ip' => [
+        'partners_ip' => []
     ]
 ];
