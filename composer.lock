@@ -5850,7 +5850,7 @@
             "source": {
                 "type": "git",
                 "url": "git@gitlab.com:t2game/common.git",
-                "reference": "901d84567bdc6f219167e45167a89b7d35cb8e29"
+                "reference": "97f8ad08f534fb2f4a32e28bd01402ccc893a060"
             },
             "require": {
                 "elasticsearch/elasticsearch": "^7.4",
@@ -5904,7 +5904,7 @@
                 "t2g",
                 "voyager"
             ],
-            "time": "2021-06-18T01:50:27+00:00"
+            "time": "2021-08-13T08:31:28+00:00"
         },
         {
             "name": "tcg/voyager",
@@ -8338,5 +8338,5 @@
         "ext-json": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "2.1.0"
 }
