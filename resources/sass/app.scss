@@ -3,6 +3,17 @@
   font-family: 'PhilosopherBold';
   src: url('../fonts/Philosopher-Bold.ttf');
 }
+@font-face {
+  font-family: 'BeaufortforLOL-Bold';
+  src: url('../fonts/BeaufortforLOL-Bold.eot'); /* IE9+ Compat Modes */
+  src: url('../fonts/BeaufortforLOL-Bold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('../fonts/BeaufortforLOL-Bold.woff2') format('woff2'), /* Super modern browsers */
+  url('../fonts/BeaufortforLOL-Bold.woff') format('woff'), /* Modern browsers */
+  url('../fonts/BeaufortforLOL-Bold.ttf')  format('truetype'), /* Safari, Android, iOS */
+  url('../fonts/BeaufortforLOL-Bold.svg#FontName') format('svg'); /* Legacy iOS */
+  font-weight: normal;
+  font-style: normal;
+}
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 @import "reset.css";
 @import "slick.css";
