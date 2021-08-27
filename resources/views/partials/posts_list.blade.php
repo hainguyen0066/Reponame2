@@ -10,7 +10,7 @@
             <a class="content f-left" href="{{ $url }}" title="{{ $post->title }}">
                 <div class="title">{{ str_limit($post->title, 100) }}</div>
                 <div class="description">
-                    {{ str_limit($post->excerpt, 200) }}
+                    {{ str_limit($post->excerpt, 170) }}
                 </div>
                 <a href="{{ $url }}" class="time f-right">{{  \App\Util\Helper::displayUpdatedDate($post) }}</a>
             </a>

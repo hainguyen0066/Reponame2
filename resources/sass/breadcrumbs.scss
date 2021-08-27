@@ -8,7 +8,15 @@ ol.breadcrumb {
     display: inline-block;
     color: #fff;
     font-family: Roboto, Arial, Helvetica, sans-serif;
-
+    &:first-child {
+      color: #3f4b6f;
+      a {
+        color: #3f4b6f;
+        &:hover {
+          color: #ff7f02;
+        }
+      }
+    }
     a {
       color: #fff;
     }

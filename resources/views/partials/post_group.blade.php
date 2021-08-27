@@ -1,16 +1,16 @@
 @if($post->hasGroup() && count($groupPosts) > 0)
     <ul class="menu-news">
         @foreach($groupPosts as $item)
-            <li>
+            <li class="{{ $item['post']->id == $post->id ? 'active' : '' }}">
                 @if(empty($item['subs']))
                     <a class="tab-link {{ $item['post']->id == $post->id ? 'active' : '' }}"
                        title="{{ $item['post']->group_title }}"
-                       href="{{ route('front.details.post', [$item['post']->getCategorySlug(), $item['post']->slug]) }}">{{ $item['post']->group_title }}</a>
+                       href="{{ route('front.details.post', [$item['post']->getCategorySlug(), $item['post']->slug]) }}">{{ ucwords($item['post']->group_title) }}</a>
                 @else
                     <a class="tab-link has-subs"
                        href="javascript:"
                        title="{{ $item['sub_title'] }}"
-                       data-group="{{ $item['sub_title'] }}">{{ $item['sub_title'] }}</a>
+                       data-group="{{ $item['sub_title'] }}">{{ ucwords($item['sub_title']) }}</a>
                 @endif
             </li>
         @endforeach

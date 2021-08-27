@@ -82,8 +82,8 @@ a {
         height: 100%;
         width: 100%;
         color: #ffffff;
-        font-family: Tahoma, Arial, sans-serif;
-        font-weight: bold;
+        font-family: BeaufortforLOL-Bold, Arial, sans-serif;
+        text-transform: uppercase;
         font-size: 18px;
         line-height: 60px;
       }
@@ -91,13 +91,13 @@ a {
         color: #c73002;
       }
       &.logo {
-        overflow: hidden;
-        width: 192px;
-        height: 192px;
-        padding: 0;
+        background: url(../images/logo.png) center no-repeat;
+        height: 110px;
+        width: 150px;
         background-size: cover;
-        background: url('../images/logo.png') no-repeat 0 -26px;
         margin-left: 10px;
+        margin-top: 10px;
+        overflow: hidden;
         a {
           display: block;
           width: 100%;
@@ -148,9 +148,12 @@ a {
           color: #ff7f02;
           font-size: 15px;
           line-height: 32px;
+          &::placeholder {
+            color: #ff7f02;
+          }
         }
         button {
-          height: 32px;
+          height: 45px;
           background: transparent;
           outline: none;
           border: none;
@@ -159,6 +162,7 @@ a {
           color: #fff;
           line-height: 32px;
           font-size: 16px;
+          cursor: pointer;
         }
       }
     }
@@ -185,55 +189,59 @@ a {
 
       .charge {
         a.btn {
-          margin-top: 10px;
           display: block;
           width: 100%;
           height: 81px;
           text-indent: -999px;
           &.btn-charge {
-            background-position: -186px -124px;
+            background-image: url("../images/news08/sidebar-napthe.png");
             &:hover {
-              background-position: -415px -124px;
+              background-image: url("../images/news08/sidebar-napthe-hover.png");
             }
           }
           &.btn-gift-code{
-            background-position: -186px -204px;
+            margin-top: -3px;
+            background-image: url("../images/news08/sidebar-nhapcode.png");
             &:hover {
-              background-position: -415px -204px;
+              background-image: url("../images/news08/sidebar-nhapcode-hover.png");
             }
           }
         }
       }
 
       .register-login {
+        display: flex;
         width: 100%;
-
+        margin-bottom: -7px;
         .register-btn {
+          flex: 1;
           cursor: pointer;
           width: 100%;
           height: 81px;
-          margin-top: 10px;
-          background-position: -186px -284px;
+          opacity: 1;
+          background-image: url("../images/news08/sidebar-dk-hover.png");
+          transform: translateX(-1px);
           &:hover {
-            background-position: -415px -284px;
+            background-image: url("../images/news08/sidebar-dk.png");
           }
         }
 
         .login-btn {
+          flex: 1;
           cursor: pointer;
           width: 100%;
           height: 81px;
-          margin-top: 10px;
-          background-position: -186px -364px;
+          background-image: url("../images/news08/sidebar-dn.png");
+          transform: translateX(1px);
           &:hover {
-            background-position: -415px -364px;
+            background-image: url("../images/news08/sidebar-dn-hover.png");
           }
         }
       }
 
       .info-user {
         margin-top: 10px;
-        background: #F7F8E0;
+        background: #FFFFFF;
         padding-top: 15px;
         height: calc(250px - 15px);;
         padding-left: 20px;
@@ -378,6 +386,10 @@ a {
               padding: 7px 0px 7px 2px;
               a {
                 color: #2444be;
+                font-size: 13px;
+                &:hover {
+                  color: #c73002;
+                }
               }
             }
           }
@@ -403,22 +415,32 @@ a {
         width: 100%;
 
         div {
-          height: 90px;
+          height: 117px;
           margin-top: 10px;
-          background-size: 701px 489px;
+          &.newbie {
+            background-image: url("../images/news08/three-btn-tanthu.png");
+            &:hover {
+              background-image: url("../images/news08/three-btn-tanthu-hover.png");
+            }
+          }
+          &.trade {
+            background-image: url("../images/news08/three-btn-trung-gian.png");
+            &:hover {
+              background-image: url("../images/news08/three-btn-trung-gian-hover.png");
+            }
+          }
+          &.info-sv {
+            background-image: url("../images/news08/three-btn-huongdan.png");
+            &:hover {
+              background-image: url("../images/news08/three-btn-huongdan-hover.png");
+            }
+          }
         }
 
         a {
           display: block;
           width: 100%;
           height: 100%;
-        }
-        .trade {
-          background-position: -237px 0;
-        }
-
-        .info-sv {
-          background-position: -473px 0;
         }
       }
 
@@ -442,6 +464,9 @@ a {
       margin-left: 13px;
       width: 760px;
       min-height: 500px;
+      &:last-child {
+        margin-left: 0;
+      }
 
       .slider {
         width: 100%;
@@ -521,15 +546,31 @@ a {
           float: left;
           width: 247px;
           height: 115px;
+          &.newbie {
+            background-image: url("../images/news08/hotro-tanthu.png");
+            &:hover {
+              background-image: url("../images/news08/hotro-tanthu-hover.png");
+            }
+          }
+          &.trade {
+            background-image: url("../images/news08/trunggian-muaban.png");
+            &:hover {
+              background-image: url("../images/news08/trunggian-muaban-hover.png");
+            }
+          }
+          &.info-sv {
+            background-image: url("../images/news08/huongdan-nguoimoi.png");
+            &:hover {
+              background-image: url("../images/news08/huongdan-nguoimoi-hover.png");
+            }
+          }
         }
 
         .trade {
-          background-position: -256px 0;
-          margin-left: 5px;
+          margin-left: 9px;
         }
 
         .info-sv {
-          background-position: -513px 0;
           float: right;
         }
 
@@ -541,7 +582,8 @@ a {
       }
 
       .news {
-        background-color: #F7F8E0;
+        background-color: #FFFFFF;
+
         margin-top: 10px;
         padding: 10px;
         width: calc(100% - 20px);
@@ -558,6 +600,8 @@ a {
           .menu-news {
             height: 40px;
             background: url('../images/line.png') bottom left repeat-x;
+            display: flex;
+            justify-content: center;
 
             .tab-link {
               background-position: -489px -566px;
@@ -670,13 +714,13 @@ a {
 
             li {
               display: table-row;
-              border-bottom: 1px solid #e8e8e8;
+              border-bottom: 1px dashed #e8e8e8;
               overflow: hidden;
               &:after {
                 content: '';
                 display: block;
-                height: 1px;
                 width: 100%;
+                border-top: 1px dashed #f5f4f4;
                 background-color: #b6b6b6;
                 margin-top: -1px;
               }
@@ -709,15 +753,16 @@ a {
           width: 175px;
           height: 450px;
           float: right;
-          background-position: 0 -115px;
+          background-image: url("../images/news08/char-in-news.png");
         }
       }
 
       .newbies {
-        background-color: #F7F8E0;
+        background-color: #FFFFFF;
         margin-top: 10px;
         padding: 10px;
         width: calc(100% - 20px);
+
         .tab-content {
           display: none;
           &.active {
@@ -725,9 +770,12 @@ a {
           }
         }
         .newbies-header {
+          padding-left: 7px;
           height: 40px;
           width: 100%;
           background: url('../images/line.png') bottom left repeat-x;
+          display: flex;
+          justify-content: center;
 
           .newbies-title {
             display: block;
@@ -831,8 +879,8 @@ a {
             &:after {
               content: '';
               display: block;
-              height: 1px;
               width: 100%;
+              border-top: 1px dashed #f5f4f4;
               background-color: #b6b6b6;
               margin-top: -1px;
             }
@@ -875,6 +923,7 @@ a {
   width: 140px;
   background-size: cover;
   margin-right: 20px;
+  margin-left: 80px;
 }
 
 .footer .bottom-logo a {
@@ -884,25 +933,21 @@ a {
 }
 
 .footer .footer-contents {
-  width: 800px;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
 }
 
 .footer .footer-contents p {
-  color: #75919f;
+  color: #ffffff;
   font-size: 16px;
   line-height: 25px;
 }
 
 .footer .footer-contents a {
-  color: #ffffff;
-}
-
-.footer .footer-contents span {
-  color: #ffffff;
+  color: #ff7f02;
 }
 
 .footer .footer-contents span.blue {
-  color: #1759df;
+  color: #ff7f02;
 }
 
 /*details content*/
@@ -918,7 +963,8 @@ a {
       margin-left: 20px;
       font-size: 24px;
       line-height: 55px;
-      font-family: Roboto, Arial, Helvetica, sans-serif;
+      font-family: BeaufortforLOL-Bold, sans-serif, Arial, Helvetica, sans-serif;
+      text-transform: uppercase;
     }
 
     ul {
@@ -952,10 +998,13 @@ a {
   .main-details-content {
     margin-top: 10px;
     width: 700px;
-    background: #F7F8E0;
+    background: #FFFFFF;
     min-height: 1610px;
     padding: 50px 30px;
     font-family: 'Roboto', sans-serif !important;
+    .manage-account {
+      font-size: 14px;
+    }
 
     p {
       line-height: 25px;
@@ -997,13 +1046,17 @@ a {
         padding-left: 40px;
         color: #151925;
         font-size: 20px;
-        font-family: PhilosopherBold, Tahoma, Arial, sans-serif;
+        font-family: Roboto, Tahoma, Arial, sans-serif;
         font-weight: bold;
+      }
+      h4.note {
+        margin-left: 50px;
+        margin-top: 10px;
       }
 
       form {
         width: 320px;
-        margin-left: 200px;
+        margin-left: 60px;
 
         input {
           border-radius: 5px;
@@ -1023,17 +1076,21 @@ a {
         button {
           width: 158px;
           height: 42px;
-          background: url('../images/btn-manage-account-hover.png') no-repeat;
+          background: url('../images/btn-manage-account.png') no-repeat;
           border: none;
           margin-top: 15px;
           text-align: center;
           color: #fff7e7;
           font-size: 16px;
-          font-family: PhilosopherBold, Tahoma, Arial, sans-serif;
+          font-family: BeaufortforLOL-Bold, Tahoma, Arial, sans-serif;
+          text-transform: uppercase;
           font-weight: bold;
           cursor: pointer;
           outline: none;
           margin-left: 70px;
+          &:hover {
+            background: url('../images/btn-manage-account-hover.png') no-repeat;
+          }
         }
 
         .invalid-feedback {
@@ -1058,10 +1115,15 @@ a {
           li {
             font-size: 18px;
             margin-top: 15px;
-            width: 400px;
-
+            display: flex;
+            p {
+              width: 27%;
+            }
             span {
-              float: right;
+              color: #335bd5;
+              &.c-red {
+                color: red;
+              }
             }
           }
         }
@@ -1095,7 +1157,7 @@ a {
       }
 
       .list-features {
-        margin: 20px;
+        margin: 20px 20px 20px 0;
 
         ul {
           margin-left: 60px
@@ -1115,10 +1177,11 @@ a {
             height: 100%;
             color: #fff7e7;
             font-size: 16px;
-            line-height: 16px;
+            text-transform: uppercase;
+            line-height: 18px;
             margin-top: 5px;
             text-align: center;
-            font-family: PhilosopherBold, Tahoma, Arial, sans-serif;
+            font-family: BeaufortforLOL-Bold, Tahoma, Arial, sans-serif;
             font-weight: bold;
           }
         }
@@ -1131,7 +1194,7 @@ a {
 
     .menu {
       margin-top: -20px;
-      border-bottom: #404040 solid 2px;
+      background: url(../images/line.png) 0 100% repeat-x;
       height: 30px;
 
       li {
@@ -1141,10 +1204,10 @@ a {
 
         a {
           font-size: 20px;
-          font-family: PhilosopherBold, Tahoma, Arial, sans-serif;
+          font-family: Roboto, Tahoma, Arial, sans-serif;
           color: #39425e;
           line-height: 25px;
-          font-weight: bold;
+          font-weight: 500;
         }
 
         a:hover, a.active {
@@ -1187,6 +1250,9 @@ a {
             padding-bottom: 15px;
             font-weight: bold;
             font-size: 18px;
+            &:hover {
+              color: #c73002;
+            }
           }
         }
 
@@ -1199,7 +1265,12 @@ a {
           width: 120px;
           border: none;
           object-fit: cover;
+          border-radius: 5%;
         }
+      }
+
+      .description {
+        line-height: 1.2;
       }
 
       .pagination {
@@ -1231,17 +1302,18 @@ a {
     .manage-charge {
       .title {
         background: url('../images/icon-arrow.png') left no-repeat;
-        padding-left: 40px;
+        padding-left: 30px;
         color: #151925;
         font-size: 20px;
-        font-family: PhilosopherBold, Tahoma, Arial, sans-serif;
+        font-family: BeaufortforLOL-Bold, Tahoma, Arial, sans-serif;
         font-weight: bold;
+      }
       }
 
       .head-title {
         color: #c33203;
         font-size: 30px;
-        font-family: Arial, Tahoma, sans-serif;
+        font-family: BeaufortforLOL-Bold, Tahoma, sans-serif;
         font-weight: bold;
         text-align: center;
       }
@@ -1270,8 +1342,8 @@ a {
             color: #fff7e7;
             font-size: 16px;
             text-align: center;
-            font-family: Arial, Tahoma, sans-serif;
-            font-weight: bold;
+            font-family: BeaufortforLOL-Bold, Tahoma, sans-serif;
+            text-transform: uppercase;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1376,7 +1448,6 @@ a {
       }
     }
   }
-}
 
 @media (max-width: 1200px) {
   body.tet:before, body.tet:after {
@@ -1460,7 +1531,7 @@ a {
   }
 }
 tr.border-custom {
-  border-bottom: 1px solid #b6b6b6;
+  border-bottom: 1px dashed #b6b6b6;
 }
 @media screen and (max-width: 1024px){
   .header #intro {
