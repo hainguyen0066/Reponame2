@@ -298,7 +298,7 @@ $(document).ready(function () {
             'padding-top': 8 * ratio
         });
         section6.find('.gift-right .gift-lv .gift-lv-content > div:first-child').css({
-            'margin-right': 30 * ratio
+            'margin-right': 10 * ratio
         });
         section6.find('.gift-right .gift-lv .gift-lv-content p').css({
             'font-size': 18 * ratio
