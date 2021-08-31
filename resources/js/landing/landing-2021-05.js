@@ -211,7 +211,7 @@ $(document).ready(function () {
         section3.find('.update-content').css({
             width: 915 * ratio,
         });
-        section3.find('.update-content a').css({
+        section3.find('.update-content p').css({
             height: 210 * ratio,
         });
 

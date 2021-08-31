@@ -478,7 +478,8 @@ body {
     .info-server {
       .info-title {
         background-image: url('../images/landing-2020-12/section-04-title.png');
-        background-size: cover;
+        background-size: contain;
+        background-repeat: no-repeat;
         width: 331px;
         height: 38px;
         margin-top: 20px;
