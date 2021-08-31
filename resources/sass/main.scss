@@ -195,12 +195,12 @@ a {
           text-indent: -999px;
           &.btn-charge {
             background-image: url("../images/news08/sidebar-napthe.png");
+            margin-bottom: 13px;
             &:hover {
               background-image: url("../images/news08/sidebar-napthe-hover.png");
             }
           }
           &.btn-gift-code{
-            margin-top: -3px;
             background-image: url("../images/news08/sidebar-nhapcode.png");
             &:hover {
               background-image: url("../images/news08/sidebar-nhapcode-hover.png");
@@ -212,7 +212,8 @@ a {
       .register-login {
         display: flex;
         width: 100%;
-        margin-bottom: -7px;
+        margin-top: 18px;
+        margin-bottom: 11px;
         .register-btn {
           flex: 1;
           cursor: pointer;
@@ -240,7 +241,7 @@ a {
       }
 
       .info-user {
-        margin-top: 10px;
+        margin-top: 15px;
         background: #FFFFFF;
         padding-top: 15px;
         height: calc(250px - 15px);;
@@ -339,7 +340,7 @@ a {
       }
 
       .act-daily {
-        margin-top: 10px;
+        margin-top: 15px;
         width: 217px;
         height: 420px;
         background: url('../images/bg-act-daily-new.jpg') no-repeat;
@@ -371,18 +372,18 @@ a {
             display: table !important;
           }
           td {
-            font-size: 12px;
+            font-size: 14px;
             &.td-time {
               padding-top: 7px;
               vertical-align: top;
               color: #ff191e;
-              width: 70px;
+              width: 90px;
               text-align: right;
               padding-right: 5px;
             }
 
             &.td-content {
-              width: 141px;
+              width: 143px;
               padding: 7px 0px 7px 2px;
               a {
                 color: #2444be;
@@ -448,7 +449,7 @@ a {
         background: url('../images/bg-hotline.jpg') no-repeat;
         width: 100%;
         height: 100px;
-        margin-top: 10px;
+        margin-top: 15px;
         padding: 50px 0 0 50px;
         p {
           color: #ffae21;
@@ -582,9 +583,8 @@ a {
       }
 
       .news {
-        background-color: #FFFFFF;
-
-        margin-top: 10px;
+        background-color: #fffff1;
+        margin-top: 6px;
         padding: 10px;
         width: calc(100% - 20px);
 
@@ -601,7 +601,7 @@ a {
             height: 40px;
             background: url('../images/line.png') bottom left repeat-x;
             display: flex;
-            justify-content: center;
+            justify-content: space-evenly;
 
             .tab-link {
               background-position: -489px -566px;
@@ -751,15 +751,15 @@ a {
         }
 
         .column-second {
-          width: 175px;
-          height: 450px;
+          width: 185px;
+          height: 460px;
           float: right;
           background-image: url("../images/news08/char-in-news.png");
         }
       }
 
       .newbies {
-        background-color: #FFFFFF;
+        background-color: #fffff1;
         margin-top: 10px;
         padding: 10px;
         width: calc(100% - 20px);
@@ -771,12 +771,12 @@ a {
           }
         }
         .newbies-header {
-          padding-left: 7px;
+          padding-left: 10px;
           height: 40px;
           width: 100%;
           background: url('../images/line.png') bottom left repeat-x;
           display: flex;
-          justify-content: center;
+          justify-content: space-evenly;
 
           .newbies-title {
             display: block;
@@ -836,6 +836,7 @@ a {
             img {
               width: 100%;
               height: 100%;
+              border-radius: 5%;
             }
           }
 
@@ -999,7 +1000,7 @@ a {
   .main-details-content {
     margin-top: 10px;
     width: 700px;
-    background: #FFFFFF;
+    background: #fffff1;
     min-height: 1610px;
     padding: 50px 30px;
     font-family: 'Roboto', sans-serif !important;
@@ -1533,6 +1534,9 @@ a {
 }
 tr.border-custom {
   border-bottom: 1px dashed #b6b6b6;
+  &:last-child {
+    border: none;
+  }
 }
 @media screen and (max-width: 1024px){
   .header #intro {
