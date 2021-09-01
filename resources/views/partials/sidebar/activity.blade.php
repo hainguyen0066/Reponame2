@@ -18,8 +18,8 @@
             ];
             $activities = [
                 'T2' => [
-                    ['Phong Lăng Độ' => 'Đầu giờ chẵn'],
-                    ['Vượt Ải' => 'Đầu mỗi giờ'],
+                    ['Phong Lăng Độ' => 'Giờ Chẵn'],
+                    ['Vượt Ải' => 'Cả Ngày'],
                     ['Tống Kim' => '11:00'],
                     ['Boss Tiểu Hoàng Kim' => '12:30'],
                     ['Quả Huy Hoàng (Tiểu)' => '12:30'],
@@ -32,8 +32,8 @@
                     ['Boss Đại Hoàng Kim' => '22:45'],
                 ],
                 'T3' => [
-                    ['Phong Lăng Độ' => 'Đầu giờ chẵn'],
-                    ['Vượt Ải' => 'Đầu mỗi giờ'],
+                    ['Phong Lăng Độ' => 'Giờ Chẵn'],
+                    ['Vượt Ải' => 'Cả Ngày'],
                     ['Tống Kim' => '11:00'],
                     ['Boss Tiểu Hoàng Kim' => '12:30'],
                     ['Quả Huy Hoàng (Tiểu)' => '12:30'],
@@ -47,8 +47,8 @@
                     ['Boss Đại Hoàng Kim' => '22:45'],
                 ],
                 'T4' => [
-                    ['Phong Lăng Độ' => 'Đầu giờ chẵn'],
-                    ['Vượt Ải' => 'Đầu mỗi giờ'],
+                    ['Phong Lăng Độ' => 'Giờ Chẵn'],
+                    ['Vượt Ải' => 'Cả Ngày'],
                     ['Tống Kim' => '11:00'],
                     ['Boss Tiểu Hoàng Kim' => '12:30'],
                     ['Quả Huy Hoàng (Tiểu)' => '12:30'],
@@ -60,8 +60,8 @@
                     ['Boss Đại Hoàng Kim' => '22:45'],
                 ],
                 'T5' => [
-                    ['Phong Lăng Độ' => 'Đầu giờ chẵn'],
-                    ['Vượt Ải' => 'Đầu mỗi giờ'],
+                    ['Phong Lăng Độ' => 'Giờ Chẵn'],
+                    ['Vượt Ải' => 'Cả Ngày'],
                     ['Tống Kim' => '11:00'],
                     ['Boss Tiểu Hoàng Kim' => '12:30'],
                     ['Quả Huy Hoàng (Tiểu)' => '12:30'],
@@ -75,8 +75,8 @@
                     ['Boss Đại Hoàng Kim' => '22:45'],
                 ],
                 'T6' => [
-                    ['Phong Lăng Độ' => 'Đầu giờ chẵn'],
-                    ['Vượt Ải' => 'Đầu mỗi giờ'],
+                    ['Phong Lăng Độ' => 'Giờ Chẵn'],
+                    ['Vượt Ải' => 'Cả Ngày'],
                     ['Tống Kim' => '11:00'],
                     ['Boss Tiểu Hoàng Kim' => '12:30'],
                     ['Quả Huy Hoàng (Tiểu)' => '12:30'],
@@ -90,8 +90,8 @@
                     ['Boss Đại Hoàng Kim' => '22:45'],
                 ],
                 'T7' => [
-                    ['Phong Lăng Độ' => 'Đầu giờ chẵn'],
-                    ['Vượt Ải' => 'Đầu mỗi giờ'],
+                    ['Phong Lăng Độ' => 'Giờ Chẵn'],
+                    ['Vượt Ải' => 'Cả Ngày'],
                     ['Tống Kim' => '11:00'],
                     ['Boss Tiểu Hoàng Kim' => '12:30'],
                     ['Quả Huy Hoàng (Tiểu)' => '12:30'],
@@ -105,8 +105,8 @@
                     ['Boss Đại Hoàng Kim' => '22:45'],
                 ],
                 'CN' => [
-                    ['Phong Lăng Độ' => 'Đầu giờ chẵn'],
-                    ['Vượt Ải' => 'Đầu mỗi giờ'],
+                    ['Phong Lăng Độ' => 'Giờ Chẵn'],
+                    ['Vượt Ải' => 'Cả Ngày'],
                     ['Tống Kim' => '11:00'],
                     ['Boss Tiểu Hoàng Kim' => '12:30'],
                     ['Quả Huy Hoàng (Tiểu)' => '12:30'],
