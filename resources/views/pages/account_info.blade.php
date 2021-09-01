@@ -6,15 +6,15 @@
 <div class="columns-right">
     <div class="details-content">
         @include('partials.manage_account.breadcrumbs')
-        <div class="main-details-content">                                
+        <div class="main-details-content">
             <div class="manage-account">
                 <div class="features">
                     <div class="title">{{ $pageTitle }}</div>
                     <ul>
-                        <li>Account: <span>{{ $user->name }}</span></li>
-                        <li>Số điện thoại: {!! $user->displayPhone() !!}</li>
-                        <li>Mật khẩu cấp 2: {!! $user->displayPass2() !!}</li>
-                        <li>Địa chỉ ip: <span>{{request()->getClientIp()}}</span></li>
+                        <li><p>Account:</p> <span>{{ $user->name }}</span></li>
+                        <li><p>Số điện thoại:</p> {!! $user->displayPhone() !!}</li>
+                        <li><p>Mật khẩu cấp 2:</p> {!! $user->displayPass2() !!}</li>
+                        <li><p>Địa chỉ ip:</p> <span>{{request()->getClientIp()}}</span></li>
                     </ul>
                 </div>
                 @include('partials.manage_account.links_list')

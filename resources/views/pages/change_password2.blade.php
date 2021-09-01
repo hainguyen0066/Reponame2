@@ -11,7 +11,7 @@
                 <div class="features">
                     <div class="title">{{ $pageTitle }}</div>
                     @if(empty($user->password2))
-                        <h4>Bạn chưa tạo mật khẩu cấp 2 cho tài khoản, tạm thời có thể nhập mật khẩu cấp 1 để xác nhận.</h4>
+                        <h4 class="note">Bạn chưa tạo mật khẩu cấp 2 cho tài khoản, tạm thời có thể nhập mật khẩu cấp 1 để xác nhận.</h4>
                     @endif
                     <form method="POST" action="{{ route('front.password2.change.submit') }}">
                         @csrf

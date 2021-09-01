@@ -114,12 +114,12 @@
             <div class="update-special container">
                 <div class="update-title"></div>
                 <div class="update-content">
-                    <a data-aos="fade-right"
-                       data-aos-easing="ease-in-sine" href="#" title="Hệ Thống Chống Kéo Xe Liên Máy"></a>
-                    <a data-aos="fade-right"
-                       data-aos-easing="ease-in-sine"  data-aos-delay="300" href="#" title="Thập Đại Môn Phái Cân Bằng"></a>
-                    <a data-aos="fade-right"
-                       data-aos-easing="ease-in-sine"  data-aos-delay="600" href="#" title="Cân Bằng Tiền Vạn Hoàn Hảo"></a>
+                    <p data-aos="fade-right"
+                       data-aos-easing="ease-in-sine"  title="Hệ Thống Chống Kéo Xe Liên Máy"></p>
+                    <p data-aos="fade-right"
+                       data-aos-easing="ease-in-sine"  data-aos-delay="300"  title="Thập Đại Môn Phái Cân Bằng"></p>
+                    <p data-aos="fade-right"
+                       data-aos-easing="ease-in-sine"  data-aos-delay="600"  title="Cân Bằng Tiền Vạn Hoàn Hảo"></p>
                 </div>
             </div>
         </section>
@@ -176,46 +176,48 @@
                         <div class="gift-lv">
                             <div class="gift-lv-title">thưởng lv20</div>
                             <div class="gift-lv-content">
-                                <span class="icon"></span><p>giày kim phong</p>
+                                <div class="d-flex"><span class="icon"></span><p>giày kim phong</p>
+                                </div>
                             </div>
                         </div>
                         <div class="gift-lv">
                             <div class="gift-lv-title">thưởng lv30</div>
                             <div class="gift-lv-content">
-                                <div class="d-flex"><span class="icon"></span><p>áo kim phong</p></div>
+                                <div class="d-flex two-child"><span class="icon"></span><p>áo kim phong</p></div>
                                 <div class="d-flex"><span class="icon"></span><p>dây chuyền k.phong</p></div>
                             </div>
                         </div>
                         <div class="gift-lv">
                             <div class="gift-lv-title">thưởng lv40</div>
                             <div class="gift-lv-content">
-                                <span class="icon"></span><p>nón, ngọc bội, nhẫn kim phong</p>
+                                <div class="d-flex"><span class="icon"></span><p>nón, ngọc bội, nhẫn kim phong</p></div>
                             </div>
                         </div>
                         <div class="gift-lv">
                             <div class="gift-lv-title">thưởng lv50</div>
                             <div class="gift-lv-content">
-                                <div class="d-flex"><span class="icon"></span><p>đai kim phong</p><</div>
+                                <div class="d-flex two-child"><span class="icon"></span><p>đai kim phong</p></div>
                                 <div class="d-flex"><span class="icon"></span><p>hộ uyển kim phong</p></div>
                             </div>
                         </div>
                         <div class="gift-lv">
                             <div class="gift-lv-title">thưởng lv60</div>
                             <div class="gift-lv-content">
-                                <div class="d-flex"><span class="icon"></span><p>nhẫn kim phong</p><</div>
+                                <div class="d-flex two-child"><span class="icon"></span><p>nhẫn kim phong</p></div>
                                 <div class="d-flex"><span class="icon"></span><p>ngựa túc sương</p></div>
                             </div>
                         </div>
                         <div class="gift-lv">
                             <div class="gift-lv-title">thưởng lv80</div>
                             <div class="gift-lv-content">
-                                <span class="icon"></span><p>mã bài ngẫu nhiên 7 ngày</p>
+                                <div class="d-flex"><span class="icon"></span><p>mã bài ngẫu nhiên 7 ngày</p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="volam-2005">
-                    <a href="{{ route('front.page.download') }}" data-aos="zoom-out-down" class="btn-volam2005" target="_blank" title="Tôi Muốn Thử"></a>
+                    <a href="{{ route('front.page.download') }}" data-aos="zoom-in" class="btn-volam2005" target="_blank" title="Tôi Muốn Thử"></a>
                 </div>
             </div>
         </section>
@@ -229,7 +231,7 @@
         </section>
         <footer>
             <!-- <p>Bản quyền &copy;2019 Phát hành duy nhất tại: <span>{{ parse_url(url()->current())['host'] }}</span></p> -->
-            <p>Bản quyền &copy;2019 Phát hành duy nhất tại: <span>Võ Lâm Trung Nguyên Team</span></p>
+            <p>Bản quyền &copy;2019 Phát hành duy nhất tại: <span>Võ Lâm Hoài Niệm</span></p>
             <p>Địa chỉ: 21 Nguyễn Thái Học, phường Bến Nghé, Quận 1, Thành phố Hồ Chí Minh</p>
             <p>Điện thoại: <span>0898 002 151</span> Fanpage : <a href="{{ config('site.fb.page_url') }}" target="blank" title="Fanpage">{{ config('site.fb.page_url') }}</a></p>
         </footer>

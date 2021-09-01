@@ -27,13 +27,13 @@ $pageTitle = "Lịch sử giao dịch";
                                         {{ \T2G\Common\Models\Payment::displayPaymentType($history->payment_type, false) }}
                                     </h4>
                                     @if($history->payment_type == \T2G\Common\Models\Payment::PAYMENT_TYPE_CARD)
-                                        <p>Mã thẻ: {{ $history->card_pin }}</p>
+                                        <p>Mã thẻ: {{ $history->card_getStatusTextpin }}</p>
                                         <p>Serial: {{ $history->card_serial }}</p>
                                         <p>Loại thẻ: {{ $history->card_type }}</p>
                                     @endif
                                 </td>
-                                <td align="right">{{ number_format($history->amount) }} VNĐ</td>
-                                <td align="right">{{ number_format($history->gamecoin) }}</td>
+                                <td align="right"><span class="c-blue">{{ number_format($history->amount) }} VNĐ</span></td>
+                                <td align="right"><span class="c-blue">{{ number_format($history->gamecoin) }}</span></td>
                                 <td align="center">{!! $history->getStatusText(false) !!}</td>
                             </tr>
                         @endforeach

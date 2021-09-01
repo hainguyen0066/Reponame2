@@ -8,15 +8,15 @@ return [
     'site'     => [
         'domains' => ['vltrungnguyen.com', 'www.vltrungnguyen.com', 'vltrungnguyen.net', 'www.vltrunglnguyen.net'],
         'seo'     => [
-            'title'            => 'Võ Lâm Trung Nguyên',
-            'meta_keyword'     => 'vo lam trung nguyen, vltk hay, game pk hay, volam1, ctc, vo lam ctc, vo lam cong thanh chien, vo lam 1',
-            'meta_description' => 'Khai mở Server Phật Sơn - 19h00 ngày 15/05/2021. Với sự góp mặt của các đại bang đến từ khắp chốn giang hồ. Sự trở lại của 1 huyền thoại với 1 diện mạo hoàn toàn mới - Nơi 1 Huyền Thoại mới của giới private xuất hiện',
-            'meta_image'       => 'images/share_phat_son_05_2021.jpg',
+            'title'            => 'Võ Lâm Hoài Niệm',
+            'meta_keyword'     => 'vo lam hoai niem, vltk hay, game pk hay, volam1, ctc, vo lam ctc, vo lam cong thanh chien, vo lam 1',
+            'meta_description' => 'Võ Lâm Hoài Niệm - Phiên bản chuẩn công thành chiến 2005. Đã hoạt động hơn 3 năm cực kỳ ổn định, với hệ thống chống multi login và kéo xe liên máy độc quyền trong giới private. Đảm bảo 1 sân chơi sạch sẽ, công bằng, nói không với chim mồi, nói không với đồ tím và trang bị siêu nhân',
+            'meta_image'       => 'images/share_fb_09_2021.png',
         ],
         // Open Graph configs
         'og' => [
             'section' => 'Gaming',
-            'tag' => 'Võ Lâm Trung Nguyên'
+            'tag' => 'Võ Lâm Hoài Niệm'
         ]
     ],
     'models'   => [
