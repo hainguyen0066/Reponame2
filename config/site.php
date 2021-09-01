@@ -4,7 +4,7 @@ return [
     'fb'  => [
         'app_id'   => '1041939975989453',
         'page_id'  => '101930468199629',
-        'page_url' => 'https://www.facebook.com/jxtrungnguyenctc/',
+        'page_url' => 'https://www.facebook.com/jxhoainiem',
         'group_url' => 'https://www.facebook.com/groups/vltrungnguyen'
     ],
     'ga'  => [
@@ -15,5 +15,5 @@ return [
         'id'        => 'GTM-KSZGPB5',
         'config_id' => 'GTM-KSZGPB5',
     ],
-    'landing_page_enabled' => true
+    'landing_page_enabled' => false
 ];

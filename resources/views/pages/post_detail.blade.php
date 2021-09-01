@@ -22,7 +22,7 @@ $activeSlug = $post->getCategorySlug();
             </div>
             <div class="ps">
                 <img src="{{ asset('images/ps-icon.png') }}" alt="" height="20" width="20">
-                &nbsp; Võ Lâm Trung Nguyên &nbsp;
+                &nbsp; Võ Lâm Hoài Niệm&nbsp;
                 <img src="{{ asset('images/ps-icon.png') }}" alt="" height="20" width="20"><br/>
                 Kính Bút!
             </div>

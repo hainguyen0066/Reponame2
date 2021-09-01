@@ -211,7 +211,7 @@ $(document).ready(function () {
         section3.find('.update-content').css({
             width: 915 * ratio,
         });
-        section3.find('.update-content a').css({
+        section3.find('.update-content p').css({
             height: 210 * ratio,
         });
 
@@ -298,7 +298,7 @@ $(document).ready(function () {
             'padding-top': 8 * ratio
         });
         section6.find('.gift-right .gift-lv .gift-lv-content > div:first-child').css({
-            'margin-right': 30 * ratio
+            'margin-right': 10 * ratio
         });
         section6.find('.gift-right .gift-lv .gift-lv-content p').css({
             'font-size': 18 * ratio

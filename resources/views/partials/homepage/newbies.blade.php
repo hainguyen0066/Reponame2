@@ -17,9 +17,6 @@
                 {{ $featureName }}
             </div>
         @endforeach
-        <div class="newbies-more f-right">
-            <a href="{{ route('front.post.group', [$viewMoreSlug]) }}"></a>
-        </div>
     </div>
     @php
         $i = 0;
