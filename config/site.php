@@ -3,8 +3,8 @@
 return [
     'fb'  => [
         'app_id'   => '1041939975989453',
-        'page_id'  => '101930468199629',
-        'page_url' => 'https://www.facebook.com/jxhoainiem',
+        'page_id'  => '107552581662610',
+        'page_url' => 'https://www.facebook.com/volamhoainiem2005',
         'group_url' => 'https://www.facebook.com/groups/vltrungnguyen'
     ],
     'ga'  => [
