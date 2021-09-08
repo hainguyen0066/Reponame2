@@ -233,7 +233,7 @@
             <!-- <p>Bản quyền &copy;2019 Phát hành duy nhất tại: <span>{{ parse_url(url()->current())['host'] }}</span></p> -->
             <p>Bản quyền &copy;2019 Phát hành duy nhất tại: <span>Võ Lâm Hoài Niệm</span></p>
             <p>Địa chỉ: 21 Nguyễn Thái Học, phường Bến Nghé, Quận 1, Thành phố Hồ Chí Minh</p>
-            <p>Điện thoại: <span>0898 002 151</span> Fanpage : <a href="{{ config('site.fb.page_url') }}" target="blank" title="Fanpage">{{ config('site.fb.page_url') }}</a></p>
+            <p>Điện thoại: <span>0898 002 151</span> Fanpage : <a href="{{ config('site.fb.page_url') }}" target="blank" title="Fanpage">facebook.com/volamhoainiem2005</a></p>
         </footer>
     </div>
 
