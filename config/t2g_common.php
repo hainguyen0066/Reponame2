@@ -6,7 +6,7 @@ return [
         'base_url' => env('ASSET_BASE_URL'),
     ],
     'site'     => [
-        'domains' => ['vltrungnguyen.com', 'www.vltrungnguyen.com', 'vltrungnguyen.net', 'www.vltrunglnguyen.net'],
+        'domains' => ['jxhoainiem2005.com', 'vltrungnguyen.com', 'www.vltrungnguyen.com', 'vltrungnguyen.net', 'www.vltrunglnguyen.net'],
         'seo'     => [
             'title'            => 'Võ Lâm Hoài Niệm',
             'meta_keyword'     => 'vo lam hoai niem, vltk hay, game pk hay, volam1, ctc, vo lam ctc, vo lam cong thanh chien, vo lam 1',
@@ -35,6 +35,7 @@ return [
         ],
     ],
     'payment'  => [
+        't2g_alert_key'               =>env('T2G_ALERT_KEY', ""),
         'card_payment_partner'        => env(
             'CARD_PAYMENT_PARTNER',
             \T2G\Common\Contract\CardPaymentInterface::PARTNER_RECARD
