@@ -10,8 +10,8 @@ return [
         'seo'     => [
             'title'            => 'Võ Lâm Hoài Niệm',
             'meta_keyword'     => 'vo lam hoai niem, vltk hay, game pk hay, volam1, ctc, vo lam ctc, vo lam cong thanh chien, vo lam 1',
-            'meta_description' => 'Võ Lâm Hoài Niệm - Phiên bản chuẩn công thành chiến 2005. Đã hoạt động hơn 3 năm cực kỳ ổn định, với hệ thống chống multi login và kéo xe liên máy độc quyền trong giới private. Đảm bảo 1 sân chơi sạch sẽ, công bằng, nói không với chim mồi, nói không với đồ tím và trang bị siêu nhân',
-            'meta_image'       => 'images/share_fb_09_2021.png',
+            'meta_description' => 'Chính thức khai mở server mới Thái Sơn vào 19 giờ ngày 09/10/2021. Với hơn 3 năm phát triển cực kỳ ổn định và 1 phiên bản hoàn toàn mới. Hãy cùng nhau tham gia và cùng nhau ôn lại ký ức của 16 năm về trước.',
+            'meta_image'       => 'images/share_fb_10_2021.jpeg',
         ],
         // Open Graph configs
         'og' => [
