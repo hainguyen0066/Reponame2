@@ -2,6 +2,7 @@
 <meta content="vi-VN" itemprop="inLanguage"/>
 <meta name="apple-mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-title" content="{{ config('app.name') }}"/>
+<meta name="facebook-domain-verification" content="255uk14m4shya882000czv2c3eb00c" />
 <link rel="dns-prefetch" href="//www.google-analytics.com"/>
 <link rel="dns-prefetch" href="//www.googletagmanager.com"/>
 <link rel="dns-prefetch" href="//www.facebook.com"/>
