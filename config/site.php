@@ -8,12 +8,12 @@ return [
         'group_url' => 'https://www.facebook.com/groups/vltrungnguyen'
     ],
     'ga'  => [
-        'id' => 'UA-131194659-2',
+        'id' => 'AW-447403547', // Google Ads
     ],
     // google tag manager
     'gtm' => [
-        'id'        => 'GTM-KSZGPB5',
-        'config_id' => 'GTM-KSZGPB5',
+        'id'        => 'GTM-WNPBNCK', // Google Tag Manager
+        'config_id' => 'G-DVKLBSF8CC', // Google Analytics
     ],
     'landing_page_enabled' => true
 ];
