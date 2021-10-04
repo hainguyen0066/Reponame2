@@ -74,8 +74,14 @@ class User extends AbstractUser
      */
     public function scopeRegisteredNumber($query)
     {
-        $query->where('created_at', '>', '2020-09-09');
+        $startDate = new \DateTime('2021-09-30');
+        $today = new \DateTime();
+        $ratio = 488;
+        $fakeCount = ceil(($today->getTimestamp() - $startDate->getTimestamp()) / 86400) * $ratio;
+        $query = $this->query();
+        $totalRegistered = $query->where('created_at', '>', $startDate->format('Y-m-d'))
+            ->count();
 
-        return $query->count() + 7300;
+        return $totalRegistered + $fakeCount;
     }
 }
