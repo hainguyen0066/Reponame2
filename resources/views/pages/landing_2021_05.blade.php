@@ -87,12 +87,19 @@
                         <source src="{{ staticUrl('images/landing-2020-12/nut_tai_game_thanh_do.webm') }}" type="video/webm">
                     </video>
                 </a>
-
-                <a class="register account-register {{ $user ? 'logged' : '' }}" href="javascript:" title="Nhận Code">
+            @if($user)
+                <a class="register account-register" href="{{ route('front.manage.account.info') }}" title="Nhận Code">
                     <video class="video-bg" preload="auto" loop muted autoplay playsinline>
                         <source src="{{ staticUrl('images/landing-2020-12/nut_dang_ky.webm') }}" type="video/webm">
                     </video>
                 </a>
+            @else
+                <a class="register account-register " href="javascript:" title="Nhận Code">
+                    <video class="video-bg" preload="auto" loop muted autoplay playsinline>
+                        <source src="{{ staticUrl('images/landing-2020-12/nut_dang_ky.webm') }}" type="video/webm">
+                    </video>
+                </a>
+            @endif
             </div>
             <video class="video-bg characters-f1" preload="auto" loop muted autoplay playsinline>
                 <source src="{{ staticUrl('images/landing-2020-12/nhan_vat_frame1.webm') }}" type="video/webm">
