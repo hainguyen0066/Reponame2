@@ -53,12 +53,12 @@ return [
         ],
 
         'game_api_request' => [
-            'driver' => 'daily',
+            'driver' => 'single',
             'path' => storage_path('logs/game_api.log'),
             'level' => 'debug',
         ],
         'card_payment' => [
-            'driver' => 'daily',
+            'driver' => 'single',
             'path' => storage_path('logs/card_payment.log'),
             'level' => 'debug',
         ],
